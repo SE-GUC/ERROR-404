@@ -4,6 +4,8 @@ const Joi = require('joi')
 const user = require('./models/')
 const adminschema = require('./schemas/TIQadmin')
 const userschema = require('./schemas/hubuser') 
+const discipleschema = require ('./schemas/disciples')
+const parentschema = require('./schemas/parent')
 const app = express()
 app.use(express.json())
 
@@ -58,6 +60,54 @@ switch(req.body.type)
                     id : uuid.v4()
                 };
                 return res.json({data:newhubuser});
-  
+  case disciples : const disciple = Joi.validate(req.body,discipleschema)
+
+                    if (disciple.error) return res.status(400).send (
+                        {error : result.error.details[0].message});
+
+                    const Newdisciple = {
+
+                        type,
+                    
+                        firstname,
+                    
+                        lastname,
+                    
+                        birth_date,
+                    
+                        bio,
+                    
+                        email,
+                    
+                        password,
+                    
+                        id:uuid.v4()
+                    
+                    };
+                    
+                    return res.json({data: Newdisciple});
+                    
+ case parent : const parent = Joi.validate(req.body,parentschema)
+
+                if (parent.error) return res.status(400).send (
+                    {error : result.error.details[0].message});
+
+                const Newparent = {
+
+                    type,
+                
+                    firstname,
+                
+                    lastname,
+                
+                    email,
+                
+                    password,
+                
+                    id:uuid.v4()
+                
+                };
+                
+                return res.json({data: newparent});
                       
 }
