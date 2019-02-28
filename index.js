@@ -6,8 +6,7 @@ const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send(`<h1>Welcome to Book Store</h1>
-    <a href="/api/update">Users</a>`);
+    res.send(`<a href="/api/update">Users</a>`);
 })
 
 // Direct routes to appropriate files 
