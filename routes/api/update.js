@@ -5,7 +5,7 @@ const update = require('../../models/user');
 //temp data for testing
 const users = [
     {
-       ,
+       
         firstname:'Mahy',
         lastname: 'Ali',
         birth_date:'23-4-1994',
