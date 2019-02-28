@@ -1,7 +1,7 @@
 const uuid = require('uuid')
 const express = require('express')
 const Joi = require('joi')
-const user = require('../../models/user')
+const user = require('../../models/User')
 const alumniSchema = require('../../schemas/Alumni')
 const memberSchema = require('../../schemas/Member') 
 //const discipleschema = require ('./schemas/disciples')
@@ -21,7 +21,7 @@ let users = [
 
     {
 
-    type:'disciple',
+    type:'alumni',
     firstname:'Maro',
     lastname: 'Marwan',
     birth_date:'23-6-2000',
@@ -58,12 +58,12 @@ let users = [
 ]
 
 
-
-router.post('/Add',(req,res)=> 
+//to create alumni or member 
+router.post('/add',(req,res)=> 
                     {
-                        const firstName = req.body.firstname
-                        const lastName = req.body.lastname
-                        const birthDate = req.body.birth_date
+                        const firstName = req.body.firstName
+                        const lastName = req.body.lastName
+                        const birthDate = req.body.birthDate
                         const clubs = req.body.clubs
                         const email = req.body.email
                         const password = req.body.password
@@ -102,9 +102,18 @@ case('member'):
 }
 });  
 
+
 router.get('/',(req,res)=>{
     res.send({data:users})
 })
+
+
+
+
+
+
+
+
 
 
 // Update a user (alumni or members)
@@ -130,9 +139,9 @@ router.put('/', (req, res) => {
 
     const user = users.find(user => user.id === userId)
 
-    user.firstname=updatedFirstName
-    user.lastname = updatedLastName
-    user.birthdate=updatedBirthDate
+    user.firstName=updatedFirstName
+    user.lastName = updatedLastName
+    user.birthDate=updatedBirthDate
     user.clubs=updatedClubs
     user.email=updatedEmail
     user.password=updatedPassword
