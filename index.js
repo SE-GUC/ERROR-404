@@ -1,16 +1,16 @@
 const express = require('express')
 
-const users = require('./routes/api/update')
+const users = require('./routes/api/users')
 
 const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send(`<a href="/api/update">Users</a>`);
+    res.send(`<a href="/api/users">Users</a>`);
 })
 
 // Direct routes to appropriate files 
-app.use('/api/update', users)
+app.use('/api/users', users)
 
 // Handling 404
  app.use((req, res) => {
