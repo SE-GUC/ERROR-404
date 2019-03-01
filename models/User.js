@@ -9,11 +9,11 @@ class user {
 
         this.type=type;
 
-        this.firstname=firstName;
+        this.firstName=firstName;
 
-        this.lastname=lastName;
+        this.lastName=lastName;
 
-        this.birth_date=birthDate;
+        this.birthDate=birthDate;
 
         this.bio=bio;
 
