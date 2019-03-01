@@ -3,7 +3,7 @@ const express = require('express')
 
 //User model
 
-class user {
+class User {
 
     constructor(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs){
 
@@ -37,4 +37,4 @@ class user {
 
 };
 
-module.exports=user;
+module.exports=User;
