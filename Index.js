@@ -7,10 +7,10 @@ const rout = express()
 
 rout.use(express.json())
 rout.get('/', (req, res) => {
-    res.send(`<a href="/api/contents">Contents</a>`);
+    res.send(`<a href="/api/Contents">Contents</a>`);
 })
 
-rout.use('/api/contents', content)
+rout.use('/api/Contents', content)
 
 rout.use((req, res) => {
 
