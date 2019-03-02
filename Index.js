@@ -2,18 +2,19 @@
 const express = require('express')
 
 const users = require('./routes/api/Users')
+const debates = require('./routes/api/Debates')
 
 const app = express()
 
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send(`<a href="/api/Users">Users</a>`);
+    res.send(`<a href="/Debates">Debates</a> </br> <a href="/api/Users">Users</a>`)
 })
 
 // Direct routes to appropriate files 
 app.use('/api/Users', users)
-
+app.use('/Debates', debates)
 // Handling 404
  app.use((req, res) => {
      res.status(404).send({err: 'We can not find what you are looking for'});
