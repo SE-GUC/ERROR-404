@@ -1,6 +1,4 @@
 
-
-
 const express = require('express');
 const router = express.Router();
 const Joi = require('joi')
@@ -12,7 +10,7 @@ const adminSchema = require('../../schemas/TIQAdmin')
  const parentSchema = require('../../schemas/Parent')
  const alumniSchema = require('../../schemas/Alumni')
 const memberSchema = require('../../schemas/Member')
-const router = express.Router();
+
 
 const update = require('../../models/User');
 //temp data for testing
