@@ -31,7 +31,7 @@ router.post('/', (req, res) => {
     const description = req.body.description
      const contentSchema = 
  {
-     date : Joi.date().required(),
+     date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
      type : Joi.string(),
      description : Joi.string()
 
@@ -53,7 +53,7 @@ router.put('/:id', (req, res) => {
     const description = req.body.description
     const contentSchema = 
 {
-    date :  Joi.date().required(),
+    date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
     type : Joi.string(),
     description : Joi.string()
 
