@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const content = require('../../models/contentModel')
+const content = require('../../models/Content')
 const Joi = require('joi')
 const uuid = require('uuid')
 //const contentSchema = require('')
@@ -31,9 +31,9 @@ router.post('/', (req, res) => {
     const description = req.body.description
      const contentSchema = 
  {
-     date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
-     type : Joi.string(),
-     description : Joi.string()
+    date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
+    type : Joi.string(),
+    description : Joi.string()
 
  };
      const result = Joi.validate(req.body, contentSchema)
