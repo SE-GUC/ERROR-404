@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const debates = require('./routes/debates')
+const debates = require('./routes/api/debates')
 app.use(express.json())
 app.get('/', (req, res) => {
     res.send(`<a href="/debates">Debates</a>`)
