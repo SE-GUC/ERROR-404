@@ -1,7 +1,6 @@
 
 const express = require('express')
 
-const users = require('./routes/api/Users')
 const Content = require('./routes/api/Content')
 
 const app = express()
@@ -13,7 +12,6 @@ app.get('/', (req, res) => {
 })
 
 // Direct routes to appropriate files 
-app.use('/api/Users', users)
 app.use('/api/Content', Content)
 
 // Handling 404
