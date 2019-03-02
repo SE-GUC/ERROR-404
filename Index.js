@@ -1,15 +1,15 @@
 const express = require('express')
 
-const content = require('./routes/api/content')
+const content = require('./routes/api/Contents')
 
 const app = express()
 
 app.use(express.json())
 app.get('/', (req, res) => {
-    res.send(`<a href="/api/content">Content</a>`);
+    res.send(`<a href="/api/Contents">Content</a>`);
 })
 
-app.use('/api/content', content)
+app.use('/api/Contents', content)
 
 app.use((req, res) => {
 
