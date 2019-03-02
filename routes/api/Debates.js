@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
     debates.forEach((value) => {
         const id = value.id
         const title = value.title
-        data += `<a href="debates/${id}">${title}</a><br>`
+        data += `<a href="Debates/${id}">${title}</a><br>`
     })
     res.send(data)
 })
@@ -47,7 +47,7 @@ router.post('/', (req, res) => {
     if (result.error) return res.status(400).send({ error: result.error.details[0].message });
     const newDebate = new Debate(title, category, date, description, info)
     debates.push(newDebate);
-    res.redirect(`http://localhost:3000/debates/${newDebate.id}`)
+    res.redirect(`http://localhost:3000/Debates/${newDebate.id}`)
 })
 
 
@@ -86,7 +86,7 @@ router.put('/:id', (req, res) => {
             if (info != undefined) value.info = info;
         }
     })
-    res.redirect("http://localhost:3000/debates")
+    res.redirect("http://localhost:3000/Debates")
 })
 
 
@@ -101,7 +101,7 @@ router.delete('/:id', (req, res) => {
         }
     })
     debates = tmp;
-    res.redirect("http://localhost:3000/debates")
+    res.redirect("http://localhost:3000/Debates")
 })
 
 module.exports = router
