@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const Debate = require('../models/Debate')
+const Debate = require('../../models/Debate')
 const joi = require('joi')
 const uuid = require('uuid')
 
