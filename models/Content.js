@@ -1,3 +1,4 @@
+
 const uuid = require('uuid')
 class Content {
     constructor(date,type,description){
@@ -8,3 +9,5 @@ class Content {
     }
 }
 module.exports = Content
+
+
