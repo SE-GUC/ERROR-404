@@ -1,3 +1,4 @@
+
 class FAQ {
     constructor(id,question, answer,) {
         this.id=id;
@@ -6,5 +7,6 @@ class FAQ {
        
     };
 }
+
 
 module.exports = FAQ
