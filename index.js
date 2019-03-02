@@ -1,3 +1,4 @@
+
 const express = require('express')
 const FAQs = require('./routes/api/FAQs')
 
@@ -13,3 +14,4 @@ app.use((req, res) => {
 
 const port = 3001
 app.listen(port, () => console.log(`Server up and running on port ${port}`))
+
