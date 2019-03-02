@@ -1,11 +1,11 @@
 const express = require('express')
 const app = express()
-const debates = require('./routes/api/debates')
+const debates = require('./routes/api/Debates')
 app.use(express.json())
 app.get('/', (req, res) => {
-    res.send(`<a href="/debates">Debates</a>`)
+    res.send(`<a href="/Debates">Debates</a>`)
 })
-app.use('/debates', debates)
+app.use('/Debates', debates)
 app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
  })
