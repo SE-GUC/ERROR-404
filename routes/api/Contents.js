@@ -1,6 +1,8 @@
 
 const express = require('express')
-const rout = express.Router()
+const router = express.Router()
+//const content = require('../../models/Content')
+const Joi = require('joi')
 const uuid = require('uuid')
 const Content = require('../../models/Content')
 
@@ -14,18 +16,18 @@ var Contents =[
 ]
 
 //displaying all content uploaded by admin
-rout.get('/', (req, res) => res.json({ data: Contents }));
+router.get('/', (req, res) => res.json({ data: Contents }));
 
 
 //displaying a certain content uploaded 
- rout.get('/:id',(req,res)=>{
+ router.get('/:id',(req,res)=>{
     const Id = req.params.id 
     const cont = Contents.find(cont=>cont.id ===Id)
     res.send(cont)
 }) 
 
 //deleting a content 
-rout.delete('/:id',(req,res)=>{
+router.delete('/:id',(req,res)=>{
   const id = req.params.id 
   const c = Contents.find(c =>c.id ===id)
   const index = Contents.indexOf(c)
@@ -33,19 +35,16 @@ rout.delete('/:id',(req,res)=>{
   res.send(Contents)
 })
 
-module.exports = rout
 
 
-const express = require('express')
-const router = express.Router()
-const content = require('../../models/Content')
-const Joi = require('joi')
-const uuid = require('uuid')
+
+
+
 //const contentSchema = require('')
 
 
 //Temp Database
-var allContent = [
+/*var allContent = [
     new content('01-01-2000', 'debate', 'Description 1'),
     new content('02-01-2000', 'debate', 'Description 2'),
     new content('03-01-2000', 'debate', 'Description 3'),
@@ -56,7 +55,7 @@ var allContent = [
     new content('02-01-2000', 'reqruitment', 'Description 8'),
     new content('03-01-2000', 'reqruitment', 'Description 9')
 
-]
+]*/
 
 
 
@@ -76,10 +75,10 @@ router.post('/', (req, res) => {
  };
      const result = Joi.validate(req.body, contentSchema)
       if (result.error)
-    return res.status(400).send({error:result.error.details[0].message})
-    const newContent = new content( date, type, description)
-    allContent.push(newContent);
-    res.send(allContent)
+    return res.status(400).send("error2")
+    const newContent = new Content( date, type, description)
+    Contents.push(newContent);
+    res.send(Contents)
     //res.redirect(`http://localhost:3000/content/${newContent.description}`)
 })
 
@@ -99,14 +98,14 @@ router.put('/:id', (req, res) => {
     
     const result = Joi.validate(req.body, contentSchema)
     if (result.error) return res.status(400).send("error1");
-    allContent.forEach((value) => {
+    Contents.forEach((value) => {
         if (value.id === id) {
             if (date !== undefined) value.date = date
             if (type !== undefined) value.type = type
             if (description !== undefined) value.description = description;       
         }
     })
-    res.send(allContent)
+    res.send(Contents)
    
 })
 
