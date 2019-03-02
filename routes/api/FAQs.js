@@ -1,3 +1,4 @@
+
 const express = require('express')
 const router = express.Router()
 router.use(express.json())
@@ -34,4 +35,31 @@ router.delete('/delete', (req, res) => {
     res.send(FAQs)
 })
 
+
+router.post('/add', (req, res) => {
+    const question = req.body.question
+    const answer = req.body.answer
+    const faq = {
+        question: question,
+        answer: answer,
+        id:FAQs.length + 1  
+    }
+    FAQs.push(faq)
+    res.send(FAQs)
+})
+router.put('/edit', (req, res) => {
+    const id = req.body.id 
+    const question = req.body.question
+    const answer = req.body.answer
+
+    const faq = FAQs.find(faq => faq.id === id)
+    faq.question = question
+    faq.answer = answer
+
+    res.send(FAQs)
+})
+
+
+
 module.exports = router
+
