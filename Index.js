@@ -3,6 +3,7 @@ const express = require('express')
 const users = require('./routes/api/Users')
 
 const app = express()
+
 app.use(express.json())
 
 app.get('/', (req, res) => {
