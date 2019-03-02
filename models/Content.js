@@ -8,3 +8,4 @@ class content {
     }
 }
 module.exports = content
+
