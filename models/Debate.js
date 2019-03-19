@@ -1,3 +1,4 @@
+
 const uuid = require('uuid')
 class Debate {
     constructor(title,category,date,description,info){
