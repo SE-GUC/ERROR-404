@@ -1,13 +1,29 @@
-const uuid = require ('uuid')
-//User model
-class Article {
-    constructor(title,description,date,author,comments){
-       this.title=title;
-       this.description=description;
-       this.date=date;
-       this.author=author;
-       this.comments=comments;
-       this.id=uuid.v4();
-    };
-};
-module.exports=Article;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+
+const articleSchema = new Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    author: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    comments: {
+        type: String, 
+        required: true
+    }
+   
+})
+
+module.exports = User = mongoose.model('users', articleSchema)
