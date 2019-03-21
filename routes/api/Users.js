@@ -11,7 +11,6 @@ try{
    
        const userId =req.params.id
         const getuser = await user.findOne({userId})
-        if(!getuser) return res.status(404).send({error:'User is not found'})
         const isValidated = validator.updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
         const updatedUser = await user.updatedOne(req.body)
@@ -44,7 +43,7 @@ router.get('/',async (req,res)=>{
     res.json({data:users})
 })
 //get by id      
-router.get('/id',async (req,res)=>{
+router.get('/:id',async (req,res)=>{
     const userId =req.params.id
     const users = await user.findOne({userId})
     res.json({data:users})
