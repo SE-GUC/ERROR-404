@@ -1,3 +1,4 @@
+
 const express = require('express')
 const mongoose = require('mongoose')
 const users = require('./routes/api/Users')
@@ -30,12 +31,6 @@ app.get('/users',async (req, res) => {
 // Direct routes to appropriate files 
 app.use('/api/Users', users)
 app.use('/api/Articles', articles)
-
-// Handling 404
- app.use((req, res) => {
-     res.status(404).send({err: 'We can not find what you are looking for'});
-  })
-
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
