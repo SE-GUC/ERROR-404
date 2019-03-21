@@ -1,20 +1,55 @@
-const uuid = require ('uuid')
-//User model
-class User {
-    constructor(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs){
-        this.type=type;
-        this.firstName=firstName;
-        this.lastName=lastName;
-        this.birthDate=birthDate;
-        this.bio=bio;
-        this.email=email;
-        this.password=password;
-        this.house=house;
-        this.score=score;
-        this.din=din;
-        this.dor=dor;
-        this.clubs=clubs;
-        this.id=uuid.v4();
-    };
-};
-module.exports=User;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
+
+const userSchema = new Schema({
+    type: {
+        type: String,
+        required: true
+    },
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
+        type: String,
+        required: true
+    },
+    birthDate: {
+        type: String,
+        required: true
+    },
+    bio: {
+        type: String, 
+        required: true
+    },
+    email: {
+        type: String, 
+        required: true
+    },
+    password: {
+        type: String, 
+        required: true
+    },
+    house: {
+        type: String, 
+        required: true
+    },
+    score: {
+        type: Number, 
+        required: true
+    },
+    din: {
+        type: String, 
+        required: true
+    },
+    dor: {
+        type: String, 
+        required: true
+    },
+    clubs: {
+        type: [String], 
+        required: true
+    },
+})
+
+module.exports = User = mongoose.model('users', articleSchema)
