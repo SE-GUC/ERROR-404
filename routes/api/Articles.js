@@ -6,8 +6,8 @@ const validator = require('../../validations/articleValidations')
 
 
 router.get('/',async(req,res)=>{
-    const users = await Book.find()
-    res.json({data:users})
+    const articles = await article.find()
+    res.json({data:articles})
 })
 router.put('/:id',async(req,res)=>{
     try{
