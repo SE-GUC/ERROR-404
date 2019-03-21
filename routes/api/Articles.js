@@ -4,6 +4,11 @@ const mongoose= require('mongoose')
 const article = require('../../models/Article')
 const validator = require('../../validations/articleValidations')
 
+
+router.get('/',async(req,res)=>{
+    const users = await Book.find()
+    res.json({data:users})
+})
 router.put('/:id',async(req,res)=>{
     try{
         const id=req.params.id
@@ -17,9 +22,8 @@ router.put('/:id',async(req,res)=>{
     catch(error){
         console.log(error)
     }
-}
+})
 
+module.exports = router;
 
-
-)
 
