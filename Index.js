@@ -1,4 +1,3 @@
-
 const express = require('express')
 const mongoose = require('mongoose')
 const users = require('./routes/api/Users')
@@ -25,8 +24,8 @@ app.get('/users',async (req, res) => {
 })
 
 // Entry point
-app.get('/', (req,res) => res.send(`<h1>Articles</h1>`))
-app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
+// app.get('/', (req,res) => res.send(`<h1>Articles</h1>`))
+// app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 // Direct routes to appropriate files 
 app.use('/api/Users', users)
