@@ -29,6 +29,7 @@ const debates = require('./routes/api/Debates')
 const FAQs = require('./routes/api/FAQs')
 const question = require('./routes/api/Questions')
 const notification = require('./routes/api/Notifications')
+const content = require('./routes/api/Contents')
 
 
 
@@ -53,6 +54,10 @@ app.get('/Clubs', async (req, res) => {
     res.send(`<a href="/api/Clubs">Clubs</a>`)
    
 })
+app.get('/Content', async (req, res) => {
+    res.send(`<a href="/api/Contents">Contents</a>`)
+   
+})
 
 app.use('/api/Users', users)
 app.use('/api/Articles',articles)
@@ -61,6 +66,7 @@ app.use('/api/FAQs', FAQs)
 app.use('/api/Questions', question)
 app.use('/api/Notifications', notification)
 app.use('/api/Clubs', clubs)
+app.use('/api/Contents', content)
 
 // Entry point
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
@@ -73,6 +79,5 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
-
 
 
