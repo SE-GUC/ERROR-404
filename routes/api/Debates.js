@@ -122,4 +122,27 @@ router.get('/searchbydate/:date', (req,res)=>{
 
 
 
+
+//TIQ users should be able to search for a debate by category
+//################## 
+
+// function searchByCategory(cat){
+//     cat=req.body.category
+//    const result= Debate.find(cat)
+//    console.log(result)
+
+router.get('/Search/:category',async(req,res)=>{
+    const cat=req.params.category
+
+    
+     const dbs = await Debate.find({category:cat})
+     console.log(dbs)
+     console.log(!dbs)
+     if(dbs.length===0) return res.status(404).send({error: 'Article with that category doesnt exisit'})
+    return res.json({data:dbs})
+         
+    })
+   
+
 module.exports = router
+

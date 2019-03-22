@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require('dotenv')
 
-
 //creating app
 const app = express()
 app.use(express.json())
@@ -24,13 +23,12 @@ app.use(cors())
 // Require Router Handlers
 const articles = require('./routes/api/Articles')
 const users = require('./routes/api/Users')
-const articles = require('./routes/api/Articles')
 const debates = require('./routes/api/Debates')
 const FAQs = require('./routes/api/FAQs')
 const question = require('./routes/api/Questions')
 const notification = require('./routes/api/Notifications')
 const content = require('./routes/api/Contents')
-
+const clubs = require('./routes/api/Clubs') 
 
 
 app.get('/articles', async (req, res) => {
@@ -79,5 +77,4 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
-
 
