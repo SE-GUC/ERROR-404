@@ -8,7 +8,7 @@ module.exports = {
             description: Joi.string().required(),
             author: Joi.string().required(),
             date: Joi.string().required(),
-            comments: Joi.string().required()
+            comments: Joi.array().required()
         }
 
         return Joi.validate(request, createSchema)
@@ -19,7 +19,8 @@ module.exports = {
             title: Joi.string(),
             description: Joi.string(),
             author: Joi.string(),
-            date: Joi.string()
+            date: Joi.string(),
+            comments:Joi.array()
             
         }
 
