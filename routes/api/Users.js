@@ -1,7 +1,10 @@
 
-const express = require('express');
-const router = express.Router();
+
+  const express = require('express')
+const router = express.Router()
 const mongoose =require('mongoose')
+const bcrypt = require('bcrypt')
+
 const user = require('../../models/User')
 const validator=require('../../validations/userValidations')
 
@@ -9,11 +12,12 @@ const validator=require('../../validations/userValidations')
     router.put('/:id',async(req,res)=>{
 try{
    
-       const userId =req.params.id
+        const userId =req.params.id
         const getuser = await user.findOne({userId})
-        const isValidated = validator.updateUserValidation(req.body)
+        const isValidated = validator. updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-        const updatedUser = await user.updatedOne(req.body)
+        const updatedUser = await user.updateOne(req.body)
+        
         res.json({msg: 'User updated sucessfully'})
      
     
@@ -54,6 +58,8 @@ router.get('/:id',async (req,res)=>{
     .catch(err => {res.send('Cannot find the user ')})
 })
 
+
 module.exports = router;
+
 
 
