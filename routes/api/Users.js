@@ -48,9 +48,9 @@ router.get('/:id',async (req,res)=>{
     const userId =req.params.id
     const users = await user.findById(userId)
     .exec()
-    .then(users => {return res.send([users.type,articles.firstName,articles.lastName,
-        articles.birthDate,articles.bio,articles.email,articles.password,articles.house,articles.din
-        ,articles.dor,,articles.clubs])})
+    .then(users => {return res.send([users.type,users.firstName,users.lastName,
+        users.birthDate,users.bio,users.email,users.password,users.house,users.din
+        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
 })
 
