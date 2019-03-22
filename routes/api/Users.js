@@ -44,9 +44,14 @@ router.get('/',async (req,res)=>{
 })
 //get by id      
 router.get('/:id',async (req,res)=>{
+    
     const userId =req.params.id
-    const users = await user.findOne({userId})
-    res.json({data:users})
+    const users = await user.findById(userId)
+    .exec()
+    .then(users => {return res.send([users.type,articles.firstName,articles.lastName,
+        articles.birthDate,articles.bio,articles.email,articles.password,articles.house,articles.din
+        ,articles.dor,,articles.clubs])})
+    .catch(err => {res.send('Cannot find the user ')})
 })
 
 module.exports = router;

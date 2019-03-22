@@ -11,9 +11,14 @@ router.get('/',async(req,res)=>{
 })
 
 router.get('/:id',async (req,res)=>{
+    
     const articleId =req.params.id
-    const articles = await article.findOne({articleId})
-    res.json({data:articles})
+    const articles = await article.findById(articleId)
+    .exec()
+    .then(articles => {return res.send([articles.title,articles.description,articles.author,articles.date,articles.comments])})
+    .catch(err => {res.send('Cannot find the article ')})
+   
+    
 })
 router.put('/:id',async(req,res)=>{
     
