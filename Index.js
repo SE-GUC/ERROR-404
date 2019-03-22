@@ -48,13 +48,19 @@ app.get('/FAQs',async (req, res) => {
 app.get('/Debates',async (req, res) => {
     res.send(`<a href="/api/Debates">Debates</a>`)
 })
+
+app.get('/Clubs', async (req, res) => {
+    res.send(`<a href="/api/Clubs">Clubs</a>`)
+   
+})
+
 app.use('/api/Users', users)
 app.use('/api/Articles',articles)
 app.use('/api/Debates', debates)
 app.use('/api/FAQs', FAQs)
 app.use('/api/Questions', question)
 app.use('/api/Notifications', notification)
-
+app.use('/api/Clubs', clubs)
 
 // Entry point
 app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
@@ -67,4 +73,6 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
+
+
 
