@@ -3,19 +3,23 @@ const Joi = require('joi')
 module.exports = {
     registerValidation: request => {
         const registerAlumniSchema = {
-            firstname : Joi.string().min(3).required(),
-            lastname : Joi.string().min(3).required(),
-            birth_date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/).required(),
-            clubs : Joi.array().required(),
+            type : Joi.string(),
+            firstName : Joi.string().min(3).required(),
+            lastName : Joi.string().min(3).required(),
+            birthDate : Joi.string().required(),
+            // .regex(/[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/).required(),
+            bio : Joi.string().required(),
             email : Joi.string().regex(/[a-z0-9\.\-]+\@student\.guc\.edu\.eg$/).required(),
             password : Joi.string().min(8).required(),
+            
             house :  Joi.string(),
-            bio : Joi.string(),
-            type : Joi.string(),
-            din : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
-            dor : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/).required(),
+            din:Joi.string().required(),
+            dor:Joi.string().required(),
+            clubs : Joi.array().required()
+            
            
         
+           
             
         }
         return Joi.validate(request, registerAlumniSchema)
@@ -32,15 +36,27 @@ module.exports = {
     
     updateValidation: request =>{
         const updateAlumniSchema = {
-            firstname : Joi.string().min(3),
-            lastname : Joi.string().min(3),
-            birth_date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/),
-            clubs : Joi.array().required(),
-            password : Joi.string().min(8),
+         
+            firstName : Joi.string().min(3),
+            lastName : Joi.string().min(3),
+            birthDate : Joi.string(),
+            // .regex(/[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/),
             bio : Joi.string(),
            
-            din : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/),
-            dor : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/),
+            password : Joi.string().min(8),    
+            din:Joi.string(),
+            dor:Joi.string(),
+            clubs : Joi.array()
+            
+            // firstname : Joi.string().min(3),
+            // lastname : Joi.string().min(3),
+            // birth_date : Joi.string().regex(/[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/),
+            // clubs : Joi.array().required(),
+            // password : Joi.string().min(8),
+            // bio : Joi.string(),
+           
+            // din : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/),
+            // dor : Joi.string().regex(/[0-3][0-9]\-[0-1][0-9]\-[1-2][0-9][0-9][0-9]/),
            
     
     }
