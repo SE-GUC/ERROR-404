@@ -1,42 +1,67 @@
 const express = require('express')
-
-const users = require('./routes/api/Users')
-const debates = require('./routes/api/Debates')
-const FAQs = require('./routes/api/FAQs')
-const content = require('./routes/api/Contents')
-const question = require('./routes/api/Questions')
-const notification = require('./routes/api/Notifications')
-
-const app = express()
 const mongoose = require('mongoose')
-const db = require('./config/keys').mongoURI
+const cors = require('cors')
+const dotenv = require('dotenv')
+
+//creating app
+const app = express()
+app.use(express.json())
+
+// Connect to mongo
+dotenv.config()
 mongoose
-    .connect(db,{ useNewUrlParser: true })
+    .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 
 // Init middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+app.use(cors())
 
-app.get('/', (req, res) => {
-    res.send(`<a href="/Debates">Debates</a> </br> <a href="/api/Users">Users</a>`)
+
+// Require Router Handlers
+const articles = require('./routes/api/Articles')
+const users = require('./routes/api/Users')
+const articles = require('./routes/api/Articles')
+const debates = require('./routes/api/Debates')
+const FAQs = require('./routes/api/FAQs')
+const question = require('./routes/api/Questions')
+const notification = require('./routes/api/Notifications')
+
+
+app.get('/articles', async (req, res) => {
+    res.send(`<a href="/api/Articles">Articles</a>`)
+   
 })
 
-// Direct routes to appropriate files 
+app.get('/users',async (req, res) => {
+    res.send(`<a href="/api/Users">Users</a>`)
+})
+
+app.get('/FAQs',async (req, res) => {
+    res.send(`<a href="/api/FAQs">FAQs</a>`)
+})
+
+app.get('/debates',async (req, res) => {
+    res.send(`<a href="/api/Debates">Debates</a>`)
+})
 app.use('/api/Users', users)
-app.use('/Debates', debates)
+app.use('/api/Articles',articles)
+app.use('/api/Debates', debates)
 app.use('/api/FAQs', FAQs)
-app.use('/api/Contents', content)
 app.use('/api/Questions', question)
 app.use('/api/Notifications', notification)
 
-// Handling 404
- app.use((req, res) => {
-     res.status(404).send({err: 'We can not find what you are looking for'});
-  })
 
-const port = 3003
-app.listen(port, () => console.log(`Server up and running on port ${port}`))
+// Entry point
+app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 
+app.use((req, res) => {
+    res.status(404).send({err: 'We can not find what you are looking for'});
+ })
+
+ 
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`Server on ${port}`))
