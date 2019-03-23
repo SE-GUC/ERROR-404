@@ -64,6 +64,3 @@ return Joi.validate(request, updateUserSchema)
     }
 
  }
-
-
-   

@@ -1,4 +1,3 @@
-
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -53,7 +52,7 @@ const userSchema = new Schema({
 
     clubs: {
         type: [String], 
-        required: true
+       
     }
 })
 
