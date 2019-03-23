@@ -1,13 +1,13 @@
 
-const uuid = require('uuid')
-class Debate {
-    constructor(title,category,date,description,info){
-        this.title = title
-        this.category = category
-        this.date = date
-        this.description = description
-        this.info = info
-        this.id = uuid.v4()
-    }
-}
-module.exports=Debate
+const mongoose = require('mongoose');
+
+const debateSchema = mongoose.Schema({
+    _id : mongoose.Schema.Types.ObjectId,
+    title : String ,
+    category : String,
+    date  : Date,
+    description : String,
+    info : String
+}) 
+module.exports = debates = mongoose.model('debates',debateSchema)
+

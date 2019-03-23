@@ -1,230 +1,415 @@
-const express = require('express');
-const router = express.Router();
+
+const express = require('express')
 const Joi = require('joi')
-const uuid = require('uuid')
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const router = express.Router()
+
+const tokenKey = require('../../config/keys').secretOrKey
+
+
 const user = require('../../models/User')
-const adminSchema = require('../../schemas/TIQAdmin')
- const userSchema = require('../../schemas/HubUsers') 
- const discipleSchema = require ('../../schemas/Disciples')
- const parentSchema = require('../../schemas/Parent')
- const alumniSchema = require('../../schemas/Alumni')
-const memberSchema = require('../../schemas/Member')
 
 
-const update = require('../../models/User');
-//temp data for testing
-const users = [
-    {
-        type:'member',
-        firstName:'Mahy',
-        lastName: 'Ali',
-        email: 'mali@gmail.com',
-        password:'mahy94',
-        birthDate:'23-4-1994',
-        bio: 'expert debater ',
-        house:'Pegasus',
-        score: 278,
-        din:'1-10-2017',
-        dor:null,
-        clubs:['TIQ'],
-        id : 1
+const userValidator = require('../../validations/userValidations')
+const adminValidator = require('../../validations/adminValidations')
+const alumniValidator = require('../../validations/alumniValidations')
+const TIQadminValidator =require('../../validations/tiqAdminValidations')
+const hubUserValidator = require('../../validations/hubUserValidations') 
+const discipleValidator = require ('../../validations/disciplevalidations')
+const parentValidator = require('../../validations/parentValidations')
 
-    },{
 
-    type:'alumni',
-    firstname:'Maro',
-    lastname: 'Marwan',
-    birth_date:'23-6-2000',
-    bio: 'young hunter ',
-    email: 'maro@student.guc.edu.eg',
-    password:'marrroo',
-    house:'Orion',
-    score: 198,
-    din:'1-10-2019',
-    dor:'1-11-2019',
-    clubs:['TIQ'],
-    id:2
 
-},
 
+//create new user (TIQ admin, Hub user, disciples, parent)
+
+
+
+router.post('/register', async (req,res) => {
+   
+  
+    const Email =req.body.email
+   
+    
+     const usernew = await User.findOne({email:Email});
+    if (usernew) return res.status(400).json({ email: 'Email already exists ,choose another mail...' });
+   
+    const t =req.body.type
+   
+    switch(t)
 {
+  
+        case ('TIQadmin'):  
+        try 
+        {
+        
+                        const isValidated = TIQadminValidator.TIQadminValidation(req.body)
+                        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+                        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+                        const salt = bcrypt.genSaltSync(10)
+                        
+                        const hashedPassword = bcrypt.hashSync(password,salt)
+                        const newTiqAdmin = new user({
+                            type ,
+                            firstName ,
+                            lastName ,
+                            birthDate ,
+                            bio,
+                            email,
+                            password : hashedPassword,
+                            clubs ,
+                            house ,
+                            score,
+                            din,
+                            dor
+                        
+                        
+                    })
+                    
+                    await User.create(newTiqAdmin);
+                            
+                    return res.json({ msg: 'User created successfully', data: newTiqAdmin });
+                    }
 
-    type:'member',
-    firstname:'Nada',
-    lastname: 'Botros',
-    birth_date:'23-9-1998',
-    bio: ' Sun Hunter ',
-    email: 'nbotros@student.guc.edu.eg',
-    password:'nbtros98',
-    house:'Orion',
-    score: 341,
-    din:'1-11-2018',
-    dor:'1-11-2019',
-    clubs:['TIQ','MUN'],
-    id:3
+                        catch(error) 
+                        {
+
+                            // We will be handling the error later
+
+                                console.log(error)
+
+                        } 
+
+                        case ('regular'):  
+                        try 
+                        {
+                               
+                               const isValidated = hubUserValidator.userValidation(req.body)
+                               if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+                               const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+                               const salt = bcrypt.genSaltSync(10)
+                               const cryptedPasswrod = bcrypt.hashSync(password,salt)
+                               const newUser = new User(
+                                   {
+                                    type,
+                                    firstName,
+                                    lastName ,
+                                    birthDate ,
+                                    bio,
+                                    email ,
+                                    password : cryptedPasswrod,
+
+                                    house,
+                                   score, 
+                                    din,
+                                    dor,
+                                  
+                                    clubs 
+   
+                                   }
+                               )
+                               await User.create(newUser);
+                    
+                               return res.json({ msg: 'User created successfully', data: newUser });
+
+                    }
+
+                    catch(error) 
+                    {
+
+                            // We will be handling the error later
+
+                                console.log(error)
+
+                    } 
+
+    case ('disciple') : 
+                      try 
+                        {
+                               
+                              
+                               const isValidated = discipleValidator.registerValidation(req.body)
+                               if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+                               const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+                               const salt = bcrypt.genSaltSync(10)
+                               const cryptedPasswrod = bcrypt.hashSync(password,salt)
+                               const newUser = new User(
+                                   {
+                                    type,
+                                    firstName,
+                                    lastName ,
+                                    birthDate ,
+                                    bio,
+                                    email ,
+                                    password : cryptedPasswrod,
+
+                                    house,
+                                   score, 
+                                    din,
+                                    dor,
+                                  
+                                    clubs 
+   
+                                   }
+                               )
+                               await User.create(newUser);
+                    
+                               return res.json({ msg: 'User created successfully', data: newUser });
+                
+                    }
+                    catch(error) 
+                    {
+                        // We will be handling the error later
+
+                            console.log(error)
+
+                    }  
+    case('alumni'):
+        try{
+    const isAlumniValidated = alumniValidator.registerValidation(req.body)
+    if (isAlumniValidated.error) return res.status(400).send({ error: isAlumniValidated.error.details[0].message })
+    
+    const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body 
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt)
+    const newAlumni = new User({
+                    type,
+                    firstName,
+                    lastName,
+                    birthDate,
+                    bio,
+                    email,
+                    password :hashedPassword,
+                    house,
+                    score,
+                    din,
+                    dor,
+                    clubs
+                    })
+          await User.create(newAlumni)
+                    
+      return  res.json({ msg: 'User created successfully', data: newAlumni })
+                             
+            } 
+        catch (error) {
+		return res.status(422).send({ error: 'Can not create user' })
+	}
+
+    case('member'):
+
+    try{
+
+        const isUserValidated = userValidator.registerValidation(req.body)
+        if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+        console.log(5)
+        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+        const salt = bcrypt.genSaltSync(10)
+        const hashedPassword = bcrypt.hashSync(password, salt)
+        console.log(6)
+        const newMember = new user({
+                  type ,
+                firstName ,
+                lastName ,
+                birthDate ,
+                bio,
+                email,
+		score:0,
+                password : hashedPassword,
+                clubs ,
+                house ,
+                din,
+                dor
+                
+               
+            })
+            
+            await User.create(newMember)
+                    
+         return res.json({ msg: 'User created successfully', data: newMember })
+                
+        } 
+    catch (error) {
+
+   return res.status(422).send({ error: 'Can not create user' })
+}
+
+    case ('parent') :
+                    try 
+                    {
+                        
+                      
+                        const isValidated = parentValidator.parentValidation(req.body)
+                        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+                        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+                        const salt = bcrypt.genSaltSync(10)
+                        const cryptedPasswrod = bcrypt.hashSync(password,salt)
+                        const newUser = new User(
+                            {
+                                type,
+                                    firstName,
+                                    lastName ,
+                                    birthDate ,
+                                    bio,
+                                    email ,
+                                    password : cryptedPasswrod,
+
+                                    house,
+                                   score, 
+                                    din,
+                                    dor,
+                                  
+                                    clubs 
+
+                            }
+                        )
+                        await User.create(newUser);
+                    
+                        return res.json({ msg: 'User created successfully', data: newUser });
+
+                    }
+
+                    catch(error) 
+                    {
+
+                        // We will be handling the error later
+
+                            console.log(error)
+
+                    }              
+
 
 }
-];
+            
+    
+usernew.catch()
+
+})
+
+
+//get all users
+
+
+router.get('/',async (req,res)=>{
+    const users = await user.find()
+    res.json({data:users})
+})
+
+//uppdate scores dynamically 
+router.put('/:id/:score',async(req,res)=>
+{
+ const id = req.params.id
+ const addedScore = req.params.score
+ const User = await user.findOneAndUpdate({_id:id}, {$inc:{score: addedScore}})
+
+ res.json({msg:'Score updated'})
+});
+
+
+//get user by id 
+  router.get('/:id',async (req,res)=>{
+    
+    const userId =req.params.id
+    const users = await user.findById(userId)
+    .exec()
+    .then(users => {return res.send([users.type,users.firstName,users.lastName,
+      users.birthDate,users.bio,users.email,users.password,users.house,users.din
+       ,users.dor,users.clubs])})
+    .catch(err => {res.send('Cannot find the user ')})
+
 
 
    // updating the info/profile of a user
-    router.put('/',(req,res)=>{
-        const userId =req.body.id;
-        const updatedType=req.body.type
-        const updatedFname= req.body.firstName
-        const updatedLname = req.body.lastName
-        const updatedEmail = req.body.email
-         const updatedPass = req.body.password
-        const updatedBdate = req.body.birthDate
-        const updatedBio = req.body.bio
-        const updatedHouse = req.body.house
-        const updatedScore = req.body.score
-        const updateDin = req.body.din
-       const updateDor = req.body.dor
-        const updatedClubs = req.body.clubs
-       const userf = users.find(user => user.id === userId )
-       userf.type=updatedType
-         userf.firstName = updatedFname
-        userf.lastName = updatedLname
-        userf.email = updatedEmail
-        userf.password = updatedPass
-         userf.birthDate = updatedBdate
-         userf.bio = updatedBio
-         userf.house = updatedHouse
-         userf.score = updatedScore
-          userf.din = updateDin
-         userf.dor = updateDor
-         userf.clubs = updatedClubs
-
-    res.send(users)
-    })
-    //delete a user
-    router.delete('/',(req,res)=>{
-        const userId =req.body.id;
-        
-        const userf = users.find(user => user.id === userId )
-        const index = users.indexOf(userf)
-        users.splice(index,1)
-        res.send(users)
-    }
-    )
-
-let newUser
-router.post('/',(req,res)=>  {
-                        const firstName = req.body.firstname
-                        const lastName = req.body.lastname
-                        const birthDate = req.body.birth_date
-                        const clubs = req.body.clubs
-                        const email = req.body.email
-                        const password = req.body.password
-                        const type = req.body.type
-                        const house=req.body.house
-                        const score=req.body.score
-                        const din = req.body.din
-                        const dor = req.body.dor
-                        const bio = req.body.bio
-                
-                    
- switch(req.body.type)
- {
-   case 'TIQadmin':  const admin = Joi.validate(req.body,adminSchema)
-                     if(admin.error) return res.status(400).send(
-                         {error:admin.error.details[0].message});
-                         newUser= new user(type,firstName,lastName,birthDate,bio,email,password,house,score,
-                            din,dor,clubs)
-                     users.push(newUser)
-                     return res.json({data:newUser});
-
-    case 'external':  const hubUser = Joi.validate(req.body,userSchema)
-                    if(hubUser.error) return res.status(400).send(
-                    {error:hubUser.error.details[0].message});  
-                   newUser = new user(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs)
-                    users.push(newUser)
-                    return res.json({data:newUser});
-
-    case 'disciple' : const disciple = Joi.validate(req.body,discipleSchema)
-                       if (disciple.error) return res.status(400).send (
-                       {error : disciple.error.details[0].message});
-                       newUser = new user(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs)
-                       users.push(newUser)
-                       return res.json({data:newUser});
-
-    case 'parent' : const parent = Joi.validate(req.body,parentSchema)
-                    if (parent.error) return res.status(400).send (
-                    {error : parent.error.details[0].message});
-                    newUser = new user(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs)
-                    users.push(newUser)
-                    return res.json({data:newUser});   
-     
-    case('alumni'):
-            const alumni =Joi.validate(req.body,alumniSchema)
-
-            if(alumni.error) return res.status(400).send({error:alumni.error.details[0].message})
-            newUser=new user(type,firstName,lastName,birthDate,bio,email,password,house,score,din,dor,clubs)
-            users.push(newUser)
-           // res.send(users)
-           return res.send({data:newUser});
-          
-
-
-case('member'):
-            const member =Joi.validate(req.body,memberSchema)
-            if(member.error) return res.status(400).send({error:member.error.details[0].message})
-            newUser=new user(type,firstName,lastName,birthDdate,bio,email,password,house,score,din,dor,clubs)
-            users.push(newUser)
-           // res.send(users)
-           return res.send({data:newUser});
-
-
- }                   
- 
-})               
-router.get('/',(req,res)=>{
-    res.send({data:users})
-})
-
-// Update a user (alumni or members)
-
-
-
-router.put('/', (req, res) => {
-
-    const userId = req.body.id 
-
-    const updatedFirstName = req.body.firstName
-    const updatedLastName = req.body.lastName
-    const updatedBirthDate = req.body.birthdDate
-    const updatedClubs = req.body.clubs
-    const updatedEmail = req.body.email
-    const updatedPassword = req.body.password
-    const updatedHouse= req.body.house
-    const updatedBio = req.body.bio
-    const updatedType = req.body.type
-    const updatedDin = req.body.din
-    const updatedDor = req.body.dor
-    const updatedScore=req.body.score
-
-    const user = users.find(user => user.id === userId)
-
-    user.firstName=updatedFirstName
-    user.lastName = updatedLastName
-    user.birthDate=updatedBirthDate
-    user.clubs=updatedClubs
-    user.email=updatedEmail
-    user.password=updatedPassword
-    user.house=updatedHouse
-    user.bio=updatedBio
-    user.type=updatedType
-    user.din=updatedDin
-    user.dor=updatedDor
-    user.score=updatedScore
-
+    router.put('/:id',async(req,res)=>{
+try{
    
+        const userId =req.params.id
+        const getuser = await user.findOne({_id:userId})
+        if(!getuser) return res.status(404).send({error: 'User does not exist'})
+        const isValidated = userValidator. updateUserValidation(req.body)
+        if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
+        const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
+        
+        res.json({msg: 'User updated sucessfully'})
+     
+    
+}
+catch (error){
+    console.log(error)
+}
+    })
+ 
+  
+    //delete a user
+    router.delete('/:id',async(req,res)=>{
+        try{
+        const userId =req.params.id;
+        const deleteduser = await user.findByIdAndRemove({_id:userId})
+        res.json({msg:'User was deleted successfully', data: deleteduser})
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    } )
 
-    res.send(users)
 
 
+// Update a user(alumni or member )
+router.put('/update/:id', async (req,res) => {
+    // try {
+     const userId = req.params.id
+     const getuser = await user.findOne({_id:userId})
+      if(!getuser) return res.status(404).send({error: 'user does not exist'})
+     const t =getuser.type
+     switch(t)
+     {
+        
+         case('alumni'):
+         try{
+            
+            const isAlumniValidated = alumniValidator.updateValidation(req.body)
+           
+            if (isAlumniValidated.error) return res.status(400).send({ error: isAlumniValidated.error.details[0].message })
+            
+            const updatedAlumni = await getuser.updateOne(req.body)
+        
+            if(!updatedAlumni) return res.status(404).send({error: 'user updation has erroe'})
+            res.json({msg: 'User updated sucessfully'})
+           
+
+         }
+         catch(error){
+            
+             console.log(error)
+         }
+
+
+         case('member'):
+         try{
+           
+            const isUserValidated = userValidator.updateValidation(req.body)
+     
+            if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+           
+            const updatedMember = await getuser.updateOne(req.body)
+     
+            if(!updatedMember) return res.status(404).send({error: 'member updation has an error'})
+            res.json({msg: 'User updated sucessfully'})
+
+
+           
+        
+
+         }
+         catch(error){
+           
+             console.log(error)
+         }
+
+
+     }
+    
 })
 
 module.exports = router;
-
