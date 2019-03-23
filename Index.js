@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require('dotenv')
 
+
 //creating app
 const app = express()
 app.use(express.json())
@@ -30,6 +31,7 @@ const question = require('./routes/api/Questions')
 const notification = require('./routes/api/Notifications')
 
 
+
 app.get('/articles', async (req, res) => {
     res.send(`<a href="/api/Articles">Articles</a>`)
    
@@ -43,7 +45,7 @@ app.get('/FAQs',async (req, res) => {
     res.send(`<a href="/api/FAQs">FAQs</a>`)
 })
 
-app.get('/debates',async (req, res) => {
+app.get('/Debates',async (req, res) => {
     res.send(`<a href="/api/Debates">Debates</a>`)
 })
 app.use('/api/Users', users)
@@ -65,3 +67,4 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
+
