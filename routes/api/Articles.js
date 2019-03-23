@@ -8,7 +8,7 @@ const validator = require('../../validations/articleValidations')
 router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const deletedArticle = await Article.findByIdAndRemove(id)
+     const deletedArticle = await Article.findByIdAndRemove({_id:id})
      res.json({msg:'Article was deleted successfully', data: deletedArticle})
     }
     catch(error) {
@@ -23,7 +23,7 @@ router.get('/',async(req,res)=>{
 
 router.get('/:id',async (req,res)=>{
     const articleId =req.params.id
-    const articles = await article.findOne({articleId})
+    const articles = await article.findOne({_id:articleId})
     res.json({data:articles})
 })
 
