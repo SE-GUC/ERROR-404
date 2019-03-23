@@ -22,3 +22,4 @@ const contentSchema = new Schema ({
 
 
 module.exports = Content = mongoose.model('content', contentSchema)
+
