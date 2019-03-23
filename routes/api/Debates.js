@@ -113,7 +113,7 @@ router.get('/searchbydate/:date', (req,res)=>{
     .exec()
     .then(doc => {
         for (let i = 0  ; i< doc.length ; i++)
-        data += (`<a href="http://localhost:3000/Debates/${doc[i]._id}">${doc[i].title}</a><br>`)
+        data += (`<a href="http://localhost:3000/api/Debates/${doc[i]._id}">${doc[i].title}</a><br>`)
         if (doc.length==0) data = 'No Debates were held on this date'
     })
     .then(()=>{return res.send(data)})
