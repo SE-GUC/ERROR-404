@@ -21,26 +21,8 @@ router.post('/create', async (req,res) => {
     }  
  })
 
-
- //get all Articles
-
   
- router.get('/',async(req,res)=>{
-    const articles = await Articles.find()
-    res.json({data:articles})
-})
-
-// get Article by id
-router.get('/:id',async (req,res)=>{
-    
-    const articleId =req.params.id
-    const articles = await Articles.findById(articleId)
-    .exec()
-    .then(articles => {return res.send([articles.title,articles.description,articles.author,articles.date,articles.comments])})
-    .catch(err => {res.send('Cannot find the article ')})
-   
-    
-})
+ 
 // update Article
 router.put('/:id',async(req,res)=>{
     
@@ -60,19 +42,27 @@ router.put('/:id',async(req,res)=>{
 })
 
 
-    //delete Article
-    router.delete('/:id',async(req,res)=>{
-        try{
-        const articleId =req.params.id;
-        const deletedarticle = await Articles.findByIdAndRemove({_id:userId})
-        res.json({msg:'Article was deleted successfully', data: deletedarticle})
-        }
-        catch(error){
-            console.log(error)
-        }
-        
+router.delete('/:id', async (req,res) => {
+    try {
+     const id = req.params.id
+     const deletedArticle = await Article.findByIdAndRemove({_id:id})
+     res.json({msg:'Article was deleted successfully', data: deletedArticle})
     }
-    )
+    catch(error) {
+        console.log(error)
+    }  
+ })
+
+router.get('/',async(req,res)=>{
+    const articles = await Article.find()
+    res.json({data:articles})
+})
+
+router.get('/:id',async (req,res)=>{
+    const articleId =req.params.id
+    const articles = await Article.findOne({_id:articleId})
+    res.json({data:articles})
+})
 
 module.exports = router
 
