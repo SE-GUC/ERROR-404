@@ -183,68 +183,6 @@ router.get('/:id',async (req,res)=>{
 
 //----------------------------------------------------------------
 //update 
-
-
-
-// router.put('/:id', async (req,res) => {
-//     try{
-
-
-
-//         console.group(1)
-//         const userId =req.params.id
-//         console.group(2)
-//         const getuser = await user.findOne({userId})
-//         console.group(3)
-//       //  if(!getuser) return res.status(400).send({msg: 'cannot find user with that id'})
-//         console.group(4)
-//         const isUserValidated = userValidator.updateValidation(req.body)
-//         console.group(5)
-//         if (isUserValidated.error) return res.status(400).send({error: isUserValidated.error.details[0].message})
-//         console.group(6)
-//         const updateuser =await getuser.updateOne(req.body)
-//         console.group(7)
-//         return res.json({msg: 'User updated sucessfully'})
-//         // {return res.send([updateuser.type,updateuser.firstName,updateuser.lastName,
-//         // updateuser.birthDate,updateuser.bio,updateuser.email,updateuser.password,updateuser.house,updateuser.din
-//         // ,updateuser.dor,updateuser.clubs])}
-   
-//          }
-//          catch(error){
-//             console.log(9)
-//              console.log(error)
-//          }
-
-
-
-//         });
-
-
-        // router.put('/:id',async(req,res)=>{
-        //     try{
-               
-        //             const userId =req.params.id
-        //             const getuser = await user.findOne({_id:userId})
-        //             console.log(getuser)
-        //             console.log(!getuser)
-        //             console.log(1)
-        //          if(!getuser) return res.status(400).send({msg: 'cannot find user with that id'})
-                   
-
-        //             console.log(2)
-        //             const isValidated = userValidator. updateValidation(req.body)
-        //             if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-        //             const updatedUser = await getuser.updateOne(req.body)
-                    
-        //             res.json({msg: 'User updated sucessfully'})
-            
-                 
-                
-        //     }
-        //     catch (error){
-        //         console.log(error)
-        //     }
-        //         })
             
 //---------------------------------------------------------------------------------
 
