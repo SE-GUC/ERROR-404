@@ -1,14 +1,15 @@
-
 const express = require('express')
 const mongoose = require('mongoose')
 const users = require('./routes/api/Users')
 const articles = require('./routes/api/Articles')
+const dotenv = require('dotenv')
+dotenv.config()
 const app = express()
 // // DB Config
-const db = require('./config/keys').mongoURI
+// const db = require('./config/keys').mongoURI
 // Connect to mongo
 mongoose
-    .connect(db)
+    .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
 // // Init middleware
@@ -25,12 +26,18 @@ app.get('/users',async (req, res) => {
 })
 
 // Entry point
-// app.get('/', (req,res) => res.send(`<h1>Articles</h1>`))
-// app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
+app.get('/', (req,res) => res.send(`<h1>Articles</h1>`))
+app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 // Direct routes to appropriate files 
 app.use('/api/Users', users)
 app.use('/api/Articles', articles)
+
+// Handling 404
+ app.use((req, res) => {
+     res.status(404).send({err: 'We can not find what you are looking for'});
+  })
+
 
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
