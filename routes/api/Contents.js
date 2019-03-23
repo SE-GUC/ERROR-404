@@ -38,11 +38,10 @@ router.put('/:id', async (req,res) => {
     }  
  })
 
- //delete with mongodb
- router.delete('/:id', async (req,res) => {
+router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const deletedContent = await Content.findByIdAndRemove(id)
+     const deletedContent = await Content.findByIdAndRemove({_id:id)
      res.json({msg:'Content was deleted successfully', data: deletedContent})
     }
     catch(error) {
@@ -50,14 +49,13 @@ router.put('/:id', async (req,res) => {
     }  
  })
 
- //displaying a certain content uploaded 
+ 
  router.get('/:id',async (req,res)=>{
     const Id = req.params.id 
-    const cont = await Content.findById(Id)
+    const cont = await Content.findById({_id:Id})
     res.send(cont)
 }) 
 
-//displaying all content 
 
 router.get('/', async (req,res) => {
     const contents = await Content.find()
