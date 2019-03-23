@@ -2,64 +2,85 @@
 const express = require('express')
 const router = express.Router()
 router.use(express.json())
-
+const mongoose = require('mongoose')
+const validator = require('../../validations/faqValidations')
 // We will be connecting using database 
 const FAQ = require('../../models/FAQ')
 
-// temporary data created as if it was pulled out of the database ...
-const FAQs = [
-    new FAQ(1,'How to sign up ?', 'Click on the sign up button and follow the steps'),
-    new FAQ(2,'How to sign in?', 'Click on the login button and enjoy')
-    
-];
 
-router.get('/', (request, response) => {
-    let data = "";
-    FAQs.forEach((value) => {
-        const question = value.question;
-        const answer = value.answer;
-        data += `<h1> ${question}${answer}</h1><br>`;
-    });
-    response.send(data);
+
+router.post('/add',async (req, res) => {
+    try {
+        const isValidated = validator.createValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const question = req.body.question
+        const answer = req.body.answer
+        const newFaq = await FAQ.create({
+            question: question,
+            answer: answer,
+            
+        })
+        res.json({msg:'FAQ was created successfully', data: newFaq})
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+       }  
+   
+   
+})
+
+router.get('/', async(request, response) => {
+    const faqs = await FAQ.find({answer:{$ne:null}})
+    response.json({data: faqs})
+
 });
 
 
 
-router.delete('/delete', (req, res) => {
-    const id = req.body.id 
+ router.delete('/:id', async(req, res) => {
+    try {
+        const id = req.params.id
+        const deletedFaq = await FAQ.findByIdAndRemove(id)
+        res.json({msg:'FAQ was deleted successfully', data: deletedFaq})
 
-    const faq = FAQs.find(faq => faq.id === id)
-    const index = FAQs.indexOf(faq)
-    FAQs.splice(index,1)
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
 
-    res.send(FAQs)
+       }  
+   
+
+
+   
+})
+
+router.put('/edit/:id',async (req, res) => {
+    try {
+        const id = req.params.id
+        const faq = await FAQ.findOne({_id:id})
+        console.log(!faq)
+        if(!faq) return res.status(404).send({error: 'FAQ does not exist'})
+        const isValidated = validator.updateValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const updatedFaq = await faq.updateOne(req.body)
+        res.json({msg: 'FAQ updated successfully', data: updatedFaq})
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+       }  
+    
 })
 
 
-router.post('/add', (req, res) => {
-    const question = req.body.question
-    const answer = req.body.answer
-    const faq = {
-        question: question,
-        answer: answer,
-        id:FAQs.length + 1  
-    }
-    FAQs.push(faq)
-    res.send(FAQs)
-})
-router.put('/edit', (req, res) => {
-    const id = req.body.id 
-    const question = req.body.question
-    const answer = req.body.answer
 
-    const faq = FAQs.find(faq => faq.id === id)
-    faq.question = question
-    faq.answer = answer
+    
 
-    res.send(FAQs)
-})
 
 
 
 module.exports = router
+
 

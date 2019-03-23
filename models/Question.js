@@ -1,19 +1,22 @@
 
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 // Create the schema
-const FAQsSchema = new Schema({
+const QuestionSchema = new Schema({
     question: {
         type: String,
         required: true
     },
     answer: {
+        type: String
+
+    },
+    user: {   //id
         type: String,
-
         required: true
-
     }
 })
 
-module.exports = FAQ = mongoose.model('faqs', FAQsSchema)
+module.exports = Question = mongoose.model('questions', QuestionSchema)
