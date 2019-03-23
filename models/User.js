@@ -1,7 +1,11 @@
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
+
+// Create the schema
 const userSchema = new Schema({
+   
     type: {
         type: String,
         required: true
@@ -20,7 +24,7 @@ const userSchema = new Schema({
     },
     bio: {
         type: String, 
-        required: true
+      
     },
     email: {
         type: String, 
@@ -32,24 +36,27 @@ const userSchema = new Schema({
     },
     house: {
         type: String, 
-        required: true
+       
     },
     score: {
-        type: Number, 
-        required: true
+        type: String
+       
     },
     din: {
-        type: String, 
-        required: true
+        type: String
+       
     },
     dor: {
-        type: String, 
-        required: true
+        type: String
+       
     },
+
     clubs: {
         type: [String], 
         required: true
-    },
+    }
 })
 
+
 module.exports = User = mongoose.model('users', userSchema)
+
