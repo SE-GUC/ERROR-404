@@ -20,10 +20,13 @@ const articleSchema = new Schema({
         required: true
     },
     comments: {
-        type: String
-        
+
+        type: [String], 
+        required: true
+
     }
    
 })
 
 module.exports = Article = mongoose.model('articles', articleSchema)
+

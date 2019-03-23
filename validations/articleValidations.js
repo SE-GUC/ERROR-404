@@ -1,17 +1,14 @@
 const Joi = require('joi')
-
-
 module.exports = {
     createValidation: request => {
-      
-            const createSchema = {
+         const createSchema = {
                 title: Joi.string().required(),
                 description: Joi.string().required(),
                 author: Joi.string().required(),
-                date: Joi.string().required(),
-             //   comments: Joi.array().required()
+                date: Joi.string().required()
+        
             }
-
+       
         return Joi.validate(request, createSchema)
     },
 
@@ -21,13 +18,12 @@ module.exports = {
             description: Joi.string(),
             author: Joi.string(),
             date: Joi.string(),
-         //   comments:Joi.array()
+            comments:Joi.array()
             
         }
 
         return Joi.validate(request, updateSchema)
-    },
-    
-      
+
+    }
      
 }
