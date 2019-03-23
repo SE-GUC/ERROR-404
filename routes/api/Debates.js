@@ -10,7 +10,7 @@ const joi = require('joi')
 //################## 
 //Displaying all debates on the Debate page
 router.get('/',(req,res)=>{
-    let data = '';
+    let data = `<a href="Debates/searchbydate">Search by Date</a><br>`;
     Debate.find({}).exec().then(doc => {
         for (let i = 0 ; i< doc.length ; i++ ) {
             // console.log(cur);
@@ -100,6 +100,26 @@ router.delete('/:id', (req, res) => {
 //User Story 
 //TIQ users should be able to search for a debate by date
 //################## 
+router.get('/searchbydate/:date', (req,res)=>{
+    const date = req.params.date;
+    const formatteddate = new Date(date)
+    const schema = {
+        date : joi.date()
+    }
+    const result = joi.validate(req.body,schema);
+    if (result.error) return res.status(400).send({error : result.error.details[0].message});
+    let data = '';
+    Debate.find({date : formatteddate})
+    .exec()
+    .then(doc => {
+        for (let i = 0  ; i< doc.length ; i++)
+        data += (`<a href="http://localhost:3000/Debates/${doc[i]._id}">${doc[i].title}</a><br>`)
+        if (doc.length==0) data = 'No Debates were held on this date'
+    })
+    .then(()=>{return res.send(data)})
+    .catch(err => {res.send('Sorry Could not find any Debates with this date')})
+})
+
 
 
 module.exports = router

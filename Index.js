@@ -6,7 +6,7 @@ const debates = require('./routes/api/Debates')
 const DB_USER = process.env.MONGO_ATLAS_USER
 const DB_PASS = process.env.MONGO_ATLAS_PASSWORD
 mongoose.connect(
-  `mongodb+srv://${DB_USER}:${DB_PASS}@tiq-mflro.gcp.mongodb.net/test?retryWrites=true`,
+  `mongodb+srv://${DB_USER}:${DB_PASS}@trail-mflro.mongodb.net/mydb?retryWrites=true`,
   { useNewUrlParser: true }
 )
 
