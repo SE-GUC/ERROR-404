@@ -164,7 +164,74 @@ router.post('/register', async (req,res) => {
 
                             console.log(error)
 
-                    }     
+                    }  
+    case('alumni'):
+        try{
+    const isAlumniValidated = alumniValidator.registerValidation(req.body)
+    if (isAlumniValidated.error) return res.status(400).send({ error: isAlumniValidated.error.details[0].message })
+    
+    const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body 
+    const salt = bcrypt.genSaltSync(10);
+    const hashedPassword = bcrypt.hashSync(password, salt)
+    const newAlumni = new User({
+                    type,
+                    firstName,
+                    lastName,
+                    birthDate,
+                    bio,
+                    email,
+                    password :hashedPassword,
+                    house,
+                    score,
+                    din,
+                    dor,
+                    clubs
+                    })
+          await User.create(newAlumni)
+                    
+      return  res.json({ msg: 'User created successfully', data: newAlumni })
+                             
+            } 
+        catch (error) {
+		return res.status(422).send({ error: 'Can not create user' })
+	}
+
+    case('member'):
+
+    try{
+
+        const isUserValidated = userValidator.registerValidation(req.body)
+        if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+        console.log(5)
+        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
+        const salt = bcrypt.genSaltSync(10)
+        const hashedPassword = bcrypt.hashSync(password, salt)
+        console.log(6)
+        const newMember = new user({
+                  type ,
+                firstName ,
+                lastName ,
+                birthDate ,
+                bio,
+                email,
+                password : hashedPassword,
+                clubs ,
+                house ,
+                din,
+                dor
+                
+               
+            })
+            
+            await User.create(newMember)
+                    
+         return res.json({ msg: 'User created successfully', data: newMember })
+                
+        } 
+    catch (error) {
+
+   return res.status(422).send({ error: 'Can not create user' })
+}
 
     case ('parent') :
                     try 
@@ -233,12 +300,115 @@ router.put('/:id/:score',async(req,res)=>
  const id = req.params.id
  const addedScore = req.params.score
  const User = await user.findOneAndUpdate({_id:id}, {$inc:{score: addedScore}})
- //const Score= user.get(score)
-//  const score = addedScore + Score
-//  const newScore =await user.findOneAndUpdate({_id:id},{score:score})
+
  res.json({msg:'Score updated'})
 });
 
 
+//get user by id 
+  router.get('/:id',async (req,res)=>{
+    
+    const userId =req.params.id
+    const users = await user.findById(userId)
+    .exec()
+    .then(users => {return res.send([users.type,users.firstName,users.lastName,
+      users.birthDate,users.bio,users.email,users.password,users.house,users.din
+       ,users.dor,users.clubs])})
+    .catch(err => {res.send('Cannot find the user ')})
+
+
+
+   // updating the info/profile of a user
+    router.put('/:id',async(req,res)=>{
+try{
+   
+        const userId =req.params.id
+        const getuser = await user.findOne({_id:userId})
+        if(!getuser) return res.status(404).send({error: 'User does not exist'})
+        const isValidated = userValidator. updateUserValidation(req.body)
+        if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
+        const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
+        
+        res.json({msg: 'User updated sucessfully'})
+     
+    
+}
+catch (error){
+    console.log(error)
+}
+    })
+ 
+  
+    //delete a user
+    router.delete('/:id',async(req,res)=>{
+        try{
+        const userId =req.params.id;
+        const deleteduser = await user.findByIdAndRemove({_id:userId})
+        res.json({msg:'User was deleted successfully', data: deleteduser})
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    } )
+
+
+
+// Update a user(alumni or member )
+router.put('/update/:id', async (req,res) => {
+    // try {
+     const userId = req.params.id
+     const getuser = await user.findOne({_id:userId})
+      if(!getuser) return res.status(404).send({error: 'user does not exist'})
+     const t =getuser.type
+     switch(t)
+     {
+        
+         case('alumni'):
+         try{
+            
+            const isAlumniValidated = alumniValidator.updateValidation(req.body)
+           
+            if (isAlumniValidated.error) return res.status(400).send({ error: isAlumniValidated.error.details[0].message })
+            
+            const updatedAlumni = await getuser.updateOne(req.body)
+        
+            if(!updatedAlumni) return res.status(404).send({error: 'user updation has erroe'})
+            res.json({msg: 'User updated sucessfully'})
+           
+
+         }
+         catch(error){
+            
+             console.log(error)
+         }
+
+
+         case('member'):
+         try{
+           
+            const isUserValidated = userValidator.updateValidation(req.body)
+     
+            if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+           
+            const updatedMember = await getuser.updateOne(req.body)
+     
+            if(!updatedMember) return res.status(404).send({error: 'member updation has an error'})
+            res.json({msg: 'User updated sucessfully'})
+
+
+           
+        
+
+         }
+         catch(error){
+           
+             console.log(error)
+         }
+
+
+     }
+    
+})
 
 module.exports = router;

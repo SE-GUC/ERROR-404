@@ -1,28 +1,18 @@
 const express = require('express')
 const mongoose = require('mongoose')
-
-const app = express()
 const cors = require('cors')
+const dotenv = require('dotenv')
+
+//creating app
+const app = express()
 app.use(express.json())
 
-
-
-
-// Require Router Handlers
-const users = require('./routes/api/users')
-const articles = require('./routes/api/Articles')
-const debates = require('./routes/api/Debates')
-
-
-//DB config 
-const db=require('./config/keys').mongoURI
-
-
 // Connect to mongo
+dotenv.config()
 mongoose
-    .connect(db,{useNewUrlParser: true })
+    .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
     .then(() => console.log('Connected to MongoDB'))
-.catch(err => console.log(err))
+    .catch(err => console.log(err))
 
 // Init middleware
 app.use(express.json())
@@ -30,19 +20,32 @@ app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
 
-//Entry point
-app.get('/', (req,res) => res.send(`<h1>Heloooooosss</h1>`))
-app.get('/Users', (req,res) => res.send(`<h1>hey user</h1>`))
-app.get('/Articles', (req,res) => res.send(`<h1>Articlesssssssssssssss?</h1>`))
-app.get('/Users/register', (req,res) => res.send(`<h1>ready to registe?</h1>`))
+// Require Router Handlers
+const articles = require('./routes/api/Articles')
+const users = require('./routes/api/Users')
+const articles = require('./routes/api/Articles')
+const debates = require('./routes/api/Debates')
 
 
+app.get('/articles', async (req, res) => {
+    res.send(`<a href="/api/Articles">Articles</a>`)
+   
+})
 
+app.get('/users',async (req, res) => {
+    res.send(`<a href="/api/Users">Users</a>`)
+})
 
+app.get('/debates',async (req, res) => {
+    res.send(`<a href="/api/Debates">Debates</a>`)
+})
 app.use('/api/Users', users)
 app.use('/api/Articles',articles)
 app.use('/api/Debates', debates)
 
+
+// Entry point
+app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
 
 
 app.use((req, res) => {
@@ -50,6 +53,5 @@ app.use((req, res) => {
  })
 
  
-
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Server up and running on port ${port}`))
+app.listen(port, () => console.log(`Server on ${port}`))
