@@ -1,40 +1,57 @@
+
 const express = require('express')
 const router = express.Router()
 router.use(express.json())
-
+const mongoose = require('mongoose')
+const validator = require('../../Validations/faqValidations')
 // We will be connecting using database 
 const FAQ = require('../../models/FAQ')
 
-// temporary data created as if it was pulled out of the database ...
-const FAQs = [
-    new FAQ(1,'The what is your name?', 'Nouran'),
-    new FAQ(2,'The what is your name?', 'Seif')
+
+
+
+ 
+ 
+
+router.post('/add',async (req, res) => {
+    try {
+        const isValidated = validator.createValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const question = req.body.question
+        const answer = req.body.answer
+        const newFaq = await FAQ.create({
+            question: question,
+            answer: answer,
+            
+        })
+        res.json({msg:'FAQ was created successfully', data: newFaq})
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+       }  
+   
+   
+})
+
+router.put('/edit/:id',async (req, res) => {
+    try {
+        const id = req.params.id
+        const faq = await FAQ.findOne({_id:id})
+        console.log(!faq)
+        if(!faq) return res.status(404).send({error: 'FAQ does not exist'})
+        const isValidated = validator.updateValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const updatedFaq = await faq.updateOne(req.body)
+        res.json({msg: 'FAQ updated successfully', data: updatedFaq})
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+       }  
     
-];
-
-
-router.post('/add', (req, res) => {
-    const question = req.body.question
-    const answer = req.body.answer
-    const faq = {
-        question: question,
-        answer: answer,
-        id:FAQs.length + 1  
-    }
-    FAQs.push(faq)
-    res.send(FAQs)
 })
-router.put('/edit', (req, res) => {
-    const id = req.body.id 
-    const question = req.body.question
-    const answer = req.body.answer
 
-    const faq = FAQs.find(faq => faq.id === id)
-    faq.question = question
-    faq.answer = answer
-
-    res.send(FAQs)
-})
 
 
 
