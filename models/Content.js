@@ -1,11 +1,24 @@
-const uuid = require ('uuid')
-//User model
-class Content {
-    constructor(type,date,description){
-        this.type=type;
-        this.date=date;
-        this.description=description;
-        this.id=uuid.v4();
-    };
-};
-module.exports=Content;
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema 
+const uuid = require('uuid')
+
+const contentSchema = new Schema ({
+    date:{
+        type : Date , 
+        default: Date.now 
+    },
+    type:{
+        type:String ,
+        required :true 
+    },
+    description : {
+        type:String , 
+        required:true 
+    }
+})
+
+
+
+
+
+module.exports = Content = mongoose.model('content', contentSchema)
