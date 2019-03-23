@@ -1,12 +1,16 @@
+const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
-class FAQ {
-    constructor(id,question, answer,) {
-        this.id=id;
-        this.question = question;
-        this.answer = answer;
-       
-    };
-}
+// Create the schema
+const FAQsSchema = new Schema({
+    question: {
+        type: String,
+        required: true
+    },
+    answer: {
+        type: String,
+        required:true
+    }
+})
 
-
-module.exports = FAQ
+module.exports = FAQ = mongoose.model('faqs', FAQsSchema)
