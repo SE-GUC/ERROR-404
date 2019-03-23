@@ -118,17 +118,8 @@ router.get('/Search/:category',async(req,res)=>{
      console.log(!dbs)
      if(dbs.length===0) return res.status(404).send({error: 'Article with that category doesnt exisit'})
     return res.json({data:dbs})
-
-    //  .exec().then(doc => {
-    //     for (let i = 0 ; i< doc.length ; i++ ) {
-    //         // console.log(cur);
-    //         data += (`<a href="Debates/${doc[i]._id}">${doc[i].title}</a><br>`)
-    //      }
          
     })
-    // then(()=>{return res.send(data)})
-    // .catch(err => {console.log(err); return Response.send('Srry , Cannot find Debates with that specific Category')});})
-
-// }
+   
 
 module.exports = router
