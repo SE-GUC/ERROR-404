@@ -3,7 +3,7 @@ const express = require('express')
 const router = express.Router()
 router.use(express.json())
 const mongoose = require('mongoose')
-const validator = require('../../Validations/faqValidations')
+const validator = require('../../validations/faqValidations')
 // We will be connecting using database 
 const FAQ = require('../../models/FAQ')
 
