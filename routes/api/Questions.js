@@ -20,6 +20,20 @@ router.get('/admin', async(request, response) => {
 });
 
 
+router.delete('/:id', async(req, res) => {
+    try {
+        const id = req.params.id
+        const deletedQuestion = await Question.findByIdAndRemove({_id:id})
+        res.json({msg:'Question was deleted successfully', data: deletedQuestion})
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+       }
+
+   
+})
+
 
 router.put('/answerquestion/:id', async(req, res) => {
     try {

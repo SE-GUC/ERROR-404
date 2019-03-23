@@ -19,7 +19,7 @@ router.get('/admin', async(request, response) => {
 
 
 
-router.delete('/delete/:id', async(req, res) => {
+router.delete('/:id', async(req, res) => {
     try {
         const id = req.params.id
         const deletedNotification = await Notification.findByIdAndRemove({_id:id})

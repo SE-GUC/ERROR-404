@@ -38,7 +38,7 @@ router.get('/', async(request, response) => {
 
 
 
- router.delete('/delete/:id', async(req, res) => {
+ router.delete('/:id', async(req, res) => {
     try {
         const id = req.params.id
         const deletedFaq = await FAQ.findByIdAndRemove(id)
@@ -51,8 +51,6 @@ router.get('/', async(request, response) => {
 
        }  
    
-
-       }
 
 
    
