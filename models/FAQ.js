@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -9,7 +10,9 @@ const FAQsSchema = new Schema({
     },
     answer: {
         type: String,
-        required:true
+
+        required: true
+
     }
 })
 

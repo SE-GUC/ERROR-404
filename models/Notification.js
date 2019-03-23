@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
@@ -5,11 +6,11 @@ const Schema = mongoose.Schema
 const NotificationShema = new Schema({
    
     user: {
-        type: Number,
+        type: String, //id
         required: true
     },
-    content: {
-        type: Number,
+    content: { //question id
+        type: String,
         required: true
     },
     type: {

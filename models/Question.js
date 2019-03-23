@@ -1,13 +1,4 @@
-const uuid = require('uuid')
-class Question {
-    constructor(question,answer,user){
-        this.question = question
-        this.answer = answer
-        this.user = user
-        this.id = uuid.v4()
-    }
-}
-module.exports = Question
+
 
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
@@ -19,10 +10,11 @@ const QuestionSchema = new Schema({
         required: true
     },
     answer: {
-        type: String,
+        type: String
+
     },
-    user: {
-        type: Number,
+    user: {   //id
+        type: String,
         required: true
     }
 })
