@@ -1,3 +1,4 @@
+
 const express = require('express')
 const router = express.Router()
 const mongoose =require('mongoose')
@@ -11,10 +12,11 @@ const validator=require('../../validations/userValidations')
 try{
    
         const userId =req.params.id
-        const getuser = await user.findOne({userId})
+        const getuser = await user.findOne({_id:userId})
+        if(!getuser) return res.status(404).send({error: 'User does not exist'})
         const isValidated = validator. updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-        const updatedUser = await user.updateOne(req.body)
+        const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
         
         res.json({msg: 'User updated sucessfully'})
      
@@ -30,7 +32,7 @@ catch (error){
     router.delete('/:id',async(req,res)=>{
         try{
         const userId =req.params.id;
-        const deleteduser = await user.findByIdAndRemove(userId)
+        const deleteduser = await user.findByIdAndRemove({_id:userId})
         res.json({msg:'User was deleted successfully', data: deleteduser})
         }
         catch(error){
@@ -58,6 +60,5 @@ router.get('/:id',async (req,res)=>{
 
 
 module.exports = router;
-
 
 

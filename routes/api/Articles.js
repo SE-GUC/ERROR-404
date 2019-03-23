@@ -28,7 +28,7 @@ router.put('/:id',async(req,res)=>{
         const getArticle= await article.findOne({articleid})
         const isValidated = validator.updateValidation(req.body)
         if(isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-        const updatedArticle=await article.updateOne(req.body)
+        const updatedArticle=await article.findOneAndUpdate({_id:articleid},req.body)
         res.json({msg:'Article updated successfully'})
     }
     catch(error){
@@ -36,7 +36,20 @@ router.put('/:id',async(req,res)=>{
     }
 })
 
-module.exports = router;
+    //delete a user
+    router.delete('/:id',async(req,res)=>{
+        try{
+        const articleId =req.params.id;
+        const deletedarticle = await article.findByIdAndRemove({_id:userId})
+        res.json({msg:'Article was deleted successfully', data: deletedarticle})
+        }
+        catch(error){
+            console.log(error)
+        }
+        
+    }
+    )
 
+module.exports = router;
 
 
