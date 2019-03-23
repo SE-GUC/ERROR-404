@@ -9,10 +9,6 @@ const FAQ = require('../../models/FAQ')
 
 
 
-
- 
- 
-
 router.post('/add',async (req, res) => {
     try {
         const isValidated = validator.createValidation(req.body)
@@ -31,6 +27,34 @@ router.post('/add',async (req, res) => {
            console.log(error)
        }  
    
+   
+})
+
+router.get('/', async(request, response) => {
+    const faqs = await FAQ.find({answer:{$ne:null}})
+    response.json({data: faqs})
+
+});
+
+
+
+ router.delete('/delete/:id', async(req, res) => {
+    try {
+        const id = req.params.id
+        const deletedFaq = await FAQ.findByIdAndRemove(id)
+        res.json({msg:'FAQ was deleted successfully', data: deletedFaq})
+
+       }
+       catch(error) {
+           // We will be handling the error later
+           console.log(error)
+
+       }  
+   
+
+       }
+
+
    
 })
 
@@ -54,5 +78,11 @@ router.put('/edit/:id',async (req, res) => {
 
 
 
+    
+
+
+
 
 module.exports = router
+
+

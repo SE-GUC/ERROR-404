@@ -1,4 +1,5 @@
 
+
     const express = require('express')
     const router = express.Router()
     router.use(express.json())
@@ -16,14 +17,6 @@ router.get('/admin', async(request, response) => {
 });
 
 
-// router.get('/user/:id', async(request, response) => {
-//     const userId = request.params.id 
-
-//     const notifications = await Notification.find({type:"answer" , user:userId})
-//     response.json({msg: 'Your question is answered',data:notifications})    
-
-// });
-
 
 
 router.delete('/delete/:id', async(req, res) => {
@@ -40,5 +33,12 @@ router.delete('/delete/:id', async(req, res) => {
    
 })
 
+router.get('/user/:id', async(request, response) => {
+    const userId = request.params.id 
+
+    const notifications = await Notification.find({type:"answer" , user:userId})
+    response.json({msg: 'Your question is answered',data:notifications})
+
+});
 module.exports = router
 

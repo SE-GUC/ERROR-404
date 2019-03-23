@@ -1,15 +1,3 @@
-// const uuid = require('uuid')
-// class Question {
-//     constructor(idd,question,answer,user){
-//         this.idd=idd
-//         this.question = question
-//         this.answer = answer
-//         this.user = user
-//         this.id = uuid.v4()
-//     }
-// }
-// module.exports = Question
-
 
 
 const mongoose = require('mongoose')
