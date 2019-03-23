@@ -214,6 +214,7 @@ router.post('/register', async (req,res) => {
                 birthDate ,
                 bio,
                 email,
+		score:0,
                 password : hashedPassword,
                 clubs ,
                 house ,
