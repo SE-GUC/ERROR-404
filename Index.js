@@ -1,29 +1,30 @@
+
 const express = require('express')
-
-const users = require('./routes/api/Users')
-const debates = require('./routes/api/Debates')
-const FAQs = require('./routes/api/FAQs')
-const content = require('./routes/api/Contents')
-
+const mongoose = require('mongoose')
+const clubs = require('./routes/api/Clubs')
 const app = express()
 
-app.use(express.json())
+// // DB Config
+const db = require('./config/keys').mongoURI
 
-app.get('/', (req, res) => {
-    res.send(`<a href="/Debates">Debates</a> </br> <a href="/api/Users">Users</a>`)
+// Connect to mongo
+mongoose
+    .connect(db, { useNewUrlParser: true })
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.log(err))
+
+// Init middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+
+app.get('/Clubs', async (req, res) => {
+    res.send(`<a href="/api/Clubs">Clubs</a>`)
+   
 })
 
+
 // Direct routes to appropriate files 
-app.use('/api/Users', users)
-app.use('/Debates', debates)
-app.use('/api/FAQs', FAQs)
-app.use('/api/Contents', content)
-// Handling 404
- app.use((req, res) => {
-     res.status(404).send({err: 'We can not find what you are looking for'});
-  })
+app.use('/api/Clubs', clubs)
 
-const port = 3000
-app.listen(port, () => console.log(`Server up and running on port ${port}`))
-
-
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log(`Server on ${port}`))
