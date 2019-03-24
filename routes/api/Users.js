@@ -5,14 +5,14 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 
-const tokenKey = require('../../config/keys').secretOrKey
+//const tokenKey = require('../../config/keys').secretOrKey
 
 
 const user = require('../../models/User')
 
 
 const userValidator = require('../../validations/userValidations')
-const adminValidator = require('../../validations/adminValidations')
+//const adminValidator = require('../../validations/adminValidations')
 const alumniValidator = require('../../validations/alumniValidations')
 const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
