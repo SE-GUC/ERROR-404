@@ -41,7 +41,7 @@ router.put('/:id', async (req,res) => {
 router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const deletedContent = await Content.findByIdAndRemove({_id:id)
+     const deletedContent = await Content.findByIdAndRemove({_id:id})
      res.json({msg:'Content was deleted successfully', data: deletedContent})
     }
     catch(error) {
