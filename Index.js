@@ -1,6 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const cors = require('cors')
+    const cors = require('cors')
 const dotenv = require('dotenv')
 
 //creating app
@@ -67,7 +67,13 @@ app.use('/api/Clubs', clubs)
 app.use('/api/Contents', content)
 
 // Entry point
-app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
+app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
+<a href="/api/Articles">Articles</a> </br>
+<a href="/api/Users">Users</a> </br>
+<a href="/api/FAQs">FAQs</a> </br>
+<a href="/api/Debates">Debates</a> </br>
+<a href="/api/Clubs">Clubs</a> </br>
+<a href="/api/Contents">Contents</a>`))
 
 
 app.use((req, res) => {
