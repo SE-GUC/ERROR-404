@@ -77,7 +77,7 @@ router.delete('/:id', (req, res) => {
     Debate.findByIdAndDelete(id)
     .exec()
     .then( doc =>{return res.json({data  : 'Deleted Successfully'})})
-    .catch(err => { return res.json({err :'Could not delete a debate with thid id'})})
+    .catch(err => { return res.json({err :'Could not delete a debate with this id'})})
 })
 
 
