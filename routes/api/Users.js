@@ -1,18 +1,17 @@
-
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 const router = express.Router()
 
-const tokenKey = require('../../config/keys').secretOrKey
+//const tokenKey = require('../../config/keys').secretOrKey
 
 
 const user = require('../../models/User')
 
 
 const userValidator = require('../../validations/userValidations')
-const adminValidator = require('../../validations/adminValidations')
+//const adminValidator = require('../../validations/adminValidations')
 const alumniValidator = require('../../validations/alumniValidations')
 const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
@@ -316,7 +315,7 @@ router.put('/:id/:score',async(req,res)=>
       users.birthDate,users.bio,users.email,users.password,users.house,users.din
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
-
+    })
 
 
    // updating the info/profile of a user
@@ -411,5 +410,14 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
+router.get('/Search/:keyWord',async(req,res)=>{
+    const keyWord=req.params.keyWord
+   const user = await User.find({$or:[ {'firstName':keyWord}, {'lastName':keyWord},{'type':keyWord}]})
+    // const user = await User.find({'lastName':keyWord})
+
+    if(user.length===0) return res.status(404).send({error: 'User with that name doesnt exisit'})
+    return res.json({data:user})
+         
+    })
 
 module.exports = router;
