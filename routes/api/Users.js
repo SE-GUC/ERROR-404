@@ -355,15 +355,15 @@ catch (error){
         
     } )
 
-router.put('/deleteNotification/:notification/:id',async(res,req)=>
-{
-    const notification = req.params.notification
-    const id = rq.params.id
-    const getUser = await user.findOne({_id:id})
-    if(!getUser)return res.status(404).send({error:'user does not exist'})
-    const updateUser= await user.findOneAndUpdate({_id:id},{$pull:{notification: notification}})
-    res.json({msg: 'Notification deleted'})
-})
+// router.put('/deleteNotification/:notification/:id',async(res,req)=>
+// {
+//     const notification = req.params.notification
+//     const id = rq.params.id
+//     const getUser = await user.findOne({_id:id})
+//     if(!getUser)return res.status(404).send({error:'user does not exist'})
+//     const updateUser= await user.findOneAndUpdate({_id:id},{$pull:{notification: notification}})
+//     res.json({msg: 'Notification deleted'})
+// })
 router.put('/notifyuser/:notification/:id',async(res,req)=>{
 const notification = req.params.notification
 const id = req.params.id
