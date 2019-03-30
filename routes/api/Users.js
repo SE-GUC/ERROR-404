@@ -1,7 +1,7 @@
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 //const tokenKey = require('../../config/keys').secretOrKey
