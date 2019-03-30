@@ -284,8 +284,6 @@ router.post('/register', async (req,res) => {
 usernew.catch()
 
 })
-
-
 //get all users
 
 
@@ -341,19 +339,39 @@ catch (error){
   
     //delete a user
     router.delete('/:id',async(req,res)=>{
-        try{
+       // try{
         const userId =req.params.id;
         const deleteduser = await user.findByIdAndRemove({_id:userId})
-        res.json({msg:'User was deleted successfully', data: deleteduser})
-        }
-        catch(error){
-            console.log(error)
-        }
+       // res.json({msg:'User was deleted successfully', data: deleteduser})
+        .exec()
+        .then(users => {return res.send([deleteduser.type,deleteduser.firstName,deleteduser.lastName,
+        deleteduser.birthDate,deleteduser.bio,deleteduser.email,deleteduser.password,deleteduser.house,deleteduser.din
+       ,deleteduser.dor,deleteduser.clubs])})
+      .catch(err => {res.send('Cannot find the user ')})
+      //  }
+        //catch(error){
+          //  console.log(error)
+       // }
         
     } )
 
-
-
+router.put('/deleteNotification/:notification/:id',async(res,req)=>
+{
+    const notification = req.params.notification
+    const id = rq.params.id
+    const getUser = await user.findOne({_id:id})
+    if(!getUser)return res.status(404).send({error:'user does not exist'})
+    const updateUser= await user.findOneAndUpdate({_id:id},{$pull:{notification: notification}})
+    res.json({msg: 'Notification deleted'})
+})
+router.put('/notifyuser/:notification/:id',async(res,req)=>{
+const notification = req.params.notification
+const id = req.params.id
+const getUser = await user.findOne({_id:id})
+if(!getUser)return res.status(404).send({error:'user does not exist'})
+const updateUser= await user.findOneAndUpdate({_id:id},{$push:{notification: notification}})
+res.json({msg: 'Notification sent sucessfully'})
+})
 // Update a user(alumni or member )
 router.put('/update/:id', async (req,res) => {
     // try {
@@ -410,14 +428,5 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
-router.get('/Search/:keyWord',async(req,res)=>{
-    const keyWord=req.params.keyWord
-   const user = await User.find({$or:[ {'firstName':keyWord}, {'lastName':keyWord},{'type':keyWord}]})
-    // const user = await User.find({'lastName':keyWord})
-
-    if(user.length===0) return res.status(404).send({error: 'User with that name doesnt exisit'})
-    return res.json({data:user})
-         
-    })
 
 module.exports = router;

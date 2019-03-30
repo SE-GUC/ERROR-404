@@ -1,11 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
-const Debate = require('../../models/Dabate')
+const Debate = require('../../models/Debate')
 const joi = require('joi')
-
-
-
 
 //###################
 //User Story 
@@ -13,7 +10,7 @@ const joi = require('joi')
 //################## 
 //Displaying all debates on the Debate page
 router.get('/',(req,res)=>{
-    let data = '';
+    let data = `<a href="Debates/searchbydate">Search by Date</a><br>`;
     Debate.find({}).exec().then(doc => {
         for (let i = 0 ; i< doc.length ; i++ ) {
             // console.log(cur);
@@ -57,7 +54,7 @@ router.post('/', (req, res) => {
         info : req.body.info
     
       }).save()
-        .then({msg: ' created successfully'})
+        .then(res.redirect('/Debates'))
         .catch(err => { console.log(err); return res.send(`Sorry, could not create a new debate with this data !`) })})
     
     
@@ -101,6 +98,31 @@ router.delete('/:id', (req, res) => {
 
 //###################
 //User Story 
+//TIQ users should be able to search for a debate by date
+//################## 
+router.get('/searchbydate/:date', (req,res)=>{
+    const date = req.params.date;
+    const formatteddate = new Date(date)
+    const schema = {
+        date : joi.date()
+    }
+    const result = joi.validate(req.body,schema);
+    if (result.error) return res.status(400).send({error : result.error.details[0].message});
+    let data = '';
+    Debate.find({date : formatteddate})
+    .exec()
+    .then(doc => {
+        for (let i = 0  ; i< doc.length ; i++)
+        data += (`<a href="http://localhost:3000/api/Debates/${doc[i]._id}">${doc[i].title}</a><br>`)
+        if (doc.length==0) data = 'No Debates were held on this date'
+    })
+    .then(()=>{return res.send(data)})
+    .catch(err => {res.send('Sorry Could not find any Debates with this date')})
+})
+
+
+
+
 //TIQ users should be able to search for a debate by category
 //################## 
 
@@ -123,3 +145,4 @@ router.get('/Search/:category',async(req,res)=>{
    
 
 module.exports = router
+

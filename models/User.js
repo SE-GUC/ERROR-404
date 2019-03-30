@@ -38,7 +38,7 @@ const userSchema = new Schema({
        
     },
     score: {
-        type: String
+        type: Number
        
     },
     din: {
@@ -51,8 +51,12 @@ const userSchema = new Schema({
     },
 
     clubs: {
-        type: [String], 
+        type: [String] 
        
+    },
+    notification: 
+    {
+       type: [String]        
     }
 })
 

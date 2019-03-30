@@ -1,3 +1,4 @@
+
 const mongoose = require('mongoose');
 
 const debateSchema = mongoose.Schema({
@@ -8,4 +9,5 @@ const debateSchema = mongoose.Schema({
     description : String,
     info : String
 }) 
-module.exports = Debate = mongoose.model('Debate',debateSchema)
+module.exports = debates = mongoose.model('debates',debateSchema)
+
