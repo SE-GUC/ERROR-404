@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         info: joi.string()
     }
     const result = joi.validate(req.body, schema)
-    if (result.error) return res.status(400).json({ err: result.error.details[0].message });
+    if (result.error) return res.json({ err: result.error.details[0].message });
     new Debate({
         _id: mongoose.Types.ObjectId(),
         title : req.body.title,
@@ -61,7 +61,7 @@ router.put('/:id', (req, res) => {
         info: joi.string()
     }
     const result = joi.validate(req.body, schema)
-    if (result.error) return res.status(400).json({ err: result.error.details[0].message });
+    if (result.error) return res.json({ err: result.error.details[0].message });
     Debate.findByIdAndUpdate(id,req.body).exec()
     .then(doc => {return res.json({data : 'Updated Successfully'})})
     .catch(err => {console.log(err);return res.json({err:'Sorry Could not update debate with that id'})})
@@ -92,7 +92,7 @@ router.get('/searchbydate/:date', (req,res)=>{
         date : joi.date()
     }
     const result = joi.validate(req.body,schema);
-    if (result.error) return res.status(400).json({err : result.error.details[0].message});
+    if (result.error) return res.json({err : result.error.details[0].message});
     Debate.find({date : formatteddate})
     .exec()
     .then(doc => {return res.json({data : doc})})

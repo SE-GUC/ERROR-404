@@ -33,6 +33,31 @@ const functions = {
     getDebateById: async(id)=>{
         const response = await axios.get(`http://localhost:3000/api/Debates/${id}`)
         return response
+    },
+    createInvalidDebate: async ()=>{
+        const newDebate = await axios.post('http://localhost:3000/api/Debates',{
+                title: "DebateTest",
+            category : "Updated Category",
+                info : "Debate Created in the Test",
+                description : "Creating this debate to test"
+        })
+        return newDebate
+    },
+    updateInvalidDebate: async(id)=>{
+        const response = await axios.put(`http://localhost:3000/api/Debates/${id}`,{
+            title: "D",
+            category : "Updated Category",
+            date : "1-1-2019",
+            info : "Updated by Invalid Schema",
+            description : "Updating this debate to test"
+        })
+        return response
+    },
+    getInvalidPage: async()=>{
+        const response = await axios.get('http://localhost:3000/apv/Debates')
+        return response
     }
-  }
+ 
+}
+  
    module.exports = functions; 
