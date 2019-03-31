@@ -1,8 +1,7 @@
-
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 //const tokenKey = require('../../config/keys').secretOrKey
@@ -316,7 +315,7 @@ router.put('/:id/:score',async(req,res)=>
       users.birthDate,users.bio,users.email,users.password,users.house,users.din
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
-
+    })
 
 
    // updating the info/profile of a user
