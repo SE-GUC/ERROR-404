@@ -21,3 +21,7 @@ test('A TIQ admin should be able to delete an existing debate' , async()=>{
     expect(Object.keys(deleteresponse.data)).not.toEqual(['err'])
 
 })
+
+test('A TIQ admin should be able to update an existing debate' , async=>{
+    const updateresponse = await funcs.updateDebate()
+})

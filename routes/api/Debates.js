@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         info: joi.string()
     }
     const result = joi.validate(req.body, schema)
-    if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+    if (result.error) return res.status(400).json({ err: result.error.details[0].message });
     new Debate({
         _id: mongoose.Types.ObjectId(),
         title : req.body.title,
@@ -61,7 +61,7 @@ router.put('/:id', (req, res) => {
         info: joi.string()
     }
     const result = joi.validate(req.body, schema)
-    if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+    if (result.error) return res.status(400).json({ err: result.error.details[0].message });
     Debate.findByIdAndUpdate(id,req.body).exec()
     .then(doc => {return res.json({data : 'Updated Successfully'})})
     .catch(err => {console.log(err);return res.json({err:'Sorry Could not update debate with that id'})})
@@ -92,11 +92,11 @@ router.get('/searchbydate/:date', (req,res)=>{
         date : joi.date()
     }
     const result = joi.validate(req.body,schema);
-    if (result.error) return res.status(400).send({error : result.error.details[0].message});
+    if (result.error) return res.status(400).json({err : result.error.details[0].message});
     Debate.find({date : formatteddate})
     .exec()
     .then(doc => {return res.json({data : doc})})
-    .catch(err => {res.send('Sorry Could not find any Debates with this date')})
+    .catch(err => {res.json({err:'Sorry Could not find any Debates with this date'})})
 })
 
 
@@ -117,7 +117,7 @@ router.get('/Search/:category',async(req,res)=>{
      const dbs = await Debate.find({category:cat})
      console.log(dbs)
      console.log(!dbs)
-     if(dbs.length===0) return res.status(404).send({error: 'Article with that category doesnt exisit'})
+     if(dbs.length===0) return res.status(404).json({err: 'Article with that category doesnt exisit'})
     return res.json({data:dbs})
          
     })

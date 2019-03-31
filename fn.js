@@ -22,11 +22,11 @@ const functions = {
     },
     updateDebate: async()=>{
         const response = await axios.updateDebate(`http://localhost:3000/api/Debates/${id}`,{
-            title: "DebateTest",
-            category : "Test Category",
+            title: "DebateUpdatedTest",
+            category : "Updated Category",
             date : "1-1-2019",
-            info : "Debate Created in the Test",
-            description : "Creating this debate to test"
+            info : "Debate Created in the Update Test",
+            description : "Updating this debate to test"
         })
         return response
     }
