@@ -1,5 +1,7 @@
+    
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
+
 
 const chatBarSchema = new Schema({
     debateLiveTitle: {
@@ -12,18 +14,17 @@ const chatBarSchema = new Schema({
     },
     numberOfResponses: {
         type: Number,
-        
+        required: false
     },
     forResponses: {
-        type: [[Object]]
-       
+        type: [String],
+        required: false
     },
     againstResponses: {
-        type: [[Object]]
-       
+        type: [String],
+        required: false
     }
-
    
 })
 
-module.exports = Chatbar = mongoose.model('chatbars', chatBarSchema)
+module.exports = Chatbar = mongoose.model('chatBars', chatBarSchema)
