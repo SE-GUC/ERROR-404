@@ -45,4 +45,10 @@ router.put('/against/:id',async(req,res)=>{
         console.log(error)
     }
 })
+
+router.get('/', async (req, res) => {
+    const chatbar = await Chatbars.find();
+    res.json({data: chatbar});
+
+})
 module.exports = router
