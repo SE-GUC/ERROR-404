@@ -30,7 +30,16 @@ getUsers: async()=>{
         const deletedContent = await axios.delete(`http://localhost:3000/api/Contents/${id}`);
         return deletedContent;
     },
-
+ viewcontent : async()=>{
+        const getuser = await axios.get('http://localhost:3000/api/Contents/')
+        return getuser
+    },
+    viewcertaincontent : async()=>{
+        const allContent = await axios.get('http://localhost:3000/api/Contents')
+        const contId = allContent.data.data[0]._id
+        const getcertainuser = await axios.get('http://localhost:3000/api/Contents/'+contId)
+        return getcertainuser
+    },
 
 
  //getingg all users
