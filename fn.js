@@ -89,15 +89,11 @@ const functions =
         return getuser
     },
     viewcertaincontent : async()=>{
-        const content = Content.findOne()
-        const contId = content._id
+        const allContent = await axios.get('http://localhost:3000/api/Contents')
+        const contId = allContent.data.data[0]._id
         const getcertainuser = await axios.get('http://localhost:3000/api/Contents/'+contId)
         return getcertainuser
     }
 }
 module.exports = functions
 
-
-    // viewcertaincontent : async(id)=>{
-    //     const getcertainuser = await axios.get('http://localhost:3000/api/Contents/'+id)
-    //     return getcertainuser
