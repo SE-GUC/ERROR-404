@@ -2,7 +2,16 @@ const axios = require('axios');
 
 functions = {
 
-    
+    getUsers: async()=>{
+        const Users = await axios.get('http://localhost:3000/api/Users')
+        return Users
+    },
+    getUserByIdFound : async()=>{
+        const user =  User.findOne()
+        const userId = user._id
+        const userFound = await axios.get('http://localhost:3000/api/Users/'+userId)
+        return userFound
+    },
     getAllClubs : async () => {
         const clubs = await axios.get('http://localhost:3000/api/Clubs');
         return clubs;
