@@ -31,7 +31,7 @@ router.post('/add',async (req, res) => {
 })
 
 router.get('/', async(request, response) => {
-    const faqs = await FAQ.find({answer:{$ne:null}})
+    const faqs = await FAQ.find()
     response.json({data: faqs})
 
 });
