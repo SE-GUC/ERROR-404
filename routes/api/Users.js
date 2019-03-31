@@ -1,4 +1,3 @@
-
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
@@ -193,8 +192,8 @@ router.post('/register', async (req,res) => {
                              
             } 
         catch (error) {
-		return res.status(422).send({ error: 'Can not create user' })
-	}
+        return res.status(422).send({ error: 'Can not create user' })
+    }
 
     case('member'):
 
@@ -214,7 +213,7 @@ router.post('/register', async (req,res) => {
                 birthDate ,
                 bio,
                 email,
-		score:0,
+        score:0,
                 password : hashedPassword,
                 clubs ,
                 house ,
@@ -316,7 +315,7 @@ router.put('/:id/:score',async(req,res)=>
       users.birthDate,users.bio,users.email,users.password,users.house,users.din
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
-
+    })
 
 
    // updating the info/profile of a user
@@ -411,5 +410,15 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
+router.get('/Search/:keyWord',async(req,res)=>{
+    const keyWord=req.params.keyWord
+   const user = await User.find({$or:[ {'firstName':keyWord}, {'lastName':keyWord},{'type':keyWord}]})
+    // const user = await User.find({'lastName':keyWord})
+
+    if(user.length===0) return res.status(404).send({error: 'User with that name doesnt exisit'})
+    return res.json({data:user})
+         
+    })
 
 module.exports = router;
+
