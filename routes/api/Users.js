@@ -1,7 +1,7 @@
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcrypt')
 const router = express.Router()
 
 //const tokenKey = require('../../config/keys').secretOrKey
@@ -17,47 +17,7 @@ const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
 const discipleValidator = require ('../../validations/disciplevalidations')
 const parentValidator = require('../../validations/parentValidations')
-const hubAdminValidator= require('../../validations/hubAdminValidations')
-
-
-router.put('/updateapprove/:uid',async(req,res)=>{
-       
-        try{
-       
-            const userId =req.params.uid
-           
-    
-            const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:true})
-            
-            res.json({msg: 'User updated sucessfully'})
-        }
-        catch(error){
-            console.log("error")
-        }
-})
-
-router.put('/updatedisapprove/:uid',async(req,res)=>{
-    
-    try{
-   
-        const userId =req.params.uid
-       
-
-        const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:false})
-        
-        res.json({msg: 'User updated sucessfully'})
-    }
-    catch(error){
-        console.log("error")
-    }
-})
-
-
-router.get('/searchbyapproval/:approval',async(req,res)=>{
-    const userStatus = req.params.approval
-    const users = await user.find({approval: userStatus})
-   return res.json({data:users})
-})
+const adminValidator = require('../../validations/hubAdminValidations')
 
 
 
@@ -101,7 +61,8 @@ router.post('/register', async (req,res) => {
                             house ,
                             score,
                             din,
-                            dor
+                            dor,
+                            notification:[]
                         
                         
                     })
@@ -138,13 +99,12 @@ router.post('/register', async (req,res) => {
                                     bio,
                                     email ,
                                     password : cryptedPasswrod,
-
                                     house,
                                    score, 
                                     din,
                                     dor,
-                                  
-                                    clubs 
+                                    clubs,
+                                    notification:[] 
    
                                    }
                                )
@@ -182,13 +142,12 @@ router.post('/register', async (req,res) => {
                                     bio,
                                     email ,
                                     password : cryptedPasswrod,
-
                                     house,
                                    score, 
                                     din,
                                     dor,
-                                  
-                                    clubs 
+                                    clubs,
+                                    notification:[] 
    
                                    }
                                )
@@ -224,7 +183,8 @@ router.post('/register', async (req,res) => {
                     score,
                     din,
                     dor,
-                    clubs
+                    clubs,
+                    notification:[]
                     })
           await User.create(newAlumni)
                     
@@ -233,7 +193,41 @@ router.post('/register', async (req,res) => {
             } 
         catch (error) {
 		return res.status(422).send({ error: 'Can not create user' })
-	}
+    }
+    case('admin'):
+                try{
+
+                    const isUserValidated = adminValidator.hubAdminValidation(req.body)
+                    if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+                    
+                    const { firstName,lastName,birthDate,clubs,email,password,type,house,din,dor,bio} = req.body
+                    const salt = bcrypt.genSaltSync(10)
+                    const hashedPassword = bcrypt.hashSync(password, salt)
+                
+                    const newMember = new user({
+                            type ,
+                            firstName ,
+                            lastName ,
+                            birthDate ,
+                            bio,
+                            email,
+                            password : hashedPassword,
+                            clubs ,
+                            house ,
+                            din,
+                            dor,
+                            notification:[]
+                        })
+                        
+                        await User.create(newMember)
+                                
+                    return res.json({ msg: 'User created successfully', data: newMember })
+                            
+                    } 
+                catch (error) {
+
+            return res.status(422).send({ error: 'Can not create user' })
+            }
 
     case('member'):
 
@@ -241,11 +235,11 @@ router.post('/register', async (req,res) => {
 
         const isUserValidated = userValidator.registerValidation(req.body)
         if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
-        console.log(5)
+        
         const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
         const salt = bcrypt.genSaltSync(10)
         const hashedPassword = bcrypt.hashSync(password, salt)
-        console.log(6)
+    
         const newMember = new user({
                   type ,
                 firstName ,
@@ -253,14 +247,13 @@ router.post('/register', async (req,res) => {
                 birthDate ,
                 bio,
                 email,
-		score:0,
+		        score:0,
                 password : hashedPassword,
                 clubs ,
                 house ,
                 din,
-                dor
-                
-               
+                dor,
+                notification:[]
             })
             
             await User.create(newMember)
@@ -292,13 +285,12 @@ router.post('/register', async (req,res) => {
                                     bio,
                                     email ,
                                     password : cryptedPasswrod,
-
                                     house,
                                    score, 
                                     din,
                                     dor,
-                                  
-                                    clubs 
+                                    clubs,
+                                    notification :[] 
 
                             }
                         )
@@ -324,8 +316,6 @@ router.post('/register', async (req,res) => {
 usernew.catch()
 
 })
-
-
 //get all users
 
 
@@ -342,8 +332,8 @@ router.put('/:id/:score',async(req,res)=>
  const User = await user.findOneAndUpdate({_id:id}, {$inc:{score: addedScore}})
 
  res.json({msg:'Score updated'})
-});
 
+})
 
 //get user by id 
   router.get('/:id',async (req,res)=>{
@@ -360,15 +350,14 @@ router.put('/:id/:score',async(req,res)=>
 
    // updating the info/profile of a user
     router.put('/:id',async(req,res)=>{
-try{
+        try{
    
         const userId =req.params.id
         const getuser = await user.findOne({_id:userId})
         if(!getuser) return res.status(404).send({error: 'User does not exist'})
         const isValidated = userValidator. updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-        const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
-        
+        const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)   
         res.json({msg: 'User updated sucessfully'})
      
     
@@ -381,19 +370,36 @@ catch (error){
   
     //delete a user
     router.delete('/:id',async(req,res)=>{
-        try{
-        const userId =req.params.id;
-        const deleteduser = await user.findByIdAndRemove({_id:userId})
-        res.json({msg:'User was deleted successfully', data: deleteduser})
-        }
-        catch(error){
-            console.log(error)
-        }
+        // try{
+         const userId =req.params.id;
+         const u = await user.findById({_id:userId})
+         if(!u)return res.status(404).send({error:'user does not exist'})
+         if(u.type==='admin')return res.send({ error:'admin cannot be deleted'})
+         const deleteduser = await user.findByIdAndRemove({_id:userId})
+         res.json({msg:'User was deleted successfully', data: deleteduser})
+         .catch(err => {res.send('Cannot find the user')})
+     
+    })
         
-    } )
 
+router.put('/deleteNotification/:id',async(res,req)=>
+{   
+    const notification = req.body
+    const id = req.params.id
+    const getUser = await user.findById({_id:id})
+    if(!getUser)return res.status(404).send({error:'user does not exist'})
+    const updateUser= await user.findByIdAndUpdate({_id:id},{$pull:{notification: notification}})
+    res.json({msg: 'Notification deleted'})
+})
 
-
+router.put('/notifyuser/:id',async(res,req)=>{
+const notification = req.body
+const id = req.params.id
+const getUser = await user.findById({"_id":id})
+if(!getUser)return res.status(404).send({error:'user does not exist'})
+const updateUser= await user.findByIdAndUpdate({"_id":id},{$push:{"notification": notification}})
+res.json({msg: 'Notification sent sucessfully'})
+})
 // Update a user(alumni or member )
 router.put('/update/:id', async (req,res) => {
     // try {
@@ -436,10 +442,6 @@ router.put('/update/:id', async (req,res) => {
             if(!updatedMember) return res.status(404).send({error: 'member updation has an error'})
             res.json({msg: 'User updated sucessfully'})
 
-
-           
-        
-
          }
          catch(error){
            
@@ -451,5 +453,5 @@ router.put('/update/:id', async (req,res) => {
     
 })
 
-module.exports = router;
 
+module.exports = router;

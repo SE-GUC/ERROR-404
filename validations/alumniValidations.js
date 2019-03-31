@@ -16,11 +16,7 @@ module.exports = {
             din:Joi.string().required(),
             dor:Joi.string().required(),
             clubs : Joi.array().required()
-            
-           
-        
-           
-            
+      
         }
         return Joi.validate(request, registerAlumniSchema)
 

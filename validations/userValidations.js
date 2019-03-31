@@ -4,7 +4,7 @@ const Joi = require('joi')
      //register schema for use except alumni
      registerValidation: request => {
         const registerSchema = {
-            type : Joi.string(),
+            type : Joi.string().regex(/member/),
             firstName : Joi.string().min(3).required(),
             lastName : Joi.string().min(3).required(),
             birthDate : Joi.string().required(),

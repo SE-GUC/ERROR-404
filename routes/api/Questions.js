@@ -9,7 +9,7 @@ const validator = require('../../validations/questionValidations')
 // We will be connecting using database 
 const Question = require('../../models/Question')
 const Notification = require('../../models/Notification')
-
+const User = require('../../models/User')
 
 
 router.get('/admin', async(request, response) => {
@@ -44,17 +44,13 @@ router.put('/answerquestion/:id', async(req, res) => {
         const user=question.user
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
         const updatedQuestion = await question.updateOne(req.body)
-        const newNotification = await Notification.create({
-            content: id,
-            type:"answer",
-            //idd:notifications.length + 1 , 
-            user:user
-        })
+        const answer = updatedQuestion.answer
+        const notify = await User.findByIdAndUpdate({_id:user},{$push:{notification:answer}})
         res.json({msg: 'Answer is sent successfully', data: updatedQuestion})
 
     }
     catch(error) {
-        // We will be handling the error later
+        
         console.log(error)
     }  
     
@@ -77,16 +73,10 @@ router.post('/ask', async(req, res) => {
         const isValidated = validator.createValidation(req.body)
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
         const newQuestion = await Question.create(req.body)
-        const questionId =  newQuestion._id
-        const userId = newQuestion.user
-
-        const newNotification = await Notification.create({
-            content: questionId,
-            type:"question",
-            //idd:notifications.length + 1 , 
-            user:userId
-        })
-
+        const question = newQuestion.question
+        //const questionId =  newQuestion._id
+        //const userId = newQuestion.user
+        const notifyAdmin = User.findByIdAndUpdate({_id:'5ca0cd223bcdfe1c9c69bd09'},{$push:{notification:question}})
         res.json({msg:'Question is sent successfully', data: newQuestion})
     }
     catch(error) {

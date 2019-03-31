@@ -20,7 +20,7 @@ module.exports  =
               
                 din : Joi.string(),
                 dor : Joi.string(),
-                clubs : Joi.array().required(),
+                clubs : Joi.array()
                
             }
             return Joi.validate(request,TIQadminSchema)
