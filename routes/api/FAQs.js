@@ -35,7 +35,13 @@ router.get('/', async(request, response) => {
     response.json({data: faqs})
 
 });
+router.get('/:id', async(request, response) => {
+    const id = request.params.id
 
+    const faqs = await FAQ.find({_id:id})
+    response.json({data: faqs})
+
+});
 
 
  router.delete('/:id', async(req, res) => {
