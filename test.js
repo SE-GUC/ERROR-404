@@ -6,6 +6,7 @@ const Article = require('./models/Article')
 var idD  =-1
 var cntD = 0
 
+
 test('Creating new content', async (done) => {
     const allContent = await functions.getAllContent();
     const databaseSize = allContent.data.data.length;
@@ -26,7 +27,39 @@ test('Creating new content', async (done) => {
     expect(allContentUpdated.data.data.length).toBe(allContent.data.data.length + 1);
     done();
 });
+test('get all Users', async () => {                             
+    const response =  await funcs.getUsers()
+    expect(response.data).toBeDefined()
+  })
 
+
+
+  test('get specific user',async()=> {
+      const response = await funcs.getUserByIdFound()
+      expect(response.data).toBeDefined()
+  })
+
+
+
+  test('get specific user failed', async()=> {
+     const response = await funcs.getUserByIdNotFound()
+     expect(response.data).toEqual("Cannot find the user ")
+  });  
+
+
+  test('Delete User', async()=> {
+    const check = (await funcs.getUsers()).data.data.length
+    const response = await funcs.deleteUserSuccess()
+    const after = (await funcs.getUsers()).data.data.length
+    expect(after).toEqual(check)
+});
+
+
+  test('Scores gets updated',async()=>{
+     
+      const response = await funcs.updateUserScore()
+     expect(response.data).toEqual({msg:"Score updated"})
+  });
 test('Updating existing content', async (done) => {
     const allContent = await functions.getAllContent();
     const id = allContent.data.data[0]._id;

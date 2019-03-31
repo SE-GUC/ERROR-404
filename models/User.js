@@ -58,6 +58,10 @@ const userSchema = new Schema({
     approval: {
         type: Boolean,
         default: false
+    },
+     notification: 
+    {
+       type: [String]        
     }
 })
 
