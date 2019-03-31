@@ -66,7 +66,7 @@ const functions =
             lastName:"7ob 3omry",
             birthDate:"12-11-1998",
             bio:"heheehhe",
-            email:"nadin@student.guc.edu.eg",
+            email:"nadin1@student.guc.edu.eg",
             password:"boooom1234",
             clubs:["tiq"],
             house:"pegasus"
