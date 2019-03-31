@@ -38,8 +38,8 @@ const userSchema = new Schema({
        
     },
     score: {
-        type: Number
-       
+        type: Number,
+        default:0
     },
     din: {
         type: String
@@ -51,12 +51,13 @@ const userSchema = new Schema({
     },
 
     clubs: {
-        type: [String] 
+        type: [String], 
        
     },
-    notification: 
-    {
-       type: [String]        
+
+    approval: {
+        type: Boolean,
+        default: false
     }
 })
 
