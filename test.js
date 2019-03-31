@@ -6,17 +6,6 @@ const Article = require('./models/Article')
 var idD  =-1
 var cntD = 0
 
-test('get all content ', async() =>{
-    const response = await content.viewcontent()
-    expect(response.data).toBeDefined()
-});
-test('get specific content', async() => {
-    const response = await content.viewcertaincontent()
-    expect(response.data).toBeDefined()
-    //done()
-    
-})
-
 test('Creating new content', async (done) => {
     const allContent = await functions.getAllContent();
     const databaseSize = allContent.data.data.length;
@@ -62,6 +51,18 @@ test('Deleting Content' , async(done) => {
     expect(b).toBeTruthy();
     done()
 });
+test('get all content ', async() =>{
+    const response = await content.viewcontent()
+    expect(response.data).toBeDefined()
+});
+test('get specific content', async() => {
+    const response = await content.viewcertaincontent()
+    expect(response.data).toBeDefined()
+    //done()
+    
+})
+
+
 
 test('Getting all clubs', async(done) => {
     const clubs = functions.getAllClubs();
