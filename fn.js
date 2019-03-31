@@ -18,7 +18,13 @@ getUsers: async()=>{
         const clubs = await axios.get('http://localhost:3000/api/Clubs');
         return clubs;
     },
-    createContent : async content => {
+	 getAllContent : async () => {
+        const content = await axios.get('http://localhost:3000/api/Contents');
+        return content;
+    }
+    ,
+  
+   createContent : async content => {
         const newContent = await axios.post('http://localhost:3000/api/Contents', content);
         return newContent;
     },
@@ -30,6 +36,9 @@ getUsers: async()=>{
         const deletedContent = await axios.delete(`http://localhost:3000/api/Contents/${id}`);
         return deletedContent;
     },
+
+
+    
  viewcontent : async()=>{
         const getuser = await axios.get('http://localhost:3000/api/Contents/')
         return getuser
