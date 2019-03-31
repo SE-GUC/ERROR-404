@@ -9,6 +9,7 @@ app.use(express.json())
 
 // Connect to mongo
 dotenv.config()
+
 mongoose
     .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
     .then(() => console.log('Connected to MongoDB'))

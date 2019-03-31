@@ -1,7 +1,7 @@
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 //const tokenKey = require('../../config/keys').secretOrKey
@@ -349,6 +349,7 @@ router.put('/:id/:score',async(req,res)=>
       users.birthDate,users.bio,users.email,users.password,users.house,users.din
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
+  })
 
     })
 
@@ -373,11 +374,11 @@ catch (error){
     })
  
   
-    //delete a user
-    router.delete('/:id',async(req,res)=>{
-        try{
-        const userId =req.params.id;
-        const deleteduser = await user.findByIdAndRemove({_id:userId})
+//delete a user
+ router.delete('/:id',async(req,res)=>{
+    try{
+    const userId =req.params.id;
+    const deleteduser = await user.findByIdAndRemove({_id:userId})
         res.json({msg:'User was deleted successfully', data: deleteduser})
         }
         catch(error){
@@ -458,5 +459,6 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
+
 
 module.exports = router;

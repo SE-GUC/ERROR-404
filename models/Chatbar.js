@@ -23,6 +23,8 @@ const chatBarSchema = new Schema({
     againstResponses: {
         type: [String],
         required: false
+
+
     }
    
 })
