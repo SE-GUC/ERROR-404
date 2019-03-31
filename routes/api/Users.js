@@ -19,7 +19,37 @@ const discipleValidator = require ('../../validations/disciplevalidations')
 const parentValidator = require('../../validations/parentValidations')
 
 
+router.put('/updateapprove/:uid',async(req,res)=>{
+        console.log("yalla ")
+        try{
+       
+            const userId =req.params.uid
+           
+    
+            const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:true})
+            
+            res.json({msg: 'User updated sucessfully'})
+        }
+        catch(error){
+            console.log("error")
+        }
+})
 
+router.put('/updatedisapprove/:uid',async(req,res)=>{
+    console.log("yalla ")
+    try{
+   
+        const userId =req.params.uid
+       
+
+        const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:false})
+        
+        res.json({msg: 'User updated sucessfully'})
+    }
+    catch(error){
+        console.log("error")
+    }
+})
 
 //create new user (TIQ admin, Hub user, disciples, parent)
 
@@ -281,9 +311,11 @@ router.post('/register', async (req,res) => {
 }
             
     
-usernew.catch()
+
 
 })
+
+
 //get all users
 
 
@@ -302,7 +334,6 @@ router.put('/:id/:score',async(req,res)=>
  res.json({msg:'Score updated'})
 });
 
-
 //get user by id 
   router.get('/:id',async (req,res)=>{
     
@@ -314,7 +345,7 @@ router.put('/:id/:score',async(req,res)=>
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
     })
-
+    
 
    // updating the info/profile of a user
     router.put('/:id',async(req,res)=>{
@@ -335,43 +366,24 @@ catch (error){
     console.log(error)
 }
     })
+   
  
   
     //delete a user
     router.delete('/:id',async(req,res)=>{
-       // try{
+        try{
         const userId =req.params.id;
         const deleteduser = await user.findByIdAndRemove({_id:userId})
-       // res.json({msg:'User was deleted successfully', data: deleteduser})
-        .exec()
-        .then(users => {return res.send([deleteduser.type,deleteduser.firstName,deleteduser.lastName,
-        deleteduser.birthDate,deleteduser.bio,deleteduser.email,deleteduser.password,deleteduser.house,deleteduser.din
-       ,deleteduser.dor,deleteduser.clubs])})
-      .catch(err => {res.send('Cannot find the user ')})
-      //  }
-        //catch(error){
-          //  console.log(error)
-       // }
+        res.json({msg:'User was deleted successfully', data: deleteduser})
+        }
+        catch(error){
+            console.log(error)
+        }
         
     } )
 
-// router.put('/deleteNotification/:notification/:id',async(res,req)=>
-// {
-//     const notification = req.params.notification
-//     const id = rq.params.id
-//     const getUser = await user.findOne({_id:id})
-//     if(!getUser)return res.status(404).send({error:'user does not exist'})
-//     const updateUser= await user.findOneAndUpdate({_id:id},{$pull:{notification: notification}})
-//     res.json({msg: 'Notification deleted'})
-// })
-router.put('/notifyuser/:notification/:id',async(res,req)=>{
-const notification = req.params.notification
-const id = req.params.id
-const getUser = await user.findOne({_id:id})
-if(!getUser)return res.status(404).send({error:'user does not exist'})
-const updateUser= await user.findOneAndUpdate({_id:id},{$push:{notification: notification}})
-res.json({msg: 'Notification sent sucessfully'})
-})
+
+
 // Update a user(alumni or member )
 router.put('/update/:id', async (req,res) => {
     // try {
@@ -392,7 +404,7 @@ router.put('/update/:id', async (req,res) => {
             const updatedAlumni = await getuser.updateOne(req.body)
         
             if(!updatedAlumni) return res.status(404).send({error: 'user updation has erroe'})
-            res.json({msg: 'User updated sucessfully'})
+            res.json({msg: 'User updated successfully'})
            
 
          }
@@ -428,5 +440,88 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
+
+
+router.get('/searchbyapproval/:approval',async(req,res)=>{
+    const userStatus = req.params.approval
+    const users = await user.find({approval: userStatus})
+   return res.json({data:users})
+})
+
+
+     
+    
+// }
+// catch (error){
+//     console.log("error")
+// }})
+    // const approval = req.body.approval
+    // const schema= {
+    //      approval:Joi.boolean()
+    // }
+    // const result = joi.validate(req.body, schema)
+    // if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+    // const userUpdated = user.findByIdAndUpdate({_id:id},req.body)
+    // .exec()
+    // .then(doc => { res.send( 'User updated sucessfully')})
+    // .catch(err => { res.send('Sorry Could not updatea user with that id')})
+
+
+
+    // try{
+       
+    //         const userId =req.params.id
+    //         const getuser = await user.findOne({_id:userId})
+    //         if(!getuser) return res.status(404).send({error: 'User does not exist'})
+    //         const isValidated = userValidator. updateUserValidation(req.body)
+    //         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
+    //         const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
+            
+    //         res.json({msg: 'User updated sucessfully'})
+         
+        
+    // }
+    // catch (error){
+    //     console.log(error)
+    // }
+    //    })
+
+// update approval status by admin
+
+     
+// router.put('/updateapproval/:id',async(req,res)=>{
+//  try{
+    
+//         const approval = req.body.approval
+//         const userId = req.params.id
+//         const getuser = await user.findOne({userId})
+//         if(!getuser) return res.status(404).send({error: 'User does not exist'})
+//         const isValidated = userValidator.updateUserValidation(req.body)
+//         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
+//         const updatedUser = await user.findOneAndUpdate({_id:userId}, req.body)
+        
+//         res.json({msg: 'User updated sucessfully'})
+     
+    
+// }
+// catch (error){
+//     console.log(error)
+//  }
+// //     const approval = req.body.approval
+// //     const userId = req.params.id
+
+// //     // const schema = {
+// //     //      approval:Joi.boolean()
+// //     // }
+// //     const result = joi.validate(req.body)
+// //     if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+// //     const userUpdated=await user.findByIdAndUpdate({_id:userId}, req.body)
+    
+// //     .exec()
+// //     .then(doc => { res.json({msg: 'User updated sucessfully'})
+// //     .catch(err => {return res.send('Sorry Could not update user with that id')})
+// //})
+// })
+
 
 module.exports = router;
