@@ -17,7 +17,47 @@ const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
 const discipleValidator = require ('../../validations/disciplevalidations')
 const parentValidator = require('../../validations/parentValidations')
+const hubAdminValidator= require('../../validations/hubAdminValidations')
 
+
+router.put('/updateapprove/:uid',async(req,res)=>{
+       
+        try{
+       
+            const userId =req.params.uid
+           
+    
+            const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:true})
+            
+            res.json({msg: 'User updated sucessfully'})
+        }
+        catch(error){
+            console.log("error")
+        }
+})
+
+router.put('/updatedisapprove/:uid',async(req,res)=>{
+    
+    try{
+   
+        const userId =req.params.uid
+       
+
+        const updatedUser = await user.findOneAndUpdate({_id:userId},{approval:false})
+        
+        res.json({msg: 'User updated sucessfully'})
+    }
+    catch(error){
+        console.log("error")
+    }
+})
+
+
+router.get('/searchbyapproval/:approval',async(req,res)=>{
+    const userStatus = req.params.approval
+    const users = await user.find({approval: userStatus})
+   return res.json({data:users})
+})
 
 
 
@@ -412,3 +452,4 @@ router.put('/update/:id', async (req,res) => {
 })
 
 module.exports = router;
+
