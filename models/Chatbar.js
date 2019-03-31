@@ -12,14 +12,14 @@ const chatBarSchema = new Schema({
     },
     numberOfResponses: {
         type: Number,
-        
+        required:false
     },
     forResponses: {
-        type: [[Object]]
+        type: [String]
        
     },
     againstResponses: {
-        type: [[Object]]
+        type: [String]
        
     }
 
