@@ -51,4 +51,12 @@ router.get('/', async (req, res) => {
     res.json({data: chatbar});
 
 })
+
+router.delete('/:id',(req,res)=>{
+    const id = req.params.id
+    Chatbars.findByIdAndDelete(id)
+    .exec()
+    .then(()=>{return res.json({data :'Deleted Successfully'})})
+    .catch(err =>{ return res.json({err : 'ERROR while deleting'})})
+})
 module.exports = router
