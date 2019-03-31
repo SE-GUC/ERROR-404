@@ -27,17 +27,18 @@ const funcs = require('./fn')
         const responseNew =  await funcs.getArticles()
         expect(responseNew.data.data.length).toBe(resLength)
     })
-    //delete Debate live testing
-    // test("It responds with deleted Debate Live",async() =>{
-    //     const response =  await funcs.getDebateLive()
-    //     const resLength  = response.data.data.length
-    //     const deletedDebateLive = await funcs.deleteDebateLive()
-    //     const responseNew =  await funcs.getDebateLive()
-    //     expect(responseNew.data.data.length).toBe(resLength)
-    // })
+    // delete Debate live testing
+    test("It responds with deleted Debate Live",async() =>{
+        const response =  await funcs.getDebateLive()
+        const resLength  = response.data.data.length
+        const deletedDebateLive = await funcs.deleteDebateLive()
+        const responseNew =  await funcs.getDebateLive()
+        expect(responseNew.data.data.length).toBe(resLength)
+    
+    })
     //get Debate Live testing
     test("It responds with all the Debate Lives",async() =>{
-        const response =  await funcs.getArticles()
+        const response =  await funcs.getDebateLive()
         expect(response.data).toBeDefined()
     })
 

@@ -16,7 +16,15 @@ const functions = {
         return newArticle
         },
         updateArticles:async() =>{
-            const updatedArticle = await axios.put("http://localhost:3000/api/Articles/5c9fd8d8b4a19c4e9c359a8e",{
+            const newArticle = await axios.post("http://localhost:3000/api/Articles/create",{
+        
+                title:"The downfall of global capitalism.",
+                description: "This article discuss downfall of global capitalism.",
+                author: "BOAs",
+                date: "25-3-2019"
+            })
+              const id = newArticle.data.data._id
+            const updatedArticle = await axios.put("http://localhost:3000/api/Articles/"+id,{
                 description: "Is the downfall of global capitalism real, read the article to find out"
             })
             
@@ -35,12 +43,20 @@ const functions = {
                     return deleteArticle
         },
         getDebateLive: async () => {
-            const debateLives = await axios.get('http://localhost:3000/api/Chatbars')
+            const debateLives = await axios.get('http://localhost:3000/api/Chatbars/')
             return debateLives
             },
-            // deleteDebateLive: async()=>{
-              
-            // }
+            deleteDebateLive: async()=>{
+                const newDebateLive = await axios.post("http://localhost:3000/api/Chatbars/",{
+        
+                    debateLiveTitle:"TH supports the decline of the nations-state's power in an increasingly globalised world.",
+                    date: "12-11-2018",
+                    
+                })
+                  const id = newDebateLive.data.data._id
+                        const deleteDebateLive= await axios.delete("http://localhost:3000/api/Chatbars/"+id)
+                        return deleteDebateLive
+            }
     
         
   }
