@@ -1,5 +1,5 @@
 const axios = require('axios');
-const id = "5c9fcfb079ab8c14bf5b6a11";
+
 const functions = {
     getDebates: async () => {
         const debates = await axios.get('http://localhost:3000/api/Debates')
@@ -16,18 +16,22 @@ const functions = {
         })
         return newDebate
     },
-    deleteDebate: async()=>{
+    deleteDebate: async(id)=>{
         const response = await axios.delete(`http://localhost:3000/api/Debates/${id}`)
         return response
     },
-    updateDebate: async()=>{
-        const response = await axios.updateDebate(`http://localhost:3000/api/Debates/${id}`,{
+    updateDebate: async(id)=>{
+        const response = await axios.put(`http://localhost:3000/api/Debates/${id}`,{
             title: "DebateUpdatedTest",
             category : "Updated Category",
             date : "1-1-2019",
             info : "Debate Created in the Update Test",
             description : "Updating this debate to test"
         })
+        return response
+    },
+    getDebateById: async(id)=>{
+        const response = await axios.get(`http://localhost:3000/api/Debates/${id}`)
         return response
     }
   }

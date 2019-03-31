@@ -1,3 +1,4 @@
 const funcs = require('./fn.js')
-
-funcs.deleteDebate().then(doc=>{return console.log(doc.data.data)})
+var x = 0;
+x++
+console.log(x)
