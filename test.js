@@ -1,4 +1,5 @@
 
+
 const funcs = require('./fn');
 const axios = require('axios');
 //test  get FAQ
@@ -8,7 +9,97 @@ test("It responds with the FAQs", async (done) => {
    expect(response.data.data).toBeDefined()
     done()
 
+
+test('Creating new content', async (done) => {
+    const allContent = await functions.getAllContent();
+    const databaseSize = allContent.data.data.length;
+    const content = {type: 'event', description: "nazleen yetkallemo"};
+    const newContent = await functions.createContent(content);
+    const allContentUpdated = await functions.getAllContent();
+    var i;
+    var b = false;
+    var index = 0;
+    for(i = 0; i < allContentUpdated.data.data.length; i++){
+        if(allContentUpdated.data.data[i].type === content.type
+        && allContentUpdated.data.data[i].description === content.description){
+        b = true;
+
+        }
+    }
+    expect(b).toBeTruthy();
+    expect(allContentUpdated.data.data.length).toBe(allContent.data.data.length + 1);
+    done();
+});
+test('get all Users', async () => {                             
+    const response =  await funcs.getUsers()
+    expect(response.data).toBeDefined()
+  })
+
+
+
+  test('get specific user',async()=> {
+      const response = await funcs.getUserByIdFound()
+      expect(response.data).toBeDefined()
+  })
+
+
+
+  test('get specific user failed', async()=> {
+     const response = await funcs.getUserByIdNotFound()
+     expect(response.data).toEqual("Cannot find the user ")
+  });  
+
+
+  test('Delete User', async()=> {
+    const check = (await funcs.getUsers()).data.data.length
+    const response = await funcs.deleteUserSuccess()
+    const after = (await funcs.getUsers()).data.data.length
+    expect(after).toEqual(check)
+});
+
+
+  test('Scores gets updated',async()=>{
+     
+      const response = await funcs.updateUserScore()
+     expect(response.data).toEqual({msg:"Score updated"})
+  });
+test('Updating existing content', async (done) => {
+    const allContent = await functions.getAllContent();
+    const id = allContent.data.data[0]._id;
+    const updatedData = {description: "a7la mesa 3aleik"};
+    const updatedContent = await functions.updateContent(id, updatedData);
+    const allContentUpdated = await functions.getAllContent(); 
+    expect(allContentUpdated.data.data[0].description).toEqual("a7la mesa 3aleik");
+    done();
+});
+
+test('Deleting Content' , async(done) => {
+    const allContent =  await functions.getAllContent();
+    const id = allContent.data.data[0]._id;
+    const deletedContent = await functions.deleteContent(id);
+    const allContentUpdated = await functions.getAllContent();
+    var i;
+    var b = true;
+    for(i = 0; i < allContentUpdated.data.data.length; i++){
+        if(allContentUpdated.data.data[i]._id === id)
+        b = false;
+    }
+    expect(b).toBeTruthy();
+    done()
+});
+test('get all content ', async() =>{
+    const response = await content.viewcontent()
+    expect(response.data).toBeDefined()
+});
+test('get specific content', async() => {
+    const response = await content.viewcertaincontent()
+    expect(response.data).toBeDefined()
+    //done()
+    
 })
+
+
+
 //test  get certain FAQ
 test("It responds with the FAQ", async (done) => {
     const response =  await funcs.getFAQs() 
@@ -201,6 +292,7 @@ test("It responds with the deleted Question",async(done) =>{
 
     })
 
+
 //test  get the user's answers of his questions
 test("It responds with the answered questions", async (done) => {
     const newQuestion = await axios.post("http://localhost:3000/api/Questions/ask",{
@@ -217,4 +309,57 @@ test("It responds with the answered questions", async (done) => {
     done()
 
 })
+
+
+    test('Getting club by id', async (done) => {
+        const allClubs = await functions.getAllClubs();
+        const firstClub = allClubs.data.data[0];
+        const club = await functions.getClubById(firstClub._id);
+        expect(club.data.data.name).toEqual(firstClub.name);
+        expect(club.data.data.description).toEqual(firstClub.description);
+        done()
+    });
+    
+    test('Creating a new club adds it to the database', async (done) => {
+        const allClubs = await functions.getAllClubs();
+        const databaseSize = allClubs.data.data.length;
+        const club = {name: "Nebny", description: "mesh charity bas ya3nii"};
+        const newClub = await functions.createClub(club);
+        const allClubsUpdated = await functions.getAllClubs();
+        var i;
+        var b = false;
+        for(i = 0; i < allClubsUpdated.data.data.length; i++){
+            if(allClubsUpdated.data.data[i].name === club.name && allClubsUpdated.data.data[i].description === club.description)
+            b = true;
+        }
+        expect(b).toBeTruthy();
+        expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
+        done();
+    });
+    
+    test('Updating an existing club', async (done) => {
+        const allClubs = await functions.getAllClubs();
+        const id = allClubs.data.data[0]._id;
+        const updatedData = {description: "a7la mesa 3aleik"};
+        const updatedClub = await functions.updateClub(id, updatedData);
+        const allClubsUpdated = await functions.getAllClubs(); 
+        expect(allClubsUpdated.data.data[0].description).toEqual("a7la mesa 3aleik");
+        done();
+    });
+    
+    test('Deleting a club', async (done) => {
+        const allClubs =  await functions.getAllClubs();
+        const id = allClubs.data.data[0]._id;
+        const deletedClub = await functions.deleteClub(id);
+        const allClubsUpdated = await functions.getAllClubs();
+        var i;
+        var b = true;
+        for(i = 0; i < allClubsUpdated.data.data.length; i++){
+            if(allClubsUpdated.data.data[i]._id === id)
+            b = false;
+        }
+        expect(b).toBeTruthy();
+        done()
+    });
+    
 

@@ -1,4 +1,8 @@
- const axios = require('axios');
+const axios = require('axios');
+const Article = require('./models/Article')
+const Articles = require('./routes/api/Articles')
+const User = require('./models/User')
+const Users = require('./routes/api/Users')
  const functions = {
                getFAQs: async () => {
                    const FAQs = await axios.get('http://localhost:3000/api/FAQs/')
@@ -67,6 +71,115 @@
                        const FAQs = await axios.get('http://localhost:3000/api/FAQs/'+id)
                        return FAQs
                        },
+
+ getUsers: async()=>{
+        const Users = await axios.get('http://localhost:3000/api/Users')
+        return Users
+    },
+  
+
+    getUserByIdFound : async()=>{
+        //const user =  User.findOne()
+        const allUsers = await axios.get('http://localhost:3000/api/Users')
+        const userId = allUsers.data.data[0]._id
+        const userFound = await axios.get('http://localhost:3000/api/Users/'+userId)
+        
+
+        return userFound
+
+    },
+
+    getUserByIdNotFound : async()=>{
+        const user = await axios.get('http://localhost:3000/api/Users/1')
+        return user
+
+    },
+   
+    updateUserScore : async() =>{
+        const user = await axios.post('http://localhost:3000/api/Users/register',{
+            
+            type:"member",
+            firstName:"Nadin ",
+            lastName:"7ob 3omry",
+            birthDate:"12-11-1998",
+            bio:"heheehhe",
+            email:"kokkkkk@student.guc.edu.eg",
+            password:"boooom1234",
+            clubs:["tiq"],
+            house:"pegasus"
+            
+        })
+        const userId = user.data.data._id
+        const updated = await axios.put('http://localhost:3000/api/Users/'+userId+'/7')
+        const deleteCreated = await axios.delete('http://localhost:3000/api/Users/'+userId)
+        return updated
+    },
+
+
+
+
+    deleteUserSuccess : async()=>{
+        //const user =  await createUserTesting()
+        const user = await axios.post('http://localhost:3000/api/Users/register',{
+            
+            type:"member",
+            firstName:"Nadin ",
+            lastName:"7ob 3omry",
+            birthDate:"12-11-1998",
+            bio:"heheehhe",
+            email:"kaaaaaaaaaaa@student.guc.edu.eg",
+            password:"boooom1234",
+            clubs:["tiq"],
+            house:"pegasus"
+            
+        })
+        const userId = user.data.data._id
+    
+        const deleteduser = await axios.delete('http://localhost:3000/api/Users/'+userId)
+        return deleteduser
+    },
+    getAllClubs : async () => {
+        const clubs = await axios.get('http://localhost:3000/api/Clubs');
+        return clubs;
+    },
+	 getAllContent : async () => {
+        const content = await axios.get('http://localhost:3000/api/Contents');
+        return content;
+    }
+    ,
+  
+   getAllContent : async () => {
+        const content = await axios.get('http://localhost:3000/api/Contents');
+        return content;
+    }
+    ,
+   
+    createContent : async content => {
+        const newContent = await axios.post('http://localhost:3000/api/Contents', content);
+        return newContent;
+    },
+    updateContent : async (id, updatedData) => {
+        const updatedContent = await axios.put(`http://localhost:3000/api/Contents/${id}`, updatedData);
+        return updatedContent;
+    },
+    deleteContent : async id => {
+        const deletedContent = await axios.delete(`http://localhost:3000/api/Contents/${id}`);
+        return deletedContent;
+    },
+
+
+    
+ viewcontent : async()=>{
+        const getuser = await axios.get('http://localhost:3000/api/Contents/')
+        return getuser
+    },
+    viewcertaincontent : async()=>{
+        const allContent = await axios.get('http://localhost:3000/api/Contents')
+        const contId = allContent.data.data[0]._id
+        const getcertainuser = await axios.get('http://localhost:3000/api/Contents/'+contId)
+        return getcertainuser
+    },
+
 
         searchDebatesbycategory: async () => {
                         const newDebate=await axios.post('http://localhost:3000/api/Debates',{
