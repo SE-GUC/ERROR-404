@@ -3,6 +3,17 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Chatbars = require('../../models/Chatbar')
 const chatBarValidator = require('../../validations/chatBarValidations')
+router.post('/', async (req, res) => {
+    try {
+        const isValidated = chatBarValidator.createValidation(req.body)
+        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
+        const newChatbar = await Chatbars.create(req.body)
+        res.json({msg:'Chatbar was created successfully', data: newChatbar})
+       }
+       catch(error) {
+           console.log(error)
+       }  
+})
 
 router.put('/for/:id',async(req,res)=>{
  
