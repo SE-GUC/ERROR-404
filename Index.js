@@ -3,13 +3,13 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const dotenv = require('dotenv')
 
-
 //creating app
 const app = express()
 app.use(express.json())
 
 // Connect to mongo
 dotenv.config()
+
 mongoose
     .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
     .then(() => console.log('Connected to MongoDB'))
@@ -24,14 +24,13 @@ app.use(cors())
 // Require Router Handlers
 const articles = require('./routes/api/Articles')
 const users = require('./routes/api/Users')
-const articles = require('./routes/api/Articles')
 const debates = require('./routes/api/Debates')
 const FAQs = require('./routes/api/FAQs')
 const question = require('./routes/api/Questions')
 const notification = require('./routes/api/Notifications')
 const content = require('./routes/api/Contents')
-
-
+const clubs = require('./routes/api/Clubs') 
+const chatbars = require('./routes/api/Chatbars')
 
 app.get('/articles', async (req, res) => {
     res.send(`<a href="/api/Articles">Articles</a>`)
@@ -67,9 +66,15 @@ app.use('/api/Questions', question)
 app.use('/api/Notifications', notification)
 app.use('/api/Clubs', clubs)
 app.use('/api/Contents', content)
-
+app.use('/api/Chatbars', chatbars)
 // Entry point
-app.get('/test', (req,res) => res.send(`<h1>Deployed on Heroku</h1>`))
+app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
+<a href="/api/Articles">Articles</a> </br>
+<a href="/api/Users">Users</a> </br>
+<a href="/api/FAQs">FAQs</a> </br>
+<a href="/api/Debates">Debates</a> </br>
+<a href="/api/Clubs">Clubs</a> </br>
+<a href="/api/Contents">Contents</a>`))
 
 
 app.use((req, res) => {
@@ -79,3 +84,4 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
+
