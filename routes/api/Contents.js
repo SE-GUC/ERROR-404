@@ -2,7 +2,6 @@
 const express = require('express')
 const router = express.Router()
 const Joi = require('joi')
-const uuid = require('uuid')
 const Content = require('../../models/Content')
 const mongoose = require('mongoose')
 const validator = require('../../validations/contentValidations')

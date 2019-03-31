@@ -17,7 +17,7 @@ const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
 const discipleValidator = require ('../../validations/disciplevalidations')
 const parentValidator = require('../../validations/parentValidations')
-
+const hubAdminValidator= require('../../validations/hubAdminValidations')
 
 
 
@@ -213,7 +213,7 @@ router.post('/register', async (req,res) => {
                 birthDate ,
                 bio,
                 email,
-		score:0,
+	        	score:0,
                 password : hashedPassword,
                 clubs ,
                 house ,
@@ -275,13 +275,47 @@ router.post('/register', async (req,res) => {
 
                             console.log(error)
 
-                    }              
+                    }   
+                    
+                    case('admin'):
+                try{
+
+                    const isUserValidated = hubAdminValidator.hubAdminValidation(req.body)
+                    if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+                    
+                    const { firstName,lastName,birthDate,clubs,email,password,type,house,din,dor,bio} = req.body
+                    const salt = bcrypt.genSaltSync(10)
+                    const hashedPassword = bcrypt.hashSync(password, salt)
+                
+                    const newMember = new user({
+                            type ,
+                            firstName ,
+                            lastName ,
+                            birthDate ,
+                            bio,
+                            email,
+                            password : hashedPassword,
+                            clubs ,
+                            house ,
+                            din,
+                            dor,
+                            notification:[]
+                        })
+                        
+                        await User.create(newMember)
+                                
+                    return res.json({ msg: 'User created successfully', data: newMember })
+                            
+                    } 
+                catch (error) {
+
+            return res.status(422).send({ error: 'Can not create user' })
+            }
 
 
 }
             
-    
-usernew.catch()
+
 
 })
 
@@ -317,7 +351,7 @@ router.put('/:id/:score',async(req,res)=>
     .catch(err => {res.send('Cannot find the user ')})
   })
 
-
+    })
 
    // updating the info/profile of a user
     router.put('/:id',async(req,res)=>{
@@ -325,12 +359,12 @@ try{
    
         const userId =req.params.id
         const getuser = await user.findOne({_id:userId})
-        if(!getuser) return res.status(404).send({error: 'User does not exist'})
-        const isValidated = userValidator. updateUserValidation(req.body)
+       if(!getuser) return res.status(404).send({error: 'User does not exist'})
+        const isValidated = userValidator.updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
         const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
-        
-        res.json({msg: 'User updated sucessfully'})
+        const updatedOne = await user.findOne({_id:userId})
+        res.json({data:updatedOne})
      
     
 }
@@ -352,6 +386,20 @@ catch (error){
         }
         
     } )
+
+
+
+    // router.delete('/:id',async(req,res)=>{
+    //     // try{
+    //      const userId =req.params.id;
+    //      const user = await user.findById({_id:userId})
+    //     //  if(user.data.data.type==='hubadmin')return res.send({ error:'admin cannot be deleted'})
+    //      const deleteduser = await user.findByIdAndRemove({_id:userId})
+    //     res.json({msg:'User was deleted successfully', data: deleteduser})
+         
+      
+         
+    //  } )
 
 
 
@@ -412,4 +460,5 @@ router.put('/update/:id', async (req,res) => {
     
 })
 
-module.exports = router
+
+module.exports = router;
