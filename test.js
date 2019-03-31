@@ -11,12 +11,12 @@ test("Creates new user ", async(done)=>{
     const newUser= await funcs.createUser()
 
     expect(newUser.data.data.type).toEqual("member")
-    expect(newUser.data.data.firstName).toEqual("Nada")
-    expect(newUser.data.data.lastName).toEqual("bob")
+    expect(newUser.data.data.firstName).toEqual("nadda")
+    expect(newUser.data.data.lastName).toEqual("kok")
    
     expect(newUser.data.data.birthDate).toEqual("1/1/1990")
     expect(newUser.data.data.bio).toEqual("hey there")
-    expect(newUser.data.data.email).toEqual("hobbalalla@student.guc.edu.eg")
+    expect(newUser.data.data.email).toEqual("zoombahanam@student.guc.edu.eg")
     expect(newUser.data.data.house).toEqual("Orion")
 
     expect(newUser.data.data.clubs).toEqual(["TIQ"])
@@ -42,8 +42,8 @@ test("Creates new user ", async(done)=>{
 	// Testing that TIQ admins are able to update the information of the users probably 
     test("Update user first and last name", async() => {
         const updUser= await funcs.updateUser()
-        expect(updUser.data.data.firstName).toEqual("Lakoooooila")
-        expect(updUser.data.data.lastName).toEqual("Ahmzzzzed")
+        expect(updUser.data.data.firstName).toEqual("karkora")
+        expect(updUser.data.data.lastName).toEqual("amoraa")
     })
 
 
@@ -81,6 +81,7 @@ test('Number of Articles should be ', async () => {                             
     const result =  await funcs.getArticles()
     expect(result).toBeDefined()
 });
+
 
 
 //-----------------------------------------------------------------------------------------------

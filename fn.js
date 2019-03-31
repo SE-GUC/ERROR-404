@@ -17,11 +17,11 @@ const functions = {
     createUser: async() =>{
         const newUser = await axios.post('http://localhost:3000/api/Users/register',{
         type : "member",
-        firstName: "Nada",
-        lastName:"bob",
+        firstName: "nadda",
+        lastName:"kok",
         birthDate:"1/1/1990",
         bio:"hey there",
-        email:"hobbalalla@student.guc.edu.eg",
+        email:"zoombahanam@student.guc.edu.eg",
         password:"12345678",
         house:"Orion",
         clubs:["TIQ"]
@@ -48,7 +48,7 @@ const functions = {
             lastName:"ramy",
             birthDate:"12-11-1998",
             bio:"ana lillla Rami",
-            email:"ziiziiziz@student.guc.edu.eg",
+            email:"zobba@student.guc.edu.eg",
             password:"lailaa1234",
             clubs:["tiq"],
             house:"Orionn"
@@ -57,8 +57,8 @@ const functions = {
         const newid = user.data.data._id
      
         const updateUser = await axios.put('http://localhost:3000/api/Users/'+newid,{
-            firstName:"Lakoooooila",
-            lastName:"Ahmzzzzed",
+            firstName:"karkora",
+            lastName:"amoraa",
     
         }  )
         const deleteduser = await axios.delete('http://localhost:3000/api/Users/'+newid)       
