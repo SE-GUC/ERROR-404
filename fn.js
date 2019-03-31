@@ -24,7 +24,13 @@ getUsers: async()=>{
     }
     ,
   
-   createContent : async content => {
+   getAllContent : async () => {
+        const content = await axios.get('http://localhost:3000/api/Contents');
+        return content;
+    }
+    ,
+   
+    createContent : async content => {
         const newContent = await axios.post('http://localhost:3000/api/Contents', content);
         return newContent;
     },
