@@ -95,3 +95,34 @@ test('A TIQ admin should be able to delete an existing debate' , async()=>{
 
 })
 
+//Testing search for debates by date 
+    test("It responds with the searched debate by date", async (done) => {
+        
+        const debate =  await funcs.searchDebatesbydate()
+        var i;
+        var b=true;
+        const testDate = '2001-12-20T22:00:00.000Z'
+        for(i=0;i<debate.data.data.length;i++){
+            if(debate.data.data[i].date!==testDate){
+                b=false
+            }
+        }
+        expect(b).toBeTruthy()
+        done()
+    })
+     //Testing search for debates by category 
+     test("It responds with the searched debate by category", async (done) => {
+        const debate =  await funcs.searchDebatesbycategory()
+        var i;
+        var b=true;
+        for(i=0;i<debate.data.data.length;i++){
+            if(debate.data.data[i].category!=="health"){
+                b=false
+            }
+        }
+       
+        expect(b).toBeTruthy()
+        done()
+    })
+
+

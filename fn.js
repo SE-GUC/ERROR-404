@@ -56,7 +56,40 @@ const functions = {
     getInvalidPage: async()=>{
         const response = await axios.get('http://localhost:3000/apv/Debates')
         return response
+    },
+    
+    searchDebatesbydate: async () => {
+        const newDebate=await axios.post('http://localhost:3000/api/Debates',{
+          
+            title : "smoking",
+            category : "health",
+            date  : "12-21-2001",
+            description : "gdhakvcladbhc",
+            info : "aksnansd;akn"
+
+
+        })
+        const debate = await axios.get('http://localhost:3000/api/Debates/searchbydate/12-21-2001')
+
+        return debate
+
+        },
+        searchDebatesbycategory: async () => {
+            const newDebate=await axios.post('http://localhost:3000/api/Debates',{
+                title : "smoking",
+                category : "health",
+                date  : "12-21-2001",
+                description : "gdhakvcladbhc",
+                info : "aksnansd;akn"
+
+        })
+        
+        const debate = await axios.get('http://localhost:3000/api/Debates/Search/health')
+        return debate
+
+
     }
+
  
 }
   

@@ -40,7 +40,7 @@ app.use('/api/Clubs', clubs)
 app.use('/api/Contents', content)
 
 // Entry point
-app.get('/', (req,res) => res.send('Deplued on Heroku'))
+app.get('/', (req,res) => res.send('Deployed on Heroku'))
 
 
 app.use((req, res) => {
