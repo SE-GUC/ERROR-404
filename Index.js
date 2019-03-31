@@ -32,7 +32,8 @@ const question = require('./routes/api/Questions')
 const notification = require('./routes/api/Notifications')
 const content = require('./routes/api/Contents')
 const clubs = require('./routes/api/Clubs') 
-const chatBars = require('./routes/api/Chatbars') 
+
+const chatbars = require('./routes/api/Chatbars')
 
 
 app.get('/articles', async (req, res) => {
@@ -69,7 +70,8 @@ app.use('/api/Questions', question)
 app.use('/api/Notifications', notification)
 app.use('/api/Clubs', clubs)
 app.use('/api/Contents', content)
-app.use('/api/Chatbars', chatBars)
+
+app.use('/api/Chatbars', chatbars)
 
 // Entry point
 app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
@@ -88,4 +90,3 @@ app.use((req, res) => {
  
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
-

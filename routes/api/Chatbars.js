@@ -3,22 +3,51 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Chatbars = require('../../models/Chatbar')
 const chatBarValidator = require('../../validations/chatBarValidations')
+
+
+router.get('/',async (req,res)=>{
+    const chats = await Chatbars.find()
+    res.json({data:chats})
+})
+
+
+
+                              
+
 router.post('/create', async (req,res) => {
     try {
      const isValidated = chatBarValidator.createValidation(req.body)
     
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
  
+
      const newChatBar = await Chatbar.create(req.body)
 
      res.json({msg:'A new chatBar was created successfully :)', data: newChatBar})
+
+    //  const newChatBar = await chatbars.create(req.body)
+     const { debateLiveTitle,date} = req.body
+     const newMotion = new Chatbars({
+        debateLiveTitle ,
+        date ,
+        numberOfResponses:0
+      
+     
+  })
+  
+  const newChatBar=await Chatbars.create(newMotion)
+          
+return res.json({msg:'A new chatBar was created successfully :)', data: newChatBar})
+
     }
     catch(error) {
         // We will be handling the error later
         console.log(error)
     }  
  }),
+
 router.put('/for/:id',async(req,res)=>{
+
  
     try{
         const chatBarId=req.params.id
@@ -61,6 +90,7 @@ router.put('/against/:id',async(req,res)=>{
 })
 
 
+
 router.get('/search/:keyWord',async(req,res)=>{
     const keyWord=req.params.keyWord
     const chatBar = await Chatbar.find({ "debateLiveTitle" : { $regex: keyWord, $options: 'i' } })
@@ -70,4 +100,31 @@ router.get('/search/:keyWord',async(req,res)=>{
     return res.json({data:chatBar})
          
     })
-module.exports = router
+
+
+router.get('/:id',async (req,res)=>{
+    
+    const motionId = req.params.id
+  
+    const motion = await Chatbars.findById({_id:motionId})
+    res.send(motion)
+   
+    })
+
+
+// router.get('/', async (req, res) => {
+//     const chatbar = await Chatbars.find();
+//     res.json({data: chatbar});
+
+// })
+
+router.delete('/:id',(req,res)=>{
+    const id = req.params.id
+    Chatbars.findByIdAndDelete(id)
+    .exec()
+    .then(()=>{return res.json({data :'Deleted Successfully'})})
+    .catch(err =>{ return res.json({err : 'ERROR while deleting'})})
+})
+module.exports = router;
+
+
