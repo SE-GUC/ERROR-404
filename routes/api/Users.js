@@ -1,7 +1,7 @@
 const express = require('express')
 const Joi = require('joi')
 const mongoose = require('mongoose')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcryptjs')
 const router = express.Router()
 
 //const tokenKey = require('../../config/keys').secretOrKey
@@ -17,10 +17,14 @@ const TIQadminValidator =require('../../validations/tiqAdminValidations')
 const hubUserValidator = require('../../validations/hubUserValidations') 
 const discipleValidator = require ('../../validations/disciplevalidations')
 const parentValidator = require('../../validations/parentValidations')
+const hubAdminValidator= require('../../validations/hubAdminValidations')
+
+
+
 
 
 router.put('/updateapprove/:uid',async(req,res)=>{
-        console.log("yalla ")
+       
         try{
        
             const userId =req.params.uid
@@ -36,7 +40,7 @@ router.put('/updateapprove/:uid',async(req,res)=>{
 })
 
 router.put('/updatedisapprove/:uid',async(req,res)=>{
-    console.log("yalla ")
+    
     try{
    
         const userId =req.params.uid
@@ -50,6 +54,15 @@ router.put('/updatedisapprove/:uid',async(req,res)=>{
         console.log("error")
     }
 })
+
+
+router.get('/searchbyapproval/:approval',async(req,res)=>{
+    const userStatus = req.params.approval
+    const users = await user.find({approval: userStatus})
+   return res.json({data:users})
+})
+
+
 
 //create new user (TIQ admin, Hub user, disciples, parent)
 
@@ -243,7 +256,7 @@ router.post('/register', async (req,res) => {
                 birthDate ,
                 bio,
                 email,
-		score:0,
+	        	score:0,
                 password : hashedPassword,
                 clubs ,
                 house ,
@@ -305,12 +318,46 @@ router.post('/register', async (req,res) => {
 
                             console.log(error)
 
-                    }              
+                    }   
+                    
+                    case('admin'):
+                try{
+
+                    const isUserValidated = hubAdminValidator.hubAdminValidation(req.body)
+                    if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
+                    
+                    const { firstName,lastName,birthDate,clubs,email,password,type,house,din,dor,bio} = req.body
+                    const salt = bcrypt.genSaltSync(10)
+                    const hashedPassword = bcrypt.hashSync(password, salt)
+                
+                    const newMember = new user({
+                            type ,
+                            firstName ,
+                            lastName ,
+                            birthDate ,
+                            bio,
+                            email,
+                            password : hashedPassword,
+                            clubs ,
+                            house ,
+                            din,
+                            dor,
+                            notification:[]
+                        })
+                        
+                        await User.create(newMember)
+                                
+                    return res.json({ msg: 'User created successfully', data: newMember })
+                            
+                    } 
+                catch (error) {
+
+            return res.status(422).send({ error: 'Can not create user' })
+            }
 
 
 }
             
-    
 
 
 })
@@ -334,6 +381,7 @@ router.put('/:id/:score',async(req,res)=>
  res.json({msg:'Score updated'})
 });
 
+
 //get user by id 
   router.get('/:id',async (req,res)=>{
     
@@ -344,8 +392,9 @@ router.put('/:id/:score',async(req,res)=>
       users.birthDate,users.bio,users.email,users.password,users.house,users.din
        ,users.dor,users.clubs])})
     .catch(err => {res.send('Cannot find the user ')})
+  })
+
     })
-    
 
    // updating the info/profile of a user
     router.put('/:id',async(req,res)=>{
@@ -353,12 +402,12 @@ try{
    
         const userId =req.params.id
         const getuser = await user.findOne({_id:userId})
-        if(!getuser) return res.status(404).send({error: 'User does not exist'})
-        const isValidated = userValidator. updateUserValidation(req.body)
+       if(!getuser) return res.status(404).send({error: 'User does not exist'})
+        const isValidated = userValidator.updateUserValidation(req.body)
         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
         const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
-        
-        res.json({msg: 'User updated sucessfully'})
+        const updatedOne = await user.findOne({_id:userId})
+        res.json({data:updatedOne})
      
     
 }
@@ -366,14 +415,13 @@ catch (error){
     console.log(error)
 }
     })
-   
  
   
-    //delete a user
-    router.delete('/:id',async(req,res)=>{
-        try{
-        const userId =req.params.id;
-        const deleteduser = await user.findByIdAndRemove({_id:userId})
+//delete a user
+ router.delete('/:id',async(req,res)=>{
+    try{
+    const userId =req.params.id;
+    const deleteduser = await user.findByIdAndRemove({_id:userId})
         res.json({msg:'User was deleted successfully', data: deleteduser})
         }
         catch(error){
@@ -381,6 +429,20 @@ catch (error){
         }
         
     } )
+
+
+
+    // router.delete('/:id',async(req,res)=>{
+    //     // try{
+    //      const userId =req.params.id;
+    //      const user = await user.findById({_id:userId})
+    //     //  if(user.data.data.type==='hubadmin')return res.send({ error:'admin cannot be deleted'})
+    //      const deleteduser = await user.findByIdAndRemove({_id:userId})
+    //     res.json({msg:'User was deleted successfully', data: deleteduser})
+         
+      
+         
+    //  } )
 
 
 
@@ -404,7 +466,7 @@ router.put('/update/:id', async (req,res) => {
             const updatedAlumni = await getuser.updateOne(req.body)
         
             if(!updatedAlumni) return res.status(404).send({error: 'user updation has erroe'})
-            res.json({msg: 'User updated successfully'})
+            res.json({msg: 'User updated sucessfully'})
            
 
          }
@@ -440,88 +502,6 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
-
-
-router.get('/searchbyapproval/:approval',async(req,res)=>{
-    const userStatus = req.params.approval
-    const users = await user.find({approval: userStatus})
-   return res.json({data:users})
-})
-
-
-     
-    
-// }
-// catch (error){
-//     console.log("error")
-// }})
-    // const approval = req.body.approval
-    // const schema= {
-    //      approval:Joi.boolean()
-    // }
-    // const result = joi.validate(req.body, schema)
-    // if (result.error) return res.status(400).send({ error: result.error.details[0].message });
-    // const userUpdated = user.findByIdAndUpdate({_id:id},req.body)
-    // .exec()
-    // .then(doc => { res.send( 'User updated sucessfully')})
-    // .catch(err => { res.send('Sorry Could not updatea user with that id')})
-
-
-
-    // try{
-       
-    //         const userId =req.params.id
-    //         const getuser = await user.findOne({_id:userId})
-    //         if(!getuser) return res.status(404).send({error: 'User does not exist'})
-    //         const isValidated = userValidator. updateUserValidation(req.body)
-    //         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-    //         const updatedUser = await user.findOneAndUpdate({_id:userId},req.body)
-            
-    //         res.json({msg: 'User updated sucessfully'})
-         
-        
-    // }
-    // catch (error){
-    //     console.log(error)
-    // }
-    //    })
-
-// update approval status by admin
-
-     
-// router.put('/updateapproval/:id',async(req,res)=>{
-//  try{
-    
-//         const approval = req.body.approval
-//         const userId = req.params.id
-//         const getuser = await user.findOne({userId})
-//         if(!getuser) return res.status(404).send({error: 'User does not exist'})
-//         const isValidated = userValidator.updateUserValidation(req.body)
-//         if (isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
-//         const updatedUser = await user.findOneAndUpdate({_id:userId}, req.body)
-        
-//         res.json({msg: 'User updated sucessfully'})
-     
-    
-// }
-// catch (error){
-//     console.log(error)
-//  }
-// //     const approval = req.body.approval
-// //     const userId = req.params.id
-
-// //     // const schema = {
-// //     //      approval:Joi.boolean()
-// //     // }
-// //     const result = joi.validate(req.body)
-// //     if (result.error) return res.status(400).send({ error: result.error.details[0].message });
-// //     const userUpdated=await user.findByIdAndUpdate({_id:userId}, req.body)
-    
-// //     .exec()
-// //     .then(doc => { res.json({msg: 'User updated sucessfully'})
-// //     .catch(err => {return res.send('Sorry Could not update user with that id')})
-// //})
-// })
 
 
 module.exports = router;
