@@ -111,10 +111,18 @@ test("Creates new user ", async(done)=>{
     // Testing that the users are able to update their information probably 
 	// Testing that TIQ admins are able to update the information of the users probably 
     test("Update user first and last name", async() => {
-        const updUser= await funcs.updateUser()
-        expect(updUser.data.data.firstName).toEqual("karkora")
-        expect(updUser.data.data.lastName).toEqual("amoraa")
+        const allusers = await functions.getUsers()
+        const updateUser = {firstName:"Karkora" ,lastName:"Amora" };
+        const id = allusers.data.data[0]._id;
+        console.log(id)
+        const updUser= await funcs.updateUser(id,updateUser)
+        const allUersAfter=await funcs.getUsers()
+        expect(allUersAfter.data.data[0].firstName).toEqual("Karkora")
+        expect(allUersAfter.data.data[0].lastName).toEqual("Amora")
+    
     })
+    
+    
 
 
 
