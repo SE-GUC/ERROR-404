@@ -66,7 +66,13 @@ router.get('/:id',async (req,res)=>{
     const articles = await Article.findOne({_id:articleId})
     res.json({data:articles})
 })
-
+router.get('/Search/:keyWord',async(req,res)=>{
+    const keyWord=req.params.keyWord
+    const article = await Article.find({ "title" : { $regex: keyWord, $options: 'i' } })
+    if(article.length===0) return res.status(404).send({error: 'Article with that key word doesnt exisit'})
+    return res.json({data:article})
+         
+    })
 module.exports = router
 
 

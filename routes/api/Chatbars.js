@@ -3,17 +3,7 @@ const router = express.Router()
 const mongoose = require('mongoose')
 const Chatbars = require('../../models/Chatbar')
 const chatBarValidator = require('../../validations/chatBarValidations')
-router.post('/', async (req, res) => {
-    try {
-        const isValidated = chatBarValidator.createValidation(req.body)
-        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-        const newChatbar = await Chatbars.create(req.body)
-        res.json({msg:'Chatbar was created successfully', data: newChatbar})
-       }
-       catch(error) {
-           console.log(error)
-       }  
-})
+
 
 router.get('/',async (req,res)=>{
     const chats = await Chatbars.find()
@@ -23,6 +13,7 @@ router.get('/',async (req,res)=>{
 
 
                               
+
 router.post('/create', async (req,res) => {
     try {
      const isValidated = chatBarValidator.createValidation(req.body)
@@ -47,9 +38,10 @@ return res.json({msg:'A new chatBar was created successfully :)', data: newChatB
         // We will be handling the error later
         console.log(error)
     }  
- }),
+ })
 
- router.put('/for/:id',async(req,res)=>{
+router.put('/for/:id',async(req,res)=>{
+
  
     try{
         const chatBarId=req.params.id
@@ -93,6 +85,17 @@ router.put('/against/:id',async(req,res)=>{
 
 
 
+router.get('/search/:keyWord',async(req,res)=>{
+    const keyWord=req.params.keyWord
+    const chatBar = await Chatbar.find({ "debateLiveTitle" : { $regex: keyWord, $options: 'i' } })
+    // const user = await User.find({'lastName':keyWord})
+
+    if(chatBar.length===0) return res.status(404).send({error: 'ChatBar with that key word doesnt exisit'})
+    return res.json({data:chatBar})
+         
+    })
+
+
 router.get('/:id',async (req,res)=>{
     
     const motionId = req.params.id
@@ -117,4 +120,5 @@ router.delete('/:id',(req,res)=>{
     .catch(err =>{ return res.json({err : 'ERROR while deleting'})})
 })
 module.exports = router;
+
 
