@@ -18,7 +18,11 @@ router.get('/admin', async(request, response) => {
     response.json({data: questions})
 
 });
-
+router.get('/allQuestions/admin', async(request, response) => {
+        const questions = await Question.find()
+        response.json({data: questions})
+    
+});
 
 router.delete('/:id', async(req, res) => {
     try {
