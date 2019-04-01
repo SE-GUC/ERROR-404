@@ -20,11 +20,6 @@ router.post('/create', async (req,res) => {
     
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
  
-
-     const newChatBar = await Chatbar.create(req.body)
-
-     res.json({msg:'A new chatBar was created successfully :)', data: newChatBar})
-
     //  const newChatBar = await chatbars.create(req.body)
      const { debateLiveTitle,date} = req.body
      const newMotion = new Chatbars({
@@ -38,13 +33,12 @@ router.post('/create', async (req,res) => {
   const newChatBar=await Chatbars.create(newMotion)
           
 return res.json({msg:'A new chatBar was created successfully :)', data: newChatBar})
-
     }
     catch(error) {
         // We will be handling the error later
         console.log(error)
     }  
- }),
+ })
 
 router.put('/for/:id',async(req,res)=>{
 
