@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './Chatbars.css';
+import Header from './Header';
+
 class Chatbars extends Component {
   constructor() {
     super();
@@ -41,7 +43,12 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
   render() {
     
     return (
-      <div style={this.getStyle()}>
+     
+      <div style={this.getStyle()}  >
+        <div>
+        <Header />
+      </div> 
+      
         <form onSubmit={this.onSubmit} style= {{display: 'flex'}}>
                 <input
                  type="text"
