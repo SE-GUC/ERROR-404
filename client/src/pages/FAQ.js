@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
-import FAQs from './FAQs';
-import AddFaq from './AddFaq';
+import FAQs from '../faq/FAQs';
+import AddFaq from '../faq/AddFaq';
 
 import axios from 'axios';
 

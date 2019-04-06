@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
-import FAQ from './components/FAQ';
+import FAQ from './pages/FAQ';
 import './App.css';
 
 
