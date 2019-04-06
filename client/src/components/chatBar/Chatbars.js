@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './Chatbars.css';
 class Chatbars extends Component {
   constructor() {
     super();

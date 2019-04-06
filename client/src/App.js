@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import './App.css';
 import Chatbars from './components/chatBar/Chatbars';
 import Header from './components/layout/Header';
 
