@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-//import Chatbars from './components/Chatbars';
 import './App.css';
 import Chatbars from './components/chatBar/Chatbars';
+import Header from './components/layout/Header';
 
-
-class App extends Component {
+class App extends Component 
+{
+  
  
   render() {
     return (
       <div className="App">
-        
-        <Chatbars />
-        
+      <div className="container">
+         <Header />
+         <Chatbars />
       </div>
+      </div>
+        
     );
   }
 }

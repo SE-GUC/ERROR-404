@@ -3,8 +3,7 @@ const Joi = require('joi')
 module.exports = {
     createValidation :request =>{
         const createSchema ={
-            debateLiveTitle: Joi.string().required(),
-            date: Joi.string().required()
+            debateLiveTitle: Joi.string().required()
             // numberOfResponses: Joi.number(),
             // forResponses: Joi.array(),
             // againstResponses:Joi.array()
