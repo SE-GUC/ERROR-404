@@ -21,14 +21,18 @@ router.post('/create', async (req,res) => {
      if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
  
     //  const newChatBar = await chatbars.create(req.body)
-     const { debateLiveTitle,date} = req.body
-     const newMotion = new Chatbars({
-        debateLiveTitle ,
-        date ,
-        numberOfResponses:0
-      
+    const { debateLiveTitle} = req.body
+    var currentDate = new Date();
+    const date = currentDate.getDate();
+    const month = currentDate.getMonth(); 
+    const year = currentDate.getFullYear();
+    const newMotion = new Chatbars({
+       debateLiveTitle ,
+       date: date + "-" +(month + 1) + "-" + year ,
+       numberOfResponses:0
      
-  })
+    
+ })
   
   const newChatBar=await Chatbars.create(newMotion)
           

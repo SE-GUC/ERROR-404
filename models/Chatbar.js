@@ -10,7 +10,7 @@ const chatBarSchema = new Schema({
     },
     date: {
         type: String,
-        required: true
+        required: false
     },
     numberOfResponses: {
         type: Number,

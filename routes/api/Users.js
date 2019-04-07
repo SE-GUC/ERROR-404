@@ -247,7 +247,7 @@ router.post('/register', async (req,res) => {
         const hashedPassword = bcrypt.hashSync(password, salt)
         console.log(6)
         const newMember = new user({
-                  type ,
+                type ,
                 firstName ,
                 lastName ,
                 birthDate ,
