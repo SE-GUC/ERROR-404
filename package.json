@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
-    "server": "nodemon server",
+    "start": "node server",
+    "server": "nodemon server.js",
     "test": "jest",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -26,10 +26,10 @@
     "jest": "^24.5.0",
     "joi": "^14.3.1",
     "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "^2.1.8",
     "typeface-roboto": "0.0.54"
   }
 }
