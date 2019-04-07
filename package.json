@@ -1,20 +1,12 @@
 {
   "name": "server",
   "version": "0.0.1",
-<<<<<<< HEAD
   "description": "TIQ Website",
-=======
-  "description": "Introduction to node",
->>>>>>> 05152bd7d5eb69fc90b2a05533a6bfbab534237f
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server",
-<<<<<<< HEAD
     "server": "nodemon server",
-=======
-    "server": "nodemon server.js",
->>>>>>> 05152bd7d5eb69fc90b2a05533a6bfbab534237f
     "test": "jest",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -34,14 +26,6 @@
     "jest": "^24.5.0",
     "joi": "^14.3.1",
     "mongoose": "^5.4.19",
-<<<<<<< HEAD
     "nodemon": "^1.18.10"
-=======
-    "nodemon": "^1.18.10",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.0",
-    "typeface-roboto": "0.0.54"
->>>>>>> 05152bd7d5eb69fc90b2a05533a6bfbab534237f
   }
 }
