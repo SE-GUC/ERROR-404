@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Chatbars = require('../../models/Chatbar')
+const User = require('../../models/User')
 const chatBarValidator = require('../../validations/chatBarValidations')
 
 
@@ -44,13 +45,13 @@ return res.json({msg:'A new chatBar was created successfully :)', data: newChatB
     }  
  })
 
-router.put('/for/:id',async(req,res)=>{
+router.put('/for/:id/:userid',async(req,res)=>{
 
  
     try{
         const chatBarId=req.params.id
         const response =req.body.forResponses
-       
+        const userid = req.params.userid
         const getchatBar= await Chatbars.findOne({_id:chatBarId})
         if(!getchatBar) return res.status(400).send({msg:'This Debate live is not found'})
         const isValidated = chatBarValidator.updateValidation(req.body)
@@ -59,19 +60,20 @@ router.put('/for/:id',async(req,res)=>{
         const updatedchatBar=await Chatbars.findOneAndUpdate({_id:chatBarId},{$push:{forResponses:response}})
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
+        const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
         res.json({data:getChatbarNew })
     }
     catch(error){
         console.log(error)
     }
 })
-router.put('/against/:id',async(req,res)=>{
+router.put('/against/:id/:userid',async(req,res)=>{
     
 
     try{
         const chatBarId=req.params.id
         const response =req.body.againstResponses
-       
+        const userid = req.params.userid
         const getchatBar= await Chatbars.findOne({_id:chatBarId})
         if(!getchatBar) return res.status(400).send({msg:'This Debate live is not found'})
         const isValidated = chatBarValidator.updateValidation(req.body)
@@ -80,6 +82,7 @@ router.put('/against/:id',async(req,res)=>{
         const updatedchatBar=await Chatbars.findOneAndUpdate({_id:chatBarId},{$push:{againstResponses:response}})
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
+        const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
         res.json({data:getChatbarNew })
     }
     catch(error){
