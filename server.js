@@ -1,19 +1,25 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const dotenv = require('dotenv')
+// const dotenv = require('dotenv')
 
 //creating app
 const app = express()
 app.use(express.json())
 
 // Connect to mongo
-dotenv.config()
+// dotenv.config()
+// mongoose
+//     .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
+//     .then(() => console.log('Connected to MongoDB'))
+//     .catch(err => console.log(err))
+const db = require('./config/keys').mongoURI
+
+// Connect to mongo
 mongoose
-    .connect(`mongodb+srv://${process.env.MONGO_ATLAS_USER}:${process.env.MONGO_ATLAS_PASSWORD}@trail-mflro.mongodb.net/mydb`)
+    .connect(db)
     .then(() => console.log('Connected to MongoDB'))
     .catch(err => console.log(err))
-
 // Init middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
