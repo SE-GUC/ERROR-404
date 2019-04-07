@@ -38,7 +38,14 @@ const styles = theme => ({
 });
 
 class DebateCard extends React.Component {
-  state = { expanded: false };
+  constructor(props){
+    super(props);
+    this.state = { 
+      expanded: false,
+      date :  (new Date(props.date)).getDate() + "-"+((new Date(props.date)).getMonth()+1) + "-" +(new Date(props.date).getFullYear())
+    };
+
+  }
 
   handleExpandClick = () => {
     this.setState(state => ({ expanded: !state.expanded }));
@@ -51,7 +58,7 @@ class DebateCard extends React.Component {
       <Card className={classes.card}>
         <CardHeader
           title = {this.props.title}
-          subheader= {this.props.date}
+        subheader = {this.state.date}
         />
         <CardContent>
           <Typography component="p">
