@@ -4,6 +4,7 @@ const mongoose = require('mongoose')
 const Articles = require('../../models/Article')
 const articleValidator = require('../../validations/articleValidations')
 
+
 //create new article
 router.post('/create', async (req,res) => {
     try {
@@ -13,10 +14,11 @@ router.post('/create', async (req,res) => {
  
      const newArticle = await Articles.create(req.body)
 
-     res.json({msg:'A new article was created successfully :)', data: newArticle})
+     res.json({ data: newArticle})
+     //msg:'A new article was created successfully :)',
     }
     catch(error) {
-        // We will be handling the error later
+        
         console.log(error)
     }  
  })
@@ -34,7 +36,8 @@ router.put('/:id',async(req,res)=>{
         const isValidated = articleValidator.updateValidation(req.body)
         if(isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
         const updatedArticle=await Articles.findOneAndUpdate({_id:articleid},req.body)
-        res.json({msg:'Article updated successfully'})
+        const getArticleNew =await Articles.findOne({_id:articleid})
+        res.json({data:getArticleNew })
     }
     catch(error){
         console.log(error)
