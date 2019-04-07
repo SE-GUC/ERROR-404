@@ -5,6 +5,9 @@ import App from "./App";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
+
+import FAQ from './components/faq/FAQ';
+
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
 import Users from "./Users";
@@ -23,9 +26,12 @@ const routing = (
         <Route exact path="/debates" component={Debates} />
         <Route exact path="/createDebate" component={CreateDebate} />
         <Route exact path="/Clubs" component={Clubs} />
-        <Route exact path="/Contents" component={Contents} />
         <Route exact path="/chatbars" component={Chatbars} />
         <Route exact path="/Articles" component={Articles} />
+        <Route exact path="/faq" component={FAQ} />
+
+
+        <Route exact path="/Contents" component={Contents} />
         <Route exact path="/Users" component={Users} />
         <Route component={Notfound} />
       </Switch>
