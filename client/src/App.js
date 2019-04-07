@@ -11,7 +11,7 @@ class App extends Component {
      
         <div className="App">
           <div className="container">
-            <FAQ/>
+            {/* <FAQ/> */}
              
           </div>  
         </div>
