@@ -75,6 +75,11 @@ app.use((req, res) => {
  })
 
  
+<<<<<<< Updated upstream
 const port = process.env.PORT || 3000
 app.listen(port, () => console.log(`Server on ${port}`))
 
+=======
+const port = process.env.PORT || 5000
+app.listen(port, () => console.log(`Server on ${port}`))
+>>>>>>> Stashed changes
