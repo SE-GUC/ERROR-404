@@ -626,11 +626,7 @@ test("It responds with the searched motion by a word in the title", async (done)
 })
 //test  get admin unanswered questions
 test("It responds with the unanswered questions", async (done) => {
-<<<<<<< HEAD
     const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-=======
-    const newQuestion = await axios.post("http://localhost:3000/api/Questions/ask",{
->>>>>>> c1dd4fade3c42bc9aa34c555f5dfcf33c1a4dc78
                 question: "dsjk are djsk",
                 user: "dskjflkdf"
         
@@ -655,11 +651,7 @@ test("It responds with the questions", async (done) => {
 })
      //delete Question testing
 test("It responds with the deleted Question",async(done) =>{
-<<<<<<< HEAD
     const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-=======
-    const newQuestion = await axios.post("http://localhost:3000/api/Questions/ask",{
->>>>>>> c1dd4fade3c42bc9aa34c555f5dfcf33c1a4dc78
                 question: "dsjk are djsk",
                 user: "dskjflkdf"
         
@@ -713,11 +705,7 @@ test("It responds with the deleted Question",async(done) =>{
 
 //test  get the user's answers of his questions
 test("It responds with the answered questions", async (done) => {
-<<<<<<< HEAD
     const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-=======
-    const newQuestion = await axios.post("http://localhost:3000/api/Questions/ask",{
->>>>>>> c1dd4fade3c42bc9aa34c555f5dfcf33c1a4dc78
                 question: "dsjk are djsk",
                 user: "dskjflkdf"
         
