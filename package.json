@@ -1,7 +1,11 @@
 {
   "name": "server",
   "version": "0.0.1",
+<<<<<<< HEAD
   "description": "Introduction to node",
+=======
+  "description": "TIQ Website",
+>>>>>>> 18d390b8ecadbe543e3b579171b0cb66857bb242
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
@@ -26,11 +30,15 @@
     "jest": "^24.5.0",
     "joi": "^14.3.1",
     "mongoose": "^5.4.19",
+<<<<<<< HEAD
     "nodemon": "^1.18.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "^2.1.8",
     "typeface-roboto": "0.0.54"
+=======
+    "nodemon": "^1.18.10"
+>>>>>>> 18d390b8ecadbe543e3b579171b0cb66857bb242
   }
 }
