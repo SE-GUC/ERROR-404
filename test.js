@@ -197,42 +197,86 @@ test("Number of response updated", async(done) =>{
     test("It responds with the newly created Article", async () => {
         const response =  await funcs.getArticles()
         const resLength  = response.data.data.length
-        const newArticle = await funcs.createArticles()
-        expect(newArticle.data.data.title).toEqual("The downfall of global capitalism.")
-        expect(newArticle.data.data.description).toEqual("This article discuss downfall of global capitalism.")
-        expect(newArticle.data.data.author).toEqual("BOAs")
-        expect(newArticle.data.data.date).toEqual("25-3-2019")
+        const NewArticle =
+        { title:"The downfall of global capitalism.",
+        description: "This article discuss downfall of global capitalism.",
+        author: "BOAs",
+        date: "25-3-2019"}
+        const createNewArticle = await funcs.createArticles(NewArticle)
+        const createNewArticleId = createNewArticle.data.data._id
+        const getNewArcticle = await funcs.getArticleById(createNewArticleId)
         const responseNew =  await funcs.getArticles()
+        expect(getNewArcticle.data.data).not.toBe(null)
+        expect(createNewArticle.data.data.title).toEqual("The downfall of global capitalism.")
+        expect(createNewArticle.data.data.description).toEqual("This article discuss downfall of global capitalism.")
+        expect(createNewArticle.data.data.author).toEqual("BOAs")
+        expect(createNewArticle.data.data.date).toEqual("25-3-2019")
         expect(responseNew.data.data.length).toBe(resLength+1)
     
     })
     //update Article testing
     test("It responds with an updated article", async () => {
-        const updatedArticle = await funcs.updateArticles()
-       
-        expect(updatedArticle.data.data.description).toEqual("Is the downfall of global capitalism real, read the article to find out")
+        const NewArticle =
+        { title:"The downfall of global capitalism.",
+        description: "This article discuss downfall of global capitalism.",
+        author: "BOAs",
+        date: "25-3-2019"}
+        const createNewArticle = await funcs.createArticles(NewArticle)
+        const createNewArticleId = createNewArticle.data.data._id
+        const updatedArticle = await funcs.updateArticles(createNewArticleId,{description: "Read more about downfall of global capitalism."})
+        expect(updatedArticle.data.data.description).toEqual("Read more about downfall of global capitalism.")
+        expect(updatedArticle.data.data.title).toEqual("The downfall of global capitalism.")
+        expect(updatedArticle.data.data.author).toEqual("BOAs")
+        expect(updatedArticle.data.data.date).toEqual("25-3-2019")
+
     })
     //delete article testing
     test("It responds with deleted article",async() =>{
         const response =  await funcs.getArticles()
         const resLength  = response.data.data.length
-        const deletedArticle = await funcs.deleteArticles()
-        const responseNew =  await funcs.getArticles()
-        expect(responseNew.data.data.length).toBe(resLength)
+        const NewArticle =
+        { title:"The downfall of global capitalism.",
+        description: "This article discuss downfall of global capitalism.",
+        author: "BOAs",
+        date: "25-3-2019"}
+        const createNewArticle = await funcs.createArticles(NewArticle)
+        const createNewArticleId = createNewArticle.data.data._id
+        const deletedArticle = await funcs.deleteArticles(createNewArticleId)
+        const responseNew =  await funcs.getArticleById(deletedArticle.data.data._id)
+        const newArticleData = await funcs.getArticles()
+        expect(responseNew.data.data).toEqual(null)
+        expect(newArticleData.data.data.length).toBe(resLength)
+        
+        
     })
-    // delete Debate live testing
+//     // delete Debate live testing
     test("It responds with deleted Debate Live",async() =>{
         const response =  await funcs.getDebateLive()
         const resLength  = response.data.data.length
-        const deletedDebateLive = await funcs.deleteDebateLive()
-        const responseNew =  await funcs.getDebateLive()
-        expect(responseNew.data.data.length).toBe(resLength)
+        const debateLive =  
+        {debateLiveTitle:"TH supports the decline of the nations-state's power in an increasingly globalised world.",
+        date: "12-11-2018"}
+        const createDebateLive = await funcs.createMotion(debateLive)
+        const createDebateLiveId = createDebateLive.data.data._id
+        const deletedDebateLive = await funcs.deleteDebateLive(createDebateLiveId)
+        const responseNew =  await funcs.getDebateLiveById(createDebateLiveId)
+        const newDebateLiveData =  await funcs.getDebateLive()
+        expect(responseNew.data.data).toEqual(undefined)
+        expect(newDebateLiveData.data.data.length).toBe(resLength)
     
-    })
+     })
     //get Debate Live testing
     test("It responds with all the Debate Lives",async() =>{
         const response =  await funcs.getDebateLive()
-        expect(response.data).toBeDefined()
+        const resLength  = response.data.data.length
+        const debateLive =  
+        {debateLiveTitle:"TH supports the decline of the nations-state's power in an increasingly globalised world.",
+        date: "12-11-2018"}
+        const createDebateLive = await funcs.createMotion(debateLive)
+        const newDebateLiveData =  await funcs.getDebateLive()
+        expect(newDebateLiveData.data.data.length).toBe(resLength+1)
+
+        
     })
 test('A TIQ user should be able to view all Debates', async (done)=>{
     const debates = await funcs.getDebates()
