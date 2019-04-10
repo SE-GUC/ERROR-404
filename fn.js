@@ -256,13 +256,13 @@ updateUser : async(id,updateUser) =>{
         return debates
         },
 
-    createDebate: async ()=>{
+    createDebate: async (debate)=>{
         const newDebate = await axios.post('http://localhost:3000/api/Debates',{
-                title: "DebateTest",
-                category : "Test Category",
-                date : "1-1-2019",
-                info : "Debate Created in the Test",
-                description : "Creating this debate to test"
+                title: debate.title,
+                category : debate.category,
+                date : debate.date,
+                info : debate.info,
+                description : debate.description
         })
         return newDebate
     },
@@ -270,14 +270,14 @@ updateUser : async(id,updateUser) =>{
         const response = await axios.delete(`http://localhost:3000/api/Debates/${id}`)
         return response
     },
-    updateDebate: async(id)=>{
+    updateDebate: async(id ,debate)=>{
         const response = await axios.put(`http://localhost:3000/api/Debates/${id}`,{
-            title: "DebateUpdatedTest",
-            category : "Updated Category",
-            date : "1-1-2019",
-            info : "Debate Created in the Update Test",
-            description : "Updating this debate to test"
-        })
+            title: debate.title,
+            category : debate.category,
+            date : debate.date,
+            info : debate.info,
+            description : debate.description
+    })
         return response
     },
     getDebateById: async(id)=>{
