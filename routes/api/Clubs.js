@@ -37,11 +37,12 @@ router.put('/:_id', async(req,res)=>{
 
     try{
         const clubId = req.params._id
-        const getClub = await Club.findOne({clubId})
+        //const getClub = await Club.findOne({clubId})
         const isValidated = validator.updateValidation(req.body)
         if(isValidated.error) return res.status(400).send({error: isValidated.error.details[0].message})
         const updatedClub = await Club.findOneAndUpdate({_id:clubId}, req.body)
-        res.json({msg:'Club updated successfully'})
+        console.log("The updated club: "+updatedClub)
+        res.json({msg:'Club updated successfully', data:updatedClub})
     }
     catch(error){
         console.log(error)
