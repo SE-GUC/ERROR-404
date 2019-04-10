@@ -6,7 +6,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 
 const content = require('./fn')
-const Content = require('./models/User')
+const Content = require('./models/Content')
 const Article = require('./models/Article')
 const AllClubs = require('./models/Club')
 const axios = require('axios');
@@ -34,17 +34,8 @@ test('Creating new content', async (done) => {
     const content = {type: 'event', description: "nazleen yetkallemo"};
     const newContent = await functions.createContent(content);
     const allContentUpdated = await functions.getAllContent();
-    var i;
-    var b = false;
-    var index = 0;
-    for(i = 0; i < allContentUpdated.data.data.length; i++){
-        if(allContentUpdated.data.data[i].type === content.type
-        && allContentUpdated.data.data[i].description === content.description){
-        b = true;
-
-        }
-    }
-    expect(b).toBeTruthy();
+    expect(newContent.data.data.type).toEqual(content.type);
+    expect(newContent.data.data.description).toEqual(content.description);
     expect(allContentUpdated.data.data.length).toBe(allContent.data.data.length + 1);
     done();
 });
@@ -766,3 +757,4 @@ test("It responds with the answered questions", async (done) => {
     done()
 
 });
+
