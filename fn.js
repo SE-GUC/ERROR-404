@@ -127,10 +127,10 @@ updateUser : async(id,updateUser) =>{
 
 //     //Testing that TIQ admins are able to create new motions on the Debate live   
 
-    createMotion : async() =>{                                                                  //done
+    createMotion : async(debateLive) =>{                                                                  //done
         const motion =await axios.post("http://localhost:3000/api/Chatbars/create", {
-        debateLiveTitle:"Engineering",
-        date:"1/1/2011"   
+        debateLiveTitle:debateLive.debateLiveTitle,
+        date:debateLive.date  
         })   
 
         return motion
@@ -178,55 +178,44 @@ updateUser : async(id,updateUser) =>{
 //         const Articles = await axios.get('http://localhost:3000/api/Articles/')
 //         return Articles
 //         },
-    createArticles:async () => {
+    createArticles:async (article) => {
        const newArticle = await axios.post("http://localhost:3000/api/Articles/create",{
         
-            title:"The downfall of global capitalism.",
-            description: "This article discuss downfall of global capitalism.",
-            author: "BOAs",
-            date: "25-3-2019"
+            title:article.title,
+            description: article.description,
+            author: article.author,
+            date: article.date
         })
         return newArticle
         },
-        updateArticles:async() =>{
-            const newArticle = await axios.post("http://localhost:3000/api/Articles/create",{
-        
-                title:"The downfall of global capitalism.",
-                description: "This article discuss downfall of global capitalism.",
-                author: "BOAs",
-                date: "25-3-2019"
-            })
-              const id = newArticle.data.data._id
+        updateArticles:async(id,updatedData) =>{
+           
             const updatedArticle = await axios.put("http://localhost:3000/api/Articles/"+id,{
-                description: "Is the downfall of global capitalism real, read the article to find out"
-            })
+            title:updatedData.title,
+            description:updatedData.description,
+            author:updatedData.author,
+            date:updatedData.date
+
+                })
             
             return updatedArticle
         },
-        deleteArticles: async()=>{
-            const newArticle = await axios.post("http://localhost:3000/api/Articles/create",{
-        
-                title:"The downfall of global capitalism.",
-                description: "This article discuss downfall of global capitalism.",
-                author: "BOAs",
-                date: "25-3-2019"
-            })
-              const id = newArticle.data.data._id
+        deleteArticles: async(id)=>{
+            
                     const deleteArticle = await axios.delete("http://localhost:3000/api/Articles/"+id)
                     return deleteArticle
         },
         getDebateLive: async () => {
             const debateLives = await axios.get('http://localhost:3000/api/Chatbars/')
             return debateLives
-            },
-            deleteDebateLive: async()=>{
-                const newDebateLive = await axios.post("http://localhost:3000/api/Chatbars/create",{
-        
-                    debateLiveTitle:"TH supports the decline of the nations-state's power in an increasingly globalised world.",
-                    date: "12-11-2018",
-                    
-                })
-                  const id = newDebateLive.data.data._id
+        }, 
+        getDebateLiveById: async (id) => {
+            const debateLives = await axios.get('http://localhost:3000/api/Chatbars/'+id)
+            return debateLives
+        },
+            
+            deleteDebateLive: async(id)=>{
+               
                         const deleteDebateLive= await axios.delete("http://localhost:3000/api/Chatbars/"+id)
                         return deleteDebateLive
             },
