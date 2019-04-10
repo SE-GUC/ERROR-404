@@ -3,6 +3,7 @@ const funcs = require('./fn');
 const content = require('./fn')
 const Content = require('./models/User')
 const Article = require('./models/Article')
+const AllClubs = require('./models/Club')
 const axios = require('axios');
 var idD  =-1
 var cntD = 0
@@ -94,23 +95,9 @@ test("Creates new user ", async(done)=>{
     const newResult=await funcs.getUsers()
 
     done();
-})
+});
 
-
-
-
-
-
-
-//-------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------
-
-
-
-//updating user if (admiin or user) // so2alllllllllllllllllll
-    // Testing that the users are able to update their information probably 
-	// Testing that TIQ admins are able to update the information of the users probably 
-    test("Update user first and last name", async() => {
+test("Update user first and last name", async() => {
         const allusers = await functions.getUsers()
         const updateUser = {firstName:"Karkora" ,lastName:"Amora" };
         const id = allusers.data.data[0]._id;
@@ -120,14 +107,7 @@ test("Creates new user ", async(done)=>{
         expect(allUersAfter.data.data[0].firstName).toEqual("Karkora")
         expect(allUersAfter.data.data[0].lastName).toEqual("Amora")
     
-    })
-    
-    
-
-
-
-//---------------------------------------------------------------------------------------------
-//---------------------------------------------------------------------------------------------
+})
 
 // // Testing that users are able to view certain Articles 
 test('testing getting an article', async(done)=> {
@@ -144,26 +124,12 @@ test('testing getting an article', async(done)=> {
     done()
 });
 
-
-//--------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------
-
-
-
-
-
-
 // // Testing that users are able to view Articles
 test('Number of Articles should be ', async () => {                                 ///doneee
     expect.assertions(1)
     const result =  await funcs.getArticles()
     expect(result).toBeDefined()
 });
-
-
-
-//-----------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------
 
 // //Testing that TIQ admins are able to create new motions on the Debate live
 test("creating Motion with name of Engineering", async() =>{                           ///donee
@@ -174,9 +140,6 @@ test("creating Motion with name of Engineering", async() =>{                    
 
 }
 )
-//--------------------------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------------------------
-
 //Testing that the number of responses are always updated
 test("Number of response updated", async(done) =>{  
     
@@ -190,8 +153,6 @@ test("Number of response updated", async(done) =>{
     
     }
     )
-
-
 
 //create Article testing
     test("It responds with the newly created Article", async () => {
@@ -362,6 +323,21 @@ test('A TIQ admin should be able to delete an existing debate' , async(done)=>{
         expect(b).toBeTruthy()
         done()
     })
+    
+    
+    test('Creating a new club adds it to the database', async (done) => {
+        const allClubs = await functions.getAllClubs();
+        const club = {name: "TEDx", description: "for pretentious people"};
+        const newClub = await functions.createClub(club);
+        const allClubsUpdated = await functions.getAllClubs();
+        const testClub = AllClubs.findOne({_id:newClub.data.data._id});
+        expect(club.name).toEqual(newClub.data.data.name);
+        expect(club.description).toEqual(newClub.data.data.description);
+        expect(testClub).toBeDefined();
+        expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
+        done();
+    });
+    
     test('Getting club by id', async (done) => {
         const allClubs = await functions.getAllClubs();
         const firstClub = allClubs.data.data[0];
@@ -370,30 +346,13 @@ test('A TIQ admin should be able to delete an existing debate' , async(done)=>{
         expect(club.data.data.description).toEqual(firstClub.description);
         done()
     });
-    
-    test('Creating a new club adds it to the database', async (done) => {
-        const allClubs = await functions.getAllClubs();
-        const databaseSize = allClubs.data.data.length;
-        const club = {name: "Nebny", description: "mesh charity bas ya3nii"};
-        const newClub = await functions.createClub(club);
-        const allClubsUpdated = await functions.getAllClubs();
-        var i;
-        var b = false;
-        for(i = 0; i < allClubsUpdated.data.data.length; i++){
-            if(allClubsUpdated.data.data[i].name === club.name && allClubsUpdated.data.data[i].description === club.description)
-            b = true;
-        }
-        expect(b).toBeTruthy();
-        expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
-        done();
-    });
-    
+
     test('Updating an existing club', async (done) => {
         const allClubs = await functions.getAllClubs();
         const id = allClubs.data.data[0]._id;
         const updatedData = {description: "a7la mesa 3aleik"};
         const updatedClub = await functions.updateClub(id, updatedData);
-        const allClubsUpdated = await functions.getAllClubs(); 
+        const allClubsUpdated = await functions.getAllClubs();
         expect(allClubsUpdated.data.data[0].description).toEqual("a7la mesa 3aleik");
         done();
     });
@@ -401,7 +360,7 @@ test('A TIQ admin should be able to delete an existing debate' , async(done)=>{
     test('Deleting a club', async (done) => {
         const allClubs =  await functions.getAllClubs();
         const id = allClubs.data.data[0]._id;
-        const deletedClub = await functions.deleteClub(id);
+        await functions.deleteClub(id);
         const allClubsUpdated = await functions.getAllClubs();
         var i;
         var b = true;
@@ -412,6 +371,8 @@ test('A TIQ admin should be able to delete an existing debate' , async(done)=>{
         expect(b).toBeTruthy();
         done()
     });
+
+
     //test  get FAQ
 test("It responds with the FAQs", async (done) => {
     
@@ -585,7 +546,7 @@ test("It responds with the FAQ", async (done) => {
         done()
 
     })
-// //     //update FAQ testing
+     //update FAQ testing
     test("It responds with an updated FAQ", async (done) => {
         const newFAQ = await funcs.createFAQs()
         const response =  await funcs.getFAQs() 
@@ -688,7 +649,7 @@ test("It responds with the deleted Question",async(done) =>{
 
 
 
-//     //answer question testing
+    //answer question testing
     test("It responds with the answered question", async (done) => {
         const newQuestion = await funcs.askQuestion()
         const response =  await funcs.getQuestionsAdmin() 
@@ -718,56 +679,4 @@ test("It responds with the answered questions", async (done) => {
     }
     done()
 
-})
-
-
-    test('Getting club by id', async (done) => {
-        const allClubs = await functions.getAllClubs();
-        const firstClub = allClubs.data.data[0];
-        const club = await functions.getClubById(firstClub._id);
-        expect(club.data.data.name).toEqual(firstClub.name);
-        expect(club.data.data.description).toEqual(firstClub.description);
-        done()
-    });
-    
-    test('Creating a new club adds it to the database', async (done) => {
-        const allClubs = await functions.getAllClubs();
-        const databaseSize = allClubs.data.data.length;
-        const club = {name: "Nebny", description: "mesh charity bas ya3nii"};
-        const newClub = await functions.createClub(club);
-        const allClubsUpdated = await functions.getAllClubs();
-        var i;
-        var b = false;
-        for(i = 0; i < allClubsUpdated.data.data.length; i++){
-            if(allClubsUpdated.data.data[i].name === club.name && allClubsUpdated.data.data[i].description === club.description)
-            b = true;
-        }
-        expect(b).toBeTruthy();
-        expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
-        done();
-    });
-    
-    test('Updating an existing club', async (done) => {
-        const allClubs = await functions.getAllClubs();
-        const id = allClubs.data.data[0]._id;
-        const updatedData = {description: "a7la mesa 3aleik"};
-        const updatedClub = await functions.updateClub(id, updatedData);
-        const allClubsUpdated = await functions.getAllClubs(); 
-        expect(allClubsUpdated.data.data[0].description).toEqual("a7la mesa 3aleik");
-        done();
-    });
-    
-    test('Deleting a club', async (done) => {
-        const allClubs =  await functions.getAllClubs();
-        const id = allClubs.data.data[0]._id;
-        const deletedClub = await functions.deleteClub(id);
-        const allClubsUpdated = await functions.getAllClubs();
-        var i;
-        var b = true;
-        for(i = 0; i < allClubsUpdated.data.data.length; i++){
-            if(allClubsUpdated.data.data[i]._id === id)
-            b = false;
-        }
-        expect(b).toBeTruthy();
-        done()
-    });
+});

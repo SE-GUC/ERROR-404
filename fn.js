@@ -231,7 +231,7 @@ updateUser : async(id,updateUser) =>{
                         return deleteDebateLive
             },
 
-			 getClubById : async id => {
+	getClubById : async id => {
         const club = await axios.get(`http://localhost:3000/api/Clubs/${id}`);
         return club;
     },
