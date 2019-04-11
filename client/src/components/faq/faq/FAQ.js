@@ -31,13 +31,7 @@ updatefaq = (id,question,answer) => {
   .then(res => {
     axios.get('http://localhost:5000/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
-    // const temp={
-    //   _id:id,
-    //   question:question,
-    //   answer:answer
-    // }
-    // this.setState({ FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)] })
-    // this.setState({ FAQs: [...this.state.FAQs,temp] })
+  
   });
 
 }
