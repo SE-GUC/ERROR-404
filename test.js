@@ -59,24 +59,6 @@ test("Updating existing content", async done => {
   done();
 });
 
-test("Deleting Content", async done => {
-  const allContent = await functions.getAllContent();
-  const id = allContent.data.data[0]._id;
-  const deletedContent = await functions.deleteContent(id);
-  const allContentUpdated = await functions.getAllContent();
-  var i;
-  var b = true;
-  for (i = 0; i < allContentUpdated.data.data.length; i++) {
-    if (allContentUpdated.data.data[i]._id === id) b = false;
-  }
-
-  expect(b).toBeTruthy();
-  expect(allContentUpdated.data.data.length).toBe(
-    allContent.data.data.length + 1
-  );
-  done();
-});
-
 test("Updating existing content", async done => {
   const allContent = await functions.getAllContent();
   const id = allContent.data.data[0]._id;
