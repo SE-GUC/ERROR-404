@@ -62,6 +62,7 @@ const functions = {
     );
     return getcertainuser;
   },
+
   //-------------------------------------------------------------------
   //------------------------------------------------------------------
 
@@ -174,48 +175,38 @@ const functions = {
     return newO;
   },
 
-  //-----------------------------------------------------------------------------
-  //----------------------------------------------------------------------------
-
   //     getArticles: async () => {
   //         const Articles = await axios.get('http://localhost:3000/api/Articles/')
   //         return Articles
   //         },
-
-  //------------------------------------------------------------------------------------------------
-  //------------------------------------------------------------------------------------------------
-  createArticles: async newArt => {
+  createArticles: async article => {
     const newArticle = await axios.post(
       "http://localhost:3000/api/Articles/create",
-      newArt
+      {
+        title: article.title,
+        description: article.description,
+        author: article.author,
+        date: article.date
+      }
     );
     return newArticle;
   },
-
-  updateArticles: async () => {
-    const newArticle = await axios.post(
-      "http://localhost:3000/api/Articles/create",
-      {
-        title: "The downfall of global capitalism.",
-        description: "This article discuss downfall of global capitalism.",
-        author: "BOAs",
-        date: "25-3-2019"
-      }
-    );
-    const id = newArticle.data.data._id;
+  updateArticles: async (id, updatedData) => {
     const updatedArticle = await axios.put(
       "http://localhost:3000/api/Articles/" + id,
       {
-        description:
-          "Is the downfall of global capitalism real, read the article to find out"
+        title: updatedData.title,
+        description: updatedData.description,
+        author: updatedData.author,
+        date: updatedData.date
       }
     );
 
     return updatedArticle;
   },
-  deleteArticles: async articleid => {
+  deleteArticles: async id => {
     const deleteArticle = await axios.delete(
-      "http://localhost:3000/api/Articles/" + articleid
+      "http://localhost:3000/api/Articles/" + id
     );
     return deleteArticle;
   },
@@ -223,6 +214,13 @@ const functions = {
     const debateLives = await axios.get("http://localhost:3000/api/Chatbars/");
     return debateLives;
   },
+  getDebateLiveById: async id => {
+    const debateLives = await axios.get(
+      "http://localhost:3000/api/Chatbars/" + id
+    );
+    return debateLives;
+  },
+
   deleteDebateLive: async id => {
     const deleteDebateLive = await axios.delete(
       "http://localhost:3000/api/Chatbars/" + id
@@ -260,13 +258,13 @@ const functions = {
     return debates;
   },
 
-  createDebate: async () => {
+  createDebate: async debate => {
     const newDebate = await axios.post("http://localhost:3000/api/Debates", {
-      title: "DebateTest",
-      category: "Test Category",
-      date: "1-1-2019",
-      info: "Debate Created in the Test",
-      description: "Creating this debate to test"
+      title: debate.title,
+      category: debate.category,
+      date: debate.date,
+      info: debate.info,
+      description: debate.description
     });
     return newDebate;
   },
@@ -276,15 +274,15 @@ const functions = {
     );
     return response;
   },
-  updateDebate: async id => {
+  updateDebate: async (id, debate) => {
     const response = await axios.put(
       `http://localhost:3000/api/Debates/${id}`,
       {
-        title: "DebateUpdatedTest",
-        category: "Updated Category",
-        date: "1-1-2019",
-        info: "Debate Created in the Update Test",
-        description: "Updating this debate to test"
+        title: debate.title,
+        category: debate.category,
+        date: debate.date,
+        info: debate.info,
+        description: debate.description
       }
     );
     return response;
@@ -310,7 +308,6 @@ const functions = {
         category: "Updated Category",
         date: "1-1-2019",
         info: "Updated by Invalid Schema",
-
         description: "Updating this debate to test"
       }
     );

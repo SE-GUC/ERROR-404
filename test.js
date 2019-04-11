@@ -1,14 +1,37 @@
 const functions = require("./fn");
 const funcs = require("./fn");
+const mongoose = require("mongoose");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
 const content = require("./fn");
 const Content = require("./models/User");
 const Article = require("./models/Article");
-const axios = require("axios");
+const AllClubs = require("./models/Club");
 const AllUsers = require("./models/User");
 const AllChatBars = require("./models/Chatbar");
-
-var idD = -1;
+const axios = require("axios");
 var cntD = 0;
+
+beforeAll(async done => {
+  await mongoose.connect(
+    `mongodb+srv://${process.env.MONGO_ATLAS_USER}:${
+      process.env.MONGO_ATLAS_PASSWORD
+    }@trail-mflro.mongodb.net/mydb`
+  );
+  var db = mongoose.connection;
+  await db.dropCollection("debates", function(result, err) {
+    if (err) console.log("error in dropping debates collection");
+    else console.log("debates collection deleted successfully");
+  });
+  db.close();
+  done();
+});
+
+afterAll(() => {
+  mongoose.disconnect();
+});
 
 test("Creating new content", async done => {
   const allContent = await functions.getAllContent();
@@ -75,9 +98,6 @@ test("Getting all clubs", async done => {
   done();
 });
 
-//---------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-
 // Testing that TIQ admins are able to create new users
 test("Creates new user ", async done => {
   const allusersBef = await funcs.getUsers();
@@ -120,8 +140,6 @@ test("Creates new user ", async done => {
 // //-------------------------------------------------------------------------------
 
 test("Update user first and last name", async done => {
-  console.log(2);
-  console.log(0);
   const updateUser = { firstName: "lila", lastName: "Hatem" };
   const U = {
     type: "member",
@@ -135,16 +153,12 @@ test("Update user first and last name", async done => {
     clubs: ["TIQ"]
   };
   const createU = await functions.createUser(U);
-  console.log(3);
-  console.log("id :" + createU.data.data._id);
 
   //   const user = await AllUsers.findOne({ _id: createU.data.data._id });
   const user = await functions.getUserById(createU.data.data._id);
-  console.log("user ----> :" + user.data);
 
   const updUser = await functions.updateUser(createU.data.data._id, updateUser);
   const userAfter = await functions.getUserById(createU.data.data._id);
-  console.log(5);
 
   expect(userAfter.data[0]).toEqual(U.type);
   expect(userAfter.data[1]).toEqual(updateUser.firstName);
@@ -246,18 +260,14 @@ test("Number of response updated", async done => {
     date: "10-11-2007"
   };
   const createNew = await functions.createMotion(mo);
-  console.log(1);
   const moId = createNew.data.data._id;
-  console.log("ID: " + moId);
 
   const wantedMotion = await functions.getDebateLiveByIdFor(moId);
   const oldNoOFResponses = wantedMotion.data.numberOfResponses;
-  console.log("oldNumberResponses : " + oldNoOFResponses);
 
   const newM = await funcs.updateNumberOfResponses(moId, "I agree On That....");
   const newMO = await functions.getDebateLiveByIdFor(moId);
   const newNoOfResponses = newMO.data.numberOfResponses;
-  console.log("new Number : " + newNoOfResponses);
 
   expect(newNoOfResponses - oldNoOFResponses).toEqual(1);
 
@@ -268,58 +278,135 @@ test("Number of response updated", async done => {
 //------------------------------------------------------------------------------------------------
 //-----------------------------------------------------------------------------------------------
 
-//-------------------------------------------------------------------------------
-//--------------------------------------------------------------------------------
-
 //create Article testing
 test("It responds with the newly created Article", async () => {
   const response = await funcs.getArticles();
   const resLength = response.data.data.length;
-  const newArticle = await funcs.createArticles();
-  expect(newArticle.data.data.title).toEqual(
+  const NewArticle = {
+    title: "The downfall of global capitalism.",
+    description: "This article discuss downfall of global capitalism.",
+    author: "BOAs",
+    date: "25-3-2019"
+  };
+  const createNewArticle = await funcs.createArticles(NewArticle);
+  const createNewArticleId = createNewArticle.data.data._id;
+  const getNewArcticle = await funcs.getArticleById(createNewArticleId);
+  const responseNew = await funcs.getArticles();
+  expect(getNewArcticle.data.data).not.toBe(null);
+  expect(createNewArticle.data.data.title).toEqual(
     "The downfall of global capitalism."
   );
-  expect(newArticle.data.data.description).toEqual(
+  expect(createNewArticle.data.data.description).toEqual(
     "This article discuss downfall of global capitalism."
   );
-  expect(newArticle.data.data.author).toEqual("BOAs");
-  expect(newArticle.data.data.date).toEqual("25-3-2019");
-  const responseNew = await funcs.getArticles();
+  expect(createNewArticle.data.data.author).toEqual("BOAs");
+  expect(createNewArticle.data.data.date).toEqual("25-3-2019");
   expect(responseNew.data.data.length).toBe(resLength + 1);
 });
 //update Article testing
 test("It responds with an updated article", async () => {
-  const updatedArticle = await funcs.updateArticles();
-
+  const NewArticle = {
+    title: "The downfall of global capitalism.",
+    description: "This article discuss downfall of global capitalism.",
+    author: "BOAs",
+    date: "25-3-2019"
+  };
+  const createNewArticle = await funcs.createArticles(NewArticle);
+  const createNewArticleId = createNewArticle.data.data._id;
+  const updatedArticle = await funcs.updateArticles(createNewArticleId, {
+    description: "Read more about downfall of global capitalism."
+  });
   expect(updatedArticle.data.data.description).toEqual(
-    "Is the downfall of global capitalism real, read the article to find out"
+    "Read more about downfall of global capitalism."
   );
+  expect(updatedArticle.data.data.title).toEqual(
+    "The downfall of global capitalism."
+  );
+  expect(updatedArticle.data.data.author).toEqual("BOAs");
+  expect(updatedArticle.data.data.date).toEqual("25-3-2019");
 });
 //delete article testing
 test("It responds with deleted article", async () => {
   const response = await funcs.getArticles();
   const resLength = response.data.data.length;
-  const deletedArticle = await funcs.deleteArticles();
-  const responseNew = await funcs.getArticles();
-  expect(responseNew.data.data.length).toBe(resLength);
+  const NewArticle = {
+    title: "The downfall of global capitalism.",
+    description: "This article discuss downfall of global capitalism.",
+    author: "BOAs",
+    date: "25-3-2019"
+  };
+  const createNewArticle = await funcs.createArticles(NewArticle);
+  const createNewArticleId = createNewArticle.data.data._id;
+  const deletedArticle = await funcs.deleteArticles(createNewArticleId);
+  const responseNew = await funcs.getArticleById(deletedArticle.data.data._id);
+  const newArticleData = await funcs.getArticles();
+  expect(responseNew.data.data).toEqual(null);
+  expect(newArticleData.data.data.length).toBe(resLength);
 });
-// delete Debate live testing
+//     // delete Debate live testing
 test("It responds with deleted Debate Live", async () => {
   const response = await funcs.getDebateLive();
   const resLength = response.data.data.length;
-  const deletedDebateLive = await funcs.deleteDebateLive();
-  const responseNew = await funcs.getDebateLive();
-  expect(responseNew.data.data.length).toBe(resLength);
+  const debateLive = {
+    debateLiveTitle:
+      "TH supports the decline of the nations-state's power in an increasingly globalised world.",
+    date: "12-11-2018"
+  };
+  const createDebateLive = await funcs.createMotion(debateLive);
+  const createDebateLiveId = createDebateLive.data.data._id;
+  const deletedDebateLive = await funcs.deleteDebateLive(createDebateLiveId);
+  const responseNew = await funcs.getDebateLiveById(createDebateLiveId);
+  const newDebateLiveData = await funcs.getDebateLive();
+  expect(responseNew.data.data).toEqual(undefined);
+  expect(newDebateLiveData.data.data.length).toBe(resLength);
 });
 //get Debate Live testing
 test("It responds with all the Debate Lives", async () => {
   const response = await funcs.getDebateLive();
-  expect(response.data).toBeDefined();
+  const resLength = response.data.data.length;
+  const debateLive = {
+    debateLiveTitle:
+      "TH supports the decline of the nations-state's power in an increasingly globalised world.",
+    date: "12-11-2018"
+  };
+  const createDebateLive = await funcs.createMotion(debateLive);
+  const newDebateLiveData = await funcs.getDebateLive();
+  expect(newDebateLiveData.data.data.length).toBe(resLength + 1);
 });
+
+//* ********************************************************** */
+//* *****************START OF MY TESTS************************** */
+//* ********************************************************** */
+
 test("A TIQ user should be able to view all Debates", async done => {
+  const debate1 = await funcs.createDebate({
+    title: "Test1",
+    category: "Test1",
+    date: "1-1-2019",
+    info: "test1",
+    description: "test1"
+  });
+  const debate2 = await funcs.createDebate({
+    title: "Test2",
+    category: "Test2",
+    date: "2-1-2019",
+    info: "test2",
+    description: "test2"
+  });
+  const debate3 = await funcs.createDebate({
+    title: "Test3",
+    category: "Test3",
+    date: "3-1-2019",
+    info: "test3",
+    description: "test3"
+  });
   const debates = await funcs.getDebates();
   expect(Object.keys(debates.data)).not.toEqual(["err"]);
   cntD = debates.data.data.length;
+  expect(cntD).toBe(3);
+  expect(debates.data.data[0]).toEqual(debate1.data.data);
+  expect(debates.data.data[1]).toEqual(debate2.data.data);
+  expect(debates.data.data[2]).toEqual(debate3.data.data);
   done();
 });
 
@@ -333,33 +420,39 @@ test("A TIQ admin should not be able to create a Debate with wrong schema", asyn
 });
 
 test("A TIQ admin should be able to create a new Debate", async done => {
-  const newDebate = await funcs.createDebate();
-  expect(newDebate.data.data.title).toEqual("DebateTest");
-  expect(newDebate.data.data.category).toEqual("Test Category");
-  expect(newDebate.data.data.info).toEqual("Debate Created in the Test");
-  expect(await new Date(newDebate.data.data.date)).toEqual(
-    await new Date("1-1-2019")
-  );
-  expect(newDebate.data.data.description).toEqual(
-    "Creating this debate to test"
-  );
-  const allDebates = await funcs.getDebates();
+  const create = {
+    title: "createTestTitle",
+    category: "CreateTestcategory",
+    date: "1-1-2019",
+    info: "createTestInfo",
+    description: "CreateTestDescription"
+  };
+  const newDebate = await funcs.createDebate(create);
   cntD++;
+  expect(newDebate.data.data.title).toEqual(create.title);
+  expect(newDebate.data.data.category).toEqual(create.category);
+  expect(newDebate.data.data.info).toEqual(create.info);
+  expect(new Date(newDebate.data.data.date)).toEqual(new Date(create.date));
+  expect(newDebate.data.data.description).toEqual(create.description);
+  const allDebates = await funcs.getDebates();
   expect(Object.keys(allDebates.data)).not.toEqual(["err"]);
   expect(allDebates.data.data.length).toBe(cntD);
-  idD = newDebate.data.data._id;
   done();
 });
 
 test("A TIQ user should be able to view a certian debate", async done => {
-  const Debate = await funcs.getDebateById(idD);
-  expect(Debate.data.data.title).toEqual("DebateTest");
-  expect(Debate.data.data.category).toEqual("Test Category");
-  expect(Debate.data.data.info).toEqual("Debate Created in the Test");
-  expect(await new Date(Debate.data.data.date)).toEqual(
-    await new Date("1-1-2019")
-  );
-  expect(Debate.data.data.description).toEqual("Creating this debate to test");
+  const create = {
+    title: "viewbyIDTestTitle",
+    category: "viewbyIDTestcategory",
+    date: "1-1-2019",
+    info: "viewbyIDTestInfo",
+    description: "viewbyIDTestDescription"
+  };
+  const newDebate = await funcs.createDebate(create);
+  cntD++;
+  const Debate = await funcs.getDebateById(newDebate.data.data._id);
+  expect(Object.keys(Debate.data)).not.toEqual(["err"]);
+  expect(Debate.data.data).toEqual(newDebate.data.data);
   done();
 });
 
@@ -370,41 +463,52 @@ test("A TIQ user should not be able to view a non-existing debate", async done =
 });
 
 test("A TIQ admin should not be able to update an existing debate with a wrong schema", async done => {
-  const updateresponse = await funcs.updateInvalidDebate(idD);
+  const create = {
+    title: "InvalidUpdateTestTitle",
+    category: "InvalidUpdateTestcategory",
+    date: "1-1-2019",
+    info: "InvalidUpdateTestInfo",
+    description: "InvalidUpdateTestDescription"
+  };
+  const newDebate = await funcs.createDebate(create);
+  cntD++;
+  const updateresponse = await funcs.updateInvalidDebate(
+    newDebate.data.data._id
+  );
   expect(Object.keys(updateresponse.data)).toEqual(["err"]);
-  const debates = await funcs.getDebates();
-  const lastinserted = await funcs.getDebateById(idD);
-  expect(lastinserted.data.data.title).toEqual("DebateTest");
-  expect(lastinserted.data.data.category).toEqual("Test Category");
-  expect(lastinserted.data.data.info).toEqual("Debate Created in the Test");
-  expect(await new Date(lastinserted.data.data.date)).toEqual(
-    await new Date("1-1-2019")
-  );
-  expect(lastinserted.data.data.description).toEqual(
-    "Creating this debate to test"
-  );
+  const debateafterupdate = await funcs.getDebateById(newDebate.data.data._id);
+  expect(debateafterupdate.data.data).toEqual(newDebate.data.data);
   done();
 });
 
 test("A TIQ admin should be able to update an existing debate", async done => {
-  const updateresponse = await funcs.updateDebate(idD);
-  expect(Object.keys(updateresponse.data)).toEqual(["data"]);
-  const lastinserted = await funcs.getDebateById(idD);
-  expect(Object.keys(lastinserted)).not.toEqual(["err"]);
-  expect(lastinserted.data.data.title).toEqual("DebateUpdatedTest");
-  expect(lastinserted.data.data.category).toEqual("Updated Category");
-  expect(lastinserted.data.data.info).toEqual(
-    "Debate Created in the Update Test"
+  const create = {
+    title: "UpdateTestTitle",
+    category: "UpdateTestcategory",
+    date: "1-1-2019",
+    info: "UpdateTestInfo",
+    description: "UpdateTestDescription"
+  };
+  const newDebate = await funcs.createDebate(create);
+  cntD++;
+  const id = newDebate.data.data._id;
+  const update = {
+    title: "AfterUpdateTestTitle",
+    category: "AfterUpdateTestcategory",
+    date: "1-1-2019",
+    info: "AfterUpdateTestInfo",
+    description: "AfterUpdateTestDescription"
+  };
+  const updateresponse = await funcs.updateDebate(id, update);
+  expect(Object.keys(updateresponse.data)).not.toEqual(["err"]);
+  const debateafterupdate = await funcs.getDebateById(id);
+  expect(debateafterupdate.data.data.title).toEqual(update.title);
+  expect(debateafterupdate.data.data.category).toEqual(update.category);
+  expect(debateafterupdate.data.data.info).toEqual(update.info);
+  expect(debateafterupdate.data.data.description).toEqual(update.description);
+  expect(new Date(debateafterupdate.data.data.date)).toEqual(
+    new Date(update.date)
   );
-  expect(await new Date(lastinserted.data.data.date)).toEqual(
-    await new Date("1-1-2019")
-  );
-  expect(lastinserted.data.data.description).toEqual(
-    "Updating this debate to test"
-  );
-  const allDebates = await funcs.getDebates();
-  expect(Object.keys(allDebates.data)).not.toEqual(["err"]);
-  expect(allDebates.data.data.length).toBe(cntD);
   done();
 });
 
@@ -418,14 +522,30 @@ test("A TIQ admin should not be able to delete a non-existing debate", async don
 });
 
 test("A TIQ admin should be able to delete an existing debate", async done => {
-  const deleteresponse = await funcs.deleteDebate(idD);
+  const create = {
+    title: "DeleteTestTitle",
+    category: "DeleteTestcategory",
+    date: "1-1-2019",
+    info: "DeleteTestInfo",
+    description: "DeleteTestDescription"
+  };
+  const newDebate = await funcs.createDebate(create);
+  cntD++;
+  const id = newDebate.data.data._id;
+  const deleteresponse = await funcs.deleteDebate(id);
   expect(Object.keys(deleteresponse.data)).not.toEqual(["err"]);
-  const allDebates = await funcs.getDebates();
   cntD--;
+  const getAfterDelete = await funcs.getDebateById(id);
+  expect(getAfterDelete.data.data).toEqual(null);
+  const allDebates = await funcs.getDebates();
   expect(Object.keys(allDebates.data)).not.toEqual(["err"]);
   expect(allDebates.data.data.length).toBe(cntD);
   done();
 });
+
+//* ********************************************************** */
+//* *****************END OF MY TESTS************************** */
+//* ********************************************************** */
 
 //Testing search for debates by date
 test("It responds with the searched debate by date", async done => {
@@ -455,32 +575,26 @@ test("It responds with the searched debate by category", async done => {
   expect(b).toBeTruthy();
   done();
 });
+
+test("Creating a new club adds it to the database", async done => {
+  const allClubs = await functions.getAllClubs();
+  const club = { name: "TEDx", description: "for pretentious people" };
+  const newClub = await functions.createClub(club);
+  const allClubsUpdated = await functions.getAllClubs();
+  const testClub = AllClubs.findOne({ _id: newClub.data.data._id });
+  expect(club.name).toEqual(newClub.data.data.name);
+  expect(club.description).toEqual(newClub.data.data.description);
+  expect(testClub).toBeDefined();
+  expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
+  done();
+});
+
 test("Getting club by id", async done => {
   const allClubs = await functions.getAllClubs();
   const firstClub = allClubs.data.data[0];
   const club = await functions.getClubById(firstClub._id);
   expect(club.data.data.name).toEqual(firstClub.name);
   expect(club.data.data.description).toEqual(firstClub.description);
-  done();
-});
-
-test("Creating a new club adds it to the database", async done => {
-  const allClubs = await functions.getAllClubs();
-  const databaseSize = allClubs.data.data.length;
-  const club = { name: "Nebny", description: "mesh charity bas ya3nii" };
-  const newClub = await functions.createClub(club);
-  const allClubsUpdated = await functions.getAllClubs();
-  var i;
-  var b = false;
-  for (i = 0; i < allClubsUpdated.data.data.length; i++) {
-    if (
-      allClubsUpdated.data.data[i].name === club.name &&
-      allClubsUpdated.data.data[i].description === club.description
-    )
-      b = true;
-  }
-  expect(b).toBeTruthy();
-  expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
   done();
 });
 
@@ -497,7 +611,7 @@ test("Updating an existing club", async done => {
 test("Deleting a club", async done => {
   const allClubs = await functions.getAllClubs();
   const id = allClubs.data.data[0]._id;
-  const deletedClub = await functions.deleteClub(id);
+  await functions.deleteClub(id);
   const allClubsUpdated = await functions.getAllClubs();
   var i;
   var b = true;
@@ -507,6 +621,7 @@ test("Deleting a club", async done => {
   expect(b).toBeTruthy();
   done();
 });
+
 //test  get FAQ
 test("It responds with the FAQs", async done => {
   const response = await funcs.getFAQs();
@@ -668,7 +783,7 @@ test("It responds with the newly created FAQ", async done => {
   expect(responseNew.data.data.length).toBe(resLength + 1);
   done();
 });
-// //     //update FAQ testing
+//update FAQ testing
 test("It responds with an updated FAQ", async done => {
   const newFAQ = await funcs.createFAQs();
   const response = await funcs.getFAQs();
@@ -764,7 +879,7 @@ test("It responds with the newly asked question", async done => {
   done();
 });
 
-//     //answer question testing
+//answer question testing
 test("It responds with the answered question", async done => {
   const newQuestion = await funcs.askQuestion();
   const response = await funcs.getQuestionsAdmin();
@@ -796,58 +911,5 @@ test("It responds with the answered questions", async done => {
   for (i = 0; i < response.data.data.length; i++) {
     expect(response.data.data[i].user).toEqual("dskjflkdf");
   }
-  done();
-});
-
-test("Getting club by id", async done => {
-  const allClubs = await functions.getAllClubs();
-  const firstClub = allClubs.data.data[0];
-  const club = await functions.getClubById(firstClub._id);
-  expect(club.data.data.name).toEqual(firstClub.name);
-  expect(club.data.data.description).toEqual(firstClub.description);
-  done();
-});
-
-test("Creating a new club adds it to the database", async done => {
-  const allClubs = await functions.getAllClubs();
-  const databaseSize = allClubs.data.data.length;
-  const club = { name: "Nebny", description: "mesh charity bas ya3nii" };
-  const newClub = await functions.createClub(club);
-  const allClubsUpdated = await functions.getAllClubs();
-  var i;
-  var b = false;
-  for (i = 0; i < allClubsUpdated.data.data.length; i++) {
-    if (
-      allClubsUpdated.data.data[i].name === club.name &&
-      allClubsUpdated.data.data[i].description === club.description
-    )
-      b = true;
-  }
-  expect(b).toBeTruthy();
-  expect(allClubsUpdated.data.data.length).toBe(allClubs.data.data.length + 1);
-  done();
-});
-
-test("Updating an existing club", async done => {
-  const allClubs = await functions.getAllClubs();
-  const id = allClubs.data.data[0]._id;
-  const updatedData = { description: "a7la mesa 3aleik" };
-  const updatedClub = await functions.updateClub(id, updatedData);
-  const allClubsUpdated = await functions.getAllClubs();
-  expect(allClubsUpdated.data.data[0].description).toEqual("a7la mesa 3aleik");
-  done();
-});
-
-test("Deleting a club", async done => {
-  const allClubs = await functions.getAllClubs();
-  const id = allClubs.data.data[0]._id;
-  const deletedClub = await functions.deleteClub(id);
-  const allClubsUpdated = await functions.getAllClubs();
-  var i;
-  var b = true;
-  for (i = 0; i < allClubsUpdated.data.data.length; i++) {
-    if (allClubsUpdated.data.data[i]._id === id) b = false;
-  }
-  expect(b).toBeTruthy();
   done();
 });
