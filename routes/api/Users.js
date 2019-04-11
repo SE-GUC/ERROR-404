@@ -450,13 +450,5 @@ router.put('/update/:id', async (req,res) => {
      }
     
 })
-router.get('/Search/:keyWord',async(req,res)=>{
-    const keyWord=req.params.keyWord
-   const user = await User.find({$or:[ {'firstName':keyWord}, {'lastName':keyWord},{'type':keyWord}]})
-    // const user = await User.find({'lastName':keyWord})
 
-    if(user.length===0) return res.status(404).send({error: 'User with that name doesnt exisit'})
-    return res.json({data:user})
-         
-    })
 module.exports = router;
