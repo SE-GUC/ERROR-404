@@ -339,74 +339,8 @@ updateUser : async(id,updateUser) =>{
 
 
     },
-    getFAQs: async () => {
-        const FAQs = await axios.get('http://localhost:3000/api/FAQs/')
-        return FAQs
-        },
+   
        
-        deleteFAQs: async id=>{
-            
-            const deletedFAQ = await axios.delete("http://localhost:3000/api/FAQs/"+id)  //a7ot id mazboot
-            return deletedFAQ
-        },
-        searchUsersByName: async () => {
-            const newUser=await axios.post('http://localhost:3000/api/Users/register',{
-                type:"alumni",
-                firstName:"nouran",
-                lastName:"KAMAAAAAAAL",
-                birthDate: "12-21-2001",
-                bio:"heeee",
-                email: "nourn.blallla@student.guc.edu.eg",
-                password: "jdknnuuniik",
-                clubs:["scs"],
-                house:"Pegasus",
-                din:"1/1/2010",
-                dor:"3/4/2013"
-
-
-            })
-            const user = await axios.get('http://localhost:3000/api/Users/Search/nouran')
-            const id=newUser.data.data._id
-            const deletedUser = await axios.delete("http://localhost:3000/api/Users/"+id)
-
-            return user
-
-            },
-
-            searchUsersByType: async () => {
-                const newUser=await axios.post('http://localhost:3000/api/Users/register',{
-                type:"alumni",
-                firstName:"nouran",
-                lastName:"KAMAAAAAAAL",
-                birthDate: "12-21-2001",
-                bio:"heeee",
-                email: "nour@student.guc.edu.eg",
-                password: "jdknnuuniik",
-                clubs:["scs"],
-                house:"Pegasus",
-                din:"1/1/2010",
-                dor:"3/4/2013"
-    
-
-
-            })
-            const id=newUser.data.data._id
-            const user = await axios.get('http://localhost:3000/api/Users/Search/alumni')
-            const deletedUser = await axios.delete("http://localhost:3000/api/Users/"+id)
-
-            return user
-
-
-                },
-getFAQById: async id => {
-            const newFAQ = await axios.post("http://localhost:3000/api/FAQs/add",{
-                question:"how are you ?",
-                answer: "meh",
-            })
-            const FAQs = await axios.get('http://localhost:3000/api/FAQs/'+id)
-            return FAQs
-            },
-
 getUsers: async()=>{
 const Users = await axios.get('http://localhost:3000/api/Users')
 return Users
@@ -534,23 +468,9 @@ searchDebatesbycategory: async () => {
 
      },
 
-createFAQs:async () => {
-const newFAQ = await axios.post("http://localhost:3000/api/FAQs/add",{
- question:"how are you ?",
- answer: "meh",
-})
-return newFAQ
-},
 
-updateFAQs:async id =>{
 
- const updatedFAQ = await axios.put("http://localhost:3000/api/FAQs/edit/"+id,{   //a7ot id mazboot
-     question: "what's your name",
-     answer:"nouran"
- })
- 
- return updatedFAQ
-},
+
 searchArticlesByTitle:async id =>{
  const newArticle = await axios.post("http://localhost:3000/api/Articles/create",{
      title: "sksl are jdsk",
@@ -581,6 +501,11 @@ getQuestions:async id =>{
  const question = await axios.get("http://localhost:3000/api/Questions/allQuestions/admin/")   //a7ot id mazboot
  return question
 },
+getQById: async id => {
+   
+    const Q = await axios.get('http://localhost:3000/api/Questions/'+id)
+    return Q
+    },
 deleteQuestions: async id=>{
  
  const deletedQuestion = await axios.delete("http://localhost:3000/api/Questions/"+id)  //a7ot id mazboot
@@ -596,20 +521,92 @@ askQuestion:async id =>{
  return question
 },
 answerQuestion:async id =>{
-
  const question = await axios.put("http://localhost:3000/api/Questions/answerquestion/"+id,{   //a7ot id mazboot
-     answer:'nouran'
+     answer:"nouran"
  })
- 
  return question
 },
 getAnswers:async id =>{
 
  const answer = await axios.get("http://localhost:3000/api/Questions/user/"+id)   //a7ot id mazboot
  return answer
-}
+},
 
-			
+
+getFAQs: async () => {
+    const FAQs = await axios.get('http://localhost:3000/api/FAQs/')
+    return FAQs
+    },
+   
+deleteFAQs: async id=>{
+        
+    const deletedFAQ = await axios.delete("http://localhost:3000/api/FAQs/"+id)  //a7ot id mazboot
+    return deletedFAQ
+    },
+getFAQById: async id => {
+   
+    const FAQs = await axios.get('http://localhost:3000/api/FAQs/'+id)
+    return FAQs
+    },
+createFAQs:async () => {
+    const newFAQ = await axios.post("http://localhost:3000/api/FAQs/add",{
+            question:"how are you ?",
+            answer: "meh",
+    })
+    return newFAQ
+    },
+updateFAQs:async id =>{
+    const updatedFAQ = await axios.put("http://localhost:3000/api/FAQs/edit/"+id,{   //a7ot id mazboot
+        question: "what's your name",
+        answer:"nouran"
+    })
+    return updatedFAQ
+    }	,
+searchUsersByName: async () => {
+        const newUser=await axios.post('http://localhost:3000/api/Users/register',{
+            type:"alumni",
+            firstName:"nouran",
+            lastName:"KAMAAAAAAAL",
+            birthDate: "12-21-2001",
+            bio:"heeee",
+            email: "no2no2a@student.guc.edu.eg",
+            password: "jdknnuuniik",
+            clubs:["scs"],
+            house:"Pegasus",
+            din:"1/1/2010",
+            dor:"3/4/2013"
+
+
+        })
+        const user = await axios.get('http://localhost:3000/api/Users/Search/nouran')
+        const id=newUser.data.data._id
+        const deletedUser = await axios.delete("http://localhost:3000/api/Users/"+id)
+
+        return user
+
+        },
+
+        searchUsersByType: async () => {
+            const newUser=await axios.post('http://localhost:3000/api/Users/register',{
+            type:"alumni",
+            firstName:"nouran",
+            lastName:"KAMAAAAAAAL",
+            birthDate: "12-21-2001",
+            bio:"heeee",
+            email: "no2no2a@student.guc.edu.eg",
+            password: "jdknnuuniik",
+            clubs:["scs"],
+            house:"Pegasus",
+            din:"1/1/2010",
+            dor:"3/4/2013"
+        })
+        const id=newUser.data.data._id
+        const user = await axios.get('http://localhost:3000/api/Users/Search/alumni')
+        const deletedUser = await axios.delete("http://localhost:3000/api/Users/"+id)
+        return user
+    }
+
+
 }
 
 module.exports = functions;
