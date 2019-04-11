@@ -13,8 +13,7 @@ const Notification = require('../../models/Notification')
 
 
 router.get('/admin', async(request, response) => {
-
-    const questions = await Question.find({answer:null}).select('question')
+    const questions = await Question.find({answer:null})
     response.json({data: questions})
 
 });
@@ -23,7 +22,13 @@ router.get('/allQuestions/admin', async(request, response) => {
         response.json({data: questions})
     
 });
+router.get('/:id', async(request, response) => {
+    const id = request.params.id
 
+    const question = await Question.find({_id:id})
+    response.json({data: question})
+
+});
 router.delete('/:id', async(req, res) => {
     try {
         const id = req.params.id
@@ -54,7 +59,7 @@ router.put('/answerquestion/:id', async(req, res) => {
             //idd:notifications.length + 1 , 
             user:user
         })
-        res.json({msg: 'Answer is sent successfully', data: updatedQuestion})
+        res.json({msg: 'Answer is sent successfully', data: question})
 
     }
     catch(error) {
