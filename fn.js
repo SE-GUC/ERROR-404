@@ -1,8 +1,9 @@
-const axios = require('axios');
-const Article = require('./models/Article')
-const Articles = require('./routes/api/Articles')
-const User = require('./models/User')
-const Users = require('./routes/api/Users')
+const axios = require("axios");
+const Article = require("./models/Article");
+const Articles = require("./routes/api/Articles");
+const User = require("./models/User");
+const Users = require("./routes/api/Users");
+
 const functions = {
 getUsers: async()=>{
         const Users = await axios.get('http://localhost:3000/api/Users')
