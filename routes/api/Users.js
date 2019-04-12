@@ -125,7 +125,7 @@ router.post("/register", async (req, res) => {
           return res
             .status(400)
             .send({ error: isValidated.error.details[0].message });
-        const {
+        const { 
           firstName,
           lastName,
           birthDate,
