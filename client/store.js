@@ -7,39 +7,57 @@ const axios = require('axios')
 dotenv.config()
 
 //MiddleWare
-const logger = store => next => action => {
-    console.log('dispatching', action)
-    let result = next(action)
-    console.log('next state', store.getState())
-    return result
-  }
-  
-const crashReporter = store => next => action => {
-    try {
-      return next(action)
-    } catch (err) {
-      console.error('Caught an exception!', err)
-      Raven.captureException(err, {
-        extra: {
-          action,
-          state: store.getState()
-        }
-      })
-      throw err
+const asyncActionsMiddleware = store => next => action => {
+    const isActionAsync = action.async;
+    if (!isActionAsync) {
+        return next(action);
     }
-  }
+    else {
+        const {httpMethodToInvoke, params, type} = action;
+        httpMethodToInvoke(...params)
+            .then(resultsObj => {
+                const successType = generateSuccessActionTypeName(type);
+                Promise.resolve(1).then(() => {
+                    return next({
+                        type : successType,
+                        token : resultsObj.token,
+                        usertype : resultsObj.usertype
+                    })
+            });
+            })
+            .catch(err => {
+                console.log(err);
+                const errorType = generateErrorActionTypeName(type);
+                Promise.resolve(1).then(() => store.dispatch({type: errorType, err}));
+            });  
+    }
+};
+
+const generateSuccessActionTypeName = (basicActionName) => `${basicActionName}_SUCCESS`;
+const generateErrorActionTypeName = (basicActionName) => `${basicActionName}_ERROR`;
 
 
 //Actions
 const SIGN_IN = 'SIGN_IN'
 const SIGN_OUT = 'SIGN_OUT'
+const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS'
 
 function signIn(email,password){
-    return {type : SIGN_IN , email , password}
+    return {
+        type : SIGN_IN,
+        async : true,
+        httpMethodToInvoke : authenticate,
+        params : [email,password]
+    }
 }
 
+
+
 function signOut(){
-    return{type : SIGN_OUT}
+    return{
+        type : SIGN_OUT,
+        async : false
+    }
 }
 
 //Reducer
@@ -51,31 +69,30 @@ const initialState = {
  function reducer (state = initialState , action){
     let newstate = {... state};
     switch(action.type){
-        case SIGN_IN :
-            authenticate(action.email,action.password).then(res=>{
-                newstate.token = res.token
-                newstate.usertype = res.type
-            })
-            console.log(newstate)
-            return newstate
+        case SIGN_IN_SUCCESS :
+           return {
+            token : action.token,
+            usertype : action.usertype
+            }
         case SIGN_OUT :
-         return {
+            return {
              token : null,
              usertype : null
-         }
+            }
      default :
-         return state
+            return newstate
 
     }
 }
 
-const store = redux.createStore(reducer, redux.applyMiddleware(logger, crashReporter))
+const store = redux.createStore(reducer, redux.applyMiddleware(asyncActionsMiddleware))
 //Testing
-// console.log(store.getState())
-// const unsubscribe = store.subscribe(() => console.log(store.getState()))
+console.log(store.getState())
+const unsubscribe = store.subscribe(() => console.log(store.getState()))
 
 // // Dispatch some actions
 store.dispatch(signIn('mena.fadali@student.guc.edu.eg','password'))
+// console.log(store.getState())
 // store.dispatch(signOut())
 // store.dispatch(signIn('Learn about actions','bla bla'))
  
@@ -90,12 +107,12 @@ async function authenticate(email, password ) {
         const type = user.type
         return {
             token : token,
-            type : type
+            usertype : type
         };
     }
     return {
         token : null,
-        type : null
+        usertype : null
     }
 }
 module.exports = store
