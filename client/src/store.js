@@ -1,8 +1,11 @@
 //Imports
-const redux = require("redux");
+import { createStore } from 'redux';
 
 //Actions
-function signIn(token, usertype) {
+const SIGN_IN = 'SIGN_IN'
+const SIGN_OUT = 'SIGN_OUT'
+
+const signIn = (token, usertype) =>{
   return {
     type: SIGN_IN,
     token : token,
@@ -10,7 +13,7 @@ function signIn(token, usertype) {
 };
 }
 
-function signOut() {
+const signOut = () =>{
   return {
     type: SIGN_OUT,
   };
@@ -39,4 +42,6 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = redux.createStore(reducer);
+const store = createStore(reducer)
+
+export default store;
