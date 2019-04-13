@@ -18,6 +18,8 @@ import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "typeface-roboto";
+import { Provider } from 'react-redux'
+import store from './redux/store'
 
 const routing = (
   <Router>
@@ -42,6 +44,30 @@ const routing = (
   </Router>
 );
 
-ReactDOM.render(routing, document.getElementById("root"));
-
+const rootElement = document.getElementById('root')
+ReactDOM.render(
+  <Provider store={store}>
+  <Router>
+    <div>
+      <hr />
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/debates" component={Debates} />
+        <Route exact path="/createDebate" component={CreateDebate} />
+        <Route exact path="/Clubs" component={Clubs} />
+        <Route exact path="/chatbars" component={Chatbars} />
+        <Route exact path="/Articles" component={Articles} />
+        <Route exact path="/faq" component={FAQU} />
+        <Route exact path="/faqAdmin" component={FAQ} />
+        <Route exact path="/userquestions" component={Question} />
+        <Route exact path="/adminquestions" component={QuestionAdmin} />
+        <Route exact path="/Contents" component={Contents} />
+        <Route exact path="/Users" component={Users} />
+        <Route component={Notfound} />
+      </Switch>
+    </div>
+  </Router>
+  </Provider>,
+  rootElement
+)
 serviceWorker.unregister();
