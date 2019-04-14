@@ -3,6 +3,9 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const dotenv = require('dotenv')
+dotenv.config()
 
 //const tokenKey = require('../../config/keys').secretOrKey
 
@@ -475,6 +478,28 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
+  }
+});
+//Authentication
+router.post("/authenticate", async (req, res) => {
+  let r = {
+    token: null,
+    id: null,
+    usertype: null
+  };
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const fuser = await user.findOne({ email: email });
+    if (fuser && bcrypt.compareSync(password, fuser.password)) {
+      r.token = jwt.sign({ sub: fuser._id }, process.env.SECRET);
+      r.usertype = fuser.type;
+      r.id = fuser._id;
+    }
+    return res.json(r);
+    
+  } catch (error) {
+    res.json(r)
   }
 });
 
