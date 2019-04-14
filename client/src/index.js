@@ -5,6 +5,7 @@ import App from "./App";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
+import SignIn from './components/signin/SignIn'
 import FAQ from './components/faq/faq/FAQ';
 import FAQU from './components/faq/faq/FAQU';
 import Question from './components/faq/question/Question'
@@ -39,7 +40,8 @@ ReactDOM.render(
         <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/Users" component={Users} />
-        <Route component={Notfound} />
+        <Route exact path="/signin" component={SignIn} />
+     <Route component={Notfound} />
       </Switch>
     </div>
   </Router>
