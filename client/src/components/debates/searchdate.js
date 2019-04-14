@@ -15,8 +15,8 @@ class SearchDate extends Component {
     const { date } = this.props.match.params;
     this.setState({ date: date });
     axios
-    .get(`http://localhost:5000/api/debates/searchbydate/${date}`)
-    .then(res => this.setState({ debates: res.data.data }));
+      .get(`http://localhost:5000/api/debates/searchbydate/${date}`)
+      .then(res => this.setState({ debates: res.data.data }));
   }
   constructor(props) {
     super(props);
@@ -28,24 +28,34 @@ class SearchDate extends Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <>
-        <div className="center-div">
-          <h1>Debates on Date {this.state.date}</h1>
-          {this.state.debates.map(debate => (
-            <DebateCard
-              key={debate._id}
-              id={debate._id}
-              title={debate.title}
-              date={debate.date}
-              category={debate.category}
-              description={debate.description}
-              info={debate.info}
-            />
-          ))}
-        </div>
-      </>
-    );
+    try {
+      return (
+        <>
+          <div className="center-div">
+            <h1>Debates on Date {this.state.date}</h1>
+            {this.state.debates.map(debate => (
+              <DebateCard
+                key={debate._id}
+                id={debate._id}
+                title={debate.title}
+                date={debate.date}
+                category={debate.category}
+                description={debate.description}
+                info={debate.info}
+              />
+            ))}
+          </div>
+        </>
+      );
+    } catch (Error) {
+      return (
+        <>
+          <div className="center-div">
+            <h1>Debates on Date {this.state.date}</h1>
+          </div>
+        </>
+      );
+    }
   }
 }
 

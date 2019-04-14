@@ -3,6 +3,7 @@ import DebateCard from "./debatecard.js";
 import { withStyles } from "@material-ui/core/styles";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
+import SearchIcon from "@material-ui/icons/Search";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -14,10 +15,9 @@ import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
-
 const styles = theme => ({
   fab: {
-    margin: theme.spacing.unit,
+    // margin: theme.spacing.unit,
     color: "#8f1814",
     background: "#e2a325"
   },
@@ -25,6 +25,15 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit
   }
 });
+
+function formatDate(input) {
+  var datePart = input.match(/\d+/g),
+    year = datePart[0].substring(2), // get only two digits
+    month = datePart[1],
+    day = datePart[2];
+
+  return day + "-" + month + "-" + year;
+}
 
 class Debates extends Component {
   constructor(props) {
@@ -37,7 +46,9 @@ class Debates extends Component {
       date: null,
       info: null,
       description: null,
-      error: ""
+      error: "",
+      selecteddate: null,
+      selectedcategory: null
     };
   }
 
@@ -53,8 +64,7 @@ class Debates extends Component {
       .then(response => {
         if (Object.keys(response.data)[0] === "err")
           this.setState({ error: "Missing/Incomplete Data" });
-        else 
-        window.location.reload();
+        else window.location.reload();
       })
       .catch(err => {
         this.setState({ error: "Missing/Incomplete Data" });
@@ -70,6 +80,19 @@ class Debates extends Component {
 
   handleCreateClick = () => {
     this.setState(state => ({ createopen: !state.createopen }));
+  };
+  handleDateSearch = () => {
+    if (this.state.selecteddate === null) return;
+    this.props.history.push(
+      `debates/searchbydate/${formatDate(this.state.selecteddate)}`
+    );
+  };
+
+  handleCategorySearch = () => {
+    if (this.state.selectedcategory === null) return;
+    this.props.history.push(
+      `debates/searchbycategory/${this.state.selectedcategory}`
+    );
   };
 
   componentDidMount() {
@@ -153,7 +176,6 @@ class Debates extends Component {
             <Button onClick={() => this.createDebate()} color="primary">
               Create
               <CloudUploadIcon className={classes.rightIcon} />
-
             </Button>
           </DialogActions>
         </Dialog>
@@ -166,6 +188,49 @@ class Debates extends Component {
         >
           <AddIcon />
         </Fab>
+
+        <Typography paragraph> </Typography>
+
+        <TextField
+          id="selecteddate"
+          label="Date"
+          type="date"
+          className={classes.textField}
+          onChange={this.handleChange("selecteddate")}
+          InputLabelProps={{
+            shrink: true
+          }}
+        />
+
+        <Fab
+          variant="extended"
+          aria-label="Search by Date"
+          className={classes.fab}
+          onClick={this.handleDateSearch}
+        >
+          Search by Date
+          <SearchIcon />
+        </Fab>
+
+        <Typography paragraph> </Typography>
+
+        <TextField
+          id="selectedcategory"
+          label="category"
+          className={classes.textField}
+          onChange={this.handleChange("selectedcategory")}
+        />
+
+        <Fab
+          variant="extended"
+          aria-label="Search by Category"
+          className={classes.fab}
+          onClick={this.handleCategorySearch}
+        >
+          Search by Category
+          <SearchIcon />
+        </Fab>
+
         <div className="center-div">
           <h1>Our Debates</h1>
           {this.state.debates.map(debate => (

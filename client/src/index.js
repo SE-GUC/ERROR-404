@@ -31,8 +31,8 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route exact path="/debates" component={Debates} />
-          <Route exact path="/searchbydate/:date" component={SearchDebateDate} />
-          <Route exact path="/searchbycategory/:category" component={SearchDebateCategory} />
+          <Route exact path="/debates/searchbydate/:date" component={SearchDebateDate} />
+          <Route exact path="/debates/searchbycategory/:category" component={SearchDebateCategory} />
           <Route exact path="/Clubs" component={Clubs} />
           <Route exact path="/chatbars" component={Chatbars} />
           <Route exact path="/Articles" component={Articles} />
