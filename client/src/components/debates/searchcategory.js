@@ -3,6 +3,8 @@ import DebateCard from "./debatecard.js";
 import { withStyles } from "@material-ui/core/styles";
 import axios from "axios";
 import "./Debates.css";
+import ToolBar from "../../layout/Toolbar/Toolbar"
+
 
 const styles = theme => ({
   rightIcon: {
@@ -30,6 +32,7 @@ class SearchDate extends Component {
     const { classes } = this.props;
     return (
       <>
+        <ToolBar />
         <div className="center-div">
           <h1>Debates with category {this.state.category}</h1>
           {this.state.debates.map(debate => (

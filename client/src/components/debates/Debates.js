@@ -15,6 +15,7 @@ import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { connect } from "react-redux";
+import ToolBar from "../../layout/Toolbar/Toolbar"
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -28,6 +29,13 @@ const styles = theme => ({
   },
   rightIcon: {
     marginLeft: theme.spacing.unit
+  },
+  fab2: {
+    margin: theme.spacing.unit,
+    color: "#8f1814",
+    background: "#e2a325",
+    marginRight: theme.spacing.unit
+
   }
 });
 
@@ -100,10 +108,10 @@ class Debates extends Component {
   }
 
   render() {
-    console.log(this.state.selecteddate)
     const { classes } = this.props;
     return (
       <>
+      <ToolBar />
         <Dialog
           open={this.state.createopen}
           onClose={this.handleCreateClick}
@@ -179,11 +187,13 @@ class Debates extends Component {
           </DialogActions>
         </Dialog>
 
-        <Fab
+
+        <Fab 
           color="secondary"
           aria-label="Add"
-          className={classes.fab}
+          className={classes.fab2}
           onClick={this.handleCreateClick}
+          
         >
           <AddIcon />
         </Fab>
