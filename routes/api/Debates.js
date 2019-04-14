@@ -85,7 +85,7 @@ router.delete('/:id', (req, res) => {
 //User Story 
 //TIQ users should be able to search for a debate by date
 //################## 
-router.get('/searchbydate/:date', (req,res)=>{
+router.get('/searchbydate/:date', async (req,res)=>{
     const date = req.params.date;
     const formatteddate = new Date(date)
     const schema = {
@@ -93,10 +93,10 @@ router.get('/searchbydate/:date', (req,res)=>{
     }
     const result = joi.validate(req.body,schema);
     if (result.error) return res.json({err : result.error.details[0].message});
-    Debate.find({date : formatteddate})
-    .exec()
-    .then(doc => {return res.json({data : doc})})
-    .catch(err => {res.json({err:'Sorry Could not find any Debates with this date'})})
+    const dbs = await Debate.find({date : formatteddate})
+    if(dbs.length===0) return res.status(404).json({err: 'Debates with this date do not exisit'})
+    return res.json({data:dbs})
+
 })
 
 

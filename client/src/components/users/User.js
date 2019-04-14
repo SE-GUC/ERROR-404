@@ -48,7 +48,6 @@ export class User extends Component {
             {"Clubs :"}
             {this.props.user.clubs}{" "}
           </p>
-          {"---------------------------------------------------------"}
         </ul>
       </div>
     );

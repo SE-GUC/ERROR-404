@@ -3,6 +3,9 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const dotenv = require('dotenv')
+dotenv.config()
 
 //const tokenKey = require('../../config/keys').secretOrKey
 
@@ -53,269 +56,7 @@ router.get("/searchbyapproval/:approval", async (req, res) => {
   return res.json({ data: users });
 });
 
-<<<<<<< HEAD
 //create new user (TIQ admin, Hub user, disciples, parent)
-=======
-router.post('/register', async (req,res) => {
-   
-  
-    const Email =req.body.email
-   
-    
-     const usernew = await User.findOne({email:Email});
-    if (usernew) return res.status(400).json({ email: 'Email already exists ,choose another mail...' });
-   
-    const t =req.body.type
-   
-    switch(t)
-{
-  
-        case ('TIQadmin'):  
-        try 
-        {
-        
-                        const isValidated = TIQadminValidator.TIQadminValidation(req.body)
-                        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-                        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
-                        const salt = bcrypt.genSaltSync(10)
-                        
-                        const hashedPassword = bcrypt.hashSync(password,salt)
-                        const newTiqAdmin = new user({
-                            type ,
-                            firstName ,
-                            lastName ,
-                            birthDate ,
-                            bio,
-                            email,
-                            password : hashedPassword,
-                            clubs ,
-                            house ,
-                            score,
-                            din,
-                            dor
-                        
-                        
-                    })
-                    
-                    await User.create(newTiqAdmin);
-                            
-                    return res.json({ msg: 'User created successfully', data: newTiqAdmin });
-                    }
-
-                        catch(error) 
-                        {
-
-                            // We will be handling the error later
-
-                                console.log(error)
-
-                        } 
-
-                        case ('regular'):  
-                        try 
-                        {
-                               
-                               const isValidated = hubUserValidator.userValidation(req.body)
-                               if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-                               const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
-                               const salt = bcrypt.genSaltSync(10)
-                               const cryptedPasswrod = bcrypt.hashSync(password,salt)
-                               const newUser = new User(
-                                   {
-                                    type,
-                                    firstName,
-                                    lastName ,
-                                    birthDate ,
-                                    bio,
-                                    email ,
-                                    password : cryptedPasswrod,
-
-                                    house,
-                                   score, 
-                                    din,
-                                    dor,
-                                  
-                                    clubs 
-   
-                                   }
-                               )
-                               await User.create(newUser);
-                    
-                               return res.json({ msg: 'User created successfully', data: newUser });
-
-                    }
-
-                    catch(error) 
-                    {
-
-                            // We will be handling the error later
-
-                                console.log(error)
-
-                    } 
-
-    case ('disciple') : 
-                      try 
-                        {
-                               
-                              
-                               const isValidated = discipleValidator.registerValidation(req.body)
-                               if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-                               const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
-                               const salt = bcrypt.genSaltSync(10)
-                               const cryptedPasswrod = bcrypt.hashSync(password,salt)
-                               const newUser = new User(
-                                   {
-                                    type,
-                                    firstName,
-                                    lastName ,
-                                    birthDate ,
-                                    bio,
-                                    email ,
-                                    password : cryptedPasswrod,
-
-                                    house,
-                                   score, 
-                                    din,
-                                    dor,
-                                  
-                                    clubs 
-   
-                                   }
-                               )
-                               await User.create(newUser);
-                    
-                               return res.json({ msg: 'User created successfully', data: newUser });
-                
-                    }
-                    catch(error) 
-                    {
-                        // We will be handling the error later
-
-                            console.log(error)
-
-                    }  
-    case('alumni'):
-        try{
-    const isAlumniValidated = alumniValidator.registerValidation(req.body)
-    if (isAlumniValidated.error) return res.status(400).send({ error: isAlumniValidated.error.details[0].message })
-    
-    const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body 
-    const salt = bcrypt.genSaltSync(10);
-    const hashedPassword = bcrypt.hashSync(password, salt)
-    const newAlumni = new User({
-                    type,
-                    firstName,
-                    lastName,
-                    birthDate,
-                    bio,
-                    email,
-                    password :hashedPassword,
-                    house,
-                    score,
-                    din,
-                    dor,
-                    clubs
-                    })
-          await User.create(newAlumni)
-                    
-      return  res.json({ msg: 'User created successfully', data: newAlumni })
-                             
-            } 
-        catch (error) {
-		return res.status(422).send({ error: 'Can not create user' })
-	}
-
-    case('member'):
-
-    try{
-
-        const isUserValidated = userValidator.registerValidation(req.body)
-        if (isUserValidated.error) return res.status(400).send({ error: isUserValidated.error.details[0].message })
-        console.log(5)
-        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
-        const salt = bcrypt.genSaltSync(10)
-        const hashedPassword = bcrypt.hashSync(password, salt)
-        console.log(6)
-        const newMember = new user({
-                type ,
-                firstName ,
-                lastName ,
-                birthDate ,
-                bio,
-                email,
-		score:0,
-                password : hashedPassword,
-                clubs ,
-                house ,
-                din,
-                dor
-                
-               
-            })
-            
-            await User.create(newMember)
-                    
-         return res.json({ msg: 'User created successfully', data: newMember })
-                
-        } 
-    catch (error) {
-
-   return res.status(422).send({ error: 'Can not create user' })
-}
-
-    case ('parent') :
-                    try 
-                    {
-                        
-                      
-                        const isValidated = parentValidator.parentValidation(req.body)
-                        if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
-                        const { firstName,lastName,birthDate,clubs,email,password,type,house,score,din,dor,bio} = req.body
-                        const salt = bcrypt.genSaltSync(10)
-                        const cryptedPasswrod = bcrypt.hashSync(password,salt)
-                        const newUser = new User(
-                            {
-                                type,
-                                    firstName,
-                                    lastName ,
-                                    birthDate ,
-                                    bio,
-                                    email ,
-                                    password : cryptedPasswrod,
-
-                                    house,
-                                   score, 
-                                    din,
-                                    dor,
-                                  
-                                    clubs 
-
-                            }
-                        )
-                        await User.create(newUser);
-                    
-                        return res.json({ msg: 'User created successfully', data: newUser });
-
-                    }
-
-                    catch(error) 
-                    {
-
-                        // We will be handling the error later
-
-                            console.log(error)
-
-                    }              
-
-
-}
-            
-    
-usernew.catch()
-
-})
->>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5
 
 router.post("/register", async (req, res) => {
   const Email = req.body.email;
@@ -737,6 +478,28 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
+  }
+});
+//Authentication
+router.post("/authenticate", async (req, res) => {
+  let r = {
+    token: null,
+    id: null,
+    usertype: null
+  };
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const fuser = await user.findOne({ email: email });
+    if (fuser && bcrypt.compareSync(password, fuser.password)) {
+      r.token = jwt.sign({ sub: fuser._id }, process.env.SECRET);
+      r.usertype = fuser.type;
+      r.id = fuser._id;
+    }
+    return res.json(r);
+    
+  } catch (error) {
+    res.json(r)
   }
 });
 
