@@ -51,8 +51,7 @@ class InputAdornments extends React.Component {
     email: "",
     password: "",
     showPassword: false,
-    errormessgae: ""
-  };
+    errormessgae: ""  };
 
   handleClick = async event => {
     const Users = await axios.post("http://localhost:5000/api/users/authenticate",{
@@ -77,7 +76,7 @@ class InputAdornments extends React.Component {
 
   render() {
     const { classes } = this.props;
-      console.log(this.props.token)
+    console.log(this.props.usertype)
       return (
       <>
       <div className={classes.root}>
