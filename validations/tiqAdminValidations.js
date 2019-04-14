@@ -17,7 +17,8 @@ module.exports  =
                 password : Joi.string().min(8).required(),
               
                 house : Joi.string(),
-              
+                tiqStatus:Joi.string(),
+                profilePicture:Joi.string(),
                 din : Joi.string(),
                 dor : Joi.string(),
                 clubs : Joi.array().required(),

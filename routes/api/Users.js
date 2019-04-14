@@ -86,7 +86,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
 
@@ -103,7 +104,9 @@ router.post("/register", async (req, res) => {
           house,
           score,
           din,
-          dor
+          dor,
+          tiqStatus: "BOA",
+          profilePicture
         });
 
         await User.create(newTiqAdmin);
@@ -137,7 +140,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -149,12 +153,11 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-
+          profilePicture,   
           house,
           score,
           din,
           dor,
-
           clubs
         });
         await User.create(newUser);
@@ -185,7 +188,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -197,7 +201,7 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-
+          profilePicture,            
           house,
           score,
           din,
@@ -233,7 +237,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
@@ -249,7 +254,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          clubs
+          clubs,
+          profilePicture
         });
         await User.create(newAlumni);
 
@@ -278,7 +284,10 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          tiqStatus,
+          supervisorType,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
@@ -295,7 +304,10 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          clubs
+          clubs,
+          tiqStatus,
+          supervisorType,
+          profilePicture
         });
 
         await User.create(newMember);
@@ -324,7 +336,8 @@ router.post("/register", async (req, res) => {
           score,
           din,
           dor,
-          bio
+          bio,
+          profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -336,7 +349,7 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-
+          profilePicture,              
           house,
           score,
           din,
@@ -363,41 +376,22 @@ router.get("/", async (req, res) => {
 });
 
 //uppdate scores dynamically
-router.put("/:id/:score", async (req, res) => {
-  const id = req.params.id;
-  const addedScore = req.params.score;
-  const User = await user.findOneAndUpdate(
-    { _id: id },
-    { $inc: { score: addedScore } }
-  );
+//uppdate scores dynamically 
+router.put('/updatescore/:id',async(req,res)=>
+{
+ try{   
+ const id = req.params.id
+ const addedScore = req.body.score
+ const usertoupdate = await user.findOneAndUpdate({_id:id},{$inc:{score: addedScore}})
+ const updated = await user.findOne({_id:id})
+ 
 
-  res.json({ msg: "Score updated" });
-});
-
-//get user by id
-router.get("/:id", async (req, res) => {
-  const userId = req.params.id;
-  const users = await user
-    .findById(userId)
-    .exec()
-    .then(users => {
-      return res.send([
-        users.type,
-        users.firstName,
-        users.lastName,
-        users.birthDate,
-        users.bio,
-        users.email,
-        users.password,
-        users.house,
-        users.din,
-        users.dor,
-        users.clubs
-      ]);
-    })
-    .catch(err => {
-      res.send("Cannot find the user ");
-    });
+ res.json({data:updated})
+ }
+ catch(error)
+ {
+     res.json({msg:"error"})
+ }
 });
 
 // updating the info/profile of a user
@@ -429,7 +423,100 @@ router.delete("/:id", async (req, res) => {
     console.log(error);
   }
 });
-
+router.get("/tiq/BOA", async(req,res)=>{
+  try{  
+  const BOAs = await user.find({tiqStatus :"BOA"})
+  res.json({data:BOAs})
+  }
+  catch(error){
+    res.json("msh 3arfa")
+  }
+})
+router.get("/tiq/PHL",async(req,res)=>{
+  try{
+    const PHL = await user.find({$and:[{house:"Pegasus"},{tiqStatus:"House Leader"}]})
+    res.json({data:PHL})
+  }
+  catch(error){
+    res.json("cannot find them")
+  }
+})
+router.get("/tiq/OHL",async(req,res)=>{
+  try{
+    const OHL = await user.find({$and:[{house:"Orion"},{tiqStatus:"House Leader"}]})
+    res.json({data:OHL})
+  }
+  catch(error){
+    res.json("cannot find them")
+  }
+})
+router.get("/tiq/FS",async(req,res)=>{
+    try{
+      const FS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Fundraising"}]})
+      res.json({data:FS})
+    }
+    catch(error){
+      res.json("cannot find user")
+    }
+})
+router.get("/tiq/MS",async(req,res)=>{
+  try{
+    const MS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Marketing"}]})
+    res.json({data:MS})
+  }
+  catch(error){
+    res.json("cannot find user")
+  }
+})
+router.get("/tiq/LS",async(req,res)=>{
+  try{
+    const LS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Logistics"}]})
+    res.json({data:LS})
+  }
+  catch(error){
+    res.json("cannot find user")
+  }
+})
+router.get("/tiq/RS",async(req,res)=>{
+  try{
+    const RS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Relations"}]})
+    res.json({data:RS})
+  }
+  catch(error){
+    res.json("cannot find user")
+  }
+})
+router.get("/tiq/MDS",async(req,res)=>{
+  try{
+    const MDS = await user.find({$and:[{tiqStatus:"Supervisor"},{supervisorType:"Media Design"}]})
+    res.json({data:MDS})
+  }
+  catch(error){
+    res.json("cannot find user")
+  }
+})
+router.get("/tiq/DHL",async(req,res)=>{
+  try{
+    const DHL = await user.find({tiqStatus:"Disciples House Leader"})
+     res.json({data:DHL})
+  }
+  catch(error){
+    res.json({msg:"cannot find users"})
+  }
+})
+//get user by id
+router.get("/:id", async (req, res) => {
+  try
+  {
+    const userId = req.params.id;
+    const specificUser = await user.findOne({_id:userId})
+    res.json({data:specificUser})
+  }
+  catch(error)
+  {
+    res.json({msg:"cannot find user"})
+  }
+});
 // Update a user(alumni or member )
 router.put("/update/:id", async (req, res) => {
   // try {

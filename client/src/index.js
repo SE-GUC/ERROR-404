@@ -7,7 +7,9 @@ import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
 
 import FAQ from './components/faq/FAQ';
-
+import AllUsers from './components/users/AllUsers';
+import UserProfile from './components/users/UserProfile';
+import About from './components/about/About';
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
 import Users from "./Users";
@@ -29,10 +31,12 @@ const routing = (
         <Route exact path="/chatbars" component={Chatbars} />
         <Route exact path="/Articles" component={Articles} />
         <Route exact path="/faq" component={FAQ} />
-
-
+        <Route exact path ="/about" component={About}/>
+        <Route exact path="/finduser" component={AllUsers} />
+        <Route exact path = "/users/:id" component = {UserProfile}/>
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/Users" component={Users} />
+       
         <Route component={Notfound} />
       </Switch>
     </div>
