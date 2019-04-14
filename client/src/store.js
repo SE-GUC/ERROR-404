@@ -1,7 +1,7 @@
 //Imports
 import { createStore } from "redux";
-import dotenv from 'dotenv'
-dotenv.config()
+import dotenv from "dotenv";
+dotenv.config();
 
 //Actions
 const SIGN_IN = "SIGN_IN";
@@ -32,16 +32,16 @@ const initialState = {
 function reducer(state = initialState, action) {
   switch (action.type) {
     case SIGN_IN:
-      return {
+      return Object.assign({}, state, {
         token: action.token,
         usertype: action.usertype,
         id: action.id
-      };
+      });
     case SIGN_OUT:
-      return {
+      return Object.assign({}, state, {
         token: null,
         usertype: null
-      };
+      });
     default:
       return state;
   }

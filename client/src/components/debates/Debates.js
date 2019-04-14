@@ -14,6 +14,11 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 const styles = theme => ({
   fab: {
@@ -26,14 +31,6 @@ const styles = theme => ({
   }
 });
 
-function formatDate(input) {
-  var datePart = input.match(/\d+/g),
-    year = datePart[0].substring(2), // get only two digits
-    month = datePart[1],
-    day = datePart[2];
-
-  return day + "-" + month + "-" + year;
-}
 
 class Debates extends Component {
   constructor(props) {
@@ -48,18 +45,19 @@ class Debates extends Component {
       description: null,
       error: "",
       selecteddate: null,
-      selectedcategory: null
+      selectedcategory: null,
+      admin: this.props.usertype === "BOA"
     };
   }
 
-  createDebate = event => {
+  createDebate = async event => {
     axios
       .post("http://localhost:5000/api/Debates", {
-        title: "" + this.state.title,
-        category: "" + this.state.category,
-        date: "" + this.state.date,
-        info: "" + this.state.info,
-        description: "" + this.state.description
+        title:  this.state.title,
+        category: this.state.category,
+        date:  this.state.date,
+        info:  this.state.info,
+        description: this.state.description
       })
       .then(response => {
         if (Object.keys(response.data)[0] === "err")
@@ -84,7 +82,7 @@ class Debates extends Component {
   handleDateSearch = () => {
     if (this.state.selecteddate === null) return;
     this.props.history.push(
-      `debates/searchbydate/${formatDate(this.state.selecteddate)}`
+      `debates/searchbydate/${(this.state.selecteddate)}`
     );
   };
 
@@ -102,6 +100,7 @@ class Debates extends Component {
   }
 
   render() {
+    console.log(this.state.selecteddate)
     const { classes } = this.props;
     return (
       <>
@@ -250,4 +249,8 @@ class Debates extends Component {
   }
 }
 
-export default withStyles(styles)(Debates);
+const Form = connect(
+  mapStateToProps,
+  null
+)(withStyles(styles)(Debates));
+export default Form;
