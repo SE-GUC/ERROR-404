@@ -22,7 +22,8 @@ class Debates extends Component {
         <h1>Our Debates</h1>
         {this.state.debates.map(debate => (
           <DebateCard
-            key={this._id}
+            key={debate._id}
+            id={debate._id}
             title={debate.title}
             date={debate.date}
             category={debate.category}
