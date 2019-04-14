@@ -34,8 +34,6 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             </form>
             <button    onClick={this.props.answerQuestion.bind(this,_id,this.state.answer)} >Answer</button>
             <button    onClick={this.props.delQuestion.bind(this, _id)}  >Delete</button>
-            
-        
       </div>
     )
   }
