@@ -1,13 +1,7 @@
 //Imports
-<<<<<<< HEAD
 import { createStore, applyMiddleware } from "redux";
 import dotenv from 'dotenv'
 dotenv.config()
-=======
-import { createStore } from "redux";
-import dotenv from "dotenv";
-dotenv.config();
->>>>>>> 0b9c742151c5d42d00f0473c44196005b35740ae
 
 //Actions
 const SIGN_IN = "SIGN_IN";
