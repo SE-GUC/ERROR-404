@@ -5,20 +5,25 @@ import App from "./App";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
-import FAQ from './components/faq/faq/FAQ';
-import FAQU from './components/faq/faq/FAQU';
-import Question from './components/faq/question/Question'
-import QuestionAdmin from './components/faq/question/QuestionAdmin'
+import Home from "./pages/Home";
+import Score from "./pages/Score";
+
+import FAQ from "./components/faq/faq/FAQ";
+import FAQU from "./components/faq/faq/FAQU";
+import Question from "./components/faq/question/Question";
+import QuestionAdmin from "./components/faq/question/QuestionAdmin";
 
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
-import Users from "./Users";
+
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ContactUs from "./ContactUs";
 import "typeface-roboto";
+import { CreateUser } from "./components/users/CreateUser";
+import GetUsers from "./components/users/GetUsers";
 
 const routing = (
   <Router>
@@ -26,6 +31,10 @@ const routing = (
       <hr />
       <Switch>
         <Route exact path="/" component={App} />
+        <Route exact path="/Home" component={Home} />
+
+        <Route exact path="/Score" component={Score} />
+
         <Route exact path="/debates" component={Debates} />
         <Route exact path="/ContactUs" component={ContactUs} />
         <Route exact path="/createDebate" component={CreateDebate} />
@@ -37,7 +46,9 @@ const routing = (
         <Route exact path="/userquestions" component={Question} />
         <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
-        <Route exact path="/Users" component={Users} />
+        <Route exact path="/createuser" component={CreateUser} />
+        <Route exact path="/getusers" component={GetUsers} />
+
         <Route component={Notfound} />
       </Switch>
     </div>
