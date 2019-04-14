@@ -1,12 +1,20 @@
 {
   "name": "server",
   "version": "0.0.1",
+<<<<<<< HEAD
   "description": "TIQ Website",
+=======
+  "description": "Introduction to node",
+>>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5
   "main": "server.js",
   "scripts": {
     "client-install": "npm install --prefix client",
     "start": "node server",
+<<<<<<< HEAD
     "server": "nodemon server",
+=======
+    "server": "nodemon server.js",
+>>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5
     "test": "jest",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\""
@@ -27,13 +35,19 @@
     "express": "^4.16.4",
     "jest": "^24.5.0",
     "joi": "^14.3.1",
+<<<<<<< HEAD
     "material-ui-icons": "^1.0.0-beta.36",
+=======
+>>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5
     "mongoose": "^5.4.19",
     "nodemon": "^1.18.10",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
+<<<<<<< HEAD
     "react-scripts": "^2.1.8",
+=======
+>>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5
     "typeface-roboto": "0.0.54"
   }
 }
