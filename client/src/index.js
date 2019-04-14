@@ -17,6 +17,7 @@ import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ContactUs from "./ContactUs";
 import "typeface-roboto";
 
 const routing = (
@@ -26,6 +27,7 @@ const routing = (
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/debates" component={Debates} />
+        <Route exact path="/ContactUs" component={ContactUs} />
         <Route exact path="/createDebate" component={CreateDebate} />
         <Route exact path="/Clubs" component={Clubs} />
         <Route exact path="/chatbars" component={Chatbars} />
