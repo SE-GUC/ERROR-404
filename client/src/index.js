@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import Debates from "./components/debates/Debates";
-import SearchDebateDate from "./components/debates/searchdate";
-import SearchDebateCategory from "./components/debates/searchcategory";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
 import SignIn from './components/signin/SignIn'
@@ -15,6 +13,8 @@ import QuestionAdmin from './components/faq/question/QuestionAdmin';
 import SignedInUser from "./hubHomepage/signedInUser";
 import SignedInAdmin from "./hubHomepage/signedInAdmin";
 import AdminEdits from "./AdminEdits";
+import SearchDebateDate from "./components/debates/searchdate";
+import SearchDebateCategory from "./components/debates/searchcategory";
 
 import Home from "./pages/Home";
 import Score from "./pages/Score";
@@ -22,12 +22,11 @@ import Score from "./pages/Score";
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
 
-import { CreateUser } from "./components/users/CreateUser";
-import GetUsers from './components/users/getUsers'
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ContactUs from "./ContactUs";
 import "typeface-roboto";
 import { Provider } from 'react-redux';
 import store from './store';
@@ -55,6 +54,7 @@ ReactDOM.render(
             path="/debates/searchbycategory/:category"
             component={SearchDebateCategory}
           />
+          <Route exact path="/ContactUs" component={ContactUs} />
           <Route exact path="/createDebate" component={CreateDebate} />
           <Route exact path="/Clubs" component={Clubs} />
           <Route exact path="/chatbars" component={Chatbars} />
