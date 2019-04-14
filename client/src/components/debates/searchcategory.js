@@ -33,6 +33,14 @@ class SearchDate extends Component {
     return (
       <>
         <ToolBar />
+        <h1> 
+
+
+
+
+
+          
+        </h1>
         <div className="center-div">
           <h1>Debates with category {this.state.category}</h1>
           {this.state.debates.map(debate => (
