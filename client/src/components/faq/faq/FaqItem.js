@@ -1,45 +1,24 @@
 import React, { Component } from 'react';
+import SimplePopper from './SimplePopper'
 
 export class FaqItem extends Component {
 
-  state = {
-    question: ' ',
-    answer:' '
-};
-
-onChange= (e) => this.setState({[e.target.name]: e.target.value});
-
+ 
 
 
   render() {
+    
    const { _id,question,answer} = this.props.faq;
     return (
       <div >
-        <p>
+        <p style={questionStyle}>
             { question }
-            <br></br>
+       </p>   
+      <p style={answerStyle}>
             { answer }
-        </p>
-            <form>
-                <label>
-                    <input
-                       type="text"
-                        name='question'
-                        value={this.state.question}
-                        onChange={this.onChange}/>
-                </label>
-                <label>
-                    <input 
-                         type="text"
-                        name='answer'
-                        value={this.state.answer} 
-                        onChange={this.onChange}/>
-                </label>
-                
-            </form>
-            <button    onClick={this.props.updatefaq.bind(this,_id,this.state.question,this.state.answer)} >update</button>
-            <button    onClick={this.props.delfaq.bind(this, _id)}  >x</button>
-            
+          
+        </p> 
+        <SimplePopper p={this.SimplePopper}   delfaq={this.props.delfaq}  updatefaq={this.props.updatefaq} faq={this.props.faq} />
         
       </div>
     )
@@ -47,16 +26,13 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
 }
 
 
-// const btnStyle = {
-//     background: '#ff0000',
-//     color: '#fff',
-//     border: 'none',
-//     padding: '5px 9px',
-//     borderRadius: '50%',
-//     cursor: 'pointer',
-//     float: 'right'
-//   }
-
+const questionStyle={
+  texttransform: 'uppercase',
+  lineheight: '0.8'
+}
+const answerStyle={
+  texttransform: 'capitalize'
+}
 
 
 export default FaqItem

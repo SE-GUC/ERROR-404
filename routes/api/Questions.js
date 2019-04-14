@@ -8,7 +8,7 @@ const validator = require('../../validations/questionValidations')
 
 // We will be connecting using database 
 const Question = require('../../models/Question')
-const Notification = require('../../models/Notification')
+const User = require('../../models/User')
 
 
 
@@ -53,12 +53,8 @@ router.put('/answerquestion/:id', async(req, res) => {
         const user=question.user
         if (isValidated.error) return res.status(400).send({ error: isValidated.error.details[0].message })
         const updatedQuestion = await question.updateOne(req.body)
-        const newNotification = await Notification.create({
-            content: id,
-            type:"answer",
-            //idd:notifications.length + 1 , 
-            user:user
-        })
+        const notification=await User.findOneAndUpdate({_id:user},{$push:{notification:"Your question is answered"}})
+
         res.json({msg: 'Answer is sent successfully', data: question})
 
     }
@@ -89,12 +85,8 @@ router.post('/ask', async(req, res) => {
         const questionId =  newQuestion._id
         const userId = newQuestion.user
 
-        const newNotification = await Notification.create({
-            content: questionId,
-            type:"question",
-            //idd:notifications.length + 1 , 
-            user:userId
-        })
+        const notification=await User.findOneAndUpdate({_id:userId},{$push:{notification:"You have a question"}})
+
 
         res.json({msg:'Question is sent successfully', data: newQuestion})
     }
