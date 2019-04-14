@@ -4,3 +4,4 @@ tmp.js
 client/node_modules
 client/public
 .env
+tmp
