@@ -6,7 +6,6 @@ import AddFaq from "./AddFaq";
 import axios from "axios";
 
 class FAQ extends Component {
-<<<<<<< HEAD:client/src/components/faq/FAQ.js
   state = {
     FAQs: []
   };
@@ -14,42 +13,6 @@ class FAQ extends Component {
     axios
       .get("http://localhost:5000/api/FAQs")
       .then(res => this.setState({ FAQs: res.data.data }));
-=======
-  state={
-      FAQs:[]
-  }
-  componentDidMount()  {
-    axios.get('http://localhost:5000/api/FAQs')
-    .then(res => this.setState({ FAQs: res.data.data }))
-  }
-  delfaq = (id) => {
-    axios.delete('http://localhost:5000/api/FAQs/'+id)
-      .then(res => this.setState({ FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)] }));
- 
-}
-updatefaq = (id,question,answer) => {
-  console.log(id);
-  console.log(question);
-  console.log(answer);
-  axios.put('http://localhost:5000/api/FAQs/edit/'+id,
-  {
-    "answer":answer,
-    "question":question
-  })
-  .then(res => {
-    axios.get('http://localhost:5000/api/FAQs')
-    .then(res => this.setState({ FAQs: res.data.data }))
-  
-  });
-
-}
-  addFAQ = (question,answer) => {
-    axios.post('http://localhost:5000/api/FAQs/add', {
-      question,
-      answer
-    })
-      .then(res => this.setState({ FAQs: [...this.state.FAQs, res.data.data] }));
->>>>>>> 9898e49db50acb9470671b93fd53bc27222720ec:client/src/components/faq/faq/FAQ.js
   }
   delfaq = id => {
     axios
@@ -59,6 +22,38 @@ updatefaq = (id,question,answer) => {
           FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)]
         })
       );
+  };
+  updatefaq = (id, question, answer) => {
+    console.log(id);
+    console.log(question);
+    console.log(answer);
+    axios
+      .put("http://localhost:5000/api/FAQs/edit/" + id, {
+        answer: answer,
+        question: question
+      })
+      .then(res => {
+        axios
+          .get("http://localhost:5000/api/FAQs")
+          .then(res => this.setState({ FAQs: res.data.data }));
+      });
+  };
+  addFAQ = (question, answer) => {
+    axios
+      .post("http://localhost:5000/api/FAQs/add", {
+        question,
+        answer
+      })
+      .then(res =>
+        this.setState({ FAQs: [...this.state.FAQs, res.data.data] })
+      );
+  };
+  delfaq = id => {
+    axios.delete("http://localhost:5000/api/FAQs/" + id).then(res =>
+      this.setState({
+        FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)]
+      })
+    );
   };
   updatefaq = (id, question, answer) => {
     console.log(id);

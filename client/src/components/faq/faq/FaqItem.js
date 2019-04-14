@@ -1,9 +1,5 @@
-<<<<<<< HEAD:client/src/components/faq/FaqItem.js
 import React, { Component } from "react";
 // import PropTypes from 'prop-types';
-=======
-import React, { Component } from 'react';
->>>>>>> 9898e49db50acb9470671b93fd53bc27222720ec:client/src/components/faq/faq/FaqItem.js
 
 export class FaqItem extends Component {
   state = {
