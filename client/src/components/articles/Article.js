@@ -6,12 +6,17 @@ class Article extends Component{
         
         for(var i = 0 ; i<this.props.article.comments.length ; i++){
           s +=  this.props.article.comments[i].username
-          s += ":"
+          s += " : "
           s += this.props.article.comments[i].comment
+          s += "\n" 
+        
         }
         return(
             <div>
-                <p>{this.props.article.title} {":"} {this.props.article.description} {" By "} {this.props.article.author} {" on "} {this.props.article.date} {"comm "} {s} </p>
+                <h3>{this.props.article.title}</h3>
+                <p>{this.props.article.description}  {" on "} {this.props.article.date} </p>
+                <a href ="#"> {" By "} {this.props.article.author} </a>
+                <p>  {"comments :"}  {s}  </p>
             </div>
         )
     }
