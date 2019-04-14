@@ -115,7 +115,7 @@ class InputAdornments extends React.Component {
         </FormControl>
         <Button
           variant="contained"
-          href="#contained-buttons"
+          href="http://localhost:3000/user"
           className={classes.button}
           onClick={() => {
             this.handleClick();
