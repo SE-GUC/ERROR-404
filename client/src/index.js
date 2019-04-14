@@ -6,21 +6,23 @@ import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
 import Home from "./pages/Home";
-import SignUp from "./pages/SignUp";
 import Score from "./pages/Score";
 
-import FAQ from "./components/faq/FAQ";
+import FAQ from "./components/faq/faq/FAQ";
+import FAQU from "./components/faq/faq/FAQU";
+import Question from "./components/faq/question/Question";
+import QuestionAdmin from "./components/faq/question/QuestionAdmin";
 
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
-import Users from "./Users";
+
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import "typeface-roboto";
-import { CreateUser } from "./components/userss/CreateUser";
-import GetUsers from "./components/userss/GetUsers";
+import { CreateUser } from "./components/users/CreateUser";
+import GetUsers from "./components/users/GetUsers";
 
 const routing = (
   <Router>
@@ -37,8 +39,10 @@ const routing = (
         <Route exact path="/Clubs" component={Clubs} />
         <Route exact path="/chatbars" component={Chatbars} />
         <Route exact path="/Articles" component={Articles} />
-        <Route exact path="/faq" component={FAQ} />
-
+        <Route exact path="/faq" component={FAQU} />
+        <Route exact path="/faqAdmin" component={FAQ} />
+        <Route exact path="/userquestions" component={Question} />
+        <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/createuser" component={CreateUser} />
         <Route exact path="/getusers" component={GetUsers} />
