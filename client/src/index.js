@@ -7,8 +7,11 @@ import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
 import FAQ from './components/faq/faq/FAQ';
 import FAQU from './components/faq/faq/FAQU';
-import Question from './components/faq/question/Question'
-import QuestionAdmin from './components/faq/question/QuestionAdmin'
+import Question from './components/faq/question/Question';
+import QuestionAdmin from './components/faq/question/QuestionAdmin';
+import SignedInUser from "./hubHomepage/signedInUser";
+import SignedInAdmin from "./hubHomepage/signedInAdmin";
+import AdminEdits from "./AdminEdits";
 
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
@@ -36,6 +39,9 @@ const routing = (
         <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/Users" component={Users} />
+        <Route exact path="/user" component={SignedInUser} />
+        <Route exact path="/admin" component={SignedInAdmin} />
+        <Route exact path="/adminedits" component={AdminEdits} />
         <Route component={Notfound} />
       </Switch>
     </div>
