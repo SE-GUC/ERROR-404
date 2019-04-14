@@ -14,10 +14,12 @@ import SignedInUser from "./hubHomepage/signedInUser";
 import SignedInAdmin from "./hubHomepage/signedInAdmin";
 import AdminEdits from "./AdminEdits";
 
+import Home from "./pages/Home";
+import Score from "./pages/Score";
 
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
-import Users from "./Users";
+
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
@@ -26,6 +28,9 @@ import "typeface-roboto";
 import { Provider } from 'react-redux';
 import store from './store';
 
+import { CreateUser } from "./components/users/CreateUser";
+import GetUsers from "./components/users/getUsers";
+
 ReactDOM.render(
   <Provider store={store}>
     <Router>
@@ -33,6 +38,8 @@ ReactDOM.render(
         <hr />
         <Switch>
           <Route exact path="/" component={App} />
+          <Route exact path="/Home" component={Home} />
+          <Route exact path="/Score" component={Score} />
           <Route exact path="/debates" component={Debates} />
           <Route exact path="/createDebate" component={CreateDebate} />
           <Route exact path="/Clubs" component={Clubs} />
@@ -43,7 +50,8 @@ ReactDOM.render(
           <Route exact path="/userquestions" component={Question} />
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
-          <Route exact path="/Users" component={Users} />
+          <Route exact path="/createuser" component={CreateUser} />
+          <Route exact path="/getusers" component={GetUsers} />
           <Route exact path="/user" component={SignedInUser} />
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />
@@ -55,4 +63,5 @@ ReactDOM.render(
   </Provider>,
  document.getElementById('root')
  )
+
 serviceWorker.unregister();

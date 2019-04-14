@@ -1,14 +1,14 @@
-body
-{
-  background-color: #8F1814;
+body {
+  /* background-color: #8F1814; */
+  background-color: white;
 }
-.center-div
-{
+.center-div {
   margin: auto;
   top: 0;
   bottom: 0;
-   width: 1000px;
-   text-align: center;
-   color : #E2A325;
-  background-color: #8F1814;
+  width: 1000px;
+  text-align: center;
+  color: #e2a325;
+  /* background-color: #8f1814; */
+  background-color: bisque;
 }
