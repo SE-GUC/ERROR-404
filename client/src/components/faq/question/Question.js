@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Questions from './Questions';
 
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
+
+
 class Question extends Component {
+  
   state={
       Questions:[],
       ask:'',
-      id:"dskjflkdf"
+      
+      
   }
   
   componentDidMount()  {
@@ -14,17 +21,17 @@ class Question extends Component {
     this.get(this.state.id )
    
   }
-  get = (id) => {
-    axios.get('http://localhost:5000/api/Questions/user/'+id )
+  get = () => {
+    axios.get('http://localhost:5000/api/Questions/user/' +"blala" )
     .then(res => this.setState({ Questions: res.data.data }))
     }
     
   
-    ask = (ask,id) => {
+    ask = (ask) => {
       console.log("pp")
       axios.post('http://localhost:5000/api/Questions/ask',
       { "question":ask,
-        "user":id
+        "user":"blala"
       })
       
     
@@ -50,8 +57,10 @@ onSubmit = (e) => {
           <div className="container">
             <h1>Your recently asked Questions</h1>      
             <Questions  Questions={this.state.Questions}  />
-             
+             <br></br>             <br></br>
+
             <form onSubmit={this.onSubmit} >
+            <p>Another Question ??   </p>
             <label>
                     <input
                        type="text"
@@ -61,7 +70,7 @@ onSubmit = (e) => {
                 </label>
 
             {/* <button    onClick={this.ask(this.state.ask)} >Send</button> */}
-          
+      
             <input 
           type="submit" 
           value="Submit" 
