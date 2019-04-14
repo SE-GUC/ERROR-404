@@ -81,14 +81,5 @@ app.use((req, res) => {
  })
 
  
-<<<<<<< HEAD:server.js
-
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server on ${port}`))
-
-
-
-=======
-const port = process.env.PORT || 5000
-app.listen(port, () => console.log(`Server on ${port}`))
->>>>>>> 39012679cfe912533e154c43e185e3acfa63f1f5:server.js
