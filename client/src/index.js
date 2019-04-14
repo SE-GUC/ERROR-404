@@ -23,7 +23,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ContactUs from "./ContactUs";
 import "typeface-roboto";
 import { CreateUser } from "./components/users/CreateUser";
-import GetUsers from "./components/users/GetUsers";
+import GetUsers from "./components/users/getUsers";
 
 const routing = (
   <Router>
@@ -47,7 +47,7 @@ const routing = (
         <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/createuser" component={CreateUser} />
-        <Route exact path="/getusers" component={GetUsers} />
+        <Route exact path="/Users" component={GetUsers} />
 
         <Route component={Notfound} />
       </Switch>
