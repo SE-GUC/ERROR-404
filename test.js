@@ -956,6 +956,16 @@ test("It responds with the searched user by type", async (done) => {
 })
 
 
+//Testing search for articles by title 
+test("It responds with the searched article by a word in the title", async (done) => {
+  
+const article =  await funcs.searchArticlesByTitle()
+var i;
+for(i=0;i<article.data.data.length;i++){
+  const art=article.data.data[i].title
+  expect(art).toEqual(expect.stringContaining("are"));
+ 
+}
 //     //answer question testing
     test("It responds with the answered question", async (done) => {
         const newQuestion = await funcs.askQuestion()

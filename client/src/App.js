@@ -5,6 +5,11 @@ import Footer from "./components/layout/Footer"
 import AllClubs from "./components/Clubs/AllClubs";
 import AllContent from "./components/Contents/AllContent";
 import axios from "axios";
+import store from "./store";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 class App extends Component {
 
@@ -14,6 +19,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props.token)
     axios.get('http://localhost:5000/api/Clubs')
       .then(res => this.setState({allClubs:res.data.data}));
     

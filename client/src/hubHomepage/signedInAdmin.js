@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-import Navbar from "../components/layout/Navbar";
+import NavbarSignedIn from "../components/layout/NavbarSignedIn";
 import Footer from "../components/layout/Footer"
 import AllClubs from "../components/Clubs/AllClubs";
 import AllContent from "../components/Contents/AllContent";
@@ -24,7 +24,7 @@ export class signedInAdmin extends Component {
   render() {
     return (
         <div className="App">
-          <Navbar />
+          <NavbarSignedIn />
           <h1>TIQ</h1>
           <nav className="navbar navbar-expand-sm navbar-dark bg-transparent mb-4">
             <div className="container">

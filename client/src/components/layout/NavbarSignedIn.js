@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class Navbar extends Component {
+export class NavbarSignedIn extends Component {
   render() {
     return (
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-4">
@@ -13,10 +13,10 @@ export class Navbar extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/createuser">Sign Up</a>     
+                <a className="nav-link" href="http://localhost:3000/Profile">Profile</a>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/signin">Login</a>     
+                <a className="nav-link" href="http://localhost:3000/">Logout</a>     
               </li>
             </ul>
           </div>
@@ -26,4 +26,4 @@ export class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default NavbarSignedIn
