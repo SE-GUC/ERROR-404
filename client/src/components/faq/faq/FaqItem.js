@@ -1,51 +1,56 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
+// import PropTypes from 'prop-types';
 
 export class FaqItem extends Component {
-
   state = {
-    question: ' ',
-    answer:' '
-};
+    question: " ",
+    answer: " "
+  };
 
-onChange= (e) => this.setState({[e.target.name]: e.target.value});
-
-
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
 
   render() {
-   const { _id,question,answer} = this.props.faq;
+    const { _id, question, answer } = this.props.faq;
     return (
-      <div >
+      <div>
         <p>
-            { question }
-            <br></br>
-            { answer }
+          {question}
+          <br />
+          {answer}
         </p>
-            <form>
-                <label>
-                    <input
-                       type="text"
-                        name='question'
-                        value={this.state.question}
-                        onChange={this.onChange}/>
-                </label>
-                <label>
-                    <input 
-                         type="text"
-                        name='answer'
-                        value={this.state.answer} 
-                        onChange={this.onChange}/>
-                </label>
-                
-            </form>
-            <button    onClick={this.props.updatefaq.bind(this,_id,this.state.question,this.state.answer)} >update</button>
-            <button    onClick={this.props.delfaq.bind(this, _id)}  >x</button>
-            
-        
+        <form>
+          <label>
+            <input
+              type="text"
+              name="question"
+              value={this.state.question}
+              onChange={this.onChange}
+            />
+          </label>
+          <label>
+            <input
+              type="text"
+              name="answer"
+              value={this.state.answer}
+              onChange={this.onChange}
+            />
+          </label>
+        </form>
+        <button
+          onClick={this.props.updatefaq.bind(
+            this,
+            _id,
+            this.state.question,
+            this.state.answer
+          )}
+        >
+          update
+        </button>
+        <button onClick={this.props.delfaq.bind(this, _id)}>x</button>
       </div>
-    )
+    );
   }
 }
-
 
 // const btnStyle = {
 //     background: '#ff0000',
@@ -57,6 +62,4 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
 //     float: 'right'
 //   }
 
-
-
-export default FaqItem
+export default FaqItem;
