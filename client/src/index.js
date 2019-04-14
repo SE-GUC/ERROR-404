@@ -3,10 +3,8 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import Debates from "./components/debates/Debates";
-import SearchDebateDate from "./components/debates/searchdate";
-import SearchDebateCategory from "./components/debates/searchcategory";
 import Notfound from "./components/notfound/NotFound";
-import SignIn from "./components/signin/SignIn";
+import CreateDebate from "./components/debates/CreateDebate";
 import Home from "./pages/Home";
 import Score from "./pages/Score";
 
@@ -18,37 +16,28 @@ import QuestionAdmin from "./components/faq/question/QuestionAdmin";
 import Chatbars from "./components/chatBar/Chatbars";
 import Clubs from "./Clubs";
 
-import { CreateUser } from "./components/users/CreateUser";
-import GetUsers from './components/users/getUsers'
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ContactUs from "./ContactUs";
 import "typeface-roboto";
+import { CreateUser } from "./components/users/CreateUser";
+import GetUsers from "./components/users/getUsers";
 
-import { Provider } from "react-redux";
-import store from "./store";
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router>
-      <div>
-        <hr />
+const routing = (
+  <Router>
+    <div>
+      <hr />
       <Switch>
         <Route exact path="/" component={App} />
         <Route exact path="/Home" component={Home} />
+
         <Route exact path="/Score" component={Score} />
+
         <Route exact path="/debates" component={Debates} />
-        <Route
-          exact
-          path="/debates/searchbydate/:date"
-          component={SearchDebateDate}
-        />
-        <Route
-          exact
-          path="/debates/searchbycategory/:category"
-          component={SearchDebateCategory}
-        />
+        <Route exact path="/ContactUs" component={ContactUs} />
+        <Route exact path="/createDebate" component={CreateDebate} />
         <Route exact path="/Clubs" component={Clubs} />
         <Route exact path="/chatbars" component={Chatbars} />
         <Route exact path="/Articles" component={Articles} />
@@ -58,16 +47,14 @@ ReactDOM.render(
         <Route exact path="/adminquestions" component={QuestionAdmin} />
         <Route exact path="/Contents" component={Contents} />
         <Route exact path="/createuser" component={CreateUser} />
-        <Route exact path="/getusers" component={GetUsers} />
-        <Route exact path="/signin" component={SignIn} />
-        <Route component={Notfound} />
-        <Route exact path="/signin" component={SignIn} />
+        <Route exact path="/Users" component={GetUsers} />
+
         <Route component={Notfound} />
       </Switch>
-
-      </div>
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+    </div>
+  </Router>
 );
+
+ReactDOM.render(routing, document.getElementById("root"));
+
 serviceWorker.unregister();
