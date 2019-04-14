@@ -1,11 +1,12 @@
 //Imports
-import { createStore } from "redux";
-import dotenv from "dotenv";
-dotenv.config();
+import { createStore, applyMiddleware } from "redux";
+import dotenv from 'dotenv'
+dotenv.config()
 
 //Actions
 const SIGN_IN = "SIGN_IN";
 const SIGN_OUT = "SIGN_OUT";
+
 
 export const signIn = (token, usertype, id) => {
   return {
