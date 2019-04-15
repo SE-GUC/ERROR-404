@@ -20,7 +20,10 @@ const articleSchema = new Schema({
         required: true
     },
     comments: {
-        type: [String], 
+        type: [{
+            username:String ,
+            comment:String
+        }], 
         required: true
     }
    
