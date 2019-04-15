@@ -33,7 +33,6 @@ class GetUsers extends Component {
 
           {/* {this.state.users.map(user => (
             <Users
-
               key={user._id}
               type={user.type}
               firstName={user.firstName}
@@ -47,7 +46,6 @@ class GetUsers extends Component {
               dor={user.dor}
               clubs={user.clubs}
             />
-
           ))} */}
         </ul>
       </div>

@@ -45,8 +45,9 @@ return res.json({msg:'A new chatBar was created successfully :)', data: newChatB
     }  
  })
 
-router.put('/for/:id/:userid',async(req,res)=>{
-
+router.put('/for/:id',async(req,res)=>{
+    //will add it again for the notification
+//:userid
  
     try{
         const chatBarId=req.params.id
@@ -60,16 +61,16 @@ router.put('/for/:id/:userid',async(req,res)=>{
         const updatedchatBar=await Chatbars.findOneAndUpdate({_id:chatBarId},{$push:{forResponses:response}})
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
-        const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
+       // const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
         res.json({data:getChatbarNew })
     }
     catch(error){
         console.log(error)
     }
 })
-router.put('/against/:id/:userid',async(req,res)=>{
-    
-
+router.put('/against/:id',async(req,res)=>{
+    //will add it again for the notification
+    // /:userid
     try{
         const chatBarId=req.params.id
         const response =req.body.againstResponses
@@ -82,7 +83,7 @@ router.put('/against/:id/:userid',async(req,res)=>{
         const updatedchatBar=await Chatbars.findOneAndUpdate({_id:chatBarId},{$push:{againstResponses:response}})
         const updateNumberofResponse =await Chatbars.findOneAndUpdate({_id:chatBarId},{$inc:{numberOfResponses: addnumberofResponse}})
         const getChatbarNew =await Chatbars.findOne({_id:chatBarId})
-        const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
+       // const notification=await User.findOneAndUpdate({_id:userid},{$push:{notification:response}})
         res.json({data:getChatbarNew })
     }
     catch(error){
@@ -119,13 +120,36 @@ router.get('/:id',async (req,res)=>{
 
 // })
 
-router.delete('/:id',(req,res)=>{
-    const id = req.params.id
-    Chatbars.findByIdAndDelete(id)
-    .exec()
-    .then(()=>{return res.json({data :'Deleted Successfully'})})
-    .catch(err =>{ return res.json({err : 'ERROR while deleting'})})
+router.delete('/:id', async (req,res) =>{
+    try {
+        const id = req.params.id
+        const deletedChatbar = await Chatbars.findByIdAndRemove({_id:id})
+        res.json({msg:'Debate Live was deleted successfully', data: deletedChatbar})
+       }
+       catch(error) {
+        console.log(error)
+    }  
 })
+
+router.get ('/getAllForResponses/:id',async (req,res)=>{
+    const motionId = req.params.id
+    const motion = await Chatbars.findById({_id:motionId})
+    const getAllForResponses = motion.forResponses
+    res.send(getAllForResponses)
+})
+router.get ('/getAllAgainstResponses/:id',async (req,res)=>{
+    const motionId = req.params.id
+    const motion = await Chatbars.findById({_id:motionId})
+    const getAllAgainstResponses = motion.againstResponses
+    res.send(getAllAgainstResponses)
+})
+router.get ('/getTitle/:id',async (req,res)=>{
+    const motionId = req.params.id
+    const motion = await Chatbars.findById({_id:motionId})
+    const getTitle = motion.debateLiveTitle
+    res.send(getTitle)
+})
+
 module.exports = router;
 
 

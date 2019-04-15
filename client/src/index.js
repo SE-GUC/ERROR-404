@@ -15,7 +15,8 @@ import SignedInAdmin from "./hubHomepage/signedInAdmin";
 import AdminEdits from "./AdminEdits";
 import SearchDebateDate from "./components/debates/searchdate";
 import SearchDebateCategory from "./components/debates/searchcategory";
-
+import deleteChatBar from './components/Chatbar/DeleteChatBar'
+import addResponse from './components/Chatbar/addResponse'
 import Home from "./pages/Home";
 import Score from "./pages/Score";
 
@@ -65,6 +66,8 @@ ReactDOM.render(
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
           <Route exact path="/createuser" component={CreateUser} />
+          <Route exact path="/addResponse" component={addResponse} />
+          <Route exact path="/deleteChatBar" component={deleteChatBar} />
           <Route exact path="/getusers" component={GetUsers} />
           <Route exact path="/user" component={SignedInUser} />
           <Route exact path="/admin" component={SignedInAdmin} />

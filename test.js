@@ -869,20 +869,7 @@ test("It responds with the searched debate by date", async (done) => {
   expect(b).toBeTruthy()
   done()
 })
-//test  get admin unanswered questions
-test("It responds with the unanswered questions", async (done) => {
-    const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-                question: "dsjk are djsk",
-                user: "dskjflkdf"
-        
-        })
-    const response =  await funcs.getQuestionsAdmin()
-    var i;
-    for(i=0;i<response.data.data.length;i++){
-        expect(response.data.data[i].answer).toBeUndefined();
-    }
-    done()
-  })
+
 
 //Testing search for debates by category 
 test("It responds with the searched debate by category", async (done) => {
@@ -916,27 +903,7 @@ test("It responds with the searched user by name", async (done) => {
   expect(b).toBeTruthy()
   done()
 })
-     //delete Question testing
-test("It responds with the deleted Question",async(done) =>{
-    const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-                question: "dsjk are djsk",
-                user: "dskjflkdf"
-        
-        })
-    const response =  await funcs.getQuestions()
-    const deletedQuestion = await funcs.deleteQuestions(response.data.data[0]._id)
-    const response1 =  await funcs.getQuestions()
-    var i;
-    var b=true;
-    for(i=0;i<response1.data.data.length;i++){
-        if(response1.data.data[i]._id===response.data.data[0]._id){
-            b=false;
-        }
-    }
-    expect(b).toBeTruthy(); //a7ot el id el mazboot
-    
-    done()
-  })
+
 
 
 
@@ -956,35 +923,16 @@ test("It responds with the searched user by type", async (done) => {
 })
 
 
-//     //answer question testing
-    test("It responds with the answered question", async (done) => {
-        const newQuestion = await funcs.askQuestion()
-        const response =  await funcs.getQuestionsAdmin() 
-        const answeredQuestion = await funcs.answerQuestion(response.data.data[0]._id)
-        const response1 =  await funcs.getQuestions() 
-        const newQuestion1 = response1.data.data[0]
-        expect(newQuestion1.answer).toEqual("nouran")
-        expect(newQuestion1._id).toEqual(response.data.data[0]._id)
-
-        done()
-
-    })
-
-
-//test  get the user's answers of his questions
-test("It responds with the answered questions", async (done) => {
-    const newQuestion = await axios.post("http://localhost:5000/api/Questions/ask",{
-                question: "dsjk are djsk",
-                user: "dskjflkdf"
-        
-        })
-    const answeredQuestion = await funcs.answerQuestion(newQuestion.data.data._id)
-    const response =  await funcs.getAnswers()
-    var i;
-    for(i=0;i<response.data.data.length;i++){
-        expect(response.data.data[i].user).toEqual("dskjflkdf");
-    }
-    done()
+//Testing search for articles by title 
+test("It responds with the searched article by a word in the title", async (done) => {
+  
+const article =  await funcs.searchArticlesByTitle()
+var i;
+for(i=0;i<article.data.data.length;i++){
+  const art=article.data.data[i].title
+  expect(art).toEqual(expect.stringContaining("are"));
+ 
+}
 
 done()
 })
