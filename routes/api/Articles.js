@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Articles = require('../../models/Article')
+const Users = require('../../models/User')
 const articleValidator = require('../../validations/articleValidations')
 
 
@@ -73,12 +74,14 @@ router.get('/Search/:keyWord',async(req,res)=>{
     return res.json({data:article})
          
     })
-router.put('/comment/:id',async(req,res)=>{
+router.put('/comment/:id/:userid',async(req,res)=>{
     try{
     const articleId =req.params.id
     const newComment= req.body.comments
+    const userid = req.params.userid
+    const getuser = await Users.findOne({_id :userid})
     const getArticle= await Articles.findOne({_id:articleId})
-    const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:newComment}})
+    const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:{username:getuser.firstName,comment:newComment}}})
     const getArticleNew =await Articles.findOne({_id:articleId})
         res.json({data:getArticleNew })
     }
