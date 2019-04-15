@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const mongoose = require('mongoose')
 const Articles = require('../../models/Article')
+const Users = require('../../models/User')
 const articleValidator = require('../../validations/articleValidations')
 
 
@@ -48,7 +49,7 @@ router.put('/:id',async(req,res)=>{
 router.delete('/:id', async (req,res) => {
     try {
      const id = req.params.id
-     const deletedArticle = await Article.findByIdAndRemove({_id:id})
+     const deletedArticle = await Articles.findByIdAndRemove({_id:id})
      res.json({msg:'Article was deleted successfully', data: deletedArticle})
     }
     catch(error) {
@@ -57,22 +58,39 @@ router.delete('/:id', async (req,res) => {
  })
 
 router.get('/',async(req,res)=>{
-    const articles = await Article.find()
+    const articles = await Articles.find()
     res.json({data:articles})
 })
 
 router.get('/:id',async (req,res)=>{
     const articleId =req.params.id
-    const articles = await Article.findOne({_id:articleId})
+    const articles = await Articles.findOne({_id:articleId})
     res.json({data:articles})
 })
 router.get('/Search/:keyWord',async(req,res)=>{
     const keyWord=req.params.keyWord
-    const article = await Article.find({ "title" : { $regex: keyWord, $options: 'i' } })
+    const article = await Articles.find({ "title" : { $regex: keyWord, $options: 'i' } })
     if(article.length===0) return res.status(404).send({error: 'Article with that key word doesnt exisit'})
     return res.json({data:article})
          
     })
+router.put('/comment/:id/:userid',async(req,res)=>{
+    try{
+    const articleId =req.params.id
+    const newComment= req.body.comments
+    const userid = req.params.userid
+    const getuser = await Users.findOne({_id :userid})
+    const getArticle= await Articles.findOne({_id:articleId})
+    const updatedArticle=await Articles.findOneAndUpdate({_id:articleId},{$push:{comments:{username:getuser.firstName,comment:newComment}}})
+    const getArticleNew =await Articles.findOne({_id:articleId})
+        res.json({data:getArticleNew })
+    }
+    catch(error){
+        console.log(error)
+    }
+
+}
+)
 module.exports = router
 
 
