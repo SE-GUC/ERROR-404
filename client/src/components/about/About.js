@@ -62,7 +62,7 @@ class About extends Component {
     render(){
     const BOAList= this.state.BOAs.map((BOA)=>{
         return(
-            <Col xs={6} md={4}>
+            <Col >
             <Image src={BOA.profilePicture}thumbnail className="image1" />
             <h5 className="BOAname">{BOA.firstName} {BOA.lastName}</h5>
             </Col>
@@ -71,36 +71,36 @@ class About extends Component {
     const PHLList = this.state.PHLs.map((PHL)=>
     {
         return(
-            <Row xs={6} md={4}>
+            <Col >
                  
                  <Image src={PHL.profilePicture} className="image1"/>
                 <h5 style={{color:yellow,textTransform:"uppercase"}}>{PHL.firstName} {PHL.lastName}</h5> 
-            </Row>
+            </Col>
         )
     })
     const MSmember = this.state.MSs.map((MS)=>
      {
         return(
-            <Row xs={6} md={4}>
+            <Col >
                <Image src={MS.profilePicture} className="image1" />
                 <h5 style={{color:yellow,textTransform:"uppercase"}}>{MS.firstName} {MS.lastName}</h5>
                 <h4>MARKETING</h4> 
-            </Row>
+            </Col>
         )
      })
     const OHLList = this.state.OHLs.map((OHL)=>
     {
         return(
-            <Row xs={6} md={4}>
+            <Col >
                <Image src={OHL.profilePicture} className="image1" />
                 <h5 style={{color:yellow,textTransform:"uppercase"}}>{OHL.firstName} {OHL.lastName}</h5> 
-            </Row>
+            </Col>
         )
     })
     const DHLList = this.state.DHLs.map((DHL)=>
     {
         return(
-            <Col xs={6} md={4}>
+            <Col>
                <Image src={DHL.profilePicture} className="image1" />
             
                 <h5 style={{color:yellow,textTransform:"uppercase"}}>{DHL.firstName} {DHL.lastName}</h5> 
@@ -113,7 +113,7 @@ class About extends Component {
     const FSmember = this.state.FSs.map((FS)=>
     {
          return(
-            <Col xs={6} md={4}>
+            <Col >
             <Image src={FS.profilePicture} className="image1" />
              <h5>{FS.firstName} {FS.lastName}</h5>
              <h4>FUNDRAISING</h4> 
@@ -124,18 +124,18 @@ class About extends Component {
     const LSmember = this.state.LSs.map((LS)=>
     {
          return(
-            <Col xs={6} md={4}>
+            <Col >
             <Image src={LS.profilePicture} className="image1" />
              <h5>{LS.firstName} {LS.lastName}</h5> 
              <h4>CO-ORDINATION&LOGISTICS</h4>
-         </Col>
+            </Col>
          )
     })
    
     const MDSmember = this.state.MDSs.map((MDS)=>
     {
          return(
-            <Col xs={6} md={4}>
+            <Col>
             <Image src={MDS.profilePicture} className="image1" />
              <h5>{MDS.firstName} {MDS.lastName}</h5>
              <h4>MEDIA DESGIN</h4> 
@@ -145,7 +145,7 @@ class About extends Component {
     const RSmember = this.state.RSs.map((RS)=>
     {
          return(
-            <Col xs={6} md={4}>
+            <Col >
             <Image src={RS.profilePicture} className="image1" />
              <h5>{RS.firstName} {RS.lastName}</h5>
              <h4>INVESTORS' RELATION</h4> 
@@ -158,18 +158,18 @@ class About extends Component {
           <div className="boatitle">
             <h1 >BOARD OF ADJUDICATORS</h1>
           </div>
-          <div>
+          <Row>
               {BOAList}
-          </div>
-        <Container id="phltitle">
+          </Row>
+        <Container className="phltitle">
           <h2 style={{color:blue}}>PEGASUS HOUSE LEADERS</h2>
         </Container>
         <Container id="PHLs">
-            <Col>
+            <Row>
             {PHLList}
-            </Col>
+            </Row>
         </Container>
-        <div id = "functiontitle">
+        <div className = "functiontitle">
            <h2 >FUNCTION SUPERVISOR</h2>
         </div>
         <Container id="FSs">
@@ -181,13 +181,13 @@ class About extends Component {
          <Col>{MDSmember}</Col>
          </Row>  
         </Container>
-        <Container id="ohltitle">
+        <Container className="ohltitle">
           <h2 style={{color:green}}>ORION HOUSE LEADERS</h2>
         </Container>
         <Container id="OHLs">
-            <Col>
+            <Row>
             {OHLList}
-            </Col>
+            </Row>
         </Container>
         <Container id="dhltitle">
             <h1 style={{color:yellow}}>DISCIPLES LEADERS</h1>

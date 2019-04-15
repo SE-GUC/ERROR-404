@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 //import Users from './Users';
 //import {BrowserRouter as Router} from 'react-router-dom'
 //import Route from 'react-router-dom'
-
+import "./UserProfile.css"
 
 class UserProfile extends Component { 
    
@@ -44,7 +44,7 @@ class UserProfile extends Component {
      <br/>
      <p>Bio: {this.state.user.bio}</p>
      <br/>
-     <image src={this.state.user.profilePicture}></image>  
+     <image src={this.state.user.profilePicture} className="image"></image>  
     </ul>
   </div>
   )

@@ -54,17 +54,6 @@ const userSchema = new Schema({
   },
   notification: {
     type: [String]
-  },
-  tiqStatus: {
-    type: String,
-    enum: ["House Leader","BOA","Supervisor","Disciples House Leader"]
-  },
-  supervisorType:{
-    type:String,
-    enum:["Marketing","Fundraising","Logistics", "Relations","Media Design"]
-  },
-  profilePicture:{
-    type: String
   }
 });
 

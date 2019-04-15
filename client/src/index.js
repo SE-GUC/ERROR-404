@@ -5,44 +5,84 @@ import App from "./App";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import CreateDebate from "./components/debates/CreateDebate";
-
-import FAQ from './components/faq/FAQ';
+import SignIn from './components/signin/SignIn'
+import FAQ from './components/faq/faq/FAQ';
+import FAQU from './components/faq/faq/FAQU';
+import Question from './components/faq/question/Question';
+import QuestionAdmin from './components/faq/question/QuestionAdmin';
+import SignedInUser from "./hubHomepage/signedInUser";
+import SignedInAdmin from "./hubHomepage/signedInAdmin";
+import AdminEdits from "./AdminEdits";
+import SearchDebateDate from "./components/debates/searchdate";
+import SearchDebateCategory from "./components/debates/searchcategory";
+import deleteChatBar from './components/Chatbar/DeleteChatBar'
+import addResponse from './components/Chatbar/addResponse'
+import Home from "./pages/Home";
+import Score from "./pages/Score";
 import AllUsers from './components/users/AllUsers';
 import UserProfile from './components/users/UserProfile';
 import About from './components/about/About';
-import Chatbars from "./components/chatBar/Chatbars";
+import Chatbars from "./components/Chatbar/Chatbars";
 import Clubs from "./Clubs";
-import Users from "./Users";
+
 import Contents from "./Contents";
 import Articles from "./Articles";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+import ContactUs from "./ContactUs";
 import "typeface-roboto";
+import { Provider } from 'react-redux';
+import store from './store';
 
-const routing = (
-  <Router>
-    <div>
-      <hr />
-      <Switch>
-        <Route exact path="/" component={App} />
-        <Route exact path="/debates" component={Debates} />
-        <Route exact path="/createDebate" component={CreateDebate} />
-        <Route exact path="/Clubs" component={Clubs} />
-        <Route exact path="/chatbars" component={Chatbars} />
-        <Route exact path="/Articles" component={Articles} />
-        <Route exact path="/faq" component={FAQ} />
-        <Route exact path ="/about" component={About}/>
-        <Route exact path="/finduser" component={AllUsers} />
-        <Route exact path = "/users/:id" component = {UserProfile}/>
-        <Route exact path="/Contents" component={Contents} />
-        <Route exact path="/Users" component={Users} />
-       
-        <Route component={Notfound} />
-      </Switch>
-    </div>
-  </Router>
-);
+import { CreateUser } from "./components/users/CreateUser";
+import GetUsers from "./components/users/getUsers";
 
-ReactDOM.render(routing, document.getElementById("root"));
-
+ReactDOM.render(
+  <Provider store={store}>
+    <Router>
+      <div>
+        <hr />
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route exact path="/Home" component={Home} />
+          <Route exact path="/Score" component={Score} />
+          <Route exact path="/debates" component={Debates} />
+          <Route
+          exact
+          path="/debates/searchbydate/:date"
+          component={SearchDebateDate}
+          />
+          <Route
+            exact
+            path="/debates/searchbycategory/:category"
+            component={SearchDebateCategory}
+          />
+          <Route exact path="/ContactUs" component={ContactUs} />
+          <Route exact path="/createDebate" component={CreateDebate} />
+          <Route exact path="/Clubs" component={Clubs} />
+          <Route exact path="/chatbars" component={Chatbars} />
+          <Route exact path="/Articles" component={Articles} />
+          <Route exact path="/faq" component={FAQU} />
+          <Route exact path="/faqAdmin" component={FAQ} />
+          <Route exact path="/userquestions" component={Question} />
+          <Route exact path="/adminquestions" component={QuestionAdmin} />
+          <Route exact path="/Contents" component={Contents} />
+          <Route exact path="/createuser" component={CreateUser} />
+          <Route exact path="/addResponse" component={addResponse} />
+          <Route exact path="/deleteChatBar" component={deleteChatBar} />
+          <Route exact path="/getusers" component={GetUsers} />
+          <Route exact path ="/about" component={About}/>
+          <Route exact path="/finduser" component={AllUsers} />
+          <Route exact path = "/users/:id" component = {UserProfile}/>  
+          <Route exact path="/user" component={SignedInUser} />
+          <Route exact path="/admin" component={SignedInAdmin} />
+          <Route exact path="/adminedits" component={AdminEdits} />
+          <Route exact path="/signin" component={SignIn} />
+          <Route component={Notfound} />
+        </Switch>
+      </div>
+    </Router> 
+  </Provider>,
+ document.getElementById('root')
+ )
 serviceWorker.unregister();
