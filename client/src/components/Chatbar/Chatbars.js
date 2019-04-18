@@ -3,6 +3,12 @@ import './Chatbars.css';
 import Header from './Header';
 import Toolbar from '../../layout/Toolbar/Toolbar';
 import Background from '../../Images/background.jpeg';
+import Logo from '../images/debate2.jpg';
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype , id: state.id}
+}
 class Chatbars extends Component {
   constructor() {
     super();
@@ -28,7 +34,36 @@ class Chatbars extends Component {
   }
   
   render() {
+     console.log(this.props.usertype);
+     if(this.props.token==null){
+       return(
+         <div>
+            <div class="thumbnails">
+     
+							<div class="box">
+							
+							
+								 <div class="inner">
+									<h3>You have to sign in first!</h3>
+									<button
+              variant="contained"
+              href="http://localhost:3000/signin"
+              className="btn"
+            >
+              Sign In
+            </button>
+                  
+								
+								</div>
+							</div>
+          
+          </div>
+           </div>
+       )
+     }
     
+      const auth = this.props.usertype === "TIQadmin";
+      if(auth){
     return (
      
       <div style={this.getStyle()} >
@@ -36,8 +71,25 @@ class Chatbars extends Component {
           <Toolbar/>
         <Header />
       </div> 
-      
-        <ul style={{color:"white"}}>
+      <div class="inner">
+      <div class="thumbnails">
+      {this.state.chatbars.map(chatbar =>
+							<div class="box">
+							
+								<a href={'/addResponse/'+chatbar._id} class="image fit"><img src={Logo} alt="" /></a>
+								<div class="inner">
+									<h3>{chatbar.date}</h3>
+									<p>{chatbar.debateLiveTitle} </p>
+									<a href={'/addResponse/'+chatbar._id} class="btn">Debate it Now!</a>
+								</div>
+							</div>)}
+          </div>
+          </div>
+
+          <button className="btn" style={ {position:"absolute", left:"0", bottom:"0"}} onClick={() => (document.location.href = "/deleteChatBar")}>
+          UPDATE AND DELETE
+        </button>
+        {/* <ul style={{color:"white"}}>
         {this.state.chatbars.map(chatbar => 
           <a key={chatbar._id} href={'/addResponse/'+chatbar._id}> {chatbar.debateLiveTitle} {chatbar.date} <br></br> </a>
         )}
@@ -45,7 +97,7 @@ class Chatbars extends Component {
         </ul>
         <button className="btn" style={ {position:"absolute", left:"0", bottom:"0"}} onClick={() => (document.location.href = "/deleteChatBar")}>
           UPDATE AND DELETE
-        </button> 
+        </button>  */}
       </div>
       
         
@@ -53,7 +105,50 @@ class Chatbars extends Component {
       
     )
   }
+  else{
+    return (
+     
+      <div style={this.getStyle()} >
+        <div>
+          <Toolbar/>
+        <Header />
+      </div> 
+      <div class="inner">
+      <div class="thumbnails">
+      {this.state.chatbars.map(chatbar =>
+							<div class="box">
+							
+								<a href={'/addResponse/'+chatbar._id} class="image fit"><img src={Logo} alt="" /></a>
+								<div class="inner">
+									<h3>{chatbar.date}</h3>
+									<p>{chatbar.debateLiveTitle} </p>
+									<a href={'/addResponse/'+chatbar._id} class="btn">Debate it Now!</a>
+								</div>
+							</div>)}
+          </div>
+          </div>
+
+        {/* <ul style={{color:"white"}}>
+        {this.state.chatbars.map(chatbar => 
+          <a key={chatbar._id} href={'/addResponse/'+chatbar._id}> {chatbar.debateLiveTitle} {chatbar.date} <br></br> </a>
+        )}
+        
+        </ul>
+        <button className="btn" style={ {position:"absolute", left:"0", bottom:"0"}} onClick={() => (document.location.href = "/deleteChatBar")}>
+          UPDATE AND DELETE
+        </button>  */}
+      </div>
+      
+        
+      
+      
+    )
+  }
+  }
 }
+const Form = connect(
+  mapStateToProps,
+  null
+)(Chatbars)
 
-
-export default Chatbars;
+export default Form;
