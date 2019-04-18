@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import SignIn from "./components/signin/SignIn";
@@ -46,7 +46,7 @@ ReactDOM.render(
         <hr />
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/Home" component={Home} />
+          <Route exact path="/TIQHome" component={Home} />
           <Route exact path="/Score" component={Score} />
           <Route exact path="/debates" component={Debates} />
           <Route
