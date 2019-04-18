@@ -19,7 +19,7 @@ import addResponse from "./components/Chatbar/addResponse";
 import Home from "./pages/Home";
 import Score from "./pages/Score";
 
-import Chatbars from "./components/chatBar/Chatbars";
+import Chatbars from "./components/Chatbar/Chatbars";
 import Clubs from "./Clubs";
 
 import Contents from "./Contents";
@@ -69,7 +69,7 @@ ReactDOM.render(
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
           <Route exact path="/createuser" component={CreateUser} />
-          <Route exact path="/addResponse" component={addResponse} />
+          <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
           <Route exact path="/getusers" component={GetUsers} />
           <Route exact path="/user" component={SignedInUser} />
