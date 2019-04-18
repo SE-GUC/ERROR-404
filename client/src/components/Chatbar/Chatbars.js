@@ -46,8 +46,8 @@ class Chatbars extends Component {
 								 <div class="inner">
 									<h3>You have to sign in first!</h3>
 									<button
-              variant="contained"
-              href="http://localhost:3000/signin"
+      
+      onClick={() => (document.location.href = "/signin")}
               className="btn"
             >
               Sign In

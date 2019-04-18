@@ -114,7 +114,7 @@ export class addResponse extends Component {
                             </div> */}
       
      <form onSubmit={this.onSubmit}>
-     <div style = {{fontSize:'20px' , color:"white", top:'80px'}}>
+     <div style = {{fontSize:'20px' , color:"black", top:'80px'}}>
     <h1 > THE FOR RESPONSES </h1>
     
      {this.state.forResponses_.map (forResponse =>
@@ -145,7 +145,7 @@ export class addResponse extends Component {
          
      </div>
      <form onSubmit={this.onSubmit}></form>
-     <div style = {{fontSize:'20px' , color:"white" ,position:"absolute",right:'10px', top:'160px'}}>
+     <div style = {{fontSize:'20px' , color:"black" ,position:"absolute",right:'10px', top:'160px'}}>
     <h1 > THE AGAINST RESPONSES </h1>
      {this.state.againstResponses_.map (againstResponse =>
      <center>
