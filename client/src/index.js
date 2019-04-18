@@ -5,7 +5,7 @@ import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import SignIn from "./components/signin/SignIn";
-import SignOut from "./components/signout/signout"
+import SignOut from "./components/signout/signout";
 import FAQ from "./components/faq/faq/FAQ";
 import FAQU from "./components/faq/faq/FAQU";
 import Question from "./components/faq/question/Question";
@@ -21,6 +21,7 @@ import Home from "./pages/Home";
 import Score from "./pages/Score";
 
 import Chatbars from "./components/Chatbar/Chatbars";
+import SeachDebateLive from "./components/Chatbar/searchChatbBar";
 import Clubs from "./Clubs";
 
 import Contents from "./Contents";
@@ -35,10 +36,11 @@ import store from "./store";
 import { CreateUser } from "./components/users/CreateUser";
 import GetUsers from "./components/users/getUsers";
 import { saveState } from "./localStorage";
+import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 
-store.subscribe(()=>{
-  saveState(store.getState())
-})
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 ReactDOM.render(
   <Provider store={store}>
@@ -63,6 +65,11 @@ ReactDOM.render(
           <Route exact path="/ContactUs" component={ContactUs} />
           <Route exact path="/Clubs" component={Clubs} />
           <Route exact path="/chatbars" component={Chatbars} />
+          <Route
+            exact
+            path="/chatbars/search/:title"
+            component={SearchDebateLive}
+          />
           <Route exact path="/Articles" component={Articles} />
           <Route exact path="/faq" component={FAQU} />
           <Route exact path="/faqAdmin" component={FAQ} />
