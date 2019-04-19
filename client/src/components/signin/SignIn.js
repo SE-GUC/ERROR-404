@@ -59,8 +59,10 @@ class InputAdornments extends React.Component {
         password : this.state.password      
     });
     if (Users.data.token !== null)
-    this.props.signin(Users.data.token, Users.data.usertype,Users.data.id);
-    else 
+    {
+      this.props.signin(Users.data.token, Users.data.usertype,Users.data.id);
+      this.props.history.push("/debates");
+    }else 
     this.setState({
       errormessgae: "Incorrect Email or Password please try again"
     });
@@ -115,7 +117,7 @@ class InputAdornments extends React.Component {
         </FormControl>
         <Button
           variant="contained"
-          href="http://localhost:3000/user"
+          // href="http://localhost:3000/user"
           className={classes.button}
           onClick={() => {
             this.handleClick();

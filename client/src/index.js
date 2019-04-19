@@ -4,7 +4,6 @@ import "./index.css";
 import App from "./App";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
-import CreateDebate from "./components/debates/CreateDebate";
 import SignIn from './components/signin/SignIn'
 import FAQ from './components/faq/faq/FAQ';
 import FAQU from './components/faq/faq/FAQU';
@@ -56,7 +55,6 @@ ReactDOM.render(
             component={SearchDebateCategory}
           />
           <Route exact path="/ContactUs" component={ContactUs} />
-          <Route exact path="/createDebate" component={CreateDebate} />
           <Route exact path="/Clubs" component={Clubs} />
           <Route exact path="/chatbars" component={Chatbars} />
           <Route exact path="/Articles" component={Articles} />
