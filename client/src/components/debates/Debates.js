@@ -106,28 +106,30 @@ class Debates extends Component {
   render() {
     const { classes } = this.props;
     if (this.props.token === null) {
-     return(
-       <>
+      return (
+        <>
           <ToolBar />
           <div className="center-div">
             <h1>You need to sign in first to view this content</h1>
             <Button
-          variant="contained"
-          href="http://localhost:3000/signin"
-          className={classes.button}
-        >
-          Sign In
-        </Button>
+              variant="contained"
+              href="http://localhost:3000/signin"
+              className={classes.button}
+            >
+              Sign In
+            </Button>
           </div>
-       </>
-       );
+        </>
+      );
     }
     console.log(this.props.usertype);
     const auth = this.props.usertype === "BOA";
+    
     if (auth) {
       return (
         <>
           <ToolBar />
+
           <Dialog
             open={this.state.createopen}
             onClose={this.handleCreateClick}
@@ -203,56 +205,59 @@ class Debates extends Component {
             </DialogActions>
           </Dialog>
 
-          <Fab
-            color="secondary"
-            aria-label="Add"
-            className={classes.fab2}
-            onClick={this.handleCreateClick}
-          >
-            <AddIcon />
-          </Fab>
+          <div className="button-div">
+          <Fab 
+          color="secondary"
+          aria-label="Add"
+          className={classes.fab2}
+          onClick={this.handleCreateClick}
+          
+        >
+          <AddIcon />
+        </Fab>
+        <Typography paragraph> </Typography>
 
-          <Typography paragraph> </Typography>
 
-          <TextField
-            id="selecteddate"
-            label="Date"
-            type="date"
-            className={classes.textField}
-            onChange={this.handleChange("selecteddate")}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
+            <TextField
+              id="selecteddate"
+              label="Date"
+              type="date"
+              className={classes.textField}
+              onChange={this.handleChange("selecteddate")}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
 
-          <Fab
-            variant="extended"
-            aria-label="Search by Date"
-            className={classes.fab}
-            onClick={this.handleDateSearch}
-          >
-            Search by Date
-            <SearchIcon />
-          </Fab>
+            <Fab
+              variant="extended"
+              aria-label="Search by Date"
+              className={classes.fab}
+              onClick={this.handleDateSearch}
+            >
+              Search by Date
+              <SearchIcon />
+            </Fab>
 
-          <Typography paragraph> </Typography>
+            <Typography paragraph> </Typography>
 
-          <TextField
-            id="selectedcategory"
-            label="category"
-            className={classes.textField}
-            onChange={this.handleChange("selectedcategory")}
-          />
+            <TextField
+              id="selectedcategory"
+              label="category"
+              className={classes.textField}
+              onChange={this.handleChange("selectedcategory")}
+            />
 
-          <Fab
-            variant="extended"
-            aria-label="Search by Category"
-            className={classes.fab}
-            onClick={this.handleCategorySearch}
-          >
-            Search by Category
-            <SearchIcon />
-          </Fab>
+            <Fab
+              variant="extended"
+              aria-label="Search by Category"
+              className={classes.fab}
+              onClick={this.handleCategorySearch}
+            >
+              Search by Category
+              <SearchIcon />
+            </Fab>
+          </div>
 
           <div className="center-div">
             <h1>Our Debates</h1>
@@ -265,6 +270,7 @@ class Debates extends Component {
                 category={debate.category}
                 description={debate.description}
                 info={debate.info}
+                auth = {auth}
               />
             ))}
           </div>
@@ -274,46 +280,47 @@ class Debates extends Component {
       return (
         <>
           <ToolBar />
+          <div className="button-div">
+            <TextField
+              id="selecteddate"
+              label="Date"
+              type="date"
+              className={classes.textField}
+              onChange={this.handleChange("selecteddate")}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
 
-          <TextField
-            id="selecteddate"
-            label="Date"
-            type="date"
-            className={classes.textField}
-            onChange={this.handleChange("selecteddate")}
-            InputLabelProps={{
-              shrink: true
-            }}
-          />
+            <Fab
+              variant="extended"
+              aria-label="Search by Date"
+              className={classes.fab}
+              onClick={this.handleDateSearch}
+            >
+              Search by Date
+              <SearchIcon />
+            </Fab>
 
-          <Fab
-            variant="extended"
-            aria-label="Search by Date"
-            className={classes.fab}
-            onClick={this.handleDateSearch}
-          >
-            Search by Date
-            <SearchIcon />
-          </Fab>
+            <Typography paragraph> </Typography>
 
-          <Typography paragraph> </Typography>
+            <TextField
+              id="selectedcategory"
+              label="category"
+              className={classes.textField}
+              onChange={this.handleChange("selectedcategory")}
+            />
 
-          <TextField
-            id="selectedcategory"
-            label="category"
-            className={classes.textField}
-            onChange={this.handleChange("selectedcategory")}
-          />
-
-          <Fab
-            variant="extended"
-            aria-label="Search by Category"
-            className={classes.fab}
-            onClick={this.handleCategorySearch}
-          >
-            Search by Category
-            <SearchIcon />
-          </Fab>
+            <Fab
+              variant="extended"
+              aria-label="Search by Category"
+              className={classes.fab}
+              onClick={this.handleCategorySearch}
+            >
+              Search by Category
+              <SearchIcon />
+            </Fab>
+          </div>
 
           <div className="center-div">
             <h1>Our Debates</h1>

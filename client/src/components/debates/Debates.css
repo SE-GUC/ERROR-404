@@ -1,9 +1,15 @@
 body {
   background-color: #8f1814;
 }
+.button-div{
+  top : 30px;
+  position: relative;
+}
+
 .center-div {
+  position: relative;
   margin: auto;
-  top: 0;
+  top: 40px;
   bottom: 0;
   width: 1000px;
   text-align: center;
