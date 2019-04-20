@@ -15,7 +15,7 @@ import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { connect } from "react-redux";
-import ToolBar from "../../layout/Toolbar/Toolbar"
+import ToolBar from "../../layout/Toolbar/Toolbar";
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -35,10 +35,8 @@ const styles = theme => ({
     color: "#8f1814",
     background: "#e2a325",
     marginRight: theme.spacing.unit
-
   }
 });
-
 
 class Debates extends Component {
   constructor(props) {
@@ -61,10 +59,10 @@ class Debates extends Component {
   createDebate = async event => {
     axios
       .post("http://localhost:5000/api/Debates", {
-        title:  this.state.title,
+        title: this.state.title,
         category: this.state.category,
-        date:  this.state.date,
-        info:  this.state.info,
+        date: this.state.date,
+        info: this.state.info,
         description: this.state.description
       })
       .then(response => {
@@ -89,9 +87,7 @@ class Debates extends Component {
   };
   handleDateSearch = () => {
     if (this.state.selecteddate === null) return;
-    this.props.history.push(
-      `debates/searchbydate/${(this.state.selecteddate)}`
-    );
+    this.props.history.push(`debates/searchbydate/${this.state.selecteddate}`);
   };
 
   handleCategorySearch = () => {
@@ -109,86 +105,108 @@ class Debates extends Component {
 
   render() {
     const { classes } = this.props;
-    return (
-      <>
-      <ToolBar />
-        <Dialog
-          open={this.state.createopen}
-          onClose={this.handleCreateClick}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">Create Debate</DialogTitle>
-          <DialogContent>
-            <TextField
-              required
-              id="title"
-              label="Title"
-              className={classes.textField}
-              onChange={this.handleChange("title")}
-              margin="normal"
-              variant="outlined"
-            />
-
-            <TextField
-              required
-              id="category"
-              label="Category"
-              className={classes.textField}
-              onChange={this.handleChange("category")}
-              margin="normal"
-              variant="outlined"
-            />
-
-            <TextField
-              id="description"
-              label="Description"
-              multiline
-              rowsMax="100"
-              //          value={this.state.multiline}
-              onChange={this.handleChange("description")}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-
-            <TextField
-              id="info"
-              label="Info"
-              multiline
-              rowsMax="100"
-              //        value={this.state.multiline}
-              onChange={this.handleChange("info")}
-              className={classes.textField}
-              margin="normal"
-              variant="outlined"
-            />
-
-            <TextField
-              required
-              id="date"
-              label="Date"
-              type="date"
-              className={classes.textField}
-              onChange={this.handleChange("date")}
-              InputLabelProps={{
-                shrink: true
-              }}
-            />
-            <Typography paragraph>{this.state.error}</Typography>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleCreateClick} color="primary">
-              Cancel
+    if (this.props.token === null) {
+      return (
+        <>
+          <ToolBar />
+          <div className="center-div">
+            <h1>You need to sign in first to view this content</h1>
+            <Button
+              variant="contained"
+              href="http://localhost:3000/signin"
+              className={classes.button}
+            >
+              Sign In
             </Button>
-            <Button onClick={() => this.createDebate()} color="primary">
-              Create
-              <CloudUploadIcon className={classes.rightIcon} />
-            </Button>
-          </DialogActions>
-        </Dialog>
+          </div>
+        </>
+      );
+    }
+    console.log(this.props.usertype);
+    const auth = this.props.usertype === "BOA";
+    
+    if (auth) {
+      return (
+        <>
+          <ToolBar />
 
+          <Dialog
+            open={this.state.createopen}
+            onClose={this.handleCreateClick}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Create Debate</DialogTitle>
+            <DialogContent>
+              <TextField
+                required
+                id="title"
+                label="Title"
+                className={classes.textField}
+                onChange={this.handleChange("title")}
+                margin="normal"
+                variant="outlined"
+              />
 
-        <Fab 
+              <TextField
+                required
+                id="category"
+                label="Category"
+                className={classes.textField}
+                onChange={this.handleChange("category")}
+                margin="normal"
+                variant="outlined"
+              />
+
+              <TextField
+                id="description"
+                label="Description"
+                multiline
+                rowsMax="100"
+                //          value={this.state.multiline}
+                onChange={this.handleChange("description")}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+              />
+
+              <TextField
+                id="info"
+                label="Info"
+                multiline
+                rowsMax="100"
+                //        value={this.state.multiline}
+                onChange={this.handleChange("info")}
+                className={classes.textField}
+                margin="normal"
+                variant="outlined"
+              />
+
+              <TextField
+                required
+                id="date"
+                label="Date"
+                type="date"
+                className={classes.textField}
+                onChange={this.handleChange("date")}
+                InputLabelProps={{
+                  shrink: true
+                }}
+              />
+              <Typography paragraph>{this.state.error}</Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleCreateClick} color="primary">
+                Cancel
+              </Button>
+              <Button onClick={() => this.createDebate()} color="primary">
+                Create
+                <CloudUploadIcon className={classes.rightIcon} />
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          <div className="button-div">
+          <Fab 
           color="secondary"
           aria-label="Add"
           className={classes.fab2}
@@ -197,65 +215,130 @@ class Debates extends Component {
         >
           <AddIcon />
         </Fab>
-
         <Typography paragraph> </Typography>
 
-        <TextField
-          id="selecteddate"
-          label="Date"
-          type="date"
-          className={classes.textField}
-          onChange={this.handleChange("selecteddate")}
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
 
-        <Fab
-          variant="extended"
-          aria-label="Search by Date"
-          className={classes.fab}
-          onClick={this.handleDateSearch}
-        >
-          Search by Date
-          <SearchIcon />
-        </Fab>
-
-        <Typography paragraph> </Typography>
-
-        <TextField
-          id="selectedcategory"
-          label="category"
-          className={classes.textField}
-          onChange={this.handleChange("selectedcategory")}
-        />
-
-        <Fab
-          variant="extended"
-          aria-label="Search by Category"
-          className={classes.fab}
-          onClick={this.handleCategorySearch}
-        >
-          Search by Category
-          <SearchIcon />
-        </Fab>
-
-        <div className="center-div">
-          <h1>Our Debates</h1>
-          {this.state.debates.map(debate => (
-            <DebateCard
-              key={debate._id}
-              id={debate._id}
-              title={debate.title}
-              date={debate.date}
-              category={debate.category}
-              description={debate.description}
-              info={debate.info}
+            <TextField
+              id="selecteddate"
+              label="Date"
+              type="date"
+              className={classes.textField}
+              onChange={this.handleChange("selecteddate")}
+              InputLabelProps={{
+                shrink: true
+              }}
             />
-          ))}
-        </div>
-      </>
-    );
+
+            <Fab
+              variant="extended"
+              aria-label="Search by Date"
+              className={classes.fab}
+              onClick={this.handleDateSearch}
+            >
+              Search by Date
+              <SearchIcon />
+            </Fab>
+
+            <Typography paragraph> </Typography>
+
+            <TextField
+              id="selectedcategory"
+              label="category"
+              className={classes.textField}
+              onChange={this.handleChange("selectedcategory")}
+            />
+
+            <Fab
+              variant="extended"
+              aria-label="Search by Category"
+              className={classes.fab}
+              onClick={this.handleCategorySearch}
+            >
+              Search by Category
+              <SearchIcon />
+            </Fab>
+          </div>
+
+          <div className="center-div">
+            <h1>Our Debates</h1>
+            {this.state.debates.map(debate => (
+              <DebateCard
+                key={debate._id}
+                id={debate._id}
+                title={debate.title}
+                date={debate.date}
+                category={debate.category}
+                description={debate.description}
+                info={debate.info}
+                auth = {auth}
+              />
+            ))}
+          </div>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <ToolBar />
+          <div className="button-div">
+            <TextField
+              id="selecteddate"
+              label="Date"
+              type="date"
+              className={classes.textField}
+              onChange={this.handleChange("selecteddate")}
+              InputLabelProps={{
+                shrink: true
+              }}
+            />
+
+            <Fab
+              variant="extended"
+              aria-label="Search by Date"
+              className={classes.fab}
+              onClick={this.handleDateSearch}
+            >
+              Search by Date
+              <SearchIcon />
+            </Fab>
+
+            <Typography paragraph> </Typography>
+
+            <TextField
+              id="selectedcategory"
+              label="category"
+              className={classes.textField}
+              onChange={this.handleChange("selectedcategory")}
+            />
+
+            <Fab
+              variant="extended"
+              aria-label="Search by Category"
+              className={classes.fab}
+              onClick={this.handleCategorySearch}
+            >
+              Search by Category
+              <SearchIcon />
+            </Fab>
+          </div>
+
+          <div className="center-div">
+            <h1>Our Debates</h1>
+            {this.state.debates.map(debate => (
+              <DebateCard
+                key={debate._id}
+                id={debate._id}
+                title={debate.title}
+                date={debate.date}
+                category={debate.category}
+                description={debate.description}
+                info={debate.info}
+              />
+            ))}
+          </div>
+        </>
+      );
+    }
   }
 }
 
