@@ -7,7 +7,7 @@ const toolbar = props => (
     <nav className="toolbar__navigation">
       <div />
       <div className="toolbar__logo">
-        <a href="/Home">TIQ TIQ</a>
+        <a href="/TIQHome">TIQ TIQ</a>
       </div>
       <div className="spacer" />
       <div className="toolbar_navigation-items">

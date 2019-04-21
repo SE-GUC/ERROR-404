@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import SignIn from "./components/signin/SignIn";
@@ -19,7 +19,7 @@ import addResponse from "./components/Chatbar/addResponse";
 import Home from "./pages/Home";
 import Score from "./pages/Score";
 
-import Chatbars from "./components/chatBar/Chatbars";
+import Chatbars from "./components/Chatbar/Chatbars";
 import Clubs from "./Clubs";
 
 import Contents from "./Contents";
@@ -46,7 +46,7 @@ ReactDOM.render(
         <hr />
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/Home" component={Home} />
+          <Route exact path="/TIQHome" component={Home} />
           <Route exact path="/Score" component={Score} />
           <Route exact path="/debates" component={Debates} />
           <Route
@@ -69,7 +69,7 @@ ReactDOM.render(
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
           <Route exact path="/createuser" component={CreateUser} />
-          <Route exact path="/addResponse" component={addResponse} />
+          <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
           <Route exact path="/getusers" component={GetUsers} />
           <Route exact path="/user" component={SignedInUser} />

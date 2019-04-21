@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import '../../components/Chatbar/Chatbars.css'
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
