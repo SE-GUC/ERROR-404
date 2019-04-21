@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Questions from './Questions';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -54,23 +55,23 @@ onSubmit = (e) => {
   render() {
     return (
         <div className="Questions">
+         <NavbarSignedIn />
+
           <div className="container">
             <h1>Your recently asked Questions</h1>      
             <Questions  Questions={this.state.Questions}  />
-             <br></br>             <br></br>
 
-            <form onSubmit={this.onSubmit} >
-            <p>Another Question ??   </p>
-            <label>
+            <form  onSubmit={this.onSubmit} >
+            <p style={{fontSize:'30px'}}>Another Question ??   </p>
+            <label style={{paddingBottom:'40px'}}>
                     <input
                        type="text"
                         name='ask'
                         value={this.state.ask}
+                        style={{width:'300px'}}
+
                         onChange={this.onChange}/>
                 </label>
-
-            {/* <button    onClick={this.ask(this.state.ask)} >Send</button> */}
-      
             <input 
           type="submit" 
           value="Submit" 

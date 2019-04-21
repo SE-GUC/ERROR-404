@@ -10,7 +10,8 @@ import Paper from '@material-ui/core/Paper';
 import { createMuiTheme } from '@material-ui/core/styles';
 import purple from '@material-ui/core/colors/purple';
 import orange from'@material-ui/core/colors/orange';
-
+import DeleteIcon from '@material-ui/icons/Delete';
+import IconButton from '@material-ui/core/IconButton';
 
 const styles = theme => ({
   margin: {
@@ -33,8 +34,8 @@ const styles = theme => ({
 
 class SimplePopper extends React.Component {
   state = {
-    question:' ',
-    answer:' ',
+    question:'',
+    answer:'',
     anchorEl: null,
     open: false,
   };
@@ -58,29 +59,40 @@ class SimplePopper extends React.Component {
       <Button variant="contained"  color="primary"    className={classNames(classes.margin, classes.cssEdit)} onClick={this.handleClick}>
         EDIT
       </Button>
-      <Popper id={id} open={open} anchorEl={anchorEl} transition>
+      <Popper id={id} open={open} anchorEl={anchorEl} style={{paddingLeft:'80px'}} transition>
         {({ TransitionProps }) => (
           <Fade {...TransitionProps} timeout={350}>
-            <Paper>
+            <Paper style={{backgroundColor:'#d81b60',padding:'10px 10px 10px 10px'}}>
             <form>
                 <label>
                     <input
                        type="text"
+                       placeholder="Edit Question ..."
                         name='question'
                         value={this.state.question}
+                        style={{backgroundColor:'#9575cd', padding: "5px",width:'300px' }}
+                       
                         onChange={this.onChange}/>
                 </label>
                 <label>
                     <input 
+                    
                          type="text"
                         name='answer'
+                        
                         value={this.state.answer} 
+                        style={{ flex: "5", padding: "5px",backgroundColor:'#9575cd', width:'300px'}}
+                        placeholder="Edit Answer ..."
                         onChange={this.onChange}/>
                 </label>
                
             </form>
-            <button   style={btnStyle2}  onClick={this.props.updatefaq.bind(this,this.props.faq._id,this.state.question,this.state.answer)} >update</button>
-            <button    onClick={this.props.delfaq.bind(this, this.props.faq._id)} style={btnStyle}  >Delete</button>
+            
+            <button  className="btn" style={btnStyle} onClick={this.props.updatefaq.bind(this,this.props.faq._id,this.state.question,this.state.answer)} >update</button>
+            <IconButton className={classes.button} aria-label="Delete">
+        <DeleteIcon onClick={this.props.delfaq.bind(this, this.props.faq._id)}/> 
+      </IconButton>
+
             
             </Paper>
           </Fade>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import QuestionsAdmin from './QuestionsAdmin';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
 
 import axios from 'axios';
 
@@ -37,6 +38,8 @@ answerQuestion = (id,answer) => {
     return (
      
         <div className="QuestionAdmin">
+         <NavbarSignedIn />
+
           <div className="container">
             <h1>Questions</h1>      
             <QuestionsAdmin  Questions={this.state.Questions} delQuestion={this.delQuestion} answerQuestion={this.answerQuestion} />

@@ -27,11 +27,22 @@ export class FaqItem extends Component {
 
 
 const questionStyle={
-  texttransform: 'uppercase',
-  lineheight: '0.8'
+  textTransform: 'uppercase',
+  lineheight: '0.8',
+  fontWeight:'bold',
+  color:'black',
+  lineHeight:'1',
+  fontSize:'25px',
+  fontFamily:'Arial'
+
 }
 const answerStyle={
-  texttransform: 'capitalize'
+  textTransform: 'capitalize',
+  color:'black',
+  lineHeight:'1',
+  fontFamily:'Arial'
+
+
 }
 
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import FAQs from './FAQs';
 import AddFaq from './AddFaq';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
 
 import axios from 'axios';
 const mapStateToProps = state => {
@@ -47,9 +48,12 @@ updatefaq = (id,question,answer) => {
     return (
      
         <div className="FAQ">
+        <NavbarSignedIn />
+
           <div className="container">
             <h1>FAQs</h1>      
             <AddFaq addFAQ={this.addFAQ} />
+            <br></br>
             <FAQs  FAQs={this.state.FAQs} delfaq={this.delfaq} updatefaq={this.updatefaq} />
              
           </div>  

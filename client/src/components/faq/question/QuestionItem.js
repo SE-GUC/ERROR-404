@@ -12,16 +12,37 @@ export class QuestionItem extends Component {
   render() {
    const { question,answer} = this.props.question;
     return (
-      <div >
+      <div style={questionStyle}>
         <p>
             { question }
-            <br></br>
+         </p>
+        <p style={answerStyle}>
             { answer }
         </p>
      
       </div>
     )
   }
+}
+const questionStyle={
+  textTransform: 'uppercase',
+  lineheight: '0.8',
+  fontWeight:'bold',
+  color:'black',
+  lineHeight:'1',
+  fontSize:'30px'
+
+
+}
+const answerStyle={
+  textTransform: 'capitalize',
+  color:'black',
+  fontWeight:'normal',
+  fontSize:'20px',
+
+  lineHeight:'1'
+
+
 }
 
 

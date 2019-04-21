@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FAQUs from './FAQUs';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
 
 class FAQU extends Component {
   state={
@@ -37,18 +38,23 @@ onSubmit = (e) => {
 
   render() {
     return (
+
         <div className="FAQU">
+              <NavbarSignedIn />
+
           <div className="container">
+
             <h1>FAQs</h1>      
-            <FAQUs  FAQs={this.state.FAQs} delfaq={this.delfaq} updatefaq={this.updatefaq} />
-             
+            <FAQUs  FAQs={this.state.FAQs}  />
             <h2>Another Question</h2>
             <form onSubmit={this.onSubmit} >
             <label>
                     <input
+                    
                        type="text"
                         name='ask'
                         value={this.state.ask}
+                        style={{display:'inline-block',height:'40px',width:'800px' ,fontSize:'20px',fontFamily:'Arial' , padding: "8px 12px" }}
                         onChange={this.onChange}/>
                 </label>
 
@@ -57,6 +63,8 @@ onSubmit = (e) => {
             <input 
           type="submit" 
           value="Submit" 
+          
+          style={{ height:'40px' ,display:'inline-block', padding: "8px 12px",borderRadius:'0px' }}
           className="btn"/>
         </form>
         
