@@ -123,8 +123,7 @@ class Debates extends Component {
       );
     }
     console.log(this.props.usertype);
-    const auth = this.props.usertype === "BOA";
-    
+    const auth = this.props.usertype === "TIQadmin";
     if (auth) {
       return (
         <>
@@ -206,17 +205,15 @@ class Debates extends Component {
           </Dialog>
 
           <div className="button-div">
-          <Fab 
-          color="secondary"
-          aria-label="Add"
-          className={classes.fab2}
-          onClick={this.handleCreateClick}
-          
-        >
-          <AddIcon />
-        </Fab>
-        <Typography paragraph> </Typography>
-
+            <Fab
+              color="secondary"
+              aria-label="Add"
+              className={classes.fab2}
+              onClick={this.handleCreateClick}
+            >
+              <AddIcon />
+            </Fab>
+            <Typography paragraph> </Typography>
 
             <TextField
               id="selecteddate"
@@ -270,7 +267,7 @@ class Debates extends Component {
                 category={debate.category}
                 description={debate.description}
                 info={debate.info}
-                auth = {auth}
+                auth={auth}
               />
             ))}
           </div>
