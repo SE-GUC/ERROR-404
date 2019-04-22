@@ -10,18 +10,24 @@ import IconButton from '@material-ui/core/IconButton';
 export class QuestionItemAdmin extends Component {
 
   state = {
-    question: ' ',
-    answer:' '
+    question: '',
+    answer:''
 };
 onChange= (e) => this.setState({[e.target.name]: e.target.value});
+handleClick = event => {
+  let path = `/userquestions`;
+  this.props.history.push(path);
+ 
+};
 
 
 
   render() {
+    
    const { _id,question} = this.props.question;
     return (
       <div >
-        <p>
+        <p style={questionStyle}>
             { question }
             <br></br>
         </p>
@@ -32,19 +38,30 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
                         type="text"
                         name='answer'
                         value={this.state.answer} 
+                        placeholder="Add Answer ..."
                         onChange={this.onChange}/>
+
                 </label>
                 
             </form>
             <button    onClick={this.props.answerQuestion.bind(this,_id,this.state.answer)} >Answer</button>
-            <IconButton className={classes.button} aria-label="Delete">
-        <DeleteIcon onClick={this.props.delQuestion.bind(this, _id)}/> 
-      </IconButton>
+           
+          
+          <IconButton className={"classes"} aria-label="Delete"  onClick={this.props.delQuestion.bind(this,this.props.question._id)}>
+          <DeleteIcon/> 
+          </IconButton>
       </div>
     )
   }
 }
 
-
+const questionStyle={
+  textTransform: 'uppercase',
+  lineheight: '0.8',
+  color:'#818888  ',
+  lineHeight:'1',
+  fontSize:'20px',
+  fontFamily:'Arial'
+}
 
 export default QuestionItemAdmin

@@ -64,8 +64,8 @@ const questionOpen={
   lineHeight:'1',
   fontSize:'17px',
   fontWeight:'bold',
-  fontFamily:'Arial',
-  
+  fontFamily:'Sanserif'
+
   
 }
 const questionStyle={
@@ -74,7 +74,7 @@ const questionStyle={
     color:'black',
     lineHeight:'1',
     fontSize:'17px',
-    fontFamily:'Arial'
+    fontFamily:'Sanserif'
 
   
   }
@@ -82,17 +82,16 @@ const questionStyle={
     textTransform: 'capitalize',
     color:'black',
     lineHeight:'1',
-    fontFamily:'Arial'
-
+    fontFamily:'Sanserif'
   
   
   }
   const panelStyle={
-    borderLeft:'20px solid green',
+    borderLeft:'20px solid #78c3bc',
     background:'#e0e0e0'
   }
   const panel2Style={
-    borderLeft:'20px solid lightgreen',
+    borderLeft:'20px solid #b2ebf2',
     background:'#eeeeee'
   }
   FaqUItem.propTypes = {

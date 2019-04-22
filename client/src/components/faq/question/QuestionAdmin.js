@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import QuestionsAdmin from './QuestionsAdmin';
 import NavbarSignedIn from "../../layout/NavbarSignedIn";
-
+import { connect } from "react-redux";
+import ToolBar from "../../../layout/Toolbar/Toolbar";
+import Button from '@material-ui/core/Button';
 import axios from 'axios';
 
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 class QuestionAdmin extends Component {
   state={
@@ -35,20 +40,49 @@ answerQuestion = (id,answer) => {
 }
  
   render() {
+console.log(this.props.usertype)
+    if (this.props.token == null) {
+      return (
+        <div>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                  style={{backgroundColor:"#70c7be"}}
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }    
+else{
+  
     return (
      
         <div className="QuestionAdmin">
          <NavbarSignedIn />
 
           <div className="container">
-            <h1>Questions</h1>      
+            <h1 style={{textTransform: 'capitalize'}}>QUESTIONS</h1>  
+            <br></br>    
             <QuestionsAdmin  Questions={this.state.Questions} delQuestion={this.delQuestion} answerQuestion={this.answerQuestion} />
              
           </div>  
         </div>
    
     );
+    }
   }
 }
-
-export default QuestionAdmin;
+const Form = connect(
+  mapStateToProps,
+  null
+)(QuestionAdmin);
+export default Form;
