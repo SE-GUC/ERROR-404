@@ -52,7 +52,7 @@ class Debates extends Component {
       error: "",
       selecteddate: null,
       selectedcategory: null,
-      admin: this.props.usertype === "BOA"
+      admin: this.props.usertype === "TIQadmin"
     };
   }
 
@@ -123,7 +123,7 @@ class Debates extends Component {
       );
     }
     console.log(this.props.usertype);
-    const auth = this.props.usertype === "BOA";
+    const auth = this.props.usertype === "TIQadmin";
     
     if (auth) {
       return (

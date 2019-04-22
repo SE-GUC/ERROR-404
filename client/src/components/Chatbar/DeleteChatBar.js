@@ -72,8 +72,30 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
                   style={{flex: '1'}}
                   />
             </form>
-           
-        {this.state.chatbars.map(chatbar =>  
+            <br></br>
+
+            <div class="thumbnails">
+      {this.state.chatbars.map(chatbar =>
+							<div class="box">
+							
+							
+								 <div class="inner">
+									<h3>{chatbar.debateLiveTitle}</h3>
+									<p> {chatbar.date} </p>
+                  <input 
+                  type="Submit" 
+                 value="delete"
+                 className="btn"
+                  onClick= {this.deleteDebateLive.bind(this,chatbar._id)}
+
+                   style={{flex: '10'}}
+                  />
+									{/* <a href={'/addResponse/'+chatbar._id} class="btn">Debate it Now!</a> */}
+								</div>
+							</div>)}
+          
+          </div>
+        {/* {this.state.chatbars.map(chatbar =>  
           <li key={chatbar._id} style = {{fontSize:'20px' , color:"white", top:'80px',textAlign:"center"}}> {chatbar.debateLiveTitle} 
            <input 
                   type="Submit" 
@@ -87,7 +109,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
           </li>
           
          )}
-         
+          */}
         </div>
         )
       }
