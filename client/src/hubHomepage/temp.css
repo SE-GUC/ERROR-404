@@ -316,7 +316,7 @@
 
 		.thumbnails .box {
 			margin: 0 1em 2em 1em;
-			width: 30%;
+			width: 27%;
 		}
 
 			@media screen and (max-width: 1280px) {
@@ -914,7 +914,7 @@
 
 /* Button */
 
-	input[type="submit"],
+	/* input[type="submit"], */
 	input[type="reset"],
 	input[type="button"],
 	button,

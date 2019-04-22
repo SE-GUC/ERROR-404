@@ -52,7 +52,7 @@ class Debates extends Component {
       error: "",
       selecteddate: null,
       selectedcategory: null,
-      admin: this.props.usertype === "BOA"
+      admin: this.props.usertype === "TIQadmin"
     };
   }
 

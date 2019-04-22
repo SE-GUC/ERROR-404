@@ -47,7 +47,7 @@ router.delete('/:id', async (req,res) => {
         console.log(error)
     }  
  })
-
+ 
  
  router.get('/:id',async (req,res)=>{
     const Id = req.params.id 
@@ -60,6 +60,7 @@ router.get('/', async (req,res) => {
     const contents = await Content.find()
     res.json({data: contents})
 })
+
 
 
 

@@ -99,16 +99,29 @@ export class addResponse extends Component {
       <div style={this.getStyle()}  >
         <div>
         <Toolbar/>
-        <Header />
-      </div> 
+        <br></br>
+        <h1 style={{fontSize:'50px', color: '#E2A325',textAlign: 'center', padding: '10px',postion:'fixed',left: '0',width:' 100%'}}>
+          {this.state.chatbars.debateLiveTitle}
+        </h1>
 
+      </div> 
+      {/* <div class="tm-timeline-description-wrap">
+                                <div class="tm-bg-dark tm-timeline-description">
+                                    <h3 class="tm-text-green tm-font-400">Nulla venenatis purus nec quam</h3>
+                                    <p>You may tell your co-workers about TemplateMo free stuffs to download and use for any website project. Thank you for supporting us.</p>
+                                    <p class="tm-text-green float-right mb-0">New Event . 12 July 2018</p>
+                                </div>
+                            </div> */}
       
      <form onSubmit={this.onSubmit}>
      <div style = {{fontSize:'20px' , color:"white", top:'80px'}}>
     <h1 > THE FOR RESPONSES </h1>
+    
      {this.state.forResponses_.map (forResponse =>
-     <p>{forResponse}</p>
+    
 
+      <p style = {{textAlign:'center',position:"relative",right:'480px'}}>{forResponse}</p>
+   
      )}
      <div style={this.styleBottom()} >
 
@@ -116,12 +129,12 @@ export class addResponse extends Component {
                  <input
                  type="text"
                  name="forResponses" 
-                 style={{flex: '10' , padding: '5px',width:'280px',color:"black"}}
+                 style={{flex: '10' , padding: '5px',position: "absoulte", width: "50%",bottom: "2px",color:"black"}}
                  placeholder='Write your response here if you are with...'
                  value={this.state.forResponses}
                  onChange={this.onChange}
                  />
-                 
+                 <b>    </b>
                  <input 
                   type="Submit" 
                   value="Add my opinion"
@@ -132,10 +145,12 @@ export class addResponse extends Component {
          
      </div>
      <form onSubmit={this.onSubmit}></form>
-     <div style = {{fontSize:'20px' , color:"white" ,position:"absolute",right:'10px', top:'120px'}}>
+     <div style = {{fontSize:'20px' , color:"white" ,position:"absolute",right:'10px', top:'160px'}}>
     <h1 > THE AGAINST RESPONSES </h1>
      {this.state.againstResponses_.map (againstResponse =>
-     <p>{againstResponse}</p>
+     <center>
+
+     <p>{againstResponse}</p> </center>
 
      )}
      </div>
@@ -143,12 +158,12 @@ export class addResponse extends Component {
           <input
                  type="text"
                  name="againstResponses" 
-                 style={{flex: '10' , padding: '5px',position: "relative", width: "50%",bottom: "2px",color:"black"}}
+                 style={{flex: '10' , padding: '5px',position: "absoulte", width: "50%",bottom: "2px",color:"black"}}
                  placeholder='Write your response here if you are against...'
                  value={this.state.againstResponses}
                  onChange={this.onChange}
                  />
-                 
+                 <b>    </b>
                  <input 
                   type="Submit" 
                   value="Add my opinion"

@@ -33,7 +33,8 @@ function mapDispatchToProps(dispatch) {
 const styles = theme => ({
   root: {
     display: "flex",
-    flexWrap: "wrap"
+    flexWrap: "wrap",
+    background: 'white'
   },
   margin: {
     margin: theme.spacing.unit
@@ -54,14 +55,14 @@ class InputAdornments extends React.Component {
     errormessgae: ""  };
 
   handleClick = async event => {
-    const Users = await axios.post("http://localhost:5000/api/users/authenticate",{
+    const Users = await axios.post("http://localhost:5000/api/Users/authenticate",{
         email : this.state.email,
         password : this.state.password      
     });
     if (Users.data.token !== null)
     {
       this.props.signin(Users.data.token, Users.data.usertype,Users.data.id);
-      this.props.history.push("/debates");
+      this.props.history.push("/");
     }else 
     this.setState({
       errormessgae: "Incorrect Email or Password please try again"

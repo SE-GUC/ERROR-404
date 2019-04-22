@@ -46,6 +46,7 @@ class logOut extends React.Component {
     } else {
       this.props.signout();
       this.props.history.push("/");
+      return(<></>)
     }
   }
 }
