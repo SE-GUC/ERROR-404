@@ -11,6 +11,9 @@ const buttonStyle = {
   display: "flex"
 };
 
+const handleLogOut = () => {
+  console.log("Signed Out Successfully");
+};
 const toolbar = props => (
   <header className="toolbar">
     <nav className="toolbar__navigation">
@@ -54,7 +57,7 @@ const toolbar = props => (
             <a href="/">HUB</a>
           </li>
           <li>
-            <a href="/">LOG OUT</a>
+            <a href="/signout">LOG OUT</a>
           </li>
 
           {/* <form>

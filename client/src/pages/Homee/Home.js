@@ -142,31 +142,34 @@ export class Home extends Component {
         <section id="four" className="wrapper style2 special">
           <div className="inner">
             <header className="major narrow">
-              <h2>Get in touch</h2>
+              <h2
+                style={{
+                  textAlign: "center",
+                  position: "relative",
+                  left: "250px"
+                }}
+              >
+                It's better to debate.A Question Without setting it than to
+                settle a question without debating it.
+              </h2>
               <p />
             </header>
             <form action="#" method="POST">
-              <div className="container 75%">
-                <div className="row uniform 50%">
-                  <div className="6u 12u$(xsmall)">
-                    <input name="name" placeholder="Name" type="text" />
-                  </div>
-                  <div className="6u$ 12u$(xsmall)">
-                    <input name="email" placeholder="Email" type="email" />
-                  </div>
-                  <div className="12u$">
-                    <textarea name="message" placeholder="Message" rows="4" />
-                  </div>
-                </div>
-              </div>
-              <ul className="actions">
-                <li>
-                  <input type="submit" className="special" value="Submit" />
-                </li>
-                <li>
-                  <input type="reset" className="alt" value="Reset" />
-                </li>
-              </ul>
+              {/* <p>
+                We live in a world of diversity, diversity of culture, diversity
+                of belief, diversity of thought. When we ask ourselves the
+                important questions we reach many important conclusions but it
+                is through constantly communicating with one another, constantly
+                trying to understand and at the same time influence that we can
+                together shape as satisfying a possible resolution. TIQ is a
+                debate club, where we strive to produce dialogue in it's most
+                exciting form, up on stage, going head to head with other
+                people. There is nothing more remarkable than the free flowing
+                of words carrying ideas, ideas that prevail with the passion,
+                steadiness and charisma of those who deliver them. If riveting
+                debate is something you long to learn and participate in then
+                here is your home.
+              </p> */}
             </form>
           </div>
         </section>
@@ -199,7 +202,7 @@ export class Home extends Component {
                 </li> */}
             </ul>
             <ul className="copyright">
-              <li>&copy; Untitled.</li>
+              <li>&copy; ERROR 404.</li>
               <li>
                 Images: <a href="http://unsplash.com">Unsplash</a>.
               </li>

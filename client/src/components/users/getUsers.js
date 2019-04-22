@@ -4,6 +4,7 @@ import axios from "axios";
 import DeleteUser from "./DeleteUser";
 import DetailedExpansionPanel from "./DetailedExpansionPanel";
 import FormDialog from "./FormDialog";
+import Toolbar from "../../layout/Toolbar/Toolbar";
 
 class GetUsers extends Component {
   constructor() {
@@ -43,6 +44,7 @@ class GetUsers extends Component {
   };
 
   handleSubmit = async () => {
+    console.log("Hnnna Ahpoooo");
     console.log(this.props.user._id);
     const update = axios.put(
       "http://localhost:5000/api/Users/update/" + this.props.user._id,
@@ -65,15 +67,20 @@ class GetUsers extends Component {
 
   render() {
     return (
-      <div className="center-div">
-        <ul>
-          <h1>Users Information</h1>
-
-          {this.state.users && (
-            <DeleteUser users={this.state.users} deleteUser={this.deleteUser} />
-          )}
-        </ul>
-      </div>
+      <>
+        <Toolbar />
+        <div className="center-div">
+          <h1>OUR PEOPLE</h1>
+          <ul>
+            {this.state.users && (
+              <DeleteUser
+                users={this.state.users}
+                deleteUser={this.deleteUser}
+              />
+            )}
+          </ul>
+        </div>
+      </>
     );
   }
 }

@@ -36,7 +36,7 @@ class Chatbars extends Component {
 
   render() {
     console.log(this.props.usertype);
-    if (this.props.token == null) {
+    if (this.props.token === null) {
       return (
         <div>
           <div class="thumbnails">
@@ -45,7 +45,7 @@ class Chatbars extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  href="http://localhost:3000/signin"
+                  onClick={() => (document.location.href = "/signin")}
                   className="btn"
                 >
                   Sign In

@@ -16,7 +16,7 @@ export class NavbarSignedIn extends Component {
                 <a className="nav-link" href="http://localhost:3000/Profile">Profile</a>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/">Logout</a>     
+                <a className="nav-link" href="http://localhost:3000/signout">Logout</a>     
               </li>
             </ul>
           </div>

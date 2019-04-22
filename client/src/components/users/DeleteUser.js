@@ -1,16 +1,15 @@
 import React, { Component } from "react";
-import OurPeopleAdmin from "../../pages/Homee/ourPeople/OurPeopleAdmin";
-
-// import ourPeopleUser from "../../pages/Homee/ourPeople/ourPeopleUser";
+import OurPeople from "../../pages/Homee/ourPeople/OurPeople";
 
 import DetailedExpansionPanel from "./DetailedExpansionPanel";
 
 export class DeleteUser extends Component {
   render() {
     console.log(this.props.users);
+
     return this.props.users.map(user => (
       <div>
-        <OurPeopleAdmin
+        <OurPeople
           key={user._id}
           id={user._id}
           user={user}

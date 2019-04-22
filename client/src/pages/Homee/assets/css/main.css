@@ -1734,7 +1734,7 @@ body.is-loading *:after {
 }
 
 /* Type */
-
+/* 
 body {
   background-color: #fff;
   color: #777;
@@ -2305,6 +2305,7 @@ form.alt select,
 form.alt textarea {
   background-color: transparent;
 }
+*/
 
 /* Box */
 
@@ -2706,7 +2707,7 @@ button,
   white-space: nowrap;
 }
 
-input[type="submit"].icon,
+/* input[type="submit"].icon,
 input[type="reset"].icon,
 input[type="button"].icon,
 button.icon,
@@ -2817,7 +2818,7 @@ input[type="button"]:active,
 button:active,
 .button:active {
   background-color: #1b292b;
-}
+} */
 
 input[type="submit"].special,
 input[type="reset"].special,
@@ -2859,7 +2860,7 @@ button.alt,
   box-shadow: #410c12;
   color: #410c12 !important;
 }
-
+/* 
 input[type="submit"].alt:hover,
 input[type="reset"].alt:hover,
 input[type="button"].alt:hover,
@@ -2874,11 +2875,11 @@ input[type="button"].alt:active,
 button.alt:active,
 .button.alt:active {
   background-color: rgba(144, 144, 144, 0.2);
-}
+} */
 
 /* Feature */
 
-.feature {
+/* .feature {
   display: -moz-flex;
   display: -webkit-flex;
   display: -ms-flex;
@@ -3010,6 +3011,7 @@ button.alt:active,
     width: 100%;
   }
 }
+*/
 
 /* Wrapper */
 

@@ -107,24 +107,39 @@ class Debates extends Component {
     const { classes } = this.props;
     if (this.props.token === null) {
       return (
-        <>
-          <ToolBar />
-          <div className="center-div">
-            <h1>You need to sign in first to view this content</h1>
-            <Button
-              variant="contained"
-              href="http://localhost:3000/signin"
-              className={classes.button}
-            >
-              Sign In
-            </Button>
+        <div>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
           </div>
-        </>
+        </div>
+        // <>
+        //   <ToolBar />
+        //   <div className="center-div">
+        //     <h1>You need to sign in first to view this content</h1>
+        //     <Button
+        //       variant="contained"
+        //       href="http://localhost:3000/signin"
+        //       className={classes.button}
+        //     >
+        //       Sign In
+        //     </Button>
+        //   </div>
+        // </>
       );
     }
     console.log(this.props.usertype);
     const auth = this.props.usertype === "TIQadmin";
-
     if (auth) {
       return (
         <>

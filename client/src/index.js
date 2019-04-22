@@ -5,6 +5,7 @@ import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import SignIn from "./components/signin/SignIn";
+import SignOut from "./components/signout/signout";
 import FAQ from "./components/faq/faq/FAQ";
 import FAQU from "./components/faq/faq/FAQU";
 import Question from "./components/faq/question/Question";
@@ -32,14 +33,14 @@ import store from "./store";
 import { CreateUser } from "./components/users/CreateUser";
 
 //Nada//---------------------------
-import ourPeopleAdmin from "./pages/Homee/ourPeople/OurPeopleAdmin";
-import ourPeopleUser from "./pages/Homee/ourPeople/ourPeopleUser";
+import ourPeople from "./pages/Homee/ourPeople/OurPeople";
 
 import Score from "./pages/Score";
 import Homee from "./pages/Homee/Home";
 import AllEvents from "./pages/Homee/AllEvents";
 import Toolbar from "./layout/Toolbar/Toolbar";
 import getUsers from "./components/users/getUsers";
+
 import { saveState } from "./localStorage";
 
 store.subscribe(() => {
@@ -55,8 +56,7 @@ ReactDOM.render(
           <Route exact path="/" component={App} />
 
           <Route exact path="/Homee" component={Homee} />
-          <Route exact path="/ourPeopleUser" component={ourPeopleUser} />
-          <Route exact path="/ourPeopleAdmin" component={ourPeopleAdmin} />
+          <Route exact path="/ourPeople" component={ourPeople} />
 
           <Route exact path="/AllEvents" component={AllEvents} />
           <Route exact path="/TIQHome" component={Homee} />
@@ -93,6 +93,7 @@ ReactDOM.render(
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />
           <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signout" component={SignOut} />
           <Route component={Notfound} />
         </Switch>
       </div>

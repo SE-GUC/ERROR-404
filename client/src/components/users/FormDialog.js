@@ -8,7 +8,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
-import "../../pages/Homee/ourPeople/ourPeople.css";
+// import "../../pages/Homee/ourPeople/ourPeople.css";
 
 class FormDialog extends React.Component {
   constructor(props) {
@@ -16,11 +16,12 @@ class FormDialog extends React.Component {
     this.state = {
       open: false,
       firstName: this.props.user.firstName,
-      lastName: null,
-      birthDate: null,
-      bio: null,
-      clubs: null,
-      din: null,
+      lastName: this.props.user.lastName,
+      birthDate: this.props.user.birthDate,
+      bio: this.props.user.bio,
+      clubs: this.props.user.clubs,
+      din: this.props.user.din,
+      dor: this.props.user.dor,
       Error: ""
     };
     this.handleClickOpen = this.handleClickOpen.bind(this);
@@ -40,37 +41,21 @@ class FormDialog extends React.Component {
   };
 
   handleSubmit = () => {
-    console.log(this.state.firstName);
-    console.log(this.state.lastName);
-    console.log(this.state.bio);
-    console.log(this.state.firstName);
-    //   console.log(this.state.birthDate);
-    console.log(this.state.clubs);
-    console.log(this.props.user.id);
     axios
-      .put("http://localhost:5000/api/Users/update/" + this.props.user.id, {
+      .put("http://localhost:5000/api/Users/update/" + this.props.user._id, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         bio: this.state.bio,
-        birthDate: this.setState.birthDate,
+        birthDate: this.state.birthDate,
         clubs: this.state.clubs,
         din: this.state.din,
         dor: this.state.dor
       })
       .then(res => console.log(res))
       .catch(err => console.log(err.message));
-    // console.log("Ammmmmmmmmmmmmmmmmmmmmmmmarrr");
-    // if (Object.keys(update.data)[0] === "err")
-    //   this.setState({ Error: "Invalid/Missing Information" });
-    // else window.location.reload();
-    /*
-     * axios ... put whatver using this.state.firstName, this.staet.lastName
-     */
   };
 
   render() {
-    console.log("hey");
-    console.log(this.props.user.user.firstName);
     return (
       <div>
         <div />
@@ -89,6 +74,7 @@ class FormDialog extends React.Component {
           <DialogTitle id="form-dialog-title">Update Profile</DialogTitle>
           <DialogContent>
             <DialogContentText />
+
             <TextField
               onChange={e => {
                 this.setState({
@@ -102,6 +88,7 @@ class FormDialog extends React.Component {
               type="FirstName"
               defaultValue={this.props.user.firstName}
             />
+
             <TextField
               onChange={e => {
                 this.setState({
@@ -115,17 +102,19 @@ class FormDialog extends React.Component {
               type="LastName"
               defaultValue={this.props.user.lastName}
             />
+
             <TextField
               onChange={e => {
                 this.setState({
-                  date: e.target.value
+                  birthDate: e.target.value
                 });
               }}
               autoFocus
               margin="dense"
-              id="date"
-              type="date"
-              defaultValue={this.props.user.date}
+              id="birthDate"
+              label="birthDate"
+              type="birthDate"
+              defaultValue={this.props.user.birthDate}
             />
 
             <TextField
@@ -189,7 +178,7 @@ class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               CANCEL
             </Button>
-            <Button onClick={() => this.handleSubmit()} color="primary">
+            <Button onClick={() => this.handleSubmit()} color="default">
               UPDATE
             </Button>
           </DialogActions>

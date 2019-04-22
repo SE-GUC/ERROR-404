@@ -1150,7 +1150,7 @@ button.style3:active,
 
 /* Banner */
 
-/* #banner {
+#banner1 {
   -moz-align-items: center;
   -webkit-align-items: center;
   -ms-align-items: center;
@@ -1175,13 +1175,13 @@ button.style3:active,
   overflow: hidden;
 }
 
-#banner .inner {
+#banner1 .inner {
   text-align: center;
   position: relative;
   z-index: 2;
 }
 
-#banner h1 {
+#banner1 h1 {
   color: #fff;
   font-size: 5em;
   font-weight: 400;
@@ -1190,47 +1190,47 @@ button.style3:active,
 }
 
 @media screen and (max-width: 980px) {
-  #banner h1 {
+  #banner1 h1 {
     font-size: 5em;
   }
 }
 
 @media screen and (max-width: 736px) {
-  #banner h1 {
+  #banner1 h1 {
     font-size: 3em;
   }
 }
 
-#banner p {
+#banner1 p {
   color: rgba(255, 255, 255, 0.85);
   font-size: 1.5em;
   font-weight: 300;
 }
 
 @media screen and (max-width: 980px) {
-  #banner p {
+  #banner1 p {
     font-size: 1.5em;
   }
 }
 
 @media screen and (max-width: 480px) {
-  #banner p {
+  #banner1 p {
     font-size: 1.25em;
   }
 }
 
-#banner a {
+#banner1 a {
   color: rgba(255, 255, 255, 0.75);
   text-decoration: none;
   border-bottom: 1px dotted;
 }
 
-#banner a:hover {
+#banner1 a:hover {
   color: #fff;
   border: none;
 }
 
-#banner .more {
+#banner1 .more {
   background-image: url("../components/images/arrow.svg");
   background-position: center 1.35em;
   background-repeat: no-repeat;
@@ -1248,13 +1248,13 @@ button.style3:active,
   margin: 0 auto 2em auto;
 }
 
-#banner .more:hover {
+#banner1 .more:hover {
   background-color: rgba(255, 255, 255, 0.05);
   border: 1px solid #fff;
   color: #fff;
 }
 
-#banner video {
+#banner1 video {
   -moz-transform: translateX(50%) translateY(50%);
   -webkit-transform: translateX(50%) translateY(50%);
   -ms-transform: translateX(50%) translateY(50%);
@@ -1269,7 +1269,7 @@ button.style3:active,
   overflow: hidden;
 }
 
-#banner:before {
+#banner1:before {
   -moz-transition: opacity 3s ease;
   -webkit-transition: opacity 3s ease;
   -ms-transition: opacity 3s ease;
@@ -1291,31 +1291,32 @@ button.style3:active,
 }
 
 @media screen and (max-width: 1280px) {
-  #banner video {
+  #banner1 video {
     display: none;
   }
 }
 
 @media screen and (max-width: 980px) {
-  #banner br {
+  #banner1 br {
     display: none;
   }
 }
 
 @media screen and (max-width: 736px) {
-  #banner {
+  #banner1 {
     min-height: 0;
     padding: 6em 2em 4em 2em;
   }
 
-  #banner br {
+  #banner1 br {
     display: none;
   }
 }
 
-body.is-loading #banner:before {
+body.is-loading #banner1:before {
   opacity: 1;
-} */
+}
+*/
 
 /* Main */
 
