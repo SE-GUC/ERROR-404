@@ -128,14 +128,7 @@ export class addResponse extends Component {
                             </div> */}
 
         <form onSubmit={this.onSubmit}>
-          <div
-            style={{
-              fontSize: "20px",
-              color: "black",
-              top: "80px",
-              position: "absoulte"
-            }}
-          >
+          <div style={{ fontSize: "20px", color: "black", top: "80px" }}>
             <h1> THE FOR RESPONSES </h1>
 
             {this.state.forResponses_.map(forResponse => (
@@ -181,7 +174,7 @@ export class addResponse extends Component {
             <div
               style={{
                 fontSize: "20px",
-                color: "white",
+                color: "black",
                 position: "absolute",
                 right: "10px",
                 top: "160px"

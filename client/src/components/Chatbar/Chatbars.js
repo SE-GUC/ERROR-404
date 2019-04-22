@@ -4,6 +4,7 @@ import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import Background from "../../Images/background.jpeg";
 import Logo from "../images/debate2.jpg";
+import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -13,10 +14,11 @@ class Chatbars extends Component {
   constructor() {
     super();
     this.state = {
-      chatbars: []
+      chatbars: [],
+      searchkey: null
     };
   }
-
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
       .then(res => res.json())
@@ -36,7 +38,7 @@ class Chatbars extends Component {
 
   render() {
     console.log(this.props.usertype);
-    if (this.props.token === null) {
+    if (this.props.token == null) {
       return (
         <div>
           <div class="thumbnails">
@@ -91,6 +93,35 @@ class Chatbars extends Component {
           >
             UPDATE AND DELETE
           </button>
+          <div style={{ right: "0", bottom: "0" }}>
+            <button
+              className="btn"
+              style={{ position: "absolute", right: "0", bottom: "0" }}
+              onClick={() =>
+                (document.location.href = `chatbars/search/${
+                  this.state.searchkey
+                }`)
+              }
+            >
+              Search
+            </button>
+            <input
+              type="text"
+              name="searchkey"
+              style={{
+                flex: "10",
+                padding: "5px",
+                position: "fixed",
+                // width: "50%",
+                right: "100px",
+                bottom: "0",
+                color: "black"
+              }}
+              placeholder="Search Debate Live"
+              value={this.state.searchkey}
+              onChange={this.onChange}
+            />
+          </div>
           {/* <ul style={{color:"white"}}>
         {this.state.chatbars.map(chatbar => 
           <a key={chatbar._id} href={'/addResponse/'+chatbar._id}> {chatbar.debateLiveTitle} {chatbar.date} <br></br> </a>

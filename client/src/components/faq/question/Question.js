@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Questions from './Questions';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
+import { connect } from "react-redux";
+import Button from '@material-ui/core/Button';
+import Navbar from '../../layout/Navbar';
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -22,7 +26,7 @@ class Question extends Component {
    
   }
   get = () => {
-    axios.get('http://localhost:5000/api/Questions/user/' +"blala" )
+    axios.get('http://localhost:5000/api/Questions/user/' +this.props.id )
     .then(res => this.setState({ Questions: res.data.data }))
     }
     
@@ -31,7 +35,7 @@ class Question extends Component {
       console.log("pp")
       axios.post('http://localhost:5000/api/Questions/ask',
       { "question":ask,
-        "user":"blala"
+        "user":this.props.id
       })
       
     
@@ -52,25 +56,51 @@ onSubmit = (e) => {
 
 
   render() {
+
+    if (this.props.token == null) {
+      return (
+        <div>
+          <Navbar/>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                  style={{backgroundColor:"#70c7be"}}
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    else{
     return (
         <div className="Questions">
-          <div className="container">
-            <h1>Your recently asked Questions</h1>      
-            <Questions  Questions={this.state.Questions}  />
-             <br></br>             <br></br>
+         <NavbarSignedIn />
 
-            <form onSubmit={this.onSubmit} >
-            <p>Another Question ??   </p>
-            <label>
+          <div className="container">
+            <h1>YOUR QUESTIONS</h1>   
+            <br></br>   
+            <Questions  Questions={this.state.Questions}  />
+
+            <form  onSubmit={this.onSubmit} >
+            <p style={{fontSize:'30px'}}>Another Question ??   </p>
+            <label style={{paddingBottom:'40px'}}>
                     <input
                        type="text"
                         name='ask'
                         value={this.state.ask}
+                        style={{width:'300px'}}
+                        placeholder="Add Question ..."
+
                         onChange={this.onChange}/>
                 </label>
-
-            {/* <button    onClick={this.ask(this.state.ask)} >Send</button> */}
-      
             <input 
           type="submit" 
           value="Submit" 
@@ -81,8 +111,13 @@ onSubmit = (e) => {
         </div>
    
     );
+    }
   }
 }
 
-export default Question;
-	
+const Form = connect(
+  mapStateToProps,
+  null
+)(Question);
+export default Form;
+		

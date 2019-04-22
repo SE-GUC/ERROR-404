@@ -19,6 +19,7 @@ import deleteChatBar from "./components/Chatbar/DeleteChatBar";
 import addResponse from "./components/Chatbar/addResponse";
 
 import Chatbars from "./components/Chatbar/Chatbars";
+import SeachDebateLive from "./components/Chatbar/searchChatbBar";
 import Clubs from "./Clubs";
 
 import Contents from "./Contents";
@@ -42,6 +43,7 @@ import Toolbar from "./layout/Toolbar/Toolbar";
 import getUsers from "./components/users/getUsers";
 
 import { saveState } from "./localStorage";
+import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 
 store.subscribe(() => {
   saveState(store.getState());
@@ -79,6 +81,11 @@ ReactDOM.render(
           <Route exact path="/ContactUs" component={ContactUs} />
           <Route exact path="/Clubs" component={Clubs} />
           <Route exact path="/chatbars" component={Chatbars} />
+          <Route
+            exact
+            path="/chatbars/search/:title"
+            component={SearchDebateLive}
+          />
           <Route exact path="/Articles" component={Articles} />
           <Route exact path="/faq" component={FAQU} />
           <Route exact path="/faqAdmin" component={FAQ} />
