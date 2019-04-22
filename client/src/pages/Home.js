@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-
+import "../layout/Footer/footer.css";
+import "./Home.css";
 import Toolbar from "../layout/Toolbar/Toolbar";
 import Complexbutton from "../layout/Buttons/Complexbutton";
-
-import "./Home.css";
+import CustomizedTable from "../layout/Table/CustomizedTable";
+import { tsImportType } from "@babel/types";
 
 export class Home extends Component {
   render() {

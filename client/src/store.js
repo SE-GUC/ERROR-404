@@ -1,6 +1,7 @@
 //Imports
 import { createStore, applyMiddleware } from "redux";
 import dotenv from 'dotenv'
+import { loadState } from "./localStorage";
 dotenv.config()
 
 //Actions
@@ -49,6 +50,7 @@ function reducer(state = initialState, action) {
 }
 
 //Store
-const store = createStore(reducer);
+const persistedState = loadState ();
+const store = createStore(reducer , persistedState);
 
 export default store;

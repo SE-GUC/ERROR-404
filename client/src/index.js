@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
 import App from "./App";
+import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
-import CreateDebate from "./components/debates/CreateDebate";
 import SignIn from "./components/signin/SignIn";
 import FAQ from "./components/faq/faq/FAQ";
 import FAQU from "./components/faq/faq/FAQU";
@@ -18,7 +17,7 @@ import SearchDebateCategory from "./components/debates/searchcategory";
 import deleteChatBar from "./components/Chatbar/DeleteChatBar";
 import addResponse from "./components/Chatbar/addResponse";
 
-// import Chatbars from "./components/chatBar/Chatbars";
+import Chatbars from "./components/Chatbar/Chatbars";
 import Clubs from "./Clubs";
 
 import Contents from "./Contents";
@@ -35,29 +34,32 @@ import { CreateUser } from "./components/users/CreateUser";
 //Nada//---------------------------
 import ourPeopleAdmin from "./pages/Homee/ourPeople/OurPeopleAdmin";
 import ourPeopleUser from "./pages/Homee/ourPeople/ourPeopleUser";
-import Home from "./pages/Home";
+
 import Score from "./pages/Score";
 import Homee from "./pages/Homee/Home";
 import AllEvents from "./pages/Homee/AllEvents";
 import Toolbar from "./layout/Toolbar/Toolbar";
 import getUsers from "./components/users/getUsers";
+import { saveState } from "./localStorage";
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <div>
-          <Toolbar />
-        </div>
         <hr />
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/Home" component={Home} />
+
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeopleUser" component={ourPeopleUser} />
           <Route exact path="/ourPeopleAdmin" component={ourPeopleAdmin} />
 
           <Route exact path="/AllEvents" component={AllEvents} />
+          <Route exact path="/TIQHome" component={Homee} />
           <Route exact path="/Score" component={Score} />
           <Route exact path="/createuser" component={CreateUser} />
           <Route exact path="/getUsers" component={getUsers} />
@@ -75,16 +77,16 @@ ReactDOM.render(
             component={SearchDebateCategory}
           />
           <Route exact path="/ContactUs" component={ContactUs} />
-          <Route exact path="/createDebate" component={CreateDebate} />
           <Route exact path="/Clubs" component={Clubs} />
-          {/* <Route exact path="/chatbars" component={Chatbars} /> */}
+          <Route exact path="/chatbars" component={Chatbars} />
           <Route exact path="/Articles" component={Articles} />
           <Route exact path="/faq" component={FAQU} />
           <Route exact path="/faqAdmin" component={FAQ} />
           <Route exact path="/userquestions" component={Question} />
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
-          <Route exact path="/addResponse" component={addResponse} />
+
+          <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
 
           <Route exact path="/user" component={SignedInUser} />
