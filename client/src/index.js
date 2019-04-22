@@ -17,8 +17,6 @@ import SearchDebateDate from "./components/debates/searchdate";
 import SearchDebateCategory from "./components/debates/searchcategory";
 import deleteChatBar from "./components/Chatbar/DeleteChatBar";
 import addResponse from "./components/Chatbar/addResponse";
-import Home from "./pages/Home";
-import Score from "./pages/Score";
 
 import Chatbars from "./components/Chatbar/Chatbars";
 import SeachDebateLive from "./components/Chatbar/searchChatbBar";
@@ -34,7 +32,16 @@ import { Provider } from "react-redux";
 import store from "./store";
 
 import { CreateUser } from "./components/users/CreateUser";
-import GetUsers from "./components/users/getUsers";
+
+//Nada//---------------------------
+import ourPeople from "./pages/Homee/ourPeople/OurPeople";
+
+import Score from "./pages/Score";
+import Homee from "./pages/Homee/Home";
+import AllEvents from "./pages/Homee/AllEvents";
+import Toolbar from "./layout/Toolbar/Toolbar";
+import getUsers from "./components/users/getUsers";
+
 import { saveState } from "./localStorage";
 import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 
@@ -49,9 +56,18 @@ ReactDOM.render(
         <hr />
         <Switch>
           <Route exact path="/" component={App} />
-          <Route exact path="/TIQHome" component={Home} />
+
+          <Route exact path="/Homee" component={Homee} />
+          <Route exact path="/ourPeople" component={ourPeople} />
+
+          <Route exact path="/AllEvents" component={AllEvents} />
+          <Route exact path="/TIQHome" component={Homee} />
           <Route exact path="/Score" component={Score} />
+          <Route exact path="/createuser" component={CreateUser} />
+          <Route exact path="/getUsers" component={getUsers} />
+
           <Route exact path="/debates" component={Debates} />
+
           <Route
             exact
             path="/debates/searchbydate/:date"
@@ -76,10 +92,10 @@ ReactDOM.render(
           <Route exact path="/userquestions" component={Question} />
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
-          <Route exact path="/createuser" component={CreateUser} />
+
           <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
-          <Route exact path="/getusers" component={GetUsers} />
+
           <Route exact path="/user" component={SignedInUser} />
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />

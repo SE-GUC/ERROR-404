@@ -121,7 +121,6 @@ class Chatbars extends Component {
               value={this.state.searchkey}
               onChange={this.onChange}
             />
-
           </div>
           {/* <ul style={{color:"white"}}>
         {this.state.chatbars.map(chatbar => 

@@ -4,8 +4,8 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
 const jwt = require("jsonwebtoken");
-const dotenv = require('dotenv')
-dotenv.config()
+const dotenv = require("dotenv");
+dotenv.config();
 
 //const tokenKey = require('../../config/keys').secretOrKey
 
@@ -366,7 +366,7 @@ router.get("/", async (req, res) => {
 });
 
 //uppdate scores dynamically
-router.put("/:id/:score", async (req, res) => {
+router.put("/updateScores/:id/:score", async (req, res) => {
   const id = req.params.id;
   const addedScore = req.params.score;
   const User = await user.findOneAndUpdate(
@@ -436,6 +436,7 @@ router.delete("/:id", async (req, res) => {
 // Update a user(alumni or member )
 router.put("/update/:id", async (req, res) => {
   // try {
+  console.log("heyyyyyyyyyyyyyyyy");
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "user does not exist" });
@@ -497,9 +498,8 @@ router.post("/authenticate", async (req, res) => {
       r.id = fuser._id;
     }
     return res.json(r);
-    
   } catch (error) {
-    res.json(r)
+    res.json(r);
   }
 });
 
