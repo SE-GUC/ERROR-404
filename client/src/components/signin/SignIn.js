@@ -62,7 +62,7 @@ class InputAdornments extends React.Component {
     if (Users.data.token !== null)
     {
       this.props.signin(Users.data.token, Users.data.usertype,Users.data.id);
-      this.props.history.push("/debates");
+      this.props.history.push("/");
     }else 
     this.setState({
       errormessgae: "Incorrect Email or Password please try again"

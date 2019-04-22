@@ -5,6 +5,7 @@ import "./App.css";
 import Debates from "./components/debates/Debates";
 import Notfound from "./components/notfound/NotFound";
 import SignIn from "./components/signin/SignIn";
+import SignOut from "./components/signout/signout"
 import FAQ from "./components/faq/faq/FAQ";
 import FAQU from "./components/faq/faq/FAQU";
 import Question from "./components/faq/question/Question";
@@ -76,6 +77,7 @@ ReactDOM.render(
           <Route exact path="/admin" component={SignedInAdmin} />
           <Route exact path="/adminedits" component={AdminEdits} />
           <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signout" component={SignOut} />
           <Route component={Notfound} />
         </Switch>
       </div>
