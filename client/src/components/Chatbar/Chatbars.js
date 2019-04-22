@@ -40,7 +40,6 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
       .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] }));
       
   }
-  
   render() {
     
     return (
@@ -70,10 +69,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             </form>
         <ul>
         {this.state.chatbars.map(chatbar => 
-          <li key={chatbar._id}>{chatbar.debateLiveTitle} {chatbar.date}
-          
-          </li>
-          
+          <li key={chatbar._id}>{chatbar.debateLiveTitle} {chatbar.date} </li>
         )}
         </ul>
       
