@@ -22,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-class QuestionItem extends React.Component {
+class FaqUItem extends React.Component {
   state = {
     expanded: null,
   };
@@ -34,7 +34,7 @@ class QuestionItem extends React.Component {
   };
 
   render() {
-    const { _id,question,answer} = this.props.question;
+    const { _id,question,answer} = this.props.faq;
 
     const { classes } = this.props;
     const { expanded } = this.state;
@@ -94,10 +94,10 @@ const questionStyle={
     borderLeft:'20px solid #b2ebf2',
     background:'#eeeeee'
   }
-  QuestionItem.propTypes = {
+  FaqUItem.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(QuestionItem);
+export default withStyles(styles)(FaqUItem);
 
 
