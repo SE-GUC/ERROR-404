@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import deleteUser from "./DeleteUser";
 export class User extends Component {
   render() {
     return (

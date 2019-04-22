@@ -15,7 +15,7 @@ import "./Debates.css";
 import Typography from "@material-ui/core/Typography";
 import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import { connect } from "react-redux";
-import ToolBar from "../../layout/Toolbar/Toolbar"
+import ToolBar from "../../layout/Toolbar/Toolbar";
 
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
@@ -35,10 +35,8 @@ const styles = theme => ({
     color: "#8f1814",
     background: "#e2a325",
     marginRight: theme.spacing.unit
-
   }
 });
-
 
 class Debates extends Component {
   constructor(props) {
@@ -61,10 +59,10 @@ class Debates extends Component {
   createDebate = async event => {
     axios
       .post("http://localhost:5000/api/Debates", {
-        title:  this.state.title,
+        title: this.state.title,
         category: this.state.category,
-        date:  this.state.date,
-        info:  this.state.info,
+        date: this.state.date,
+        info: this.state.info,
         description: this.state.description
       })
       .then(response => {
@@ -89,9 +87,7 @@ class Debates extends Component {
   };
   handleDateSearch = () => {
     if (this.state.selecteddate === null) return;
-    this.props.history.push(
-      `debates/searchbydate/${(this.state.selecteddate)}`
-    );
+    this.props.history.push(`debates/searchbydate/${this.state.selecteddate}`);
   };
 
   handleCategorySearch = () => {
@@ -111,7 +107,7 @@ class Debates extends Component {
     const { classes } = this.props;
     return (
       <>
-      <ToolBar />
+        <ToolBar />
         <Dialog
           open={this.state.createopen}
           onClose={this.handleCreateClick}
@@ -176,6 +172,7 @@ class Debates extends Component {
             />
             <Typography paragraph>{this.state.error}</Typography>
           </DialogContent>
+
           <DialogActions>
             <Button onClick={this.handleCreateClick} color="primary">
               Cancel
@@ -187,13 +184,11 @@ class Debates extends Component {
           </DialogActions>
         </Dialog>
 
-
-        <Fab 
+        <Fab
           color="secondary"
           aria-label="Add"
           className={classes.fab2}
           onClick={this.handleCreateClick}
-          
         >
           <AddIcon />
         </Fab>

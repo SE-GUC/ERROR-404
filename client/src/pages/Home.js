@@ -2,19 +2,19 @@ import React, { Component } from "react";
 
 import Toolbar from "../layout/Toolbar/Toolbar";
 import Complexbutton from "../layout/Buttons/Complexbutton";
-import CustomizedTable from "../layout/Table/CustomizedTable";
+
+import "./Home.css";
 
 export class Home extends Component {
   render() {
     return (
       <div>
         <Toolbar />
-
-        <main className="Home__Page" style={{ marginTop: "64px" }}>
-          <header>Ready For The Challange !!</header>
+        <main className="Home_Page_title">
+          <p>READY FOR THE CHALLENGE...!!</p>
         </main>
         <Complexbutton />
-        {/* <CustomizedTable /> */}
+        <div />
       </div>
     );
   }

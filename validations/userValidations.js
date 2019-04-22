@@ -50,16 +50,15 @@ module.exports = {
   },
   updateUserValidation: request => {
     const updateUserSchema = {
-      type: Joi.string(),
+      // type: Joi.string(),
       firstName: Joi.string().min(3),
       lastName: Joi.string().min(3),
       birthDate: Joi.string().regex(
         /[0-3][0-9]\-[0-1][0-2]\-[1-2][0-9][0-9][0-9]/
       ),
       bio: Joi.string(),
-      password: Joi.string().min(8),
-      house: Joi.string(),
-      score: Joi.number(),
+      // password: Joi.string().min(8),
+
       dor: Joi.string(),
       din: Joi.string(),
       clubs: Joi.array()

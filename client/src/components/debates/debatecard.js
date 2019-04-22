@@ -190,6 +190,7 @@ class DebateCard extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
+
         <Card className={classes.card}>
           <CardHeader title={this.props.title} subheader={this.state.date} />
           <CardContent>
@@ -197,6 +198,7 @@ class DebateCard extends React.Component {
               category : {this.props.category}
             </Typography>
           </CardContent>
+
           <CardActions className={classes.actions} disableActionSpacing>
             <IconButton
               aria-label="Delete"
@@ -225,6 +227,7 @@ class DebateCard extends React.Component {
               <ExpandMoreIcon />
             </IconButton>
           </CardActions>
+
           <Collapse in={this.state.expanded} timeout="auto" unmountOnExit>
             <CardContent>
               <Typography paragraph>Description:</Typography>
