@@ -4,7 +4,6 @@ import axios from 'axios';
 import AddContent from './components/Contents/AddContent';
 import DeleteContent from './components/Contents/DeleteContent';
 import UpdatingContents from './components/Contents/UpdatingContents';
-import './App.css';
 
 class Contents extends Component {
   state = {

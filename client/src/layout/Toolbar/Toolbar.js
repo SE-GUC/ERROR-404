@@ -17,7 +17,6 @@ const toolbar = props => (
           <li>
             <a href="/">Profile</a>
           </li>
-
           <li>
             <a href="/">Disciples</a>
           </li>
@@ -37,7 +36,7 @@ const toolbar = props => (
             <a href="/">About</a>
           </li>
           <li>
-            <a href="/">Contact Us</a>
+            <a href="/ContactUs">Contact Us</a>
           </li>
           {/* <li>
             <a href="/">Search</a>
