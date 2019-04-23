@@ -3,6 +3,9 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const router = express.Router();
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 
 //const tokenKey = require('../../config/keys').secretOrKey
 
@@ -87,7 +90,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           bio,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
 
@@ -106,7 +109,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           tiqStatus: "BOA",
-          profilePicture
+          //profilePicture
         });
 
         await User.create(newTiqAdmin);
@@ -141,7 +144,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           bio,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -153,7 +156,7 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-          profilePicture,   
+          //profilePicture,   
           house,
           score,
           din,
@@ -189,7 +192,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           bio,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -201,7 +204,7 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-          profilePicture,            
+          //profilePicture,            
           house,
           score,
           din,
@@ -238,7 +241,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           bio,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
@@ -255,7 +258,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           clubs,
-          profilePicture
+          //profilePicture
         });
         await User.create(newAlumni);
 
@@ -287,7 +290,7 @@ router.post("/register", async (req, res) => {
           bio,
           tiqStatus,
           supervisorType,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const hashedPassword = bcrypt.hashSync(password, salt);
@@ -307,7 +310,7 @@ router.post("/register", async (req, res) => {
           clubs,
           tiqStatus,
           supervisorType,
-          profilePicture
+          //profilePicture
         });
 
         await User.create(newMember);
@@ -337,7 +340,7 @@ router.post("/register", async (req, res) => {
           din,
           dor,
           bio,
-          profilePicture
+          //profilePicture
         } = req.body;
         const salt = bcrypt.genSaltSync(10);
         const cryptedPasswrod = bcrypt.hashSync(password, salt);
@@ -349,7 +352,7 @@ router.post("/register", async (req, res) => {
           bio,
           email,
           password: cryptedPasswrod,
-          profilePicture,              
+          //profilePicture,              
           house,
           score,
           din,
@@ -376,22 +379,29 @@ router.get("/", async (req, res) => {
 });
 
 //uppdate scores dynamically
-//uppdate scores dynamically 
-router.put('/updatescore/:id',async(req,res)=>
-{
- try{   
- const id = req.params.id
- const addedScore = req.body.score
- const usertoupdate = await user.findOneAndUpdate({_id:id},{$inc:{score: addedScore}})
- const updated = await user.findOne({_id:id})
- 
+router.put("/updateScores/:id/:score", async (req, res) => {
+  const id = req.params.id;
+  const addedScore = req.params.score;
+  const User = await user.findOneAndUpdate(
+    { _id: id },
+    { $inc: { score: addedScore } }
+  );
 
- res.json({data:updated})
- }
- catch(error)
- {
-     res.json({msg:"error"})
- }
+  res.json({ msg: "Score updated" });
+});
+
+//get user by id
+router.get("/:id", async (req, res) => {
+  try
+  {
+    const userId = req.params.id;
+    const specificUser = await user.findOne({_id:userId})
+    res.json({data:specificUser})
+  }
+  catch(error)
+  {
+    res.json({msg:"cannot find user"})
+  }
 });
 
 // updating the info/profile of a user
@@ -520,6 +530,7 @@ router.get("/:id", async (req, res) => {
 // Update a user(alumni or member )
 router.put("/update/:id", async (req, res) => {
   // try {
+  console.log("heyyyyyyyyyyyyyyyy");
   const userId = req.params.id;
   const getuser = await user.findOne({ _id: userId });
   if (!getuser) return res.status(404).send({ error: "user does not exist" });
@@ -562,6 +573,27 @@ router.put("/update/:id", async (req, res) => {
       } catch (error) {
         console.log(error);
       }
+  }
+});
+//Authentication
+router.post("/authenticate", async (req, res) => {
+  let r = {
+    token: null,
+    id: null,
+    usertype: null
+  };
+  try {
+    const email = req.body.email;
+    const password = req.body.password;
+    const fuser = await user.findOne({ email: email });
+    if (fuser && bcrypt.compareSync(password, fuser.password)) {
+      r.token = jwt.sign({ sub: fuser._id }, process.env.SECRET);
+      r.usertype = fuser.type;
+      r.id = fuser._id;
+    }
+    return res.json(r);
+  } catch (error) {
+    res.json(r);
   }
 });
 

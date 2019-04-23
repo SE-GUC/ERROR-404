@@ -3,7 +3,11 @@ import React, { Component } from "react";
 import Toolbar from "../layout/Toolbar/Toolbar";
 import axios from "axios";
 import CustomizedTable from "../layout/Table/CustomizedTable";
+import { connect } from "react-redux";
 
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 export class Score extends Component {
   constructor() {
     super();
@@ -22,18 +26,42 @@ export class Score extends Component {
   render() {
     console.log("kiki");
     console.log(this.state.scores);
-    return (
-      <div>
-        <Toolbar />
+    if (this.props.token != null) {
+      return (
+        <div>
+          <Toolbar />
 
-        <main className="Score__page" style={{ marginTop: "64px" }}>
-          <header>Debaters Scores!!</header>
-        </main>
+          <main className="Score__page" style={{ marginTop: "64px" }}>
+            <header>Debaters Scores!!</header>
+          </main>
 
-        <CustomizedTable scores={this.state.scores} />
-      </div>
-    );
+          <CustomizedTable scores={this.state.scores} />
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
   }
 }
-
-export default Score;
+const Form = connect(
+  mapStateToProps,
+  null
+)(Score);
+export default Form;

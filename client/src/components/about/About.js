@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col,Row,Image,Container} from 'react-bootstrap'
 import { yellow, green, blue } from '@material-ui/core/colors';
 import "./About.css"
+import Toolbar from "../../layout/Toolbar/Toolbar"
 class About extends Component { 
       state = {
          BOAs : [],
@@ -60,145 +61,240 @@ class About extends Component {
     }
 
     render(){
-    const BOAList= this.state.BOAs.map((BOA)=>{
-        return(
-            <Col >
-            <Image src={BOA.profilePicture}thumbnail className="image1" />
-            <h5 className="BOAname">{BOA.firstName} {BOA.lastName}</h5>
-            </Col>
+        const BOAList= this.state.BOAs.map((BOA)=>{
+            return(
+                <Col xs={2} >
+                <Image src={BOA.profilePicture}roundedCircle className="image1555" />
+                <div className="center555">
+                <h5 className="BOAname">{BOA.firstName} {BOA.lastName}</h5>
+                </div>
+               
+                </Col>
+                )
+            })
+        const PHLList = this.state.PHLs.map((PHL)=>
+        {
+            return(
+                <Row xs={6} >
+                     <Col lg={true}>
+                     <Image src={PHL.profilePicture} roundedCircle className="image1555"/>
+                     <div className="center555">
+                    <h5 style={{color:yellow,textTransform:"uppercase"}}>{PHL.firstName} {PHL.lastName}</h5> 
+                    </div>
+                    </Col>
+                </Row>
             )
         })
-    const PHLList = this.state.PHLs.map((PHL)=>
-    {
-        return(
-            <Col >
-                 
-                 <Image src={PHL.profilePicture} className="image1"/>
-                <h5 style={{color:yellow,textTransform:"uppercase"}}>{PHL.firstName} {PHL.lastName}</h5> 
-            </Col>
-        )
-    })
-    const MSmember = this.state.MSs.map((MS)=>
-     {
-        return(
-            <Col >
-               <Image src={MS.profilePicture} className="image1" />
-                <h5 style={{color:yellow,textTransform:"uppercase"}}>{MS.firstName} {MS.lastName}</h5>
-                <h4>MARKETING</h4> 
-            </Col>
-        )
-     })
-    const OHLList = this.state.OHLs.map((OHL)=>
-    {
-        return(
-            <Col >
-               <Image src={OHL.profilePicture} className="image1" />
-                <h5 style={{color:yellow,textTransform:"uppercase"}}>{OHL.firstName} {OHL.lastName}</h5> 
-            </Col>
-        )
-    })
-    const DHLList = this.state.DHLs.map((DHL)=>
-    {
-        return(
-            <Col>
-               <Image src={DHL.profilePicture} className="image1" />
-            
-                <h5 style={{color:yellow,textTransform:"uppercase"}}>{DHL.firstName} {DHL.lastName}</h5> 
-            </Col>
-        )
-    })
-
-
-
-    const FSmember = this.state.FSs.map((FS)=>
-    {
-         return(
-            <Col >
-            <Image src={FS.profilePicture} className="image1" />
-             <h5>{FS.firstName} {FS.lastName}</h5>
-             <h4>FUNDRAISING</h4> 
-            </Col>
-         )
-    })
+        const MSmember = this.state.MSs.map((MS)=>
+         {
+            return(
+                <Col >
+                   <Image src={MS.profilePicture} roundedCircle className="image1555" />
+                   <div className="center555">
+                    <h5 style={{color:yellow}}>{MS.firstName} {MS.lastName}</h5>
+                    <h5>MARKETING</h5> 
+                    </div>
+                </Col>
+            )
+         })
+        const OHLList = this.state.OHLs.map((OHL)=>
+        {
+            return(
+                <Row >
+                    <Col lg={true}>
+                   <Image src={OHL.profilePicture} roundedCircle className="image1555" />
+                   <div className="center555">
+                    <h5 style={{color:yellow,textTransform:"uppercase"}}>{OHL.firstName} {OHL.lastName}</h5> 
+                    </div>
+                    </Col>
+                </Row>
+            )
+        })
+        const DHLList = this.state.DHLs.map((DHL)=>
+        {
+            return(
+                <Col xs={3}>
+                   <Image src={DHL.profilePicture} roundedCircle className="image1555" />
+                   <div className="center555">
+                    <h5>{DHL.firstName} {DHL.lastName}</h5> 
+                   </div>
+                </Col>
+            )
+        })
     
-    const LSmember = this.state.LSs.map((LS)=>
-    {
-         return(
-            <Col >
-            <Image src={LS.profilePicture} className="image1" />
-             <h5>{LS.firstName} {LS.lastName}</h5> 
-             <h4>CO-ORDINATION&LOGISTICS</h4>
-            </Col>
-         )
-    })
+    
+    
+        const FSmember = this.state.FSs.map((FS)=>
+        {
+             return(
+                <Col >
+                <Image  src={FS.profilePicture} roundedCircle className="image1555" />
+            
+                 <h5 className="center555">{FS.firstName} {FS.lastName}</h5>
+                 <h5>FUNDRAISING</h5> 
+               
+                </Col>
+             )
+        })
+        
+        const LSmember = this.state.LSs.map((LS)=>
+        {
+             return(
+                <Col >
+                <Image src={LS.profilePicture} roundedCircle className="image1555" />
+                <div className="center555">
+                    <h5 >{LS.firstName} {LS.lastName}</h5> 
+                    <h5>CO-ORDINATION
+                     &LOGISTICS</h5>
+                </div>
+                
+                </Col>
+             )
+        })
+        const RSmember = this.state.RSs.map((RS)=>
+        {
+             return(
+                <Col>
+                <Image src={RS.profilePicture} roundedCircle className="image1555" />
+                <div className="center555">
+                 <h5>{RS.firstName} {RS.lastName}</h5>
+                 <h5>INVESTORS' 
+                     RELATION</h5> 
+                </div>
+             </Col>
+             )
+        })
+        const LSFS = <Row>
+                        <Col xs={6}>
+                            {LSmember}
+                        </Col> 
+                        <Col xs={6}>
+                            {RSmember}
+                            
+                        </Col>
+                    </Row>
+        const MDSmember = this.state.MDSs.map((MDS)=>
+        {
+             return(
+                <Col>
+                
+                <Image class="img-responsive" src={MDS.profilePicture} roundedCircle className="image1555" />
+                 <h5>{MDS.firstName} {MDS.lastName}</h5>
+                 <h5>MEDIA DESGIN</h5>
+                 
+               </Col>
+             )
+        })
+        
+        const MSRS = <Row>
+                        <Col xs={6}>
+                            {MSmember}
+                        </Col> 
+                        <Col xs={6}>
+                        {FSmember}
+                        </Col>
+                    </Row>
+    
+        return(
+         <div>
    
-    const MDSmember = this.state.MDSs.map((MDS)=>
-    {
-         return(
-            <Col>
-            <Image src={MDS.profilePicture} className="image1" />
-             <h5>{MDS.firstName} {MDS.lastName}</h5>
-             <h4>MEDIA DESGIN</h4> 
-         </Col>
-         )
-    })
-    const RSmember = this.state.RSs.map((RS)=>
-    {
-         return(
-            <Col >
-            <Image src={RS.profilePicture} className="image1" />
-             <h5>{RS.firstName} {RS.lastName}</h5>
-             <h4>INVESTORS' RELATION</h4> 
-         </Col>
-         )
-    })
+       <Toolbar/>
+    
+    
 
-    return(
-    <div className="whole"> 
-          <div className="boatitle">
-            <h1 >BOARD OF ADJUDICATORS</h1>
-          </div>
-          <Row>
-              {BOAList}
-          </Row>
-        <Container className="phltitle">
-          <h2 style={{color:blue}}>PEGASUS HOUSE LEADERS</h2>
-        </Container>
-        <Container id="PHLs">
-            <Row>
-            {PHLList}
-            </Row>
-        </Container>
-        <div className = "functiontitle">
-           <h2 >FUNCTION SUPERVISOR</h2>
-        </div>
-        <Container id="FSs">
-        <Row>
-         <Col>{MSmember}</Col>
-         <Col>{FSmember}</Col>
-         <Col>{LSmember}</Col>
-         <Col>{RSmember}</Col>
-         <Col>{MDSmember}</Col>
-         </Row>  
-        </Container>
-        <Container className="ohltitle">
-          <h2 style={{color:green}}>ORION HOUSE LEADERS</h2>
-        </Container>
-        <Container id="OHLs">
-            <Row>
-            {OHLList}
-            </Row>
-        </Container>
-        <Container id="dhltitle">
-            <h1 style={{color:yellow}}>DISCIPLES LEADERS</h1>
-        </Container>
-        <Container id= "dhls">
-            <Row>
-                {DHLList}
-            </Row>
-        </Container>
-    </div>
-    )
+            <div className="whole555"> 
+    
+                <h2 className="about555">First Worlds style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
+                </h2> 
+                  
+             <Container className="V555">   
+                <h1 className="visiontitle555">Our Vision</h1>
+                <h2 className="vision555">"Achieving progress through effective communication and perpetually seeking knowledge"
+    
+                    We live in a world of diversity, diversity of culture, diversity of belief, diversity of thought. When we ask ourselves the important questions we reach many important conclusions but it is through constantly communicating with one another, constantly trying to understand and at the same time influence that we can together shape as satisfying a possible resolution.
+    
+                    TIQ is a debate club, where we strive to produce dialogue in it's most exciting form, up on stage, going head to head with other people. There is nothing more remarkable than the free flowing of words carrying ideas, ideas that prevail with the passion, steadiness and charisma of those who deliver them. If riveting debate is something you long to learn and participate in then here is your home.</h2>
+                </Container>
+                <div>
+                    <h1 className="title555">OUR HIERARCHY</h1>
+                </div>
+                <div className="heirarchy555">
+                    <div className="boatitle555">
+                        <h1 >BOARD OF ADJUDICATORS</h1>
+                    </div>
+                    <Row className="BOAs555">
+                        {BOAList}
+                    </Row>
+    
+                <Container classname="container1555">
+                    <Row>
+                    <Col >
+                        <Container className="phltitle555">
+                        <h2 >PEGASUS HOUSE
+                                LEADERS</h2>
+                        </Container>
+                    </Col>
+                    <Col>
+                        <Container className = "functiontitle555">
+                        <h2 >FUNCTION SUPERVISOR</h2>
+                        </Container>
+                    </Col>
+                    <Col>
+                    <Container className="ohltitle555">
+                    <h2 >ORION HOUSE</h2>
+                        <h2> LEADERS</h2>
+                    </Container>
+                    </Col>
+                    </Row> 
+    
+                    <Row>
+                        <Col xs={1} className="PHLs555">
+                            <Container id="PHLs555">
+                            <Col lg={true}>
+                            {PHLList}
+                            </Col>
+                            </Container>
+                        </Col>
+                        <Col xs={6}  className="super555">
+                            <Container className="FSs555" >
+                                <Container>
+                                    {LSFS}     
+                                </Container>
+                                <Container>
+                                    {MSRS}
+                                </Container>
+                                <Container classname = "center555">
+                                    <Row>
+                                    <Col >{MDSmember}</Col>
+                                    </Row>  
+                                </Container>
+                            </Container>
+                        </Col>
+                        <Col xs={1} className="OHLs555">
+                            <Container id="OHLs555">
+                                <Col>
+                                {OHLList}
+                                </Col>
+                            </Container>
+                        </Col>
+                    </Row>    
+                </Container>
+    
+    
+                    <Container className="dhltitle555">
+                        <h1>DISCIPLES LEADERS</h1>
+                    </Container>
+                    <Container className= "dhls555">
+                        <Row>
+                            {DHLList}
+                        </Row>
+                    </Container>
+            </div>      
+            </div>   
+            
+         
+         </div>
+        )
+        }
     }
-}
-export default About 
+    export default About  
