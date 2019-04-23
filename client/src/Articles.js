@@ -6,6 +6,12 @@ import AddArticle from './components/articles/AddArticle'
 import DeleteArticle from './components/articles/DeleteArticle'
 import UpdateArticlehelper from './components/articles/UpdateArticlehelper';
 
+import {connect} from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id }
+}
+
 class Articles extends Component {
   state = {
     allArticles : [] 
@@ -23,19 +29,14 @@ class Articles extends Component {
         console.log('erorr')
       });
   }
-  // addComment = (comment , id , userid)=>{
-  //   const articles = this.state.allArticles 
-  //   for(var i = 0 ; i<articles.length;i++){
-  //     if(articles[i]._id === id ){
-  //       if(comment!== ""){
-  //         articles[i].comments[comments.length-1].comment = comment 
-  //         articles[i].comments[comments.length-1].username = Users.findOne({_id:id})
-  //       }
-  //     }
-  //     }
-  //     axios.put(`http://localhost:5000/api/Articles/comment/${id}/${userid}`,comment)
-  //     .then(this.setState({allArticles:articles}))
-  //   }
+
+  updateComment = (comment)=>{
+    console.log(this.props.id)
+    console.log(this.usertype)
+    axios.put(`http://localhost:5000/api/Articles/comment/${comment.article._id}/${this.props.id}`,{comments:comment.comment})
+    axios.get('/api/Articles')
+    .then(res=>this.setState({allArticles:res.data.data}))  
+    }
   
   deleteArticle = (id) =>{
     axios.delete(`http://localhost:5000/api/Articles/${id}`)
@@ -69,13 +70,13 @@ class Articles extends Component {
     return (
       <div className="App">
       <h1>show all Articles</h1>
-      <AllArticles allArticles = {this.state.allArticles}/>
+      <AllArticles allArticles = {this.state.allArticles} updateComment = {this.updateComment} />
       {/* <h1>add new comment</h1>
       <AddComment allArticles = {this.state.allArticles} addComment = {this.state.addComment}/> */}
       <h1>add new Article</h1>
       <AddArticle addArticle = {this.addArticle} />
       <h1>delete article</h1>
-      <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles}/>
+      <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles} updateComment = {this.updateComment}/>
       <h1>update articles</h1>
       <UpdateArticlehelper allArticles ={this.state.allArticles} updateArticle = {this.updateArticle} />
       </div>
@@ -83,4 +84,8 @@ class Articles extends Component {
   }
 }
 
-export default Articles;
+const Form = connect(
+  mapStateToProps,
+  null
+)(Articles)
+export default Form
