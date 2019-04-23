@@ -85,18 +85,18 @@ onSubmit = (e) => {
          <NavbarSignedIn />
 
           <div className="container">
-            <h1>YOUR QUESTIONS</h1>   
+            <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}}>YOUR QUESTIONS</h1>   
             <br></br>   
             <Questions  Questions={this.state.Questions}  />
 
             <form  onSubmit={this.onSubmit} >
-            <p style={{fontSize:'30px'}}>Another Question ??   </p>
+            <p style={{fontSize:'30px',color:"#3e3939bf"}}>Another Question ??   </p>
             <label style={{paddingBottom:'40px'}}>
                     <input
                        type="text"
                         name='ask'
                         value={this.state.ask}
-                        style={{width:'300px'}}
+                        style={{width:'300px',backgroundColor:'#efefef'}}
                         placeholder="Add Question ..."
 
                         onChange={this.onChange}/>
@@ -104,6 +104,8 @@ onSubmit = (e) => {
             <input 
           type="submit" 
           value="Submit" 
+          style={{backgroundColor:"#70c7be"}}
+
           className="btn"/>
         </form>
 

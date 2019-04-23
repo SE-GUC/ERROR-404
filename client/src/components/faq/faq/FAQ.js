@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import FAQUs from './FAQUs';
 import FAQs from './FAQs';
 import AddFaq from './AddFaq';
 import NavbarSignedIn from "../../layout/NavbarSignedIn";
@@ -54,22 +54,27 @@ updatefaq = (id,question,answer) => {
   render() {
     const { classes } = this.props;
 
-    if (this.props.token === null) {
-      
+    if (this.props.token == null) {
       return (
-        <>
-          <Navbar />
-          <div className="center-div">
-            <h1>You need to sign in first to view this content</h1>
-            <Button
-              variant="contained"
-              href="http://localhost:3000/signin"
-              className={classes.button}
-            >
-              Sign In
-            </Button>
+        <div>
+        <Navbar/>
+        <div className="FAQU">
+        <div className="container">
+
+                <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf",fontSize:"5000px"}} >FAQs </h1>
+                <FAQUs  FAQs={this.state.FAQs}  />
+                <br></br>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                  style={{backgroundColor:"#70c7be"}}
+                >
+                  Sign In
+                </button>
+                </div>
           </div>
-        </>
+        </div>
       );
     }
     else{
@@ -79,7 +84,7 @@ updatefaq = (id,question,answer) => {
         <NavbarSignedIn />
 
           <div className="container">
-            <h1>FAQs <Button variant="contained"  style={edit} onClick={this.handleClick}>
+            <h1 style={{color:"#3e3939bf"}}>FAQs <Button variant="contained"  style={edit} onClick={this.handleClick}>
             Questions     
             </Button></h1>      
             <AddFaq addFAQ={this.addFAQ} />
@@ -95,7 +100,6 @@ updatefaq = (id,question,answer) => {
 }
 const edit={
   backgroundColor:'#5ec0b6' ,
-  '&:hover': {backgroundColor: 'red'},
   paddingBottom:'5px',
   marginLeft:"1000px"
   

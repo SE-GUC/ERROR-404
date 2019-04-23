@@ -67,9 +67,7 @@ class ourPeople extends Component {
     } else {
       return (
         <section id="two" class="wrapper style2">
-          <header class="major">
-            <h2>OUR PEOPLE</h2>
-          </header>
+         
           <div class="container">
             <div class="row">
               <div class="6u">

@@ -30,15 +30,16 @@ const questionStyle={
   textTransform: 'uppercase',
   lineheight: '0.8',
   fontWeight:'bold',
-  color:'#818888',
+  color:'#3e3939bf',
   lineHeight:'1',
   fontSize:'25px',
 
 }
 const answerStyle={
   textTransform: 'capitalize',
-  color:'#c7c8c8',
+  color:'#6d7173',
   lineHeight:'1',
+  fontSize:'20px',
 
 
 }

@@ -28,7 +28,6 @@ class FAQU extends Component {
     axios.get('http://localhost:5000/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   }
-
   ask = (ask,id) => {
     console.log("pp")
     axios.post('http://localhost:5000/api/Questions/ask',
@@ -63,14 +62,14 @@ onSubmit = (e) => {
         <div className="FAQU">
         <div className="container">
 
-                <h1 style={{paddingRight:'500px',boxAlign:"inline"}} >FAQs </h1>
+                <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs </h1>
                 <FAQUs  FAQs={this.state.FAQs}  />
                 <br></br>
                 <button
                   variant="contained"
                   onClick={() => (document.location.href = "/signin")}
                   className="btn"
-                  style={{backgroundColor:"#70c7be"}}
+                    style={{backgroundColor:"#70c7be"}}
                 >
                   Sign In
                 </button>
@@ -96,7 +95,7 @@ else{
 
           <div className="container">
             <view>
-            <h1 style={{paddingRight:'500px',boxAlign:"inline"}} >FAQs  <Button variant="contained"  style={edit} onClick={this.handleClick}>
+            <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs  <Button variant="contained"  style={edit} onClick={this.handleClick}>
             My Questions     
             </Button></h1>  
            
@@ -104,7 +103,7 @@ else{
            
             <FAQUs  FAQs={this.state.FAQs}  />
            <br></br>
-        <h2>Another Question</h2>
+        <h2 style={{color:"#3e3939bf"}}> Another Question</h2>
             <form onSubmit={this.onSubmit} >
             <label>
                     <input
@@ -113,7 +112,7 @@ else{
                         value={this.state.ask}
                         placeholder="Add Question ..."
 
-                        style={{width:'500px',fontSize:'15px',fontFamily:'Arial'}}
+                        style={{width:'500px',fontSize:'15px',fontFamily:'Arial',backgroundColor:'#efefef'}}
 
                         onChange={this.onChange}/>
                 </label>
@@ -122,7 +121,9 @@ else{
             <input 
           type="submit" 
           value="Submit" 
-          className="btn"/>
+          style={{backgroundColor:"#5ec0b6"}}
+          className="btn"
+          />
         </form>
           </div>  
         </div>

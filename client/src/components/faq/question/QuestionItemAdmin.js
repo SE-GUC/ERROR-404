@@ -39,6 +39,7 @@ handleClick = event => {
                         name='answer'
                         value={this.state.answer} 
                         placeholder="Add Answer ..."
+                        style={{backgroundColor:'#efefef'}}
                         onChange={this.onChange}/>
 
                 </label>
@@ -58,7 +59,7 @@ handleClick = event => {
 const questionStyle={
   textTransform: 'uppercase',
   lineheight: '0.8',
-  color:'#818888  ',
+  color:'#3e3939bf',
   lineHeight:'1',
   fontSize:'20px',
   fontFamily:'Arial'
