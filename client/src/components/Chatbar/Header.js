@@ -8,10 +8,14 @@ function Header() {
 }
 
 const headerStyle = {
-  background: '#8F1814',
+ 
   color: '#E2A325',
   textAlign: 'center',
-  padding: '10px'
+  padding: '10px',
+  postion:'fixed',
+  left: '0',
+  width:' 100%'
+ 
 }
 
 

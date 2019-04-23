@@ -1,10 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import '../../components/Chatbar/Chatbars.css'
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
 
-import testImage from "./ORION.jpeg";
+import orionImage from "../../Images/rsz_1rsz_orion-logo.jpg";
+import pegasusImage from "../../Images/rsz_pegasus-logo.jpg";
 
 const styles = theme => ({
   root: {
@@ -82,7 +84,6 @@ const styles = theme => ({
 
 const images = [
   {
-    //  url: "./ORION-LOGO.jpeg",
     title: "WHO IS LEADING..!!",
     width: "100%",
     height: "80%"
@@ -116,14 +117,9 @@ function ButtonBases(props) {
             width: image.width
           }}
         >
-          {/* <span
-            className={classes.imageSrc}
-            style={{
-              backgroundImage: `url(${image.url})`
-            }}
-          /> */}
+          <img src={orionImage} width={700} height={700} />
+          <img src={pegasusImage} width={700} height={700} />
 
-          {/* <img src={testImage} /> */}
           <span className={classes.imageBackdrop} />
           <span className={classes.imageButton}>
             <Typography

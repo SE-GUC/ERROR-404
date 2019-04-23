@@ -1,6 +1,9 @@
-.Home__Page a {
-  font-size: 3rem;
+.Home_Page_title {
+  font-size: 1.4rem;
   display: flex;
   padding: 0;
-  color: blue;
+  color: black;
+  left: 50%;
+  top: 50%;
+  text-align: "center";
 }
