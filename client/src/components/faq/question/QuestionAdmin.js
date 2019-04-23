@@ -70,7 +70,7 @@ else{
          <NavbarSignedIn />
 
           <div className="container">
-            <h1 style={{textTransform: 'capitalize'}}>QUESTIONS</h1>  
+            <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}}>QUESTIONS</h1>  
             <br></br>    
             <QuestionsAdmin  Questions={this.state.Questions} delQuestion={this.delQuestion} answerQuestion={this.answerQuestion} />
              

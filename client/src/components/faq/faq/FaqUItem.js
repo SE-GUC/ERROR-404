@@ -41,7 +41,7 @@ class FaqUItem extends React.Component {
 
     return (
       <div className={classes.root}>
-        <ExpansionPanel style={expanded?panelStyle:null} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
+        <ExpansionPanel style={expanded?panelStyle:style} expanded={expanded === 'panel1'} onChange={this.handleChange('panel1')}>
           <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
             <Typography className={classes.heading} style={expanded?questionOpen:questionStyle} >{question}</Typography>
           </ExpansionPanelSummary>
@@ -60,7 +60,7 @@ class FaqUItem extends React.Component {
 const questionOpen={
   textTransform: 'uppercase',
   lineheight: '0.8',
-  color:'black',
+  color:'#5b5f61',
   lineHeight:'1',
   fontSize:'17px',
   fontWeight:'bold',
@@ -71,7 +71,7 @@ const questionOpen={
 const questionStyle={
     textTransform: 'uppercase',
     lineheight: '0.8',
-    color:'black',
+    color:'#9a9ea0',
     lineHeight:'1',
     fontSize:'17px',
     fontFamily:'Sanserif'
@@ -80,7 +80,7 @@ const questionStyle={
   }
   const answerStyle={
     textTransform: 'capitalize',
-    color:'black',
+    color:'#6d7173',
     lineHeight:'1',
     fontFamily:'Sanserif'
   
@@ -93,6 +93,9 @@ const questionStyle={
   const panel2Style={
     borderLeft:'20px solid #b2ebf2',
     background:'#eeeeee'
+  }
+  const style={
+    background:"#31383d"
   }
   FaqUItem.propTypes = {
   classes: PropTypes.object.isRequired,

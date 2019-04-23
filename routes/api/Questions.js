@@ -69,7 +69,7 @@ router.put('/answerquestion/:id', async(req, res) => {
 
 router.get('/user/:id', async(request, response) => {
     const userId = request.params.id 
-    const questions = await Question.find({user:userId})
+    const questions = await Question.find({user:userId,answer:{$ne:undefined}})
     response.json({data: questions})
 
 });

@@ -37,8 +37,8 @@ const styles = theme => ({
 
 class SimplePopper extends React.Component {
   state = {
-    question:'',
-    answer:'',
+    question:this.props.faq.question,
+    answer:this.props.faq.answer,
     anchorEl: null,
     open: false,
   };
@@ -76,7 +76,7 @@ class SimplePopper extends React.Component {
                        placeholder="Edit Question ..."
                         name='question'
                         value={this.state.question}
-                        style={{backgroundColor:'white', padding: "5px",width:'300px' }}
+                        style={{backgroundColor:'#efefef', padding: "5px",width:'300px' }}
                         onChange={this.onChange}
                         />
                 </label>
@@ -85,7 +85,7 @@ class SimplePopper extends React.Component {
                         type="text"
                         name='answer'
                         value={this.state.answer} 
-                        style={{ flex: "5", padding: "5px",backgroundColor:'white', width:'300px'}}
+                        style={{ flex: "5", padding: "5px",backgroundColor:'#efefef', width:'300px'}}
                         placeholder="Edit Answer ..."
                         onChange={this.onChange}
                         />
