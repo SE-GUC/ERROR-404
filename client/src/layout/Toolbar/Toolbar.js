@@ -25,7 +25,7 @@ const toolbar = props => (
       <div className="toolbar_navigation-items">
         <ul>
           <li>
-            <a href="/">Profile</a>
+            <a href="/Profile">Profile</a>
           </li>
 
           <li>
@@ -44,7 +44,7 @@ const toolbar = props => (
             <a href="/debates">Debates</a>
           </li>
           <li>
-            <a href="/">About</a>
+            <a href="/about">About</a>
           </li>
           <li>
             <a href="/">Contact Us</a>

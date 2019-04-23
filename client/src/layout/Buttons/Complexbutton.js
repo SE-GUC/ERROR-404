@@ -47,7 +47,6 @@ const styles = theme => ({
     justifyContent: "center",
     color: theme.palette.common.white
   },
-
   imageSrc: {
     position: "absolute",
     left: 0,

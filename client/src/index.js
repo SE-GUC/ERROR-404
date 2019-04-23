@@ -45,6 +45,9 @@ import getUsers from "./components/users/getUsers";
 import { saveState } from "./localStorage";
 import SearchDebateLive from "./components/Chatbar/searchChatbBar";
 
+import profile from "../src/components/users/profile"
+import About from "../src/components/about/About"
+
 store.subscribe(() => {
   saveState(store.getState());
 });
@@ -65,7 +68,8 @@ ReactDOM.render(
           <Route exact path="/Score" component={Score} />
           <Route exact path="/createuser" component={CreateUser} />
           <Route exact path="/getUsers" component={getUsers} />
-
+          <Route exact path="/about" component={About}/>
+          <Route exact path= "/Profile" component={profile}/>
           <Route exact path="/debates" component={Debates} />
 
           <Route
