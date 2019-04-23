@@ -33,7 +33,7 @@ const toolbar = props => (
           </li>
 
           <li>
-            <a href="/">Blog</a>
+            <a href="/Articles">Blog</a>
           </li>
 
           <li>

@@ -1,8 +1,10 @@
 import React ,{Component} from 'react'
+import AddComment from './AddComment';
 
 class Article extends Component{
     render(){
-        var s = "";
+         var s = "";
+
         
         for(var i = 0 ; i<this.props.article.comments.length ; i++){
           s +=  this.props.article.comments[i].username
@@ -16,7 +18,10 @@ class Article extends Component{
                 <h3>{this.props.article.title}</h3>
                 <p>{this.props.article.description}  {" on "} {this.props.article.date} </p>
                 <a href ="#"> {" By "} {this.props.article.author} </a>
-                <p>  {"comments :"}  {s}  </p>
+                <p>  {"comments :"} {s}</p>
+                <div>
+                <AddComment article = {this.props.article} updateComment = {this.props.updateComment}/>
+                </div>
             </div>
         )
     }
