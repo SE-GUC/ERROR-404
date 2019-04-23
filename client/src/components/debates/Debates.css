@@ -1,17 +1,10 @@
 body {
-  background-color:white;
+  background-color: white;
   /* background-image: url(../../Images/background.jpeg); */
-
 }
-.button-div{
-  top : 30px;
-  position: relative;
-}
-
 .center-div {
-  position: relative;
   margin: auto;
-  top: 40px;
+  top: 0;
   bottom: 0;
   width: 1000px;
   text-align: center;

@@ -123,7 +123,7 @@ class DebateCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    if (this.props.auth){
+    if (this.props.auth) {
       return (
         <>
           <Dialog
@@ -238,8 +238,7 @@ class DebateCard extends React.Component {
           </Card>
         </>
       );
-  
-    }else{
+    } else {
       return (
         <>
           <Dialog
@@ -338,7 +337,6 @@ class DebateCard extends React.Component {
           </Card>
         </>
       );
-  
     }
   }
 }

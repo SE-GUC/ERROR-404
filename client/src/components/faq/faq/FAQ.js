@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-// import { BrowserRouter as Router, Route } from 'react-router-dom';
+import FAQUs from './FAQUs';
 import FAQs from './FAQs';
 import AddFaq from './AddFaq';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
+import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
+import Navbar from "../../layout/Navbar";
 
 import axios from 'axios';
 const mapStateToProps = state => {
@@ -13,6 +17,11 @@ class FAQ extends Component {
       FAQs:[]
   }
   
+  handleClick = event => {
+    let path = `/adminquestions`;
+    this.props.history.push(path);
+   
+  };
   componentDidMount()  {
     axios.get('http://localhost:5000/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
@@ -43,20 +52,60 @@ updatefaq = (id,question,answer) => {
       .then(res => this.setState({ FAQs: [...this.state.FAQs, res.data.data] }));
   }
   render() {
-    
+    const { classes } = this.props;
+
+    if (this.props.token == null) {
+      return (
+        <div>
+        <Navbar/>
+        <div className="FAQU">
+        <div className="container">
+
+                <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf",fontSize:"5000px"}} >FAQs </h1>
+                <FAQUs  FAQs={this.state.FAQs}  />
+                <br></br>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                  style={{backgroundColor:"#70c7be"}}
+                >
+                  Sign In
+                </button>
+                </div>
+          </div>
+        </div>
+      );
+    }
+    else{
     return (
      
         <div className="FAQ">
+        <NavbarSignedIn />
+
           <div className="container">
-            <h1>FAQs</h1>      
+            <h1 style={{color:"#3e3939bf"}}>FAQs <Button variant="contained"  style={edit} onClick={this.handleClick}>
+            Questions     
+            </Button></h1>      
             <AddFaq addFAQ={this.addFAQ} />
+            <br></br>
             <FAQs  FAQs={this.state.FAQs} delfaq={this.delfaq} updatefaq={this.updatefaq} />
              
           </div>  
         </div>
    
     );
+    }
   }
 }
-
-export default FAQ;
+const edit={
+  backgroundColor:'#5ec0b6' ,
+  paddingBottom:'5px',
+  marginLeft:"1000px"
+  
+}
+const Form = connect(
+  mapStateToProps,
+  null
+)((FAQ));
+export default Form;

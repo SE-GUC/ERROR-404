@@ -1,18 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import FAQUs from './FAQUs';
+import NavbarSignedIn from "../../layout/NavbarSignedIn";
+import { connect } from "react-redux";
+import Button from '@material-ui/core/Button';
+import Navbar from "../../layout/Navbar";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 class FAQU extends Component {
   state={
       FAQs:[],
       ask:'',
-      id:"dskjflkdf"
+      id:this.props.id
+     
   }
+  
+  handleClick = event => {
+    let path = `/userquestions`;
+    this.props.history.push(path);
+   
+  };
+  
   componentDidMount()  {
     axios.get('http://localhost:5000/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   }
-
   ask = (ask,id) => {
     console.log("pp")
     axios.post('http://localhost:5000/api/Questions/ask',
@@ -22,7 +37,11 @@ class FAQU extends Component {
     
   
   }
-
+  renderRedirect = () => {
+    let path = `/faqAdmin`;
+    this.props.history.push(path);
+   
+  }
 
 onChange= (e) => this.setState({[e.target.name]: e.target.value});
 
@@ -36,37 +55,92 @@ onSubmit = (e) => {
 }
 
   render() {
-    return (
+    if (this.props.token == null) {
+      return (
+        <div>
+        <Navbar/>
         <div className="FAQU">
+        <div className="container">
+
+                <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs </h1>
+                <FAQUs  FAQs={this.state.FAQs}  />
+                <br></br>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                    style={{backgroundColor:"#70c7be"}}
+                >
+                  Sign In
+                </button>
+                </div>
+          </div>
+        </div>
+      );
+    }
+else{
+  if (this.props.usertype === "admin") {
+    return(
+        <div>
+        {this.renderRedirect()}
+       </div>
+    );
+  }
+    else{
+   return (
+      
+
+        <div className="FAQU">
+              <NavbarSignedIn />
+
           <div className="container">
-            <h1>FAQs</h1>      
-            <FAQUs  FAQs={this.state.FAQs} delfaq={this.delfaq} updatefaq={this.updatefaq} />
-             
-            <h2>Another Question</h2>
+            <view>
+            <h1 style={{paddingRight:'500px',boxAlign:"inline",color:"#3e3939bf"}} >FAQs  <Button variant="contained"  style={edit} onClick={this.handleClick}>
+            My Questions     
+            </Button></h1>  
+           
+            </view>
+           
+            <FAQUs  FAQs={this.state.FAQs}  />
+           <br></br>
+        <h2 style={{color:"#3e3939bf"}}> Another Question</h2>
             <form onSubmit={this.onSubmit} >
             <label>
                     <input
                        type="text"
                         name='ask'
                         value={this.state.ask}
+                        placeholder="Add Question ..."
+
+                        style={{width:'500px',fontSize:'15px',fontFamily:'Arial',backgroundColor:'#efefef'}}
+
                         onChange={this.onChange}/>
                 </label>
 
-            {/* <button    onClick={this.ask(this.state.ask)} >Send</button> */}
           
             <input 
           type="submit" 
           value="Submit" 
-          className="btn"/>
+          style={{backgroundColor:"#5ec0b6"}}
+          className="btn"
+          />
         </form>
-        
-
           </div>  
         </div>
    
     );
+   }}
   }
 }
-
-export default FAQU;
+const edit={
+  backgroundColor:'#5ec0b6' ,
+  '&:hover': {backgroundColor: 'red'},
+  paddingBottom:'5px',
+  marginLeft:"976px",
+}
+const Form = connect(
+  mapStateToProps,
+  null
+)((FAQU));
+export default Form;
 	
