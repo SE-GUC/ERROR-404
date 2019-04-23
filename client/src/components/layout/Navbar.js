@@ -10,6 +10,9 @@ export class Navbar extends Component {
               <li className="nav-item">
                 <a className="nav-link" href="http://localhost:3000/faq">FAQs</a>     
               </li>
+              <li className="nav-item">
+                <a className="nav-link" href="http://localhost:3000">Home</a>     
+              </li>
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
