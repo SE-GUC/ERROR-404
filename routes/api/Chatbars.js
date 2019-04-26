@@ -45,7 +45,7 @@ return res.json({msg:'A new chatBar was created successfully :)', data: newChatB
     }  
  })
 
-router.put('/for/:id',async(req,res)=>{
+router.put('/for/:id/',async(req,res)=>{
     //will add it again for the notification
 //:userid
  

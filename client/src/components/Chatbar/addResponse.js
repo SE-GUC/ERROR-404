@@ -1,17 +1,24 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./Chatbars.css";
-import Header from "./Header";
+import "./title.css"
+// import Header from "./Header";
 import Toolbar from "../../layout/Toolbar/Toolbar";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 export class addResponse extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       chatbars: [],
       forResponses_: [],
       againstResponses_: [],
       forResponses: "",
-      againstResponses: ""
+      againstResponses: "",
+      user:{}
     };
   }
   onChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -24,6 +31,9 @@ export class addResponse extends Component {
   };
   componentDidMount() {
     const id = this.props.match.params.key;
+    axios.get('http://localhost:5000/api/Users/'+ this.props.id)
+    .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
+    .catch(console.log('cannot fetch'))
     fetch("/api/Chatbars/" + id)
       .then(res => res.json())
       .then(chatbars =>
@@ -63,9 +73,9 @@ export class addResponse extends Component {
   styleBottomRight = () => {
     return {
       position: "absolute",
-      width: "50%",
+      width: "20%",
       bottom: "10px",
-      left: "850px"
+      left: "795px"
     };
   };
 
@@ -101,47 +111,84 @@ export class addResponse extends Component {
 
   render() {
     return (
+
       <div style={this.getStyle()}>
-        <div>
+          <div>
           <Toolbar />
-          <br />
-          <h1
+
+          
+          <br /> 
+          <header
             style={{
-              fontSize: "50px",
-              color: "#E2A325",
-              textAlign: "center",
-              padding: "10px",
-              postion: "fixed",
-              left: "0",
-              width: " 100%"
+              fontSize:"30px",
+              color: '#E2A325',
+              textAlign: 'center',
+              padding: '50px',
+              // postion:'relative',
+              // top: '0',
+              // width:' 100%'
             }}
           >
-            {this.state.chatbars.debateLiveTitle}
-          </h1>
+           <h1> {this.state.chatbars.debateLiveTitle}</h1>
+            <br></br>
+            <br></br>
+            Number Of <br></br>
+            Responses : {this.state.chatbars.numberOfResponses}
+          </header>
+          
         </div>
-        {/* <div class="tm-timeline-description-wrap">
-                                <div class="tm-bg-dark tm-timeline-description">
-                                    <h3 class="tm-text-green tm-font-400">Nulla venenatis purus nec quam</h3>
-                                    <p>You may tell your co-workers about TemplateMo free stuffs to download and use for any website project. Thank you for supporting us.</p>
-                                    <p class="tm-text-green float-right mb-0">New Event . 12 July 2018</p>
-                                </div>
-                            </div> */}
-
+      
+       
         <form onSubmit={this.onSubmit}>
-          <div style={{ fontSize: "20px", color: "black", top: "80px" }}>
-            <h1> THE FOR RESPONSES </h1>
-
+        <div
+              style={{
+                fontSize: "20px",
+                color: "black",
+                position: "absolute",
+                top: "95px"
+              }}
+            >
+          <div style={{ fontSize: "20px", color: "black",postion:"absolute",top: "84px",left:"50px" }}>
+            <h1> WITH <br/> RESPONSES </h1>
+             
             {this.state.forResponses_.map(forResponse => (
               <p
                 style={{
                   textAlign: "center",
                   position: "relative",
-                  right: "480px"
+                  color: "white"
+                   // right: "480px"
                 }}
               >
-                {forResponse}
+              <div className="speech-bubble">
+                {forResponse} </div>
+                <br/> 
               </p>
-            ))}
+             
+            )
+            )}
+
+            </div>
+             <form onSubmit={this.onSubmit} />
+            <div
+            style={{
+              fontSize: "15px",
+              padding:"5px",
+              color: "black",
+              position: "absolute",
+              top:"-3px"
+            }}
+            >
+             <div style={{fontSize: "20px", color: "white",position: "absolute", top: "2px" ,left:"1020px"}}>
+              <h1> AGAINST RESPONSES </h1>
+              {this.state.againstResponses_.map(againstResponse => (
+                <center>
+                   
+                  <p> <div className="speech-bubble2"> {againstResponse}</div></p>
+                </center>
+              ))}
+            </div></div>
+           
             <div style={this.styleBottom()}>
               <input
                 type="text"
@@ -149,8 +196,8 @@ export class addResponse extends Component {
                 style={{
                   flex: "10",
                   padding: "5px",
-                  position: "absoulte",
-                  width: "50%",
+                  position: "fixed",
+                  width: "26%",
                   bottom: "2px",
                   color: "black"
                 }}
@@ -161,31 +208,16 @@ export class addResponse extends Component {
               <b> </b>
               <input
                 type="Submit"
-                value="Add my opinion"
+                value="Submit"
                 className="btn"
                 onClick={this.addForResponse.bind(this, {
                   _id: this.props.match.params.key,
-                  forResponses: this.state.forResponses
+                  forResponses: this.state.user.firstName +" "+ this.state.user.lastName+" : " +this.state.forResponses
                 })}
-                style={{ flex: "1" }}
+                style={{ flex: "1", position: "fixed", bottom: "2px",left: "375px" }}
+               
               />
-            </div>
-            <form onSubmit={this.onSubmit} />
-            <div
-              style={{
-                fontSize: "20px",
-                color: "black",
-                position: "absolute",
-                right: "10px",
-                top: "160px"
-              }}
-            >
-              <h1> THE AGAINST RESPONSES </h1>
-              {this.state.againstResponses_.map(againstResponse => (
-                <center>
-                  <p>{againstResponse}</p>{" "}
-                </center>
-              ))}
+              
             </div>
             <div style={this.styleBottomRight()}>
               <input
@@ -194,8 +226,8 @@ export class addResponse extends Component {
                 style={{
                   flex: "10",
                   padding: "5px",
-                  position: "absoulte",
-                  width: "50%",
+                  position: "fixed",
+                  width: "26%",
                   bottom: "2px",
                   color: "black"
                 }}
@@ -206,20 +238,25 @@ export class addResponse extends Component {
               <b> </b>
               <input
                 type="Submit"
-                value="Add my opinion"
+                value="Submit"
                 className="btn"
                 onClick={this.addAgainstResponse.bind(this, {
                   _id: this.props.match.params.key,
-                  againstResponses: this.state.againstResponses
+                  againstResponses: this.state.user.firstName +" "+ this.state.user.lastName +" : "+ this.state.againstResponses
                 })}
-                style={{ flex: "1" }}
+                style={{ flex: "1",position: "fixed", bottom: "2px",left: "1165px"  }}
               />
             </div>
           </div>
         </form>
+        
       </div>
     );
   }
 }
+const Form = connect(
+  mapStateToProps,
+  null
+)(addResponse);
 
-export default addResponse;
+export default Form;

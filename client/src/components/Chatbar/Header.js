@@ -3,6 +3,7 @@ function Header() {
   return (
     <header style={headerStyle}>
       <h1>LET'S DEBATE LIVE !</h1>
+      Chatrooms to allow the users to share their opinions respectively...
     </header>
   )
 }

@@ -23,6 +23,7 @@ export class DeleteChatBar extends Component {
       // this.setState(this.state.debateLiveTitle);
     
        this.setState({debateLiveTitle:''})
+       this.render();
 }
 onChange= (e) => this.setState({[e.target.name]: e.target.value});
 
@@ -53,12 +54,19 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <div>
         <Toolbar/>
         <Header />
+        <button
+            className="btn"
+            style={{ position: "absolute", left: "20px", top: "63px" }}
+            onClick={() => (document.location.href = "/chatbars")}
+          >
+            BACK
+          </button>
       </div>
       <form onSubmit={this.onSubmit} style= {{display: 'flex'}}>
                 <input
                  type="text"
                  name="debateLiveTitle" 
-                 style={{flex: '10' , padding: '5px'}}
+                 style={{flex: '10' , padding: '5px',color:"black"}}
                  placeholder="Add a new Debate live..."
                  value={this.state.debateLiveTitle}
                  onChange={this.onChange}
