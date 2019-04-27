@@ -88,15 +88,15 @@ class Chatbars extends Component {
 
           <button
             className="btn"
-            style={{ position: "absolute", left: "0", bottom: "0" }}
+            style={{ position: "absolute", left: "20px", top: "63px" }}
             onClick={() => (document.location.href = "/deleteChatBar")}
           >
-            UPDATE AND DELETE
+            CREATE AND DELETE
           </button>
-          <div style={{ right: "0", bottom: "0" }}>
+          <div style={{ right: "0", top: "63px" }}>
             <button
               className="btn"
-              style={{ position: "absolute", right: "0", bottom: "0" }}
+              style={{ position: "absolute", right: "0", top: "63px" }}
               onClick={() =>
                 (document.location.href = `chatbars/search/${
                   this.state.searchkey
@@ -111,26 +111,18 @@ class Chatbars extends Component {
               style={{
                 flex: "10",
                 padding: "5px",
-                position: "fixed",
-                // width: "50%",
-                right: "100px",
-                bottom: "0",
+                position: "absolute",
+                 width: "26%",
+                right: "170px",
+                top: "60px",
                 color: "black"
               }}
               placeholder="Search Debate Live"
               value={this.state.searchkey}
               onChange={this.onChange}
             />
+
           </div>
-          {/* <ul style={{color:"white"}}>
-        {this.state.chatbars.map(chatbar => 
-          <a key={chatbar._id} href={'/addResponse/'+chatbar._id}> {chatbar.debateLiveTitle} {chatbar.date} <br></br> </a>
-        )}
-        
-        </ul>
-        <button className="btn" style={ {position:"absolute", left:"0", bottom:"0"}} onClick={() => (document.location.href = "/deleteChatBar")}>
-          UPDATE AND DELETE
-        </button>  */}
         </div>
       );
     } else {
@@ -159,15 +151,36 @@ class Chatbars extends Component {
             </div>
           </div>
 
-          {/* <ul style={{color:"white"}}>
-        {this.state.chatbars.map(chatbar => 
-          <a key={chatbar._id} href={'/addResponse/'+chatbar._id}> {chatbar.debateLiveTitle} {chatbar.date} <br></br> </a>
-        )}
-        
-        </ul>
-        <button className="btn" style={ {position:"absolute", left:"0", bottom:"0"}} onClick={() => (document.location.href = "/deleteChatBar")}>
-          UPDATE AND DELETE
-        </button>  */}
+          <div style={{ right: "0", top: "63px" }}>
+            <button
+              className="btn"
+              style={{ position: "absolute", right: "0", top: "63px" }}
+              onClick={() =>
+                (document.location.href = `chatbars/search/${
+                  this.state.searchkey
+                }`)
+              }
+            >
+              Search
+            </button>
+            <input
+              type="text"
+              name="searchkey"
+              style={{
+                flex: "10",
+                padding: "5px",
+                position: "absolute",
+                 width: "26%",
+                right: "170px",
+                top: "60px",
+                color: "black"
+              }}
+              placeholder="Search Debate Live"
+              value={this.state.searchkey}
+              onChange={this.onChange}
+            />
+
+          </div>
         </div>
       );
     }

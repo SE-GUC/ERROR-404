@@ -62,7 +62,7 @@ ReactDOM.render(
 
           <Route exact path="/Homee" component={Homee} />
           <Route exact path="/ourPeople" component={ourPeople} />
-
+         
           <Route exact path="/AllEvents" component={AllEvents} />
           <Route exact path="/TIQHome" component={Homee} />
           <Route exact path="/Score" component={Score} />

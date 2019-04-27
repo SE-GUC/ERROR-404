@@ -19,6 +19,13 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
+//Server static assets if in the production
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    })
+}
 
 // Require Router Handlers
 const articles = require('./routes/api/Articles')
