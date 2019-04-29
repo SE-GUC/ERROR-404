@@ -19,13 +19,6 @@ app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use(cors())
 
-//Server static assets if in the production
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build'));
-    app.get('*', (req, res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    })
-}
 
 // Require Router Handlers
 const articles = require('./routes/api/Articles')
@@ -81,6 +74,15 @@ app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br
 <a href="/api/Debates">Debates</a> </br>
 <a href="/api/Clubs">Clubs</a> </br>
 <a href="/api/Contents">Contents</a>`))
+
+
+//Server static assets if in the production
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    })
+}
 
 
 app.use((req, res) => {
