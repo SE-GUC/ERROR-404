@@ -66,6 +66,15 @@ app.use('/api/Notifications', notification)
 app.use('/api/Clubs', clubs)
 app.use('/api/Contents', content)
 app.use('/api/Chatbars', chatbars)
+
+
+//Server static assets if in the production
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+    app.get('*', (req, res)=>{
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    })
+}
 // Entry point
 app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
 <a href="/api/Articles">Articles</a> </br>
@@ -87,10 +96,4 @@ app.use((req, res) => {
 const port = process.env.PORT || 5000
 app.listen(port, () => console.log(`Server on ${port}`))
 
-//Server static assets if in the production
-if(process.env.NODE_ENV === 'production'){
-    app.use(express.static('client/build'));
-    app.get('*', (req, res)=>{
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    })
-}
+
