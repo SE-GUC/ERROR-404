@@ -79,6 +79,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
                   onClick= {this.addDebateLive}
                   style={{flex: '1'}}
                   />
+                  
             </form>
             <br></br>
 
@@ -103,21 +104,9 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
 							</div>)}
           
           </div>
-        {/* {this.state.chatbars.map(chatbar =>  
-          <li key={chatbar._id} style = {{fontSize:'20px' , color:"white", top:'80px',textAlign:"center"}}> {chatbar.debateLiveTitle} 
-           <input 
-                  type="Submit" 
-                 value="delete"
-                 className="btn"
-                  onClick= {this.deleteDebateLive.bind(this,chatbar._id)}
-                   style={{flex: '10'}}
-                  />
-          
-          </li>
-          
-         )}
-          */}
+       
         </div>
+        
         )
       }
 }
