@@ -22,13 +22,14 @@ class FAQ extends Component {
     this.props.history.push(path);
    
   };
-  handleClick1 =() => {
-    this.props.history.push("/signin");
- };
+  
   componentDidMount()  {
     axios.get('/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   }
+  handleClickWWW =() => {
+    this.props.history.push("/signin");
+ };
   delfaq = (id) => {
     axios.delete('/api/FAQs/'+id)
       .then(res => this.setState({ FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)] }));
@@ -69,7 +70,9 @@ updatefaq = (id,question,answer) => {
                 <br></br>
                 <button
                   variant="contained"
-                  onClick={this.handleClick1}
+                  onClick={() => {
+                    this.handleClickWWW();
+                  }}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >
