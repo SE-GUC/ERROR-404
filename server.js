@@ -31,31 +31,31 @@ const content = require('./routes/api/Contents')
 const clubs = require('./routes/api/Clubs') 
 const chatbars = require('./routes/api/Chatbars')
 
-app.get('/articles', async (req, res) => {
-    res.send(`<a href="/api/Articles">Articles</a>`)
+// app.get('/articles', async (req, res) => {
+//     res.send(`<a href="/api/Articles">Articles</a>`)
    
-})
+// })
 
-app.get('/users',async (req, res) => {
-    res.send(`<a href="/api/Users">Users</a>`)
-})
+// app.get('/users',async (req, res) => {
+//     res.send(`<a href="/api/Users">Users</a>`)
+// })
 
-app.get('/FAQs',async (req, res) => {
-    res.send(`<a href="/api/FAQs">FAQs</a>`)
-})
+// app.get('/FAQs',async (req, res) => {
+//     res.send(`<a href="/api/FAQs">FAQs</a>`)
+// })
 
-app.get('/Debates',async (req, res) => {
-    res.send(`<a href="/api/Debates">Debates</a>`)
-})
+// app.get('/Debates',async (req, res) => {
+//     res.send(`<a href="/api/Debates">Debates</a>`)
+// })
 
-app.get('/Clubs', async (req, res) => {
-    res.send(`<a href="/api/Clubs">Clubs</a>`)
+// app.get('/Clubs', async (req, res) => {
+//     res.send(`<a href="/api/Clubs">Clubs</a>`)
    
-})
-app.get('/Content', async (req, res) => {
-    res.send(`<a href="/api/Contents">Contents</a>`)
+// })
+// app.get('/Content', async (req, res) => {
+//     res.send(`<a href="/api/Contents">Contents</a>`)
    
-})
+// })
 
 app.use('/api/Users', users)
 app.use('/api/Articles',articles)
@@ -76,13 +76,13 @@ if(process.env.NODE_ENV === 'production'){
     })
 }
 // Entry point
-app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
-<a href="/api/Articles">Articles</a> </br>
-<a href="/api/Users">Users</a> </br>
-<a href="/api/FAQs">FAQs</a> </br>
-<a href="/api/Debates">Debates</a> </br>
-<a href="/api/Clubs">Clubs</a> </br>
-<a href="/api/Contents">Contents</a>`))
+// app.get('/', (req,res) => res.send(`<h1>Welcome to TIQ APP by ERROR 404</h1></br></br></br> 
+// <a href="/api/Articles">Articles</a> </br>
+// <a href="/api/Users">Users</a> </br>
+// <a href="/api/FAQs">FAQs</a> </br>
+// <a href="/api/Debates">Debates</a> </br>
+// <a href="/api/Clubs">Clubs</a> </br>
+// <a href="/api/Contents">Contents</a>`))
 
 
 
