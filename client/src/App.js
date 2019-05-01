@@ -21,11 +21,11 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/Clubs")
+      .get("/api/Clubs")
       .then(res => this.setState({ allClubs: res.data.data }));
 
     axios
-      .get("http://localhost:5000/api/Contents")
+      .get("/api/Contents")
       .then(res => this.setState({ allContent: res.data.data }));
   }
 
