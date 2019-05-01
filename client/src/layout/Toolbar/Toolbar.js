@@ -4,7 +4,7 @@ import Search from "../Search/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -24,49 +24,49 @@ const toolbar = props => (
     <nav className="toolbar__navigation">
       <div />
       <div className="toolbar__logo">
-        <a href="/TIQHome">TIQ TIQ</a>
+        <Link to="/TIQHome">TIQ TIQ</Link>
       </div>
       <div className="spacer" />
       <div className="toolbar_navigation-items">
         <ul>
           <li>
-            <a href="/Profile">Profile</a>
+            <Link to="/Profile">Profile</Link>
           </li>
 
           {/* <li>
-            <a href="/">Disciples</a>
+            <Link to="/">Disciples</Link>
           </li> */}
 
           <li>
-            <a href="/ArticlesHome">Blog</a>
+            <Link to="/ArticlesHome">Blog</Link>
           </li>
 
           <li>
-            <a href="/chatbars">Debate Live</a>
+            <Link to="/chatbars">Debate Live</Link>
           </li>
 
           <li>
-            <a href="/debates">Debates</a>
+            <Link to="/debates">Debates</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link to="/about">About</Link>
           </li>
           <li>
-          <a href="/ContactUs">Contact Us</a>
+          <Link to="/ContactUs">Contact Us</Link>
           </li>
           <li>
-            <a href="/getUsers">Debaters</a>
+            <Link to="/getUsers">Debaters</Link>
           </li>
           <li>
-            <a href="/contents">Announcements</a>
+            <Link to="/contents">Announcements</Link>
           </li>
           <li>
-            <a href="/">HUB</a>
+            <Link to="/">HUB</Link>
           </li>
          
          
              {/* <li>
-             <a href="/signout">LOG OUT</a>
+             <Link to="/signout">LOG OUT</Link>
            </li> */}
           
 
