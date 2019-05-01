@@ -3,6 +3,11 @@ import axios from 'axios';
 import './Chatbars.css';
 import Header from './Header';
 import Toolbar from '../../layout/Toolbar/Toolbar'
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 export class DeleteChatBar extends Component {
         constructor() {
@@ -113,5 +118,10 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
       }
     }
 }
+const Form = connect(
+  mapStateToProps,
+  null
+)(DeleteChatBar);
 
-export default DeleteChatBar
+export default Form;
+//export default DeleteChatBar
