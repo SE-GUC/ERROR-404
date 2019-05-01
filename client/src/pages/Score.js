@@ -41,6 +41,7 @@ export class Score extends Component {
     } else {
       return (
         <div>
+           <Toolbar />
           <div class="thumbnails">
             <div class="box">
               <div class="inner">

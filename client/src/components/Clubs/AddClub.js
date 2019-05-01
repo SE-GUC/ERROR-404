@@ -23,6 +23,7 @@ export class AddClub extends Component {
             value={this.state.name}
             onChange={this.onChange}
           />
+          <br></br>
           <input
             type="text"
             name="description"
@@ -30,6 +31,7 @@ export class AddClub extends Component {
             value={this.state.description}
             onChange={this.onChange}
           />
+           <br></br>
           <input
             type="submit"
             value="Submit"

@@ -24,6 +24,7 @@ import Clubs from "./Clubs";
 
 import Contents from "./Contents";
 import Articles from "./Articles";
+import ArticleHome from "./ArticlesHome";
 import * as serviceWorker from "./serviceWorker";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import ContactUs from "./ContactUs";
@@ -96,7 +97,7 @@ ReactDOM.render(
           <Route exact path="/userquestions" component={Question} />
           <Route exact path="/adminquestions" component={QuestionAdmin} />
           <Route exact path="/Contents" component={Contents} />
-
+          <Route exact path="/ArticlesHome" component={ArticleHome} />
           <Route exact path="/addResponse/:key" component={addResponse} />
           <Route exact path="/deleteChatBar" component={deleteChatBar} />
 

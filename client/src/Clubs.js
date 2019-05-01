@@ -4,6 +4,7 @@ import axios from "axios";
 import AddClub from "./components/Clubs/AddClub";
 import DeleteClub from "./components/Clubs/DeleteClub";
 import UpdatingClubs from "./components/Clubs/UpdatingClubs";
+import SignedInNavBar from "./components/layout/NavbarSignedIn";
 import "./App.css";
 
 class Clubs extends Component {
@@ -53,9 +54,10 @@ class Clubs extends Component {
 
   render() {
     return (
-      <div className="App">
-        <h1>ALL CLUBS</h1>
-        <AllClubs allClubs={this.state.allClubs} />
+     <div className="App">
+     <SignedInNavBar/>
+        {/* <h1>ALL CLUBS</h1>
+        <AllClubs allClubs={this.state.allClubs} /> */}
         <h1>ADD NEW CLUB</h1>
         <AddClub addClub={this.addClub} />
         <h1>DELETE CLUB</h1>
@@ -65,7 +67,16 @@ class Clubs extends Component {
           allClubs={this.state.allClubs}
           updateClub={this.updateClub}
         />
+         <footer id="footer">
+            <div class="inner">
+              <h2>GUC HUB</h2>
+              <p>Connecting the GUCians togther</p>
+
+              <p class="copyright">&copy; ERROR 404 </p>
+            </div>
+          </footer>
       </div>
+      
     );
   }
 }

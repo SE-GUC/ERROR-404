@@ -4,8 +4,13 @@ import axios from "axios";
 import AddContent from "./components/Contents/AddContent";
 import DeleteContent from "./components/Contents/DeleteContent";
 import UpdatingContents from "./components/Contents/UpdatingContents";
+import Toolbar from "./layout/Toolbar/Toolbar";
 import "./App.css";
+import {connect} from "react-redux";
 
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id }
+}
 class Contents extends Component {
   state = {
     allContent: []
@@ -53,10 +58,11 @@ class Contents extends Component {
       .then(this.setState({ allContent: contents }));
   };
   render() {
+    const auth = this.props.usertype === "TIQadmin";
+    if (auth) {
     return (
       <div className="App">
-        <h1>ALL CONTENT</h1>
-        <AllContent allContent={this.state.allContent} />
+      <Toolbar />
         <h1>ADD NEW CONTENT</h1>
         <AddContent addContent={this.addContent} />
         <h1>DELETE CONTENT</h1>
@@ -64,13 +70,27 @@ class Contents extends Component {
           allContent={this.state.allContent}
           delContent={this.delContent}
         />
+        <h1>UPDATE CONTENT</h1>
         <UpdatingContents
           allContent={this.state.allContent}
           updateContent={this.updateContent}
         />
       </div>
     );
+  }else{
+    return (
+      <div className="App">
+         <Toolbar />
+        {/* <h1>ALL CONTENT</h1> */}
+        <AllContent allContent={this.state.allContent} />
+      </div>
+    );
   }
 }
+}
+const Form = connect(
+  mapStateToProps,
+  null
+)(Contents)
+export default Form
 
-export default Contents;

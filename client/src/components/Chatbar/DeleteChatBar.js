@@ -46,9 +46,11 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             
         })
           .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] }));
-          
+          alert("The new motion has been added successfully, please refresh the page");
       }
       render() {
+        const auth = this.props.usertype === "TIQadmin";
+        if (auth) {
         return (
           <div style={this.getStyle()}  >
         <div>
@@ -109,6 +111,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         
         )
       }
+    }
 }
 
 export default DeleteChatBar

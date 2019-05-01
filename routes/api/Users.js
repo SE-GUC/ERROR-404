@@ -266,7 +266,58 @@ router.post("/register", async (req, res) => {
       } catch (error) {
         return res.status(422).send({ error: "Can not create user" });
       }
+case "member":
+      try {
+        // const isUserValidated = userValidator.registerValidation(req.body);
+        // if (isUserValidated.error)
+        //   return res
+        //     .status(400)
+        //     .send({ error: isUserValidated.error.details[0].message });
+        console.log(5);
+        const {
+          firstName,
+          lastName,
+          birthDate,
+          clubs,
+          email,
+          password,
+          type,
+          house,
+          score,
+          din,
+          dor,
+          bio,
+          tiqStatus,
+          supervisorType,
+          //profilePicture
+        } = req.body;
+        const salt = bcrypt.genSaltSync(10);
+        const hashedPassword = bcrypt.hashSync(password, salt);
+        console.log(6);
+        const newMember = new User({
+          type,
+          firstName,
+          lastName,
+          birthDate,
+          bio,
+          email,
+          password: hashedPassword,
+          house,
+          score,
+          din,
+          dor,
+          clubs,
+          tiqStatus,
+          supervisorType,
+          //profilePicture
+        });
 
+        await User.create(newMember);
+        console.log("done");
+        return res.json({ msg: "User created successfully", data: newMember });
+      } catch (error) {
+        return res.status(422).send({ error: "Can not create user" });
+      }
     case "member":
       try {
         // const isUserValidated = userValidator.registerValidation(req.body);

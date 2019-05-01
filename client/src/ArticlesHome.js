@@ -73,19 +73,31 @@ class Articles extends Component {
     return (
       <div className="App">
         <Toolbar />
-        <button
+        <btn
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={() => (document.location.href = "/ArticlesHome")}
+            onClick={() => (document.location.href = "/Articles")}
           >
-            BACK
-          </button>
-      <h1>add new Article</h1>
-      <AddArticle addArticle = {this.addArticle} />
-      <h1>delete article</h1>
-      <DeleteArticle deleteArticle ={this.deleteArticle} allArticles={this.state.allArticles} updateComment = {this.updateComment}/>
-      <h1>update articles</h1>
-      <UpdateArticlehelper allArticles ={this.state.allArticles} updateArticle = {this.updateArticle} />
+            CREATE AND DELETE
+          </btn>
+    
+      <AllArticles allArticles = {this.state.allArticles}  />
+      {/* updateComment = {this.updateComment} */}
+      {/* <h1>add new comment</h1>
+      <AddComment allArticles = {this.state.allArticles} addComment = {this.state.addComment}/> */}
+      </div>
+    );
+  }
+  else{
+    return (
+      <div className="App">
+        <Toolbar />
+        
+    
+      <AllArticles allArticles = {this.state.allArticles}  />
+      {/* updateComment = {this.updateComment} */}
+      {/* <h1>add new comment</h1>
+      <AddComment allArticles = {this.state.allArticles} addComment = {this.state.addComment}/> */}
       </div>
     );
   }

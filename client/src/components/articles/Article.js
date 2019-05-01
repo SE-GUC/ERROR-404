@@ -15,12 +15,13 @@ class Article extends Component{
         }
         return(
             <div>
-                <h3>{this.props.article.title}</h3>
+                <h1>{this.props.article.title}</h1>
                 <p>{this.props.article.description}  {" on "} {this.props.article.date} </p>
-                <a href ="#"> {" By "} {this.props.article.author} </a>
-                <p>  {"comments :"} {s}</p>
+                <a href ="/getUsers"> {" By "} {this.props.article.author} </a>
+                {/* <p>  {"comments :"} {s}</p> */}
                 <div>
-                <AddComment article = {this.props.article} updateComment = {this.props.updateComment}/>
+                {/* <AddComment article = {this.props.article} /> */}
+                {/* updateComment = {this.props.updateComment} */}
                 </div>
             </div>
         )

@@ -44,11 +44,14 @@ export class CreateUser extends Component {
         dor: dor,
         clubs: clubs
       })
+      
       .then(res =>
         this.setState({ users: [...this.state.users, res.data.data] })
       );
     console.log("llllll");
-    alert("User Added Sucessfully");
+    
+        alert("User added successfully");
+      
   };
 
   render() {

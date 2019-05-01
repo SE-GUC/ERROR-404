@@ -19,6 +19,7 @@ export class UpdateContent extends Component {
           placeholder="Add  Content date ..."
           onChange={this.onChange}
         />
+        <br></br>
         <input
           type="text"
           name="description"
@@ -26,6 +27,7 @@ export class UpdateContent extends Component {
           onChange={this.onChange}
           
         />
+        <br></br>
         <input
             type="text"
             name="type"
@@ -33,6 +35,7 @@ export class UpdateContent extends Component {
             value={this.state.type}
             onChange={this.onChange}
           />
+          <br></br>
         <button onClick={this.props.updateContent.bind(this, {_id: this.props.content._id, date:this.state.name, description: this.state.description,type:this.state.type})}>
         UPDATE
         </button>

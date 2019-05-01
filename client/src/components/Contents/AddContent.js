@@ -24,6 +24,7 @@ export class AddContent extends Component {
             value={this.state.date}
             onChange={this.onChange}
           />
+          <br></br>
           <input
             type="text"
             name="description"
@@ -31,6 +32,7 @@ export class AddContent extends Component {
             value={this.state.description}
             onChange={this.onChange}
           />
+          <br></br>
            <input
             type="text"
             name="type"
@@ -38,6 +40,7 @@ export class AddContent extends Component {
             value={this.state.type}
             onChange={this.onChange}
           />
+          <br></br>
           <input
             type="submit"
             value="Submit"

@@ -74,6 +74,7 @@ class SignUp extends React.Component {
     console.log("hhhhhhhhhhhhhhhh");
     return (
       <main className={classes.main}>
+       
         <CssBaseline />
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>

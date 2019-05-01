@@ -31,7 +31,7 @@ export class Home extends Component {
           <Toolbar />
         </div>
         <section id="banner">
-          <i className="icon  " />
+          {/* <i className="icon" /> */}
           <h2>Welcome to TIQ </h2>
           <p>READY FOR THE CHALLANGE </p>
 
@@ -72,7 +72,7 @@ export class Home extends Component {
 
                 <ul class="actions">
                   <li>
-                    <a href="/AllEvents" class="button alt">
+                    <a href="/contents" class="button alt">
                       Check All Events
                     </a>
                   </li>
@@ -131,7 +131,7 @@ export class Home extends Component {
             </header>
             <ul className="actions">
               <li>
-                <a href="#" className="button big alt">
+                <a href="/about" className="button big alt">
                   About Us
                 </a>
               </li>

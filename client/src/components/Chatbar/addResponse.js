@@ -90,7 +90,7 @@ export class addResponse extends Component {
         forResponses: [chatbar.forResponses]
       }
     );
-
+    alert("Your response has been added successfully, please refresh the page");
     //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
   }
   addAgainstResponse(chatbar) {
@@ -105,7 +105,7 @@ export class addResponse extends Component {
         againstResponses: [chatbar.againstResponses]
       }
     );
-
+    alert("Your response has been added successfully, please refresh the page");
     //  .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] },console.log(forResponses_)));
   }
 

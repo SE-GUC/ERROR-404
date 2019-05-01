@@ -41,6 +41,7 @@ class Chatbars extends Component {
     if (this.props.token == null) {
       return (
         <div>
+          <Toolbar />
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
