@@ -72,15 +72,15 @@ class Chatbars extends Component {
             <div class="thumbnails">
               {this.state.chatbars.map(chatbar => (
                 <div class="box">
-                  <a to={"/addResponse/" + chatbar._id} class="image fit">
+                  <Link to={"/addResponse/" + chatbar._id} class="image fit">
                     <img src={Logo} alt="" />
-                  </a>
+                  </Link>
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
-                    <a to={"/addResponse/" + chatbar._id} class="btn">
+                    <Link to={"/addResponse/" + chatbar._id} class="btn">
                       Debate it Now!
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -137,15 +137,15 @@ class Chatbars extends Component {
             <div class="thumbnails">
               {this.state.chatbars.map(chatbar => (
                 <div class="box">
-                  <a to={"/addResponse/" + chatbar._id} class="image fit">
+                  <Link to={"/addResponse/" + chatbar._id} class="image fit">
                     <img src={Logo} alt="" />
-                  </a>
+                  </Link>
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
-                    <a to={"/addResponse/" + chatbar._id} class="btn">
+                    <Link to={"/addResponse/" + chatbar._id} class="btn">
                       Debate it Now!
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
