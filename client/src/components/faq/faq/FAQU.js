@@ -5,7 +5,7 @@ import NavbarSignedIn from "../../layout/NavbarSignedIn";
 import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import Navbar from "../../layout/Navbar";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -67,7 +67,7 @@ onSubmit = (e) => {
                 <br></br>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={<Link to="/signin" />}
                   className="btn"
                     style={{backgroundColor:"#70c7be"}}
                 >

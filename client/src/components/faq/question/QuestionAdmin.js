@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ToolBar from "../../../layout/Toolbar/Toolbar";
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -50,7 +50,7 @@ console.log(this.props.usertype)
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={<Link to= "/signin"/>}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >

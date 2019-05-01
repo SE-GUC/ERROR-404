@@ -6,7 +6,7 @@ import AllArticles from './components/articles/AllArticles'
 import AddArticle from './components/articles/AddArticle'
 import DeleteArticle from './components/articles/DeleteArticle'
 import UpdateArticlehelper from './components/articles/UpdateArticlehelper';
-
+import { Link } from 'react-router-dom'
 import {connect} from "react-redux";
 
 const mapStateToProps = state => {
@@ -76,7 +76,7 @@ class Articles extends Component {
         <btn
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={() => (document.location.href = "/Articles")}
+            onClick={<Link to= "/Articles"/>}
           >
             CREATE AND DELETE
           </btn>

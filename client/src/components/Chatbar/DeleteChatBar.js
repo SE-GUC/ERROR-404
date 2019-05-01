@@ -4,7 +4,7 @@ import './Chatbars.css';
 import Header from './Header';
 import Toolbar from '../../layout/Toolbar/Toolbar'
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -64,7 +64,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <button
             className="btn"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={() => (document.location.href = "/chatbars")}
+            onClick={<Link to= "/chatbars" />}
           >
             BACK
           </button>

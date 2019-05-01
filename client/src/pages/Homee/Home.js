@@ -9,7 +9,7 @@ import pic5 from "./images/pic5.jpeg";
 import pic6 from "./images/pic6.jpeg";
 import TIQ from "./images/TIQ.png";
 import Toolbar from "../../layout/Toolbar/Toolbar";
-
+import { Link } from 'react-router-dom'
 import EventPic from "./images/Event.png";
 
 import axios from "axios";
@@ -37,9 +37,9 @@ export class Home extends Component {
 
           <ul className="actions">
             <li>
-              <a href="/getUsers" className="button big special">
+              <Link to="/getUsers" className="button big special">
                 Our People
-              </a>
+              </Link>
             </li>
           </ul>
         </section>
@@ -56,9 +56,9 @@ export class Home extends Component {
 
                 <ul class="actions">
                   <li>
-                    <a href="/Score" class="button alt">
+                    <Link to="/Score" class="button alt">
                       Check Scores
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -72,9 +72,9 @@ export class Home extends Component {
 
                 <ul class="actions">
                   <li>
-                    <a href="/contents" class="button alt">
+                    <Link to="/contents" class="button alt">
                       Check All Events
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -89,36 +89,36 @@ export class Home extends Component {
               <p>{/* KLLLLAMMM BLAAA BLAAA BLAAA */}</p>
             </header>
             <div className="image-grid">
-              <a href="#" className="image">
+              <Link to="#" className="image">
                 <img src={pic4} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic5} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic5} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic4} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic5} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic4} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic5} alt="" />
-              </a>
-              <a href="#" className="image">
+              </Link>
+              <Link to="#" className="image">
                 <img src={pic5} alt="" />
-              </a>
+              </Link>
             </div>
             <ul className="actions">
               {/* <li>
-                  <a href="#" className="button big alt">
+                  <Link to="#" className="button big alt">
                     Tempus Aliquam
-                  </a>
+                  </Link>
                 </li> */}
             </ul>
           </div>
@@ -131,9 +131,9 @@ export class Home extends Component {
             </header>
             <ul className="actions">
               <li>
-                <a href="/about" className="button big alt">
+                <Link to="/about" className="button big alt">
                   About Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -178,36 +178,36 @@ export class Home extends Component {
           <div className="inner">
             <ul className="icons">
               <li>
-                <a
-                  href="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX"
+                <Link
+                  to="https://www.facebook.com/TheIntelligentQuestion/?epa=SEARCH_BOX"
                   className="icon fa-facebook"
                 >
                   <span className="label">Facebook</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="icon fa-twitter">
+                <Link to="#" className="icon fa-twitter">
                   <span className="label">Twitter</span>
-                </a>
+                </Link>
               </li>
               <li>
-                <a href="#" className="icon fa-instagram">
+                <Link to="#" className="icon fa-instagram">
                   <span className="label">Instagram</span>
-                </a>
+                </Link>
               </li>
               {/* <li>
-                  <a href="#" className="icon fa-linkedin">
+                  <Link to="#" className="icon fa-linkedin">
                     <span className="label">LinkedIn</span>
-                  </a>
+                  </Link>
                 </li> */}
             </ul>
             <ul className="copyright">
               <li>&copy; ERROR 404.</li>
               <li>
-                Images: <a href="http://unsplash.com">Unsplash</a>.
+                Images: <Link to="http://unsplash.com">Unsplash</Link>.
               </li>
               <li>
-                Design: <a href="http://templated.co">TEMPLATED</a>.
+                Design: <Link to="http://templated.co">TEMPLATED</Link>.
               </li>
             </ul>
           </div>

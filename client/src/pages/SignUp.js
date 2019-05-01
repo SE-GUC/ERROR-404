@@ -224,7 +224,7 @@ class SignUp extends React.Component {
               fullWidth
               variant="contained"
               color="primary"
-              href="http://localhost:3000/signin"
+              href="/signin"
               onClick={this.props.addUser.bind(
                 this,
                 this.state.type,
