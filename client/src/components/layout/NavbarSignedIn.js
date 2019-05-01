@@ -9,18 +9,18 @@ export class NavbarSignedIn extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/">HUB</a>     
+                <a className="nav-link" href="/">HUB</a>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/faq">FAQs</a>     
+                <a className="nav-link" href="/faq">FAQs</a>     
               </li>
               </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/Profile">Profile</a>     
+                <a className="nav-link" href="/Profile">Profile</a>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/signout">Logout</a>     
+                <a className="nav-link" href="/signout">Logout</a>     
               </li>
             </ul>
           </div>
