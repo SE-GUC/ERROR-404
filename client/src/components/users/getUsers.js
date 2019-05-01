@@ -19,14 +19,14 @@ class GetUsers extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:5000/api/Users").then(res => {
+    axios.get("/api/Users").then(res => {
       this.setState({ users: res.data.data });
     });
   }
   deleteUser = id => {
     console.log(id);
 
-    axios.delete("http://localhost:5000/api/Users/" + id).then(
+    axios.delete("/api/Users/" + id).then(
       this.setState({
         users: [...this.state.users.filter(user => user._id !== id)]
       })
@@ -47,7 +47,7 @@ class GetUsers extends Component {
     console.log("Hnnna Ahpoooo");
     console.log(this.props.user._id);
     const update = axios.put(
-      "http://localhost:5000/api/Users/update/" + this.props.user._id,
+      "/api/Users/update/" + this.props.user._id,
       {
         firstName: this.state.firstName,
         lastName: this.state.lastName,

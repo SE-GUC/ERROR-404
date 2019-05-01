@@ -51,7 +51,7 @@ class CreateDebate extends React.Component {
   }
   handleClick = event => {
     axios
-      .post("http://localhost:5000/api/Debates", {
+      .post("/api/Debates", {
         title: "" + this.state.title,
         category: "" + this.state.category,
         date: "" + this.state.date,

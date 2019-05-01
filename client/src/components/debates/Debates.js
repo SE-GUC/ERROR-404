@@ -58,7 +58,7 @@ class Debates extends Component {
 
   createDebate = async event => {
     axios
-      .post("http://localhost:5000/api/Debates", {
+      .post("/api/Debates", {
         title: this.state.title,
         category: this.state.category,
         date: this.state.date,
@@ -99,7 +99,7 @@ class Debates extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/debates")
+      .get("/api/debates")
       .then(res => this.setState({ debates: res.data.data }));
   }
 

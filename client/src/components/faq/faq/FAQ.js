@@ -23,29 +23,29 @@ class FAQ extends Component {
    
   };
   componentDidMount()  {
-    axios.get('http://localhost:5000/api/FAQs')
+    axios.get('/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   }
   delfaq = (id) => {
-    axios.delete('http://localhost:5000/api/FAQs/'+id)
+    axios.delete('/api/FAQs/'+id)
       .then(res => this.setState({ FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)] }));
  
 }
 updatefaq = (id,question,answer) => {
-   axios.put('http://localhost:5000/api/FAQs/edit/'+id,
+   axios.put('/api/FAQs/edit/'+id,
   {
     "answer":answer,
     "question":question
   })
   .then(res => {
-    axios.get('http://localhost:5000/api/FAQs')
+    axios.get('/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   
   });
 
 }
   addFAQ = (question,answer) => {
-    axios.post('http://localhost:5000/api/FAQs/add', {
+    axios.post('/api/FAQs/add', {
       question,
       answer
     })

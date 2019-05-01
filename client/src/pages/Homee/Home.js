@@ -21,7 +21,7 @@ export class Home extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/Contents")
+      .get("/api/Contents")
       .then(res => this.setState({ allConents: res.data.data }));
   }
   render() {

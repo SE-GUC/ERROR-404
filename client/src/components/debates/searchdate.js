@@ -16,7 +16,7 @@ class SearchDate extends Component {
     const { date } = this.props.match.params;
     this.setState({ date: date });
     axios
-      .get(`http://localhost:5000/api/debates/searchbydate/${date}`)
+      .get(`/api/debates/searchbydate/${date}`)
       .then(res => this.setState({ debates: res.data.data }));
   }
   constructor(props) {

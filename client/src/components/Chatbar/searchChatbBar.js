@@ -11,7 +11,7 @@ class SearchDebateLive extends Component {
   componentDidMount() {
     const { title } = this.props.match.params;
     axios
-      .get(`http://localhost:5000/api/chatbars/Search/${title}`)
+      .get(`/api/chatbars/Search/${title}`)
       .then(res => this.setState({ chatbars: res.data.data }));
   }
   constructor(props) {

@@ -41,12 +41,12 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
   }
  
     deleteDebateLive= (id)=> {
-        axios.delete(' http://localhost:5000/api/Chatbars/'+id)
+        axios.delete(' /api/Chatbars/'+id)
         .then(this.setState({chatbars: [...this.state.chatbars.filter(chatbar => chatbar._id !== id)]}))
     
       } 
       addDebateLive = () => {
-        axios.post(' http://localhost:5000/api/Chatbars/create', {
+        axios.post(' /api/Chatbars/create', {
             debateLiveTitle:this.state.debateLiveTitle
             
         })

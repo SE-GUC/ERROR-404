@@ -16,23 +16,23 @@ class QuestionAdmin extends Component {
       Questions:[]
   }
   componentDidMount()  {
-    axios.get('http://localhost:5000/api/Questions/admin')
+    axios.get('/api/Questions/admin')
     .then(res => this.setState({ Questions: res.data.data }))
   }
   delQuestion = (id) => {
-    axios.delete('http://localhost:5000/api/Questions/'+id)
+    axios.delete('/api/Questions/'+id)
       .then(res => this.setState({ Questions: [...this.state.Questions.filter(question => question._id !== id)] }));
  
 }
 
 answerQuestion = (id,answer) => {
   
-  axios.put('http://localhost:5000/api/Questions/answerquestion/'+id,
+  axios.put('/api/Questions/answerquestion/'+id,
   {
     "answer":answer
   })
   .then(res => {
-    axios.get('http://localhost:5000/api/Questions/admin')
+    axios.get('/api/Questions/admin')
     .then(res => this.setState({ Questions: res.data.data }))
    
   });

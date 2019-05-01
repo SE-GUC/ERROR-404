@@ -19,7 +19,7 @@ export class Score extends Component {
   componentDidMount() {
     console.log("ana henaa");
     axios
-      .get("http://localhost:5000/api/Users")
+      .get("/api/Users")
       .then(res => this.setState({ scores: res.data.data }));
   }
 

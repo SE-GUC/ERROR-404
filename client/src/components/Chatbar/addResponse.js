@@ -31,7 +31,7 @@ export class addResponse extends Component {
   };
   componentDidMount() {
     const id = this.props.match.params.key;
-    axios.get('http://localhost:5000/api/Users/'+ this.props.id)
+    axios.get('/api/Users/'+ this.props.id)
     .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
     .catch(console.log('cannot fetch'))
     fetch("/api/Chatbars/" + id)
@@ -85,7 +85,7 @@ export class addResponse extends Component {
       updatedData.forResponses = chatbar.forResponses;
 
     axios.put(
-      " http://localhost:5000/api/Chatbars/for/" + this.props.match.params.key,
+      " /api/Chatbars/for/" + this.props.match.params.key,
       {
         forResponses: [chatbar.forResponses]
       }
@@ -99,7 +99,7 @@ export class addResponse extends Component {
       updatedData.againstResponses = chatbar.againstResponses;
 
     axios.put(
-      " http://localhost:5000/api/Chatbars/against/" +
+      " /api/Chatbars/against/" +
         this.props.match.params.key,
       {
         againstResponses: [chatbar.againstResponses]

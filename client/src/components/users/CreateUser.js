@@ -31,7 +31,7 @@ export class CreateUser extends Component {
     clubs
   ) => {
     axios
-      .post("http://localhost:5000/api/Users/register", {
+      .post("/api/Users/register", {
         type: type,
         firstName: firstName,
         lastName: lastName,

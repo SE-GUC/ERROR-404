@@ -24,7 +24,7 @@ class UserProfile extends Component {
   componentDidMount()
   {
      const id = this.props.match.params.id
-     axios.get(`http://localhost:5000/api/Users/${id}`)
+     axios.get(`/api/Users/${id}`)
      .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
      .catch(console.log('cannot fetch'))
   }

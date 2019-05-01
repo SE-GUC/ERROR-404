@@ -13,7 +13,7 @@ class Users extends Component {
   };
 
   componentDidMount() {
-    Axios.get("http://localhost:5000/api/Users").then(res =>
+    Axios.get("/api/Users").then(res =>
       this.setState({ users: res.data.data })
     );
   }
@@ -42,7 +42,7 @@ class Users extends Component {
     console.log(din);
     console.log(dor);
     console.log(clubs);
-    Axios.post("http://localhost:5000/api/Users/register", {
+    Axios.post("/api/Users/register", {
       type,
       firstName,
       lastName,

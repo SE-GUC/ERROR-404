@@ -26,14 +26,14 @@ class Question extends Component {
    
   }
   get = () => {
-    axios.get('http://localhost:5000/api/Questions/user/' +this.props.id )
+    axios.get('/api/Questions/user/' +this.props.id )
     .then(res => this.setState({ Questions: res.data.data }))
     }
     
   
     ask = (ask) => {
       console.log("pp")
-      axios.post('http://localhost:5000/api/Questions/ask',
+      axios.post('/api/Questions/ask',
       { "question":ask,
         "user":this.props.id
       })

@@ -42,7 +42,7 @@ class FormDialog extends React.Component {
 
   handleSubmit = () => {
     axios
-      .put("http://localhost:5000/api/Users/update/" + this.props.user._id, {
+      .put("/api/Users/update/" + this.props.user._id, {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
         bio: this.state.bio,

@@ -24,7 +24,7 @@ class Articles extends Component {
 
   addArticle = (article)=>{
       //console.log(article)
-      axios.post('http://localhost:5000/api/Articles/create' , article)
+      axios.post('/api/Articles/create' , article)
       .then(res=>this.setState({allArticles:[...this.state.allArticles,res.data.data]}))
       .catch(error=> {
         console.log('erorr')
@@ -34,13 +34,13 @@ class Articles extends Component {
   updateComment = (comment)=>{
     console.log(this.props.id)
     console.log(this.usertype)
-    axios.put(`http://localhost:5000/api/Articles/comment/${comment.article._id}/${this.props.id}`,{comments:comment.comment})
+    axios.put(`/api/Articles/comment/${comment.article._id}/${this.props.id}`,{comments:comment.comment})
     axios.get('/api/Articles')
     .then(res=>this.setState({allArticles:res.data.data}))  
     }
   
   deleteArticle = (id) =>{
-    axios.delete(`http://localhost:5000/api/Articles/${id}`)
+    axios.delete(`/api/Articles/${id}`)
     .then(res=>this.setState({allArticles:[...this.state.allArticles.filter(article=>article._id!== id)]}))
   }
 
@@ -63,7 +63,7 @@ class Articles extends Component {
     if(article.description !== ""){
       back.description = article.description
     }
-    axios.put(`http://localhost:5000/api/Articles/${article._id}`,back)
+    axios.put(`/api/Articles/${article._id}`,back)
     .then(this.setState({allArticles : articles})) 
   }
 

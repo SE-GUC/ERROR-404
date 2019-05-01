@@ -15,13 +15,13 @@ class GetUsersScores extends Component {
   }
   getAllUsers() {
     axios
-      .get("http://localhost:5000/api/Users/AllScores")
+      .get("/api/Users/AllScores")
       .then(res => this.setState({ users: res.data.data }));
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/Users/AllScores")
+      .get("/api/Users/AllScores")
       .then(res => this.setState({ users: res.data.data }));
   }
   // updateScore = () => {

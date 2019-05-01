@@ -97,12 +97,12 @@ class DebateCard extends React.Component {
   };
 
   handleDeleteClick = async () => {
-    await Axios.delete(`http://localhost:5000/api/Debates/${this.props.id}`);
+    await Axios.delete(`/api/Debates/${this.props.id}`);
     window.location.reload();
   };
   UpdateDebate = async () => {
     const reply = await Axios.put(
-      `http://localhost:5000/api/Debates/${this.props.id}`,
+      `/api/Debates/${this.props.id}`,
       {
         title: this.state.updatetitle,
         category: this.state.updatecategory,

@@ -25,12 +25,12 @@ class FAQU extends Component {
   };
   
   componentDidMount()  {
-    axios.get('http://localhost:5000/api/FAQs')
+    axios.get('/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
   }
   ask = (ask,id) => {
     console.log("pp")
-    axios.post('http://localhost:5000/api/Questions/ask',
+    axios.post('/api/Questions/ask',
     { "question":ask,
       "user":id
     })
