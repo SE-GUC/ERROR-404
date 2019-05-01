@@ -56,7 +56,7 @@ class InputAdornments extends React.Component {
 
   handleClick = async event => {
     const Users = await axios.post(
-      "http://localhost:5000/api/Users/authenticate",
+      "/api/Users/authenticate",
       {
         email: this.state.email,
         password: this.state.password
