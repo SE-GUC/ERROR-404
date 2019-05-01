@@ -57,15 +57,15 @@ class App extends Component {
               <div class="thumbnails">
                 {this.state.allClubs.map(club => (
                   <div class="box">
-                    <a href={"/" + club.name + "Home"} class="image fit">
+                    <linkto href={"/" + club.name + "Home"} class="image fit">
                       <img src={Logo} alt="" />
-                    </a>
+                    </linkto>
                     <div class="inner">
                       <h3>{club.name}</h3>
                       <p>{club.description}</p>
-                      <a href={"/" + club.name + "Home"} class="button fit">
+                      <linkto href={"/" + club.name + "Home"} class="button fit">
                         Discover Now
-                      </a>
+                      </linkto>
                     </div>
                   </div>
                 ))}
@@ -121,9 +121,9 @@ class App extends Component {
                   To allow the students to discover themselves
                 </p>
               </header>
-              <a href="#main" class="more">
+              <linkto href="#main" class="more">
                 Learn More
-              </a>
+              </linkto>
             </div>
           </section>
 
@@ -132,22 +132,22 @@ class App extends Component {
               <div class="thumbnails">
                 {this.state.allClubs.map(club => (
                   <div class="box">
-                    <a href={"/" + club.name + "Home"} class="image fit">
+                    <linkto href={"/" + club.name + "Home"} class="image fit">
                       <img src={Logo} alt="" />
-                    </a>
+                    </linkto>
                     <div class="inner">
                       <h3>{club.name}</h3>
                       <p>{club.description}</p>
-                      <a href={"/" + club.name + "Home"} class="button fit">
+                      <linkto href={"/" + club.name + "Home"} class="button fit">
                         Discover Now
-                      </a>
+                      </linkto>
                     </div>
                   </div>
                 ))}
                  <div class="box">
-                    <a href={"/clubs"} class="image fit">
+                    <linkto href={"/clubs"} class="image fit">
                       <img src={addIcon} alt="" />
-                    </a>
+                    </linkto>
                     <div class="inner">
                        ADD A NEW ONE OR DELETE AN OLD ONE
                      
@@ -208,9 +208,9 @@ class App extends Component {
                         To allow the students to discover themselves
                       </p>
                     </header>
-                    <a href="#main" class="more">
+                    <linkto href="#main" class="more">
                       Learn More
-                    </a>
+                    </linkto>
                   </div>
                 </section>
       
@@ -219,15 +219,15 @@ class App extends Component {
                     <div class="thumbnails">
                       {this.state.allClubs.map(club => (
                         <div class="box">
-                          <a href={"/" + club.name + "Home"} class="image fit">
+                          <linkto href={"/" + club.name + "Home"} class="image fit">
                             <img src={Logo} alt="" />
-                          </a>
+                          </linkto>
                           <div class="inner">
                             <h3>{club.name}</h3>
                             <p>{club.description}</p>
-                            <a href={"/" + club.name + "Home"} class="button fit">
+                            <linkto href={"/" + club.name + "Home"} class="button fit">
                               Discover Now
-                            </a>
+                            </linkto>
                           </div>
                         </div>
                       ))}

@@ -17,7 +17,7 @@ export class Navbar extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/createuser">Sign Up</a>     
+                <a className="nav-link" href="/createuser">Sign Up</a>     
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="http://localhost:3000/signin">Login</a>     
