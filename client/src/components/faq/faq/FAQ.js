@@ -69,9 +69,7 @@ updatefaq = (id,question,answer) => {
                 <br></br>
                 <button
                   variant="contained"
-                  onClick={() => {
-                    this.handleClick1();
-                  }}
+                  onClick={this.handleClick1}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >
