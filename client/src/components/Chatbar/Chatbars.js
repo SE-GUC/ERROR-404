@@ -18,6 +18,9 @@ class Chatbars extends Component {
       searchkey: null
     };
   }
+  handleClick =() => {
+     this.props.history.push("/signin");
+  };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
@@ -46,13 +49,18 @@ class Chatbars extends Component {
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
-                  onClick={<Link to= "/signin" />}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>

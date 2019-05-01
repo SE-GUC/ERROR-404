@@ -102,7 +102,9 @@ class Debates extends Component {
       .get("/api/debates")
       .then(res => this.setState({ debates: res.data.data }));
   }
-
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
   render() {
     const { classes } = this.props;
     if (this.props.token === null) {
@@ -115,7 +117,9 @@ class Debates extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
                   className="btn"
                 >
                   Sign In

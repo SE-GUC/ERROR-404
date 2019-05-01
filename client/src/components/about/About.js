@@ -21,41 +21,41 @@ class About extends Component {
     componentDidMount()
     {
        //BOAS
-       fetch('/api/Users/tiq/BOA')
+       fetch('/api/Users/tiq/BOA/')
       .then(res=>res.json())
       .then(BOAs=> this.setState({BOAs:BOAs.data},()=>console.log("fetched",BOAs)));
       //PHL 
-      fetch('/api/Users/tiq/PHL')
+      fetch('/api/Users/tiq/PHL/')
       .then(res=>res.json())
       .then(PHLs=> this.setState({PHLs : PHLs.data},()=>console.log("fetched",PHLs.data)));
       //OHL
-      fetch('/api/Users/tiq/OHL')
+      fetch('/api/Users/tiq/OHL/')
       .then(res=>res.json())
       .then(OHLs=> this.setState({OHLs : OHLs.data},()=>console.log("fetched",OHLs.data)));
       //DHL
-      fetch('/api/Users/tiq/DHL')
+      fetch('/api/Users/tiq/DHL/')
       .then(res=>res.json())
       .then(DHLs=> this.setState({DHLs : DHLs.data},()=>console.log("fetched",DHLs.data)));
       //MS
-      fetch('/api/Users/tiq/MS')
+      fetch('/api/Users/tiq/MS/')
       .then(res=>res.json())
       .then(MS=> this.setState({MSs : MS.data},()=>console.log("fetched",MS.data)));
       ///.catch(console.log("cannot fetch"))
       //.then(MS=> this.setState({MS : MS.data},()=>console.log("fetched",MS.data)));
       //LS
-      fetch('/api/Users/tiq/LS')
+      fetch('/api/Users/tiq/LS/')
       .then(res=>res.json())
       .then(LS=> this.setState({LSs : LS.data},()=>console.log("fetched",LS.data)));
       //FS
-      fetch('/api/Users/tiq/FS')
+      fetch('/api/Users/tiq/FS/')
       .then(res=>res.json())
       .then(FS=> this.setState({FSs : FS.data},()=>console.log("fetched",FS.data)));
       //MDS
-      fetch('/api/Users/tiq/MDS')
+      fetch('/api/Users/tiq/MDS/')
       .then(res=>res.json())
       .then(MDS=> this.setState({MDSs : MDS.data},()=>console.log("fetched",MDS.data)));
       //RS
-      fetch('/api/Users/tiq/RS')
+      fetch('/api/Users/tiq/RS/')
       .then(res=>res.json())
       .then(RS=> this.setState({RSs:RS.data},()=>console.log("fetched",RS.data)));
     }

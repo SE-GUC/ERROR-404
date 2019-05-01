@@ -29,6 +29,9 @@ class profile extends Component {
      .catch(console.log('cannot fetch'))
   }
   
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
   render()
   {
     if (this.props.token == null) {
@@ -41,7 +44,9 @@ class profile extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={<Link to="/signin"/>}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
                   className="btn"
                 >
                   Sign In
