@@ -108,6 +108,7 @@ class Debates extends Component {
     if (this.props.token === null) {
       return (
         <div>
+              <ToolBar />
           <div class="thumbnails">
             <div class="box">
               <div class="inner">

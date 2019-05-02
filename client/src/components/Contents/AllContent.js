@@ -5,11 +5,23 @@ import Home from "../../pages/Homee/Home";
 
 class AllContent extends Component {
   render() {
-    return this.props.allContent.map(content => (
-      // <ReviewCard key={content._id} content={content} />
-      <Content key={content._id} content={content} />
-      // <Home key={content._id} content={content} />
-    ));
+    return (
+      <div class="inner">
+      <div class="thumbnails">
+        {  this.props.allContent.map(content => (
+          <div class="box">
+            <div class="inner">
+               <h3>{content.type}</h3>
+              <p>{content.description} </p>
+              <p>{content.date} </p>
+        
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    )
+  
   }
 }
 

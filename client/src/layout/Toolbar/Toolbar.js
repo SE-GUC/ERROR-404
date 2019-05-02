@@ -3,6 +3,11 @@ import "./Toolbar.css";
 import Search from "../Search/Search";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 const searchStyle = {
   color: "white"
@@ -28,12 +33,12 @@ const toolbar = props => (
             <a href="/Profile">Profile</a>
           </li>
 
-          <li>
+          {/* <li>
             <a href="/">Disciples</a>
-          </li>
+          </li> */}
 
           <li>
-            <a href="/Articles">Blog</a>
+            <a href="/ArticlesHome">Blog</a>
           </li>
 
           <li>
@@ -47,18 +52,23 @@ const toolbar = props => (
             <a href="/about">About</a>
           </li>
           <li>
-            <a href="/">Contact Us</a>
+          <a href="/ContactUs">Contact Us</a>
           </li>
           <li>
-            <a href="/ourPeople">Debaters</a>
+            <a href="/getUsers">Debaters</a>
           </li>
-
+          <li>
+            <a href="/contents">Announcements</a>
+          </li>
           <li>
             <a href="/">HUB</a>
           </li>
-          <li>
-            <a href="/signout">LOG OUT</a>
-          </li>
+         
+         
+             {/* <li>
+             <a href="/signout">LOG OUT</a>
+           </li> */}
+          
 
           {/* <form>
             <Search />
@@ -76,5 +86,10 @@ const toolbar = props => (
     </nav>
   </header>
 );
+const Form = connect(
+  mapStateToProps,
+  null
+)(toolbar);
 
-export default toolbar;
+export default Form;
+//export default toolbar;

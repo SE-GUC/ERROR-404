@@ -13,6 +13,7 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Navbar from "../../components/layout/Navbar";
 import { connect } from "react-redux";
 import { signIn, signOut } from "../../store";
 import axios from "axios";
@@ -83,6 +84,7 @@ class InputAdornments extends React.Component {
     console.log(this.props.usertype);
     return (
       <>
+     <Navbar/>
         <div className={classes.root}>
           <TextField
             className={classes.margin}

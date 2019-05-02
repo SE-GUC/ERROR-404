@@ -6,6 +6,7 @@ import Navbar from "./components/layout/Navbar";
 import SignedInNavBar from "./components/layout/NavbarSignedIn";
 import Logo from "./components/images/pic05.jpg";
 import news from "./components/images/news.jpg";
+import addIcon from "./components/images/addIcon.png";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -70,6 +71,7 @@ class App extends Component {
                 ))}
               </div>
             </div>
+            
             <header>
               <center>
                 <h1>ANNONCEMENTS</h1>
@@ -104,6 +106,8 @@ class App extends Component {
         </div>
       );
     } else {
+      const auth = this.props.usertype === "HUBadmin";
+      if(auth){
       return (
         <div>
           <SignedInNavBar />
@@ -140,8 +144,22 @@ class App extends Component {
                     </div>
                   </div>
                 ))}
+                 <div class="box">
+                    <a href={"/clubs"} class="image fit">
+                      <img src={addIcon} alt="" />
+                    </a>
+                    <div class="inner">
+                       ADD A NEW ONE OR DELETE AN OLD ONE
+                     
+                      {/* <a href={"/clubs"} class="button fit">
+                        CLICK HERE
+                      </a> */}
+                    </div>
+                  </div>
               </div>
-            </div>
+
+             </div>
+            
             <header>
               <center>
                 <h1>ANNONCEMENTS</h1>
@@ -175,6 +193,85 @@ class App extends Component {
           </footer>
         </div>
       );
+          }
+          else{
+            return (
+              <div>
+                <SignedInNavBar />
+                <section id="banner1">
+                  <div class="inner">
+                    <header>
+                      <h1>GUC HUB</h1>
+                      <p>
+                        A platform for all the AWGs in the German university in Cairo
+                        camps <br />
+                        To allow the students to discover themselves
+                      </p>
+                    </header>
+                    <a href="#main" class="more">
+                      Learn More
+                    </a>
+                  </div>
+                </section>
+      
+                <div id="main">
+                  <div class="inner">
+                    <div class="thumbnails">
+                      {this.state.allClubs.map(club => (
+                        <div class="box">
+                          <a href={"/" + club.name + "Home"} class="image fit">
+                            <img src={Logo} alt="" />
+                          </a>
+                          <div class="inner">
+                            <h3>{club.name}</h3>
+                            <p>{club.description}</p>
+                            <a href={"/" + club.name + "Home"} class="button fit">
+                              Discover Now
+                            </a>
+                          </div>
+                        </div>
+                      ))}
+                      
+                    </div>
+      
+                   </div>
+                  
+                  <header>
+                    <center>
+                      <h1>ANNONCEMENTS</h1>
+                    </center>
+                  </header>
+                </div>
+                {this.state.allContent.map(content => (
+                  <section id="one" class="wrapper style1">
+                    <div class="inner">
+                      <article class="feature left">
+                        <span class="image">
+                          <img src={news} alt="" />
+                        </span>
+                        <div class="content">
+                          <h2>
+                            {content.type} {content.date} {content.description}{" "}
+                          </h2>
+                        </div>
+                      </article>
+                    </div>
+                  </section>
+                ))}
+      
+                <footer id="footer">
+                  <div class="inner">
+                    <h2>GUC HUB</h2>
+                    <p>Connecting the GUCians togther</p>
+      
+                    <p class="copyright">&copy; ERROR 404 </p>
+                  </div>
+                </footer>
+              </div>
+            );
+          }
+    
+
     }
   }
 }

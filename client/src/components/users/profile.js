@@ -30,7 +30,28 @@ class profile extends Component {
   
   render()
   {
-
+    if (this.props.token == null) {
+      return (
+        <div>
+          <Toolbar />
+          <div class="thumbnails">
+            <div class="box">
+              <div class="inner">
+                <h3>You have to sign in first!</h3>
+                <button
+                  variant="contained"
+                  onClick={() => (document.location.href = "/signin")}
+                  className="btn"
+                >
+                  Sign In
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+    else{
     return(
   <div className="profilePage7">
       <Toolbar/>
@@ -53,7 +74,7 @@ class profile extends Component {
     </Container>
   </div>
   )
-  }
+  }}
 }
 const Form = connect(
     mapStateToProps,

@@ -19,12 +19,14 @@ export class UpdateArticle extends Component {
           placeholder={this.props.article.title}
           onChange={this.onChange}
         />
+        <br></br>
         <input
           type="text"
           name="description"
           placeholder={this.props.article.description}
           onChange={this.onChange}
         />
+        <br></br>
         <button onClick={this.props.updateArticle.bind(this, {_id: this.props.article._id, title:this.state.title, description: this.state.description})}>
         UPDATE
         </button>

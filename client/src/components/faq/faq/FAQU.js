@@ -79,7 +79,7 @@ onSubmit = (e) => {
       );
     }
 else{
-  if (this.props.usertype === "admin") {
+  if (this.props.usertype === "HUBadmin") {
     return(
         <div>
         {this.renderRedirect()}

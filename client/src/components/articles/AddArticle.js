@@ -27,6 +27,7 @@ import React , {Component} from "react";
             value={this.state.title}
             onChange={this.onChange}
           />
+          <br></br>
           <input
             type="text"
             name="description"
@@ -34,7 +35,7 @@ import React , {Component} from "react";
             value={this.state.description}
             onChange={this.onChange}
           />
-           
+           <br></br>
           <input
             type="text"
             name="author"
@@ -42,7 +43,7 @@ import React , {Component} from "react";
             value={this.state.author}
             onChange={this.onChange}
           />
-           
+           <br></br>
           <input
             type="text"
             name="date"
@@ -51,7 +52,7 @@ import React , {Component} from "react";
             onChange={this.onChange}
           />
           
-       
+          <br></br>
           <input
             type="submit"
             value="Submit"

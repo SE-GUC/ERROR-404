@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import "./assets/css/main.css";
 import "./assets/css/ie9.css";
-
+import Toolbar from "../../layout/Toolbar/Toolbar";
 import pic1 from "./images/pic01.jpg";
 import axios from "axios";
 
@@ -20,7 +20,7 @@ export class AllEvents extends Component {
   render() {
     return (
       <section id="one" className="wrapper style1">
-        <div className="inner">
+       <div className="inner">
           {this.state.allConents.map(content => (
             <article className="feature left">
               <section>

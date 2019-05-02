@@ -4,12 +4,25 @@ import Article from './Article'
 class DeleteArticle extends Component {
 
    render(){
-       return  this.props.allArticles.map((article)=>(
-        <div>
-        <Article key={article._id} article={article} />
-        <button onClick={this.props.deleteArticle.bind(this, article._id)}>DELETE Article</button>
-        </div>  
-       ));
+    return (
+        <div class="thumbnails">
+        {this.props.allArticles.map((article)=>(
+                <div class="box">
+                <div class="inner">
+                    <h3>{article.title}</h3>
+                  <input 
+                   type="Submit" 
+                   value="delete"
+                   className="btn"
+                   onClick={this.props.deleteArticle.bind(this, article._id)}
+                   style={{flex: '10'}}
+                    />
+                  </div>
+                </div>))}
+            
+            </div>
+        )
+    
    }
 
 }

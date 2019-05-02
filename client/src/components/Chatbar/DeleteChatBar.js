@@ -3,6 +3,11 @@ import axios from 'axios';
 import './Chatbars.css';
 import Header from './Header';
 import Toolbar from '../../layout/Toolbar/Toolbar'
+import { connect } from "react-redux";
+
+const mapStateToProps = state => {
+  return { token: state.token, usertype: state.usertype, id: state.id };
+};
 
 export class DeleteChatBar extends Component {
         constructor() {
@@ -23,6 +28,7 @@ export class DeleteChatBar extends Component {
       // this.setState(this.state.debateLiveTitle);
     
        this.setState({debateLiveTitle:''})
+       this.render();
 }
 onChange= (e) => this.setState({[e.target.name]: e.target.value});
 
@@ -45,20 +51,29 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
             
         })
           .then(res => this.setState({ chatbars: [...this.state.chatbars, res.data] }));
-          
+          alert("The new motion has been added successfully, please refresh the page");
       }
       render() {
+        const auth = this.props.usertype === "TIQadmin";
+        if (auth) {
         return (
           <div style={this.getStyle()}  >
         <div>
         <Toolbar/>
         <Header />
+        <button
+            className="btn"
+            style={{ position: "absolute", left: "20px", top: "63px" }}
+            onClick={() => (document.location.href = "/chatbars")}
+          >
+            BACK
+          </button>
       </div>
       <form onSubmit={this.onSubmit} style= {{display: 'flex'}}>
                 <input
                  type="text"
                  name="debateLiveTitle" 
-                 style={{flex: '10' , padding: '5px'}}
+                 style={{flex: '10' , padding: '5px',color:"black"}}
                  placeholder="Add a new Debate live..."
                  value={this.state.debateLiveTitle}
                  onChange={this.onChange}
@@ -71,6 +86,7 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
                   onClick= {this.addDebateLive}
                   style={{flex: '1'}}
                   />
+                  
             </form>
             <br></br>
 
@@ -95,23 +111,17 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
 							</div>)}
           
           </div>
-        {/* {this.state.chatbars.map(chatbar =>  
-          <li key={chatbar._id} style = {{fontSize:'20px' , color:"white", top:'80px',textAlign:"center"}}> {chatbar.debateLiveTitle} 
-           <input 
-                  type="Submit" 
-                 value="delete"
-                 className="btn"
-                  onClick= {this.deleteDebateLive.bind(this,chatbar._id)}
-                   style={{flex: '10'}}
-                  />
-          
-          </li>
-          
-         )}
-          */}
+       
         </div>
+        
         )
       }
+    }
 }
+const Form = connect(
+  mapStateToProps,
+  null
+)(DeleteChatBar);
 
-export default DeleteChatBar
+export default Form;
+//export default DeleteChatBar
