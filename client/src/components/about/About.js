@@ -63,62 +63,62 @@ class About extends Component {
     render(){
         const BOAList= this.state.BOAs.map((BOA)=>{
             return(
-                <Col xs={2} >
-                <Image src={BOA.profilePicture}roundedCircle className="image1555" />
+                // <Col xs={2} >
+                // <Image src={BOA.profilePicture}roundedCircle className="image1555" />
                 <div className="center555">
                 <h5 className="BOAname">{BOA.firstName} {BOA.lastName}</h5>
                 </div>
                
-                </Col>
+                // </Col>
                 )
             })
         const PHLList = this.state.PHLs.map((PHL)=>
         {
             return(
-                <Row xs={6} >
-                     <Col lg={true}>
-                     <Image src={PHL.profilePicture} roundedCircle className="image1555"/>
+                // <Row xs={6} >
+                    //  <Col lg={true}>
+                    // <Image src={PHL.profilePicture} roundedCircle className="image1555"/>
                      <div className="center555">
                     <h5 style={{color:yellow,textTransform:"uppercase"}}>{PHL.firstName} {PHL.lastName}</h5> 
                     </div>
-                    </Col>
-                </Row>
+                  //  </Col>
+               // </Row>
             )
         })
         const MSmember = this.state.MSs.map((MS)=>
          {
             return(
-                <Col >
-                   <Image src={MS.profilePicture} roundedCircle className="image1555" />
+               // <Col >
+                  // <Image src={MS.profilePicture} roundedCircle className="image1555" />
                    <div className="center555">
                     <h5 style={{color:yellow}}>{MS.firstName} {MS.lastName}</h5>
                     <h5>MARKETING</h5> 
                     </div>
-                </Col>
+              //  </Col>
             )
          })
         const OHLList = this.state.OHLs.map((OHL)=>
         {
             return(
-                <Row >
-                    <Col lg={true}>
-                   <Image src={OHL.profilePicture} roundedCircle className="image1555" />
+               // <Row >
+                //    <Col lg={true}>
+                //   <Image src={OHL.profilePicture} roundedCircle className="image1555" />
                    <div className="center555">
                     <h5 style={{color:yellow,textTransform:"uppercase"}}>{OHL.firstName} {OHL.lastName}</h5> 
                     </div>
-                    </Col>
-                </Row>
+               //     </Col>
+              //  </Row>
             )
         })
         const DHLList = this.state.DHLs.map((DHL)=>
         {
             return(
-                <Col xs={3}>
-                   <Image src={DHL.profilePicture} roundedCircle className="image1555" />
+               // <Col xs={3}>
+                //   <Image src={DHL.profilePicture} roundedCircle className="image1555" />
                    <div className="center555">
                     <h5>{DHL.firstName} {DHL.lastName}</h5> 
                    </div>
-                </Col>
+               // </Col>
             )
         })
     
@@ -127,73 +127,75 @@ class About extends Component {
         const FSmember = this.state.FSs.map((FS)=>
         {
              return(
-                <Col >
-                <Image  src={FS.profilePicture} roundedCircle className="image1555" />
-            
+               // <Col >
+               // <Image  src={FS.profilePicture} roundedCircle className="image1555" />
+            <div>
                  <h5 className="center555">{FS.firstName} {FS.lastName}</h5>
                  <h5>FUNDRAISING</h5> 
-               
-                </Col>
+               </div>
+               // </Col>
              )
         })
         
         const LSmember = this.state.LSs.map((LS)=>
         {
              return(
-                <Col >
-                <Image src={LS.profilePicture} roundedCircle className="image1555" />
+               // <Col >
+               // <Image src={LS.profilePicture} roundedCircle className="image1555" />
                 <div className="center555">
                     <h5 >{LS.firstName} {LS.lastName}</h5> 
                     <h5>CO-ORDINATION
                      &LOGISTICS</h5>
                 </div>
                 
-                </Col>
+                //</Col>
              )
         })
         const RSmember = this.state.RSs.map((RS)=>
         {
              return(
-                <Col>
-                <Image src={RS.profilePicture} roundedCircle className="image1555" />
+                //<Col>
+                //<Image src={RS.profilePicture} roundedCircle className="image1555" />
                 <div className="center555">
                  <h5>{RS.firstName} {RS.lastName}</h5>
                  <h5>INVESTORS' 
                      RELATION</h5> 
                 </div>
-             </Col>
+            // </Col>
              )
         })
-        const LSFS = <Row>
-                        <Col xs={6}>
+        const LSFS = 
+        //<Row>
+                     //   <Col xs={6}>
                             {LSmember}
-                        </Col> 
-                        <Col xs={6}>
+                      //  </Col> 
+                     //   <Col xs={6}>
                             {RSmember}
                             
-                        </Col>
-                    </Row>
+                     //   </Col>
+                    //</Row>
         const MDSmember = this.state.MDSs.map((MDS)=>
         {
              return(
-                <Col>
-                
-                <Image class="img-responsive" src={MDS.profilePicture} roundedCircle className="image1555" />
+               // <Col>
+                <div>
+              //  <Image class="img-responsive" src={MDS.profilePicture} roundedCircle className="image1555" />
                  <h5>{MDS.firstName} {MDS.lastName}</h5>
                  <h5>MEDIA DESGIN</h5>
-                 
-               </Col>
+                 </div>
+              // </Col>
              )
         })
         
-        const MSRS = <Row>
-                        <Col xs={6}>
+        const MSRS = 
+          // <Row>
+               //         <Col xs={6}>
                             {MSmember}
-                        </Col> 
-                        <Col xs={6}>
+                 //       </Col> 
+                   //     <Col xs={6}>
                         {FSmember}
-                        </Col>
-                    </Row>
+                    //    </Col>
+                  //  </Row>
     
         return(
          <div>
@@ -222,40 +224,40 @@ class About extends Component {
                     <div >
                         <h1 >BOARD OF ADJUDICATORS</h1>
                     </div>
-                    <Row>
+                    {/* <Row> */}
                         {BOAList}
-                    </Row>
+                    {/* </Row> */}
     
                 {/* <Container> */}
-                    <Row>
-                    <Col >
+                    {/* <Row>
+                    <Col > */}
                         {/* <Container > */}
                         <h2 >PEGASUS HOUSE
                                 LEADERS</h2>
                         {/* </Container> */}
-                    </Col>
-                    <Col>
+                    {/* </Col>
+                    <Col> */}
                         {/* <Container > */}
                         <h2 >FUNCTION SUPERVISOR</h2>
                         {/* </Container> */}
-                    </Col>
-                    <Col>
+                    {/* </Col>
+                    <Col> */}
                     {/* <Container > */}
                     <h2 >ORION HOUSE</h2>
                         <h2> LEADERS</h2>
                     {/* </Container> */}
-                    </Col>
+                    {/* </Col>
                     </Row> 
     
                     <Row>
-                        <Col xs={1} >
+                        <Col xs={1} > */}
                             {/* <Container i> */}
-                            <Col lg={true}>
+                            {/* <Col lg={true}> */}
                             {PHLList}
-                            </Col>
+                            {/* </Col> */}
                             {/* </Container> */}
-                        </Col>
-                        <Col xs={6}  >
+                        {/* </Col>
+                        <Col xs={6}  > */}
                             {/* <Container  >
                                 <Container> */}
                                     {LSFS}     
@@ -264,20 +266,22 @@ class About extends Component {
                                     {MSRS}
                                 {/* </Container>
                                 <Container > */}
-                                    <Row>
-                                    <Col >{MDSmember}</Col>
-                                    </Row>  
+                                    {/* <Row> */}
+                                    {/* <Col > */}
+                                    {MDSmember}
+                                    {/* </Col> */}
+                                    {/* </Row>   */}
                                 {/* </Container>
                             </Container> */}
-                        </Col>
-                        <Col xs={1} >
+                        {/* </Col>
+                        <Col xs={1} > */}
                             {/* <Container > */}
-                                <Col>
+                                {/* <Col> */}
                                 {OHLList}
-                                </Col>
+                                {/* </Col> */}
                             {/* </Container> */}
-                        </Col>
-                    </Row>    
+                        {/* </Col> */}
+                    {/* </Row>     */}
                 {/* </Container> */}
     
     
@@ -285,9 +289,9 @@ class About extends Component {
                         <h1>DISCIPLES LEADERS</h1>
                     {/* </Container> */}
                     {/* <Container > */}
-                        <Row>
+                        {/* <Row> */}
                             {DHLList}
-                        </Row>
+                        {/* </Row> */}
                     {/* </Container> */}
             </div>      
             </div>
