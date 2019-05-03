@@ -24,6 +24,12 @@ class Chatbars extends Component {
   handleClickME =() => {
     this.props.history.push("/deleteChatBar");
  };
+ handleClickSearch =() => {
+  this.props.history.push(`chatbars/search/${
+    this.state.searchkey
+  }`)
+};
+ 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
@@ -111,11 +117,14 @@ class Chatbars extends Component {
             <button
               className="btn"
               style={{ position: "absolute", right: "0", top: "63px" }}
-              onClick={() =>
-                (document.location.href = `chatbars/search/${
-                  this.state.searchkey
-                }`)
-              }
+              onClick={() => {
+                this.handleClickSearch();
+              }}
+              // onClick={() =>
+              //   (document.location.href = `chatbars/search/${
+              //     this.state.searchkey
+              //   }`)
+              // }
             >
               Search
             </button>
@@ -169,11 +178,14 @@ class Chatbars extends Component {
             <button
               className="btn"
               style={{ position: "absolute", right: "0", top: "63px" }}
-              onClick={() =>
-                (document.location.href = `chatbars/search/${
-                  this.state.searchkey
-                }`)
-              }
+              onClick={() => {
+                this.handleClickSearch();
+              }}
+              // onClick={() =>
+              //   (document.location.href = `chatbars/search/${
+              //     this.state.searchkey
+              //   }`)
+              // }
             >
               Search
             </button>
