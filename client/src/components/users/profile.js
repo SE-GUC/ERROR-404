@@ -68,6 +68,7 @@ class profile extends Component {
   <figcaption>
     <h2>{this.state.user.firstName} <span>{this.state.user.lastName}</span></h2>
     <p> {this.state.user.bio}</p>
+    
     <p>{this.state.user.birthDate}</p>  
     <br></br>
     <br></br>
