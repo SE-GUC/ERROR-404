@@ -207,14 +207,14 @@ class About extends Component {
                 <h2>First Worlds style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
                 </h2> 
                   
-          <Container>   
+          {/* <Container>    */}
                 <h1 >Our Vision</h1>
                 <h2 >"Achieving progress through effective communication and perpetually seeking knowledge"
     
                     We live in a world of diversity, diversity of culture, diversity of belief, diversity of thought. When we ask ourselves the important questions we reach many important conclusions but it is through constantly communicating with one another, constantly trying to understand and at the same time influence that we can together shape as satisfying a possible resolution.
     
                     TIQ is a debate club, where we strive to produce dialogue in it's most exciting form, up on stage, going head to head with other people. There is nothing more remarkable than the free flowing of words carrying ideas, ideas that prevail with the passion, steadiness and charisma of those who deliver them. If riveting debate is something you long to learn and participate in then here is your home.</h2>
-                </Container> 
+                {/* </Container>  */}
                 <div>
                     <h1>OUR HIERARCHY</h1>
                 </div>
@@ -226,69 +226,69 @@ class About extends Component {
                         {BOAList}
                     </Row>
     
-                <Container>
+                {/* <Container> */}
                     <Row>
                     <Col >
-                        <Container >
+                        {/* <Container > */}
                         <h2 >PEGASUS HOUSE
                                 LEADERS</h2>
-                        </Container>
+                        {/* </Container> */}
                     </Col>
                     <Col>
-                        <Container >
+                        {/* <Container > */}
                         <h2 >FUNCTION SUPERVISOR</h2>
-                        </Container>
+                        {/* </Container> */}
                     </Col>
                     <Col>
-                    <Container >
+                    {/* <Container > */}
                     <h2 >ORION HOUSE</h2>
                         <h2> LEADERS</h2>
-                    </Container>
+                    {/* </Container> */}
                     </Col>
                     </Row> 
     
                     <Row>
                         <Col xs={1} >
-                            <Container i>
+                            {/* <Container i> */}
                             <Col lg={true}>
                             {PHLList}
                             </Col>
-                            </Container>
+                            {/* </Container> */}
                         </Col>
                         <Col xs={6}  >
-                            <Container  >
-                                <Container>
+                            {/* <Container  >
+                                <Container> */}
                                     {LSFS}     
-                                </Container>
-                                <Container>
+                                {/* </Container>
+                                <Container> */}
                                     {MSRS}
-                                </Container>
-                                <Container >
+                                {/* </Container>
+                                <Container > */}
                                     <Row>
                                     <Col >{MDSmember}</Col>
                                     </Row>  
-                                </Container>
-                            </Container>
+                                {/* </Container>
+                            </Container> */}
                         </Col>
                         <Col xs={1} >
-                            <Container >
+                            {/* <Container > */}
                                 <Col>
                                 {OHLList}
                                 </Col>
-                            </Container>
+                            {/* </Container> */}
                         </Col>
                     </Row>    
-                </Container>
+                {/* </Container> */}
     
     
-                    <Container >
+                    {/* <Container > */}
                         <h1>DISCIPLES LEADERS</h1>
-                    </Container>
-                    <Container >
+                    {/* </Container> */}
+                    {/* <Container > */}
                         <Row>
                             {DHLList}
                         </Row>
-                    </Container>
+                    {/* </Container> */}
             </div>      
             </div>
             
