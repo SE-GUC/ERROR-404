@@ -21,6 +21,9 @@ class Chatbars extends Component {
   handleClick =() => {
      this.props.history.push("/signin");
   };
+  handleClickME =() => {
+    this.props.history.push("/deleteChatBar");
+ };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
@@ -98,7 +101,9 @@ class Chatbars extends Component {
           <button
             className="btn"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={<Link to="/deleteChatBar" />}
+            onClick={() => {
+              this.handleClickME();
+            }}
           >
             CREATE AND DELETE
           </button>

@@ -30,6 +30,9 @@ export class DeleteChatBar extends Component {
        this.setState({debateLiveTitle:''})
        this.render();
 }
+handleClick =() => {
+  this.props.history.push("/chatbars");
+};
 onChange= (e) => this.setState({[e.target.name]: e.target.value});
 
   getStyle = () => {
@@ -64,7 +67,9 @@ onChange= (e) => this.setState({[e.target.name]: e.target.value});
         <button
             className="btn"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={<Link to= "/chatbars" />}
+            onClick={() => {
+              this.handleClick();
+            }}
           >
             BACK
           </button>
