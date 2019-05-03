@@ -4,7 +4,7 @@ import '../../components/Chatbar/Chatbars.css'
 import { withStyles } from "@material-ui/core/styles";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import Typography from "@material-ui/core/Typography";
-
+import { Link } from 'react-router-dom'
 import orionImage from "../../Images/rsz_1rsz_orion-logo.jpg";
 import pegasusImage from "../../Images/rsz_pegasus-logo.jpg";
 
@@ -112,7 +112,7 @@ function ButtonBases(props) {
           key={image.title}
           className={classes.image}
           focusVisibleClassName={classes.focusVisible}
-          onClick={() => (document.location.href = "/Score")}
+          onClick={<Link to= "/Score" />}
           style={{
             width: image.width
           }}

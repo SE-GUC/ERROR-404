@@ -4,7 +4,7 @@ import Toolbar from "../layout/Toolbar/Toolbar";
 import axios from "axios";
 import CustomizedTable from "../layout/Table/CustomizedTable";
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -19,9 +19,12 @@ export class Score extends Component {
   componentDidMount() {
     console.log("ana henaa");
     axios
-      .get("http://localhost:5000/api/Users")
+      .get("/api/Users")
       .then(res => this.setState({ scores: res.data.data }));
   }
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
 
   render() {
     console.log("kiki");
@@ -48,7 +51,9 @@ export class Score extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
                   className="btn"
                 >
                   Sign In

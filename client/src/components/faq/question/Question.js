@@ -5,7 +5,7 @@ import NavbarSignedIn from "../../layout/NavbarSignedIn";
 import { connect } from "react-redux";
 import Button from '@material-ui/core/Button';
 import Navbar from '../../layout/Navbar';
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -26,14 +26,14 @@ class Question extends Component {
    
   }
   get = () => {
-    axios.get('http://localhost:5000/api/Questions/user/' +this.props.id )
+    axios.get('/api/Questions/user/' +this.props.id )
     .then(res => this.setState({ Questions: res.data.data }))
     }
     
   
     ask = (ask) => {
       console.log("pp")
-      axios.post('http://localhost:5000/api/Questions/ask',
+      axios.post('/api/Questions/ask',
       { "question":ask,
         "user":this.props.id
       })
@@ -67,7 +67,7 @@ onSubmit = (e) => {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={<Link to="/signin" />}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >

@@ -5,7 +5,7 @@ import Footer from "../components/layout/Footer"
 import AllClubs from "../components/Clubs/AllClubs";
 import AllContent from "../components/Contents/AllContent";
 import axios from "axios";
-
+import { Link } from 'react-router-dom'
 export class signedInAdmin extends Component {
 
   state = {
@@ -32,9 +32,9 @@ export class signedInAdmin extends Component {
             </div>
           </nav>  
           <AllContent allContent = {this.state.allContent} />
-          <a className="navbar-brand" href="http://localhost:3000/adminedits">
+          <Link className="navbar-brand" to="/adminedits">
              EDIT
-          </a>
+          </Link>
           <Footer />
         </div>
     )

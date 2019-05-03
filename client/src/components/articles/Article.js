@@ -1,6 +1,6 @@
 import React ,{Component} from 'react'
 import AddComment from './AddComment';
-
+import { Link } from 'react-router-dom'
 class Article extends Component{
     render(){
          var s = "";
@@ -17,7 +17,7 @@ class Article extends Component{
             <div>
                 <h1>{this.props.article.title}</h1>
                 <p>{this.props.article.description}  {" on "} {this.props.article.date} </p>
-                <a href ="/getUsers"> {" By "} {this.props.article.author} </a>
+                <Link to ="/getUsers"> {" By "} {this.props.article.author} </Link>
                 {/* <p>  {"comments :"} {s}</p> */}
                 <div>
                 {/* <AddComment article = {this.props.article} /> */}

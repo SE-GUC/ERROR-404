@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import ToolBar from "../../../layout/Toolbar/Toolbar";
 import Button from '@material-ui/core/Button';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -16,23 +16,23 @@ class QuestionAdmin extends Component {
       Questions:[]
   }
   componentDidMount()  {
-    axios.get('http://localhost:5000/api/Questions/admin')
+    axios.get('/api/Questions/admin')
     .then(res => this.setState({ Questions: res.data.data }))
   }
   delQuestion = (id) => {
-    axios.delete('http://localhost:5000/api/Questions/'+id)
+    axios.delete('/api/Questions/'+id)
       .then(res => this.setState({ Questions: [...this.state.Questions.filter(question => question._id !== id)] }));
  
 }
 
 answerQuestion = (id,answer) => {
   
-  axios.put('http://localhost:5000/api/Questions/answerquestion/'+id,
+  axios.put('/api/Questions/answerquestion/'+id,
   {
     "answer":answer
   })
   .then(res => {
-    axios.get('http://localhost:5000/api/Questions/admin')
+    axios.get('/api/Questions/admin')
     .then(res => this.setState({ Questions: res.data.data }))
    
   });
@@ -50,7 +50,7 @@ console.log(this.props.usertype)
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={<Link to= "/signin"/>}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >

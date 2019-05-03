@@ -17,7 +17,7 @@ class SearchDate extends Component {
     const { category } = this.props.match.params;
     this.setState({ category: category });
     axios
-    .get(`http://localhost:5000/api/debates/Search/${category}`)
+    .get(`/api/debates/Search/${category}`)
     .then(res => this.setState({ debates: res.data.data }));
   }
   constructor(props) {

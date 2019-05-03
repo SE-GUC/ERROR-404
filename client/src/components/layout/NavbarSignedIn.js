@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 export class NavbarSignedIn extends Component {
   render() {
     return (
@@ -9,18 +9,18 @@ export class NavbarSignedIn extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/">HUB</a>     
+                <Link className="nav-link" to="/">HUB</Link>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/faq">FAQs</a>     
+                <Link className="nav-link" to="/faq">FAQs</Link>     
               </li>
               </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/Profile">Profile</a>     
+                <Link className="nav-link" to="/Profile">Profile</Link>     
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://localhost:3000/signout">Logout</a>     
+                <Link className="nav-link" to="/signout">Logout</Link>     
               </li>
             </ul>
           </div>

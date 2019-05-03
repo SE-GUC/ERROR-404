@@ -40,7 +40,7 @@ export class AllEvents extends Component {
 
                   {/* <ul className="actions">
                     <li>
-                      <a href="#" className="button alt">
+                      <a to="#" className="button alt">
                         More
                       </a>
                     </li>

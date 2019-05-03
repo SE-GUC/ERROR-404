@@ -6,7 +6,7 @@ import Background from "../../Images/background.jpeg";
 import Logo from "../images/debate2.jpg";
 import TextField from "@material-ui/core/TextField";
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -18,6 +18,9 @@ class Chatbars extends Component {
       searchkey: null
     };
   }
+  handleClick =() => {
+     this.props.history.push("/signin");
+  };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
@@ -46,13 +49,18 @@ class Chatbars extends Component {
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>
@@ -72,15 +80,15 @@ class Chatbars extends Component {
             <div class="thumbnails">
               {this.state.chatbars.map(chatbar => (
                 <div class="box">
-                  <a href={"/addResponse/" + chatbar._id} class="image fit">
+                  <Link to={"/addResponse/" + chatbar._id} class="image fit">
                     <img src={Logo} alt="" />
-                  </a>
+                  </Link>
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
-                    <a href={"/addResponse/" + chatbar._id} class="btn">
+                    <Link to={"/addResponse/" + chatbar._id} class="btn">
                       Debate it Now!
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}
@@ -90,7 +98,7 @@ class Chatbars extends Component {
           <button
             className="btn"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={() => (document.location.href = "/deleteChatBar")}
+            onClick={<Link to="/deleteChatBar" />}
           >
             CREATE AND DELETE
           </button>
@@ -137,15 +145,15 @@ class Chatbars extends Component {
             <div class="thumbnails">
               {this.state.chatbars.map(chatbar => (
                 <div class="box">
-                  <a href={"/addResponse/" + chatbar._id} class="image fit">
+                  <Link to={"/addResponse/" + chatbar._id} class="image fit">
                     <img src={Logo} alt="" />
-                  </a>
+                  </Link>
                   <div class="inner">
                     <h3>{chatbar.date}</h3>
                     <p>{chatbar.debateLiveTitle} </p>
-                    <a href={"/addResponse/" + chatbar._id} class="btn">
+                    <Link to={"/addResponse/" + chatbar._id} class="btn">
                       Debate it Now!
-                    </a>
+                    </Link>
                   </div>
                 </div>
               ))}

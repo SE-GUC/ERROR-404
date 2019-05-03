@@ -8,7 +8,7 @@ import Logo from "./components/images/pic05.jpg";
 import news from "./components/images/news.jpg";
 import addIcon from "./components/images/addIcon.png";
 import { connect } from "react-redux";
-
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
   return { token: state.token, usertype: state.usertype, id: state.id };
 };
@@ -21,11 +21,11 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/api/Clubs")
+      .get("/api/Clubs")
       .then(res => this.setState({ allClubs: res.data.data }));
 
     axios
-      .get("http://localhost:5000/api/Contents")
+      .get("/api/Contents")
       .then(res => this.setState({ allContent: res.data.data }));
   }
 
@@ -46,9 +46,9 @@ class App extends Component {
                   to allow the students to discover themselves
                 </p>
               </header>
-              <a href="#main" class="more">
+              <Link to="#main" class="more">
                 Learn More
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -57,15 +57,15 @@ class App extends Component {
               <div class="thumbnails">
                 {this.state.allClubs.map(club => (
                   <div class="box">
-                    <a href={"/" + club.name + "Home"} class="image fit">
+                    <Link to={"/" + club.name + "Home"} class="image fit">
                       <img src={Logo} alt="" />
-                    </a>
+                    </Link>
                     <div class="inner">
                       <h3>{club.name}</h3>
                       <p>{club.description}</p>
-                      <a href={"/" + club.name + "Home"} class="button fit">
+                      <Link to={"/" + club.name + "Home"} class="button fit">
                         Discover Now
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -121,9 +121,9 @@ class App extends Component {
                   To allow the students to discover themselves
                 </p>
               </header>
-              <a href="#main" class="more">
+              <Link to="#main" class="more">
                 Learn More
-              </a>
+              </Link>
             </div>
           </section>
 
@@ -132,26 +132,26 @@ class App extends Component {
               <div class="thumbnails">
                 {this.state.allClubs.map(club => (
                   <div class="box">
-                    <a href={"/" + club.name + "Home"} class="image fit">
+                    <Link to={"/" + club.name + "Home"} class="image fit">
                       <img src={Logo} alt="" />
-                    </a>
+                    </Link>
                     <div class="inner">
                       <h3>{club.name}</h3>
                       <p>{club.description}</p>
-                      <a href={"/" + club.name + "Home"} class="button fit">
+                      <Link to={"/" + club.name + "Home"} class="button fit">
                         Discover Now
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
                  <div class="box">
-                    <a href={"/clubs"} class="image fit">
+                    <Link to={"/clubs"} class="image fit">
                       <img src={addIcon} alt="" />
-                    </a>
+                    </Link>
                     <div class="inner">
                        ADD A NEW ONE OR DELETE AN OLD ONE
                      
-                      {/* <a href={"/clubs"} class="button fit">
+                      {/* <a to={"/clubs"} class="button fit">
                         CLICK HERE
                       </a> */}
                     </div>
@@ -208,9 +208,9 @@ class App extends Component {
                         To allow the students to discover themselves
                       </p>
                     </header>
-                    <a href="#main" class="more">
+                    <Link to="#main" class="more">
                       Learn More
-                    </a>
+                    </Link>
                   </div>
                 </section>
       
@@ -219,15 +219,15 @@ class App extends Component {
                     <div class="thumbnails">
                       {this.state.allClubs.map(club => (
                         <div class="box">
-                          <a href={"/" + club.name + "Home"} class="image fit">
+                          <Link to={"/" + club.name + "Home"} class="image fit">
                             <img src={Logo} alt="" />
-                          </a>
+                          </Link>
                           <div class="inner">
                             <h3>{club.name}</h3>
                             <p>{club.description}</p>
-                            <a href={"/" + club.name + "Home"} class="button fit">
+                            <Link to={"/" + club.name + "Home"} class="button fit">
                               Discover Now
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       ))}

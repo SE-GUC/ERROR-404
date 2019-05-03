@@ -18,7 +18,7 @@ class AllUsers extends Component {
   }
   componentDidMount()
   {
-     fetch('http://localhost:5000/api/Users/')
+     fetch('/api/Users/')
     .then(res=>res.json())
     .then(users=> this.setState({users : users.data},()=>console.log("fetched",users.data)));
   }

@@ -4,6 +4,7 @@ import axios from "axios"
 import "./profile.css"
 import Toolbar from "../../layout/Toolbar/Toolbar"
 import {Container} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 const mapStateToProps = state => {
     return { token: state.token, usertype: state.usertype, id: state.id };
   };
@@ -23,11 +24,14 @@ class profile extends Component {
   {
      const id = this.state.id
      console.log(id)
-     axios.get(`http://localhost:5000/api/Users/${id}`)
+     axios.get(`/api/Users/${id}`)
      .then(user=>this.setState({user : user.data.data},()=>console.log("fetched",user.data.data)))
      .catch(console.log('cannot fetch'))
   }
   
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
   render()
   {
     if (this.props.token == null) {
@@ -40,7 +44,9 @@ class profile extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={() => (document.location.href = "/signin")}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
                   className="btn"
                 >
                   Sign In
