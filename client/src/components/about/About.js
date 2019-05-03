@@ -202,19 +202,19 @@ class About extends Component {
     
     
 
-            <div className="whole555"> 
+            {/* <div className="whole555">  */}
     
-                <h2 className="about555">First Worlds style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
+                <h2>First Worlds style debate club in Egypt and North Africa. Established and located in the German University in Cairo.
                 </h2> 
                   
-             <Container className="V555">   
-                <h1 className="visiontitle555">Our Vision</h1>
-                <h2 className="vision555">"Achieving progress through effective communication and perpetually seeking knowledge"
+         {/* <Container>    */}
+                <h1 >Our Vision</h1>
+                <h2 >"Achieving progress through effective communication and perpetually seeking knowledge"
     
                     We live in a world of diversity, diversity of culture, diversity of belief, diversity of thought. When we ask ourselves the important questions we reach many important conclusions but it is through constantly communicating with one another, constantly trying to understand and at the same time influence that we can together shape as satisfying a possible resolution.
     
                     TIQ is a debate club, where we strive to produce dialogue in it's most exciting form, up on stage, going head to head with other people. There is nothing more remarkable than the free flowing of words carrying ideas, ideas that prevail with the passion, steadiness and charisma of those who deliver them. If riveting debate is something you long to learn and participate in then here is your home.</h2>
-                </Container>
+                {/* </Container> */}
                 {/* <div>
                     <h1 className="title555">OUR HIERARCHY</h1>
                 </div>
@@ -290,7 +290,7 @@ class About extends Component {
                         </Row>
                     </Container>
             </div>       */}
-            </div>   
+           {/* </div>    */}
             
          
          </div>
