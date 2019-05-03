@@ -20,24 +20,24 @@ export class ContactUs extends Component {
         <li>
           <p class="left">
           <label for="Facebook Page :">Facebook Page :</label>
-          <Link style={{ color:"blue"}}  to="https://www.facebook.com/TheIntelligentQuestion/"> </Link> 
+          <Link style={{ color:"blue"}}  to="https://www.facebook.com/TheIntelligentQuestion/"><u>https://www.facebook.com/TheIntelligentQuestion/ </u> </Link> 
           </p>
           <p class="left">
             <label for="Blog :">Blog :</label>
-            <Link style={{ color:"blue"}} to="https://tiqguc.blogspot.com.eg/p/welcome.html"></Link>    
+            <Link style={{ color:"blue"}} to="https://tiqguc.blogspot.com.eg/p/welcome.html"><u> https://tiqguc.blogspot.com.eg/p/welcome.html</u></Link>    
           </p>
         </li>
         
         <li>
           <p>
             <label for="Messenger :">Messenger : <span class="req"></span></label>
-            <Link style={{ color:"BLACK"}} to="m.me/TheIntelligentQuestion"> </Link>
+            <Link style={{ color:"BLACK"}}>m.me/TheIntelligentQuestion</Link>
           </p>
         </li>        
         <li>
           <p>
             <label for="Mail :">Mail : <span class="req"></span></label>
-            <Link style={{ color:"BLACK"}} to= "the.intelligent.question@gmail.com"></Link>
+            <Link style={{ color:"BLACK"}}>the.intelligent.question@gmail.com</Link>
           </p>
         </li>   
         
