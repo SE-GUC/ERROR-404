@@ -59,23 +59,23 @@ class profile extends Component {
     }
     else{
     return(
-  <div className="profilePage7">
+  <div >
       <Toolbar/>
-      <Container className="nadin">
-      <ul className="profile7">
-      <image src={this.state.user.profilePicture} className="profilepic7"></image>
+      <Container >
+      <ul >
+      <image src={this.state.user.profilePicture} ></image>
       <br/>
-     <p className="Name">Name: {this.state.user.firstName} {this.state.user.lastName}</p>
+     <p >Name: {this.state.user.firstName} {this.state.user.lastName}</p>
      <br></br>
-     <p className="Email">Email: {this.state.user.email}</p>
+     <p >Email: {this.state.user.email}</p>
      <br></br>
-     <p className="BD">birthday: {this.state.user.birthDate}</p>
+     <p >birthday: {this.state.user.birthDate}</p>
      <br></br>
-     <p className="C">clubs:{this.state.user.clubs}</p>
+     <p >clubs:{this.state.user.clubs}</p>
      <br/>
-     <p className="B">Bio: {this.state.user.bio}</p>
+     <p >Bio: {this.state.user.bio}</p>
      <br/>
-     <p className="T">Type: {this.state.user.type}</p> 
+     <p >Type: {this.state.user.type}</p> 
     </ul>   
     </Container>
   </div>
