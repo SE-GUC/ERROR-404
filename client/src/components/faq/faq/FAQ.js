@@ -33,7 +33,7 @@ class FAQ extends Component {
   delfaq = (id) => {
     axios.delete('/api/FAQs/'+id)
       .then(res => this.setState({ FAQs: [...this.state.FAQs.filter(faq => faq._id !== id)] }));
- 
+      alert("Deleted successfully!")
 }
 updatefaq = (id,question,answer) => {
    axios.put('/api/FAQs/edit/'+id,
@@ -44,7 +44,7 @@ updatefaq = (id,question,answer) => {
   .then(res => {
     axios.get('/api/FAQs')
     .then(res => this.setState({ FAQs: res.data.data }))
-  
+     alert("Updated successfully!")
   });
 
 }
@@ -54,6 +54,7 @@ updatefaq = (id,question,answer) => {
       answer
     })
       .then(res => this.setState({ FAQs: [...this.state.FAQs, res.data.data] }));
+      alert("Added successfully!");
   }
   render() {
     const { classes } = this.props;
@@ -84,6 +85,8 @@ updatefaq = (id,question,answer) => {
       );
     }
     else{
+      const auth = this.props.usertype === "HUBadmin";
+    if (auth) {
     return (
      
         <div className="FAQ">
@@ -102,7 +105,7 @@ updatefaq = (id,question,answer) => {
    
     );
     }
-  }
+  }}
 }
 const edit={
   backgroundColor:'#5ec0b6' ,
