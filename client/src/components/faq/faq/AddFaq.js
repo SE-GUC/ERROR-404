@@ -21,7 +21,7 @@ export class AddFaq extends Component {
         <input
           type="text"
           name="question"
-          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#efefef" }}
+          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black" }}
           placeholder="Add Question ..."
           value={this.state.question}
           onChange={this.onChange}
@@ -29,7 +29,7 @@ export class AddFaq extends Component {
         <input
           type="text"
           name="answer"
-          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#efefef" }}
+          style={{ flex: "10", padding: "5px",fontFamily:'Arial',backgroundColor:"#black",color:"black" }}
           placeholder="Add Answer ..."
           value={this.state.answer}
           onChange={this.onChange}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import { BrowserRouter as Router, Route } from 'react-router-dom';
 import QuestionsAdmin from './QuestionsAdmin';
 import NavbarSignedIn from "../../layout/NavbarSignedIn";
+import Navbar from "../../layout/Navbar";
 import { connect } from "react-redux";
 import ToolBar from "../../../layout/Toolbar/Toolbar";
 import Button from '@material-ui/core/Button';
@@ -15,6 +16,9 @@ class QuestionAdmin extends Component {
   state={
       Questions:[]
   }
+  handleClickWWW =() => {
+    this.props.history.push("/signin");
+ };
   componentDidMount()  {
     axios.get('/api/Questions/admin')
     .then(res => this.setState({ Questions: res.data.data }))
@@ -44,13 +48,16 @@ console.log(this.props.usertype)
     if (this.props.token == null) {
       return (
         <div>
+          <Navbar/>
           <div class="thumbnails">
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={<Link to= "/signin"/>}
+                  onClick={() => {
+                    this.handleClickWWW();
+                  }}
                   className="btn"
                   style={{backgroundColor:"#70c7be"}}
                 >
@@ -63,9 +70,10 @@ console.log(this.props.usertype)
       );
     }    
 else{
-  
+    const auth = this.props.usertype === "HUBadmin";
+    if (auth) {
     return (
-     
+    
         <div className="QuestionAdmin">
          <NavbarSignedIn />
 
@@ -78,7 +86,7 @@ else{
         </div>
    
     );
-    }
+    }}
   }
 }
 const Form = connect(

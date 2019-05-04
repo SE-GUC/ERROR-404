@@ -34,7 +34,7 @@ class FAQU extends Component {
     { "question":ask,
       "user":id
     })
-    
+    alert("Added successfully!")
   
   }
   renderRedirect = () => {
