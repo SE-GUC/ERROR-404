@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import withStyles from "@material-ui/core/styles/withStyles";
+import Navbar from "../components/layout/Navbar"
 import { red } from "@material-ui/core/colors";
 
 const styles = theme => ({
@@ -73,8 +74,9 @@ class SignUp extends React.Component {
     const { classes } = this.props;
     console.log("hhhhhhhhhhhhhhhh");
     return (
+      
       <main className={classes.main}>
-       
+       <Navbar/>
         <CssBaseline />
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
@@ -90,6 +92,8 @@ class SignUp extends React.Component {
                 id="type"
                 name="type"
                 autoComplete="type"
+                placeholder="TIQadmin,member,...."
+                style={{color:"black"}}
                 onChange={this.onChange}
                 value={this.state.type}
                 autoFocus
@@ -127,6 +131,7 @@ class SignUp extends React.Component {
                 name="birthDate"
                 onChange={this.onChange}
                 value={this.state.birthDate}
+                placeholder="DD-MM-YYYY"
                 autoComplete="birthDate"
                 autoFocus
               />
@@ -151,6 +156,7 @@ class SignUp extends React.Component {
                 name="email"
                 onChange={this.onChange}
                 value={this.state.email}
+                placeholder="example@student.guc.edu.eg"
                 autoComplete="email"
                 autoFocus
               />
@@ -176,6 +182,7 @@ class SignUp extends React.Component {
                 autoComplete="house"
                 onChange={this.onChange}
                 value={this.state.house}
+                placeholder="Pegasus,Orion,Neutral"
                 autoFocus
               />
             </FormControl>
@@ -188,6 +195,7 @@ class SignUp extends React.Component {
                 autoComplete="din"
                 onChange={this.onChange}
                 value={this.state.din}
+                placeholder="DD-MM-YYYY"
                 autoFocus
               />
             </FormControl>
@@ -200,6 +208,7 @@ class SignUp extends React.Component {
                 autoComplete="dor"
                 onChange={this.onChange}
                 value={this.state.dor}
+                placeholder="DD-MM-YYYY"
                 autoFocus
               />
             </FormControl>
