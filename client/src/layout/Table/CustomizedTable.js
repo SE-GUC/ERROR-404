@@ -14,6 +14,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Axios from "axios";
 import { connect } from "react-redux";
 
 const mapStateToProps = state => {
@@ -45,63 +46,42 @@ const styles = theme => ({
   }
 });
 
-// let id = 0;
-// function createData(type, firstName, lastName, score) {
-//   id += 1;
-//   return { id, type, firstName, lastName, score };
-// }
-
-// const rows = [
-//   createData("Frozen yoghurt", 159, 6.0, 24),
-//   createData("Ice cream sandwich", 237, 9.0, 37),
-//   createData("Eclair", 262, 16.0, 24),
-//   createData("Cupcake", 305, 3.7, 67),
-//   createData("Gingerbread", 356, 16.0, 49)
-// ];
-
-// function CustomizedTable(props) {
-//   const { classes } = props;
-
-//   return (
-//     <Paper className={classes.root}>
-//       <Table className={classes.table}>
-//         <TableHead>
-//           <TableRow>
-//             <CustomTableCell>Member Of</CustomTableCell>
-//             <CustomTableCell align="right">First Name</CustomTableCell>
-//             <CustomTableCell align="right">Last Name</CustomTableCell>
-//             <CustomTableCell align="right"> Score</CustomTableCell>
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {rows.map(row => (
-//             <TableRow className={classes.row} key={row.id}>
-//               <CustomTableCell component="th" scope="row">
-//                 {row.name}
-//               </CustomTableCell>
-//               <CustomTableCell align="right">{row.calories}</CustomTableCell>
-//               <CustomTableCell align="right">{row.fat}</CustomTableCell>
-//               <CustomTableCell align="right">{row.carbs}</CustomTableCell>
-//             </TableRow>
-//           ))}
-//         </TableBody>
-//       </Table>
-//     </Paper>
-//   );
-// }
 class CustomizedTable extends React.Component {
   constructor(props) {
-    super(props);
+     super(props);
     this.state = {
       
       updateOpen: false,
-     
+      updateScore: this.props.score,
+      scoree:0,
+      idd:0
     };
   }
-  handleUpdateClick = () => {
+  handleUpdateClick = (id) => { console.log(id);
     this.setState(state => ({ updateOpen: !state.updateOpen }));
+    this.setState(state => ({ idd: id}));
+   
   };
-  
+  handleChange = name => event => {
+    this.setState({
+      [name]: event.target.value
+    });
+  };
+  onChange = e => this.setState({ [e.target.name]: e.target.value });
+  UpdateScore = async (id,score) => {
+    console.log(score);
+    console.log(`/updateScores/${id}/${score}`)
+      await Axios.put(
+      `/api/Users/updateScores/${id}/${score}` );
+    alert("updated");
+  };
+  onSubmit= (e) => {
+    e.preventDefault();
+      // this.setState(this.state.debateLiveTitle);
+    
+       this.setState({scoree:0})
+       this.render();
+}
   render() {
     const auth = this.props.usertype === "TIQadmin";
     if (auth) {
@@ -110,26 +90,6 @@ class CustomizedTable extends React.Component {
     return (
       
       <Paper className={classes.root}>
-      <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleUpdateClick}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
-            <DialogContent>
-              <TextField
-                margin="dense"
-                id="updatetitle"
-                label="Score"
-                // onChange={this.handleChange("updatescore")}
-               // defaultValue={score.score}
-              />
-              
-            </DialogContent>
-            <DialogActions>
-               <Button class="button"> Update </Button>
-            </DialogActions>
-          </Dialog>
         <Table className={classes.table}>
           <TableHead>
             <TableRow>
@@ -140,8 +100,31 @@ class CustomizedTable extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+          
             {this.props.scores.map(score => (
+              
               <TableRow className={classes.score} key={score._id}>
+             <Dialog
+            open={this.state.updateOpen}
+            onClose={this.handleUpdateClick}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
+            <DialogContent>
+            <TextField
+                autoFocus
+                margin="dense"
+                id="scoree"
+                multiline
+                label="scoree"
+                // placeholder={score.score}
+                onChange={this.handleChange("scoree")}
+              />
+            </DialogContent>
+            <DialogActions>
+               <Button class="button" onClick={() => this.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
+            </DialogActions>
+          </Dialog>
                 <CustomTableCell component="th" scope="row">
                   {score.type}
                 </CustomTableCell>
@@ -151,9 +134,11 @@ class CustomizedTable extends React.Component {
                 <CustomTableCell align="right">
                   {score.lastName}
                 </CustomTableCell>
-                <CustomTableCell align="right"> {score.score} {"  "} 
+                <CustomTableCell align="right">
+                
+                 {score.score} {"  "} 
                <a onClick={() => {
-                  this.handleUpdateClick();
+                  this.handleUpdateClick(score._id);
                 }}>
                 <EditIcon /></a>
                    
@@ -172,27 +157,7 @@ class CustomizedTable extends React.Component {
     return (
       
       <Paper className={classes.root}>
-      {/* <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleUpdateClick}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
-            <DialogContent>
-              <TextField
-                margin="dense"
-                id="updatetitle"
-                label="Score"
-                // onChange={this.handleChange("updatescore")}
-               // defaultValue={score.score}
-              />
-              
-            </DialogContent>
-            <DialogActions>
-               <Button class="button"> Update </Button>
-            </DialogActions>
-          </Dialog> */}
-        <Table className={classes.table}>
+     <Table className={classes.table}>
           <TableHead>
             <TableRow>
               <CustomTableCell>Member Of</CustomTableCell>
@@ -204,6 +169,7 @@ class CustomizedTable extends React.Component {
           <TableBody>
             {this.props.scores.map(score => (
               <TableRow className={classes.score} key={score._id}>
+              
                 <CustomTableCell component="th" scope="row">
                   {score.type}
                 </CustomTableCell>
@@ -214,11 +180,7 @@ class CustomizedTable extends React.Component {
                   {score.lastName}
                 </CustomTableCell>
                 <CustomTableCell align="right"> {score.score} {"  "} 
-               {/* <a onClick={() => {
-                  this.handleUpdateClick();
-                }}>
-                <EditIcon /></a> */}
-                   
+               
                     </CustomTableCell>
               </TableRow>
             ))}
