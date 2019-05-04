@@ -88,9 +88,30 @@ class CustomizedTable extends React.Component {
     console.log(this.props.scores);
     const { classes } = this.props;
     return (
-      
+      <div style={{position:"relative",top:"20px"}}>
       <Paper className={classes.root}>
-        <Table className={classes.table}>
+      <Dialog
+            open={this.state.updateOpen}
+            onClose={this.handleUpdateClick}
+            aria-labelledby="form-dialog-title"
+          >
+            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
+            <DialogContent>
+            <TextField
+                // autoFocus
+                // margin="dense"
+                id="scoree"
+                // multiline
+                label="Score"
+                // placeholder={score.score}
+                onChange={this.handleChange("scoree")}
+              />
+            </DialogContent>
+            <DialogActions>
+               <Button class="button" onClick={() => this.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
+            </DialogActions>
+          </Dialog>
+        <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
           <TableHead>
             <TableRow>
               <CustomTableCell>Member Of</CustomTableCell>
@@ -104,27 +125,7 @@ class CustomizedTable extends React.Component {
             {this.props.scores.map(score => (
               
               <TableRow className={classes.score} key={score._id}>
-             <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleUpdateClick}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
-            <DialogContent>
-            <TextField
-                autoFocus
-                margin="dense"
-                id="scoree"
-                multiline
-                label="scoree"
-                // placeholder={score.score}
-                onChange={this.handleChange("scoree")}
-              />
-            </DialogContent>
-            <DialogActions>
-               <Button class="button" onClick={() => this.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
-            </DialogActions>
-          </Dialog>
+             
                 <CustomTableCell component="th" scope="row">
                   {score.type}
                 </CustomTableCell>
@@ -148,16 +149,16 @@ class CustomizedTable extends React.Component {
           </TableBody>
         </Table>
       </Paper>
-      
+      </div>
     );
             
   }else{
     console.log(this.props.scores);
     const { classes } = this.props;
     return (
-      
+      <div style={{position:"relative",top:"20px"}}>
       <Paper className={classes.root}>
-     <Table className={classes.table}>
+      <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
           <TableHead>
             <TableRow>
               <CustomTableCell>Member Of</CustomTableCell>
@@ -187,7 +188,7 @@ class CustomizedTable extends React.Component {
           </TableBody>
         </Table>
       </Paper>
-      
+      </div>
     );
   }
 

@@ -48,17 +48,22 @@ const toolbar = props => (
           <li>
             <Link to="/debates">Debates</Link>
           </li>
+          
+          <li>
+            <Link to="/getUsers">Debaters</Link>
+          </li>
+          <li>
+            <Link to="/Score">Scores</Link>
+          </li>
+         
+          <li>
+            <Link to="/contents">Announcements</Link>
+          </li>
           <li>
             <Link to="/about">About</Link>
           </li>
           <li>
           <Link to="/ContactUs">Contact Us</Link>
-          </li>
-          <li>
-            <Link to="/getUsers">Debaters</Link>
-          </li>
-          <li>
-            <Link to="/contents">Announcements</Link>
           </li>
           <li>
             <Link to="/">HUB</Link>
