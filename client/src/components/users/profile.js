@@ -61,7 +61,7 @@ class profile extends Component {
     return(
   <div className="profilePage7">
       <Toolbar/>
-      <Container className="nadin">
+      {/* <Container className="nadin"> */}
       <ul className="profile7">
       <image src={this.state.user.profilePicture} className="profilepic7"></image>
       <br/>
@@ -77,7 +77,7 @@ class profile extends Component {
      <br/>
      <p className="T">Type: {this.state.user.type}</p> 
     </ul>   
-    </Container>
+    {/* </Container> */}
   </div>
   )
   }}
