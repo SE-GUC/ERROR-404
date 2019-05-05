@@ -14,7 +14,7 @@ import pic19 from "./images/pic19.jpg";
 import pic20 from "./images/pic20.jpg";
 import TIQ from "./images/TIQ.png";
 import Toolbar from "../../layout/Toolbar/Toolbar";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import EventPic from "./images/Event.png";
 
 import axios from "axios";
@@ -118,7 +118,6 @@ export class Home extends Component {
               <Link to="#" className="image">
                 <img src={pic20} alt="" />
               </Link>
-              
             </div>
             <ul className="actions">
               {/* <li>
@@ -133,7 +132,16 @@ export class Home extends Component {
         <section id="three" className="wrapper style3 special">
           <div className="inner">
             <header className="major narrow	">
-              <p>Want to Know more about our family ?</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  position: "relative",
+                  left: "200px",
+                  fontSize: "38px"
+                }}
+              >
+                Get to Know more about our family ?
+              </p>
             </header>
             <ul className="actions">
               <li>
@@ -201,20 +209,9 @@ export class Home extends Component {
                   <span className="label">Instagram</span>
                 </Link>
               </li>
-              {/* <li>
-                  <Link to="#" className="icon fa-linkedin">
-                    <span className="label">LinkedIn</span>
-                  </Link>
-                </li> */}
             </ul>
             <ul className="copyright">
               <li>&copy; ERROR 404.</li>
-              <li>
-                Images: <Link to="http://unsplash.com">Unsplash</Link>.
-              </li>
-              <li>
-                Design: <Link to="http://templated.co">TEMPLATED</Link>.
-              </li>
             </ul>
           </div>
         </footer>

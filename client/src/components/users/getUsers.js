@@ -46,16 +46,13 @@ class GetUsers extends Component {
   handleSubmit = async () => {
     console.log("Hnnna Ahpoooo");
     console.log(this.props.user._id);
-    const update = axios.put(
-      "/api/Users/update/" + this.props.user._id,
-      {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
-        bio: this.state.bio,
-        birthDate: this.setState.birthDate,
-        clubs: this.state.clubs
-      }
-    );
+    const update = axios.put("/api/Users/update/" + this.props.user._id, {
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
+      bio: this.state.bio,
+      birthDate: this.setState.birthDate,
+      clubs: this.state.clubs
+    });
 
     if (Object.keys(update.data)[0] === "err")
       this.setState({ Error: "Invalid/Missing Information" });
@@ -70,7 +67,16 @@ class GetUsers extends Component {
       <>
         <Toolbar />
         <div className="center-div">
-          <h1>OUR PEOPLE</h1>
+          <h1
+            style={{
+              textAlign: "center",
+              position: "relative",
+
+              fontSize: "50px"
+            }}
+          >
+            OUR PEOPLE{" "}
+          </h1>
           <ul>
             {this.state.users && (
               <DeleteUser
