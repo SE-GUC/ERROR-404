@@ -8,7 +8,9 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import axios from "axios";
 import Typography from "@material-ui/core/Typography";
+
 // import "../../pages/Homee/ourPeople/ourPeople.css";
+import "./Design.css";
 
 class FormDialog extends React.Component {
   constructor(props) {
@@ -59,7 +61,10 @@ class FormDialog extends React.Component {
     return (
       <div>
         <div />
+
         <Button
+          type="button"
+          class="btn btn-primary "
           variant="outlined"
           color="primary"
           onClick={this.handleClickOpen}
@@ -175,10 +180,20 @@ class FormDialog extends React.Component {
             <Typography paragraph>{this.state.Error}</Typography>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
+            <Button
+              type="button"
+              class="btn btn-primary"
+              onClick={this.handleClose}
+              color="primary"
+            >
               CANCEL
             </Button>
-            <Button onClick={() => this.handleSubmit()} color="default">
+            <Button
+              type="button"
+              class="btn btn-primary"
+              onClick={() => this.handleSubmit()}
+              color="default"
+            >
               UPDATE
             </Button>
           </DialogActions>

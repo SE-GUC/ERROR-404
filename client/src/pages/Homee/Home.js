@@ -9,7 +9,7 @@ import pic5 from "./images/pic5.jpeg";
 import pic6 from "./images/pic6.jpeg";
 import TIQ from "./images/TIQ.png";
 import Toolbar from "../../layout/Toolbar/Toolbar";
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import EventPic from "./images/Event.png";
 
 import axios from "axios";
@@ -195,20 +195,9 @@ export class Home extends Component {
                   <span className="label">Instagram</span>
                 </Link>
               </li>
-              {/* <li>
-                  <Link to="#" className="icon fa-linkedin">
-                    <span className="label">LinkedIn</span>
-                  </Link>
-                </li> */}
             </ul>
             <ul className="copyright">
               <li>&copy; ERROR 404.</li>
-              <li>
-                Images: <Link to="http://unsplash.com">Unsplash</Link>.
-              </li>
-              <li>
-                Design: <Link to="http://templated.co">TEMPLATED</Link>.
-              </li>
             </ul>
           </div>
         </footer>

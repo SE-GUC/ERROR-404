@@ -1,11 +1,13 @@
 .toolbar {
-  position: fixed;
+  position: absolute;
+
   top: 0;
   left: 0;
   width: 100%;
   /* background-color: #521751; */
   background-color: #410c12;
   height: 56px;
+  display: inline-block;
 }
 .toolbar__navigation {
   display: flex;
@@ -19,6 +21,7 @@
   text-decoration: none;
   font-size: 1.5rem;
 }
+
 .spacer {
   flex: 0.4;
 }

@@ -32,18 +32,17 @@
     transform: rotate(360deg);
   }
 }
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-
-}  
-.App-body{
+}
+.App-body {
   font-family: Georgia, serif;
   line-height: 1.7;
 }
 
-.App-a{
+.App-a {
   color: #333;
   text-decoration: none;
 }
@@ -55,7 +54,7 @@
 .App-btn {
   display: inline-block;
   border: none;
-  background: #E2A325;
+  background: #e2a325;
   color: #fff;
   padding: 7px 20px;
   cursor: pointer;
