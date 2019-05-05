@@ -21,7 +21,9 @@ class Articles extends Component {
     axios.get('/api/Articles')
     .then(res=>this.setState({allArticles:res.data.data}))
   }
-
+  handleClick =() => {
+    this.props.history.push("/Articles");
+  };
   addArticle = (article)=>{
       //console.log(article)
       axios.post('/api/Articles/create' , article)
@@ -76,7 +78,9 @@ class Articles extends Component {
         <btn
             className="button"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={<Link to= "/Articles"/>}
+            onClick={() => {
+              this.handleClick();
+            }}
           >
             CREATE AND DELETE
           </btn>

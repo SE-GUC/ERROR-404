@@ -4,9 +4,14 @@ import "./assets/css/ie9.css";
 import "./assets/css/main.css";
 import pic1 from "./images/pic01.jpg";
 import pic2 from "./images/pic02.jpg";
-import pic4 from "./images/pic4.jpeg";
 import pic5 from "./images/pic5.jpeg";
-import pic6 from "./images/pic6.jpeg";
+import pic8 from "./images/pic8.jpg";
+import pic12 from "./images/pic12.jpg";
+import pic13 from "./images/pic13.jpg";
+import pic17 from "./images/pic17.jpg";
+import pic18 from "./images/pic18.jpg";
+import pic19 from "./images/pic19.jpg";
+import pic20 from "./images/pic20.jpg";
 import TIQ from "./images/TIQ.png";
 import Toolbar from "../../layout/Toolbar/Toolbar";
 import { Link } from "react-router-dom";
@@ -85,34 +90,35 @@ export class Home extends Component {
         <section id="two" className="wrapper special">
           <div className="inner">
             <header className="major narrow">
-              <h2>OUR BEST MOMENT</h2>
+              <h2>SOME OF OUR MOMENTS</h2>
               <p>{/* KLLLLAMMM BLAAA BLAAA BLAAA */}</p>
             </header>
             <div className="image-grid">
               <Link to="#" className="image">
-                <img src={pic4} alt="" />
-              </Link>
-              <Link to="#" className="image">
                 <img src={pic5} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic5} alt="" />
+                <img src={pic8} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic4} alt="" />
+                <img src={pic12} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic5} alt="" />
+                <img src={pic18} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic4} alt="" />
+                <img src={pic17} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic5} alt="" />
+                <img src={pic13} alt="" />
               </Link>
               <Link to="#" className="image">
-                <img src={pic5} alt="" />
+                <img src={pic19} alt="" />
               </Link>
+              <Link to="#" className="image">
+                <img src={pic20} alt="" />
+              </Link>
+              
             </div>
             <ul className="actions">
               {/* <li>

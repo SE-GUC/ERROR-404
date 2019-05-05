@@ -18,6 +18,18 @@ class Chatbars extends Component {
       searchkey: null
     };
   }
+  handleClick =() => {
+     this.props.history.push("/signin");
+  };
+  handleClickME =() => {
+    this.props.history.push("/deleteChatBar");
+ };
+ handleClickSearch =() => {
+  this.props.history.push(`chatbars/search/${
+    this.state.searchkey
+  }`)
+};
+ 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
   componentDidMount() {
     fetch("/api/Chatbars/")
@@ -46,13 +58,18 @@ class Chatbars extends Component {
             <div class="box">
               <div class="inner">
                 <h3>You have to sign in first!</h3>
+               
                 <button
                   variant="contained"
-                  onClick={<Link to= "/signin" />}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
+                  //onClick={() => (document.location = "/signin")}
                   className="btn"
                 >
                   Sign In
                 </button>
+                
               </div>
             </div>
           </div>
@@ -90,7 +107,9 @@ class Chatbars extends Component {
           <button
             className="btn"
             style={{ position: "absolute", left: "20px", top: "63px" }}
-            onClick={<Link to="/deleteChatBar" />}
+            onClick={() => {
+              this.handleClickME();
+            }}
           >
             CREATE AND DELETE
           </button>
@@ -98,11 +117,14 @@ class Chatbars extends Component {
             <button
               className="btn"
               style={{ position: "absolute", right: "0", top: "63px" }}
-              onClick={() =>
-                (document.location.href = `chatbars/search/${
-                  this.state.searchkey
-                }`)
-              }
+              onClick={() => {
+                this.handleClickSearch();
+              }}
+              // onClick={() =>
+              //   (document.location.href = `chatbars/search/${
+              //     this.state.searchkey
+              //   }`)
+              // }
             >
               Search
             </button>
@@ -156,11 +178,14 @@ class Chatbars extends Component {
             <button
               className="btn"
               style={{ position: "absolute", right: "0", top: "63px" }}
-              onClick={() =>
-                (document.location.href = `chatbars/search/${
-                  this.state.searchkey
-                }`)
-              }
+              onClick={() => {
+                this.handleClickSearch();
+              }}
+              // onClick={() =>
+              //   (document.location.href = `chatbars/search/${
+              //     this.state.searchkey
+              //   }`)
+              // }
             >
               Search
             </button>

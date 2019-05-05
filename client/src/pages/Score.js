@@ -22,6 +22,9 @@ export class Score extends Component {
       .get("/api/Users")
       .then(res => this.setState({ scores: res.data.data }));
   }
+  handleClick =() => {
+    this.props.history.push("/signin");
+ };
 
   render() {
     console.log("kiki");
@@ -48,7 +51,9 @@ export class Score extends Component {
                 <h3>You have to sign in first!</h3>
                 <button
                   variant="contained"
-                  onClick={<Link to="/signin"/>}
+                  onClick={() => {
+                    this.handleClick();
+                  }}
                   className="btn"
                 >
                   Sign In
