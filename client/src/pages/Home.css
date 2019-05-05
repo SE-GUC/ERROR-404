@@ -7,3 +7,9 @@
   top: 50%;
   text-align: "center";
 }
+.paragraph {
+  font-size: 1.4rem;
+  text-align: "center";
+  position: relative;
+  left: "250px";
+}

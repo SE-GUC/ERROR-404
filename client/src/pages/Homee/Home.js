@@ -118,7 +118,6 @@ export class Home extends Component {
               <Link to="#" className="image">
                 <img src={pic20} alt="" />
               </Link>
-              
             </div>
             <ul className="actions">
               {/* <li>
@@ -133,7 +132,16 @@ export class Home extends Component {
         <section id="three" className="wrapper style3 special">
           <div className="inner">
             <header className="major narrow	">
-              <p>Want to Know more about our family ?</p>
+              <p
+                style={{
+                  textAlign: "center",
+                  position: "relative",
+                  left: "250px",
+                  fontSize: "38px"
+                }}
+              >
+                Get to Know more about our family ?
+              </p>
             </header>
             <ul className="actions">
               <li>

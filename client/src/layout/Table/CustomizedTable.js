@@ -48,19 +48,18 @@ const styles = theme => ({
 
 class CustomizedTable extends React.Component {
   constructor(props) {
-     super(props);
+    super(props);
     this.state = {
-      
       updateOpen: false,
       updateScore: this.props.score,
-      scoree:0,
-      idd:0
+      scoree: 0,
+      idd: 0
     };
   }
-  handleUpdateClick = (id) => { console.log(id);
+  handleUpdateClick = id => {
+    console.log(id);
     this.setState(state => ({ updateOpen: !state.updateOpen }));
-    this.setState(state => ({ idd: id}));
-   
+    this.setState(state => ({ idd: id }));
   };
   handleChange = name => event => {
     this.setState({
@@ -68,131 +67,141 @@ class CustomizedTable extends React.Component {
     });
   };
   onChange = e => this.setState({ [e.target.name]: e.target.value });
-  UpdateScore = async (id,score) => {
+  UpdateScore = async (id, score) => {
     console.log(score);
-    console.log(`/updateScores/${id}/${score}`)
-      await Axios.put(
-      `/api/Users/updateScores/${id}/${score}` );
+    console.log(`/updateScores/${id}/${score}`);
+    await Axios.put(`/api/Users/updateScores/${id}/${score}`);
     alert("updated");
   };
-  onSubmit= (e) => {
+  onSubmit = e => {
     e.preventDefault();
-      // this.setState(this.state.debateLiveTitle);
-    
-       this.setState({scoree:0})
-       this.render();
-}
+    // this.setState(this.state.debateLiveTitle);
+
+    this.setState({ scoree: 0 });
+    this.render();
+  };
   render() {
     const auth = this.props.usertype === "TIQadmin";
     if (auth) {
-    console.log(this.props.scores);
-    const { classes } = this.props;
-    return (
-      <div style={{position:"relative",top:"20px"}}>
-      <Paper className={classes.root}>
-      <Dialog
-            open={this.state.updateOpen}
-            onClose={this.handleUpdateClick}
-            aria-labelledby="form-dialog-title"
-          >
-            <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
-            <DialogContent>
-            <TextField
-                // autoFocus
-                // margin="dense"
-                id="scoree"
-                // multiline
-                label="Score"
-                // placeholder={score.score}
-                onChange={this.handleChange("scoree")}
-              />
-            </DialogContent>
-            <DialogActions>
-               <Button class="button" onClick={() => this.UpdateScore(this.state.idd,this.state.scoree)} onSubmit={this.onSubmit}> Update </Button>
-            </DialogActions>
-          </Dialog>
-        <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
-          <TableHead>
-            <TableRow>
-              <CustomTableCell>Member Of</CustomTableCell>
-              <CustomTableCell align="right">First Name</CustomTableCell>
-              <CustomTableCell align="right">Last Name</CustomTableCell>
-              <CustomTableCell align="right"> Score</CustomTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-          
-            {this.props.scores.map(score => (
-              
-              <TableRow className={classes.score} key={score._id}>
-             
-                <CustomTableCell component="th" scope="row">
-                  {score.type}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                  {score.firstName}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                  {score.lastName}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                
-                 {score.score} {"  "} 
-               <a onClick={() => {
-                  this.handleUpdateClick(score._id);
-                }}>
-                <EditIcon /></a>
-                   
+      console.log(this.props.scores);
+      const { classes } = this.props;
+      return (
+        <div style={{ position: "relative", top: "59px" }}>
+          <Paper className={classes.root}>
+            <Dialog
+              open={this.state.updateOpen}
+              onClose={this.handleUpdateClick}
+              aria-labelledby="form-dialog-title"
+            >
+              <DialogTitle id="form-dialog-title">Update Score</DialogTitle>
+              <DialogContent>
+                <TextField
+                  // autoFocus
+                  // margin="dense"
+                  id="scoree"
+                  // multiline
+                  label="Score"
+                  // placeholder={score.score}
+                  onChange={this.handleChange("scoree")}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button
+                  class="button"
+                  onClick={() =>
+                    this.UpdateScore(this.state.idd, this.state.scoree)
+                  }
+                  onSubmit={this.onSubmit}
+                >
+                  {" "}
+                  Update{" "}
+                </Button>
+              </DialogActions>
+            </Dialog>
+            <Table
+              className={classes.table}
+              style={{ position: "absolute", top: "-199px" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <CustomTableCell>Member Of</CustomTableCell>
+                  <CustomTableCell align="right">First Name</CustomTableCell>
+                  <CustomTableCell align="right">Last Name</CustomTableCell>
+                  <CustomTableCell align="right"> Score</CustomTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.scores.map(score => (
+                  <TableRow className={classes.score} key={score._id}>
+                    <CustomTableCell component="th" scope="row">
+                      {score.type}
                     </CustomTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
-      </div>
-    );
-            
-  }else{
-    console.log(this.props.scores);
-    const { classes } = this.props;
-    return (
-      <div style={{position:"relative",top:"20px"}}>
-      <Paper className={classes.root}>
-      <Table className={classes.table}style={{position:"absolute",top:"-199px"}} >
-          <TableHead>
-            <TableRow>
-              <CustomTableCell>Member Of</CustomTableCell>
-              <CustomTableCell align="right">First Name</CustomTableCell>
-              <CustomTableCell align="right">Last Name</CustomTableCell>
-              <CustomTableCell align="right"> Score</CustomTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {this.props.scores.map(score => (
-              <TableRow className={classes.score} key={score._id}>
-              
-                <CustomTableCell component="th" scope="row">
-                  {score.type}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                  {score.firstName}
-                </CustomTableCell>
-                <CustomTableCell align="right">
-                  {score.lastName}
-                </CustomTableCell>
-                <CustomTableCell align="right"> {score.score} {"  "} 
-               
+                    <CustomTableCell align="right">
+                      {score.firstName}
                     </CustomTableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </Paper>
-      </div>
-    );
+                    <CustomTableCell align="right">
+                      {score.lastName}
+                    </CustomTableCell>
+                    <CustomTableCell align="right">
+                      {score.score} {"  "}
+                      <a
+                        onClick={() => {
+                          this.handleUpdateClick(score._id);
+                        }}
+                      >
+                        <EditIcon />
+                      </a>
+                    </CustomTableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </div>
+      );
+    } else {
+      console.log(this.props.scores);
+      const { classes } = this.props;
+      return (
+        <div style={{ position: "relative", top: "59px" }}>
+          <Paper className={classes.root}>
+            <Table
+              className={classes.table}
+              style={{ position: "absolute", top: "-199px" }}
+            >
+              <TableHead>
+                <TableRow>
+                  <CustomTableCell>Member Of</CustomTableCell>
+                  <CustomTableCell align="right">First Name</CustomTableCell>
+                  <CustomTableCell align="right">Last Name</CustomTableCell>
+                  <CustomTableCell align="right"> Score</CustomTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {this.props.scores.map(score => (
+                  <TableRow className={classes.score} key={score._id}>
+                    <CustomTableCell component="th" scope="row">
+                      {score.type}
+                    </CustomTableCell>
+                    <CustomTableCell align="right">
+                      {score.firstName}
+                    </CustomTableCell>
+                    <CustomTableCell align="right">
+                      {score.lastName}
+                    </CustomTableCell>
+                    <CustomTableCell align="right">
+                      {" "}
+                      {score.score} {"  "}
+                    </CustomTableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </Paper>
+        </div>
+      );
+    }
   }
-
-}
 }
 
 CustomizedTable.propTypes = {
@@ -202,7 +211,6 @@ const Form = connect(
   mapStateToProps,
   null
 )(withStyles(styles)(CustomizedTable));
-  
 
 export default Form;
 //export default withStyles(styles)(CustomizedTable);

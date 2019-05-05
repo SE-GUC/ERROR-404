@@ -179,39 +179,40 @@ class ourPeople extends Component {
       );
     } else {
       return (
-        <div class="box1">
-          <div class="inner">
-            <a href="#link">
-              <div class="feature1 flex_feature_item1 feature1">
-                <h6>{this.props.user.firstName}</h6>
-
-                <p>
-                  {this.props.user.lastName}
-                  <br />
-                  {this.props.user.type}
-                  <br />
-                  {this.props.user.birthDate}
-                  <br />
-                  {this.props.user.bio}
-                  <br />
-                  {this.props.user.email}
-                  <br />
-
-                  {this.props.user.clubs}
-                  <br />
-                  {this.props.user.house}
-                  <br />
-                  {this.props.user.din}
-                  <br />
-                  {this.props.user.dor}
-                </p>
+        <div id="main">
+          <div class="inner1">
+            <div>
+              <div class="box1">
+                <a className="hoba">
+                  <div class="feature1 flex_feature_item1 feature1">
+                    <h6>{this.props.user.firstName}</h6>
+                    <p>
+                      {this.props.user.lastName}
+                      <br />
+                      {this.props.user.type}
+                      <br />
+                      {this.props.user.birthDate}
+                      <br />
+                      {this.props.user.bio}
+                      <br />
+                      {this.props.user.email}
+                      <br />
+                      {this.props.user.clubs}
+                      <br />
+                      {this.props.user.house}
+                      <br />
+                      {this.props.user.din}
+                      <br />
+                      {this.props.user.dor}
+                    </p>
+                  </div>
+                </a>
               </div>
-            </a>
+            </div>
+            //{" "}
           </div>
+          //{" "}
         </div>
-
-        //   </div>
-        // </div>
       );
     }
   }
